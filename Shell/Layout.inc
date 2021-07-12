@@ -1,0 +1,3 @@
+
+[Variables]
+BarHandler=4
