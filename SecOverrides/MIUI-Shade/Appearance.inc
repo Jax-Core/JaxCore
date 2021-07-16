@@ -151,7 +151,7 @@ MeterStyle=Set.TextBox:S
 Y=([Option11:Y]-#Set.P#+(-30/2+8)*#Set.S#)
 [Value11]
 Meter=String
-Text=#Set.R#
+Text=#R#
 MeterStyle=Set.String:S | Set.Value:S
 
 [GlobalP]

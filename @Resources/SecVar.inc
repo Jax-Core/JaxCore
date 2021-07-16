@@ -1,6 +1,6 @@
 [Variables]
-Skin.Name=ModularClocks
+Skin.Name=MIUI-Shade
 Skin.Shorthand=
 
-Skin.Set_Page=Render
+Skin.Set_Page=Info
 Skin.Ctx_Ctx=Refresh
