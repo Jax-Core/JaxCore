@@ -16,6 +16,7 @@ InlinePattern=\s(.*)
 InlineSetting=Size | 10
 InlinePattern2=\s(.*)
 InlineSetting2=Color | 150,150,150
+Group=Shorthand
 ;================================================================================================================================================================================
 
 [Time]
@@ -81,7 +82,7 @@ Container=ContentContainer
 [2412]
 Meter=Shape
 MeterStyle=Set.TextBox:S
-Y=([Option01:Y]-#Set.P#-30/2+8)
+Y=([Option01:Y]-#Set.P#+(-30/2+8)*#Set.S#)
 [Value01]
 Meter=String
 Text=#2412#
@@ -90,7 +91,7 @@ MeterStyle=Set.String:S | Set.Value:S
 [WeatherLocation]
 Meter=Shape
 MeterStyle=Set.TextBox:S
-Y=([Option11:Y]-#Set.P#-30/2+8)
+Y=([Option11:Y]-#Set.P#+(-30/2+8)*#Set.S#)
 [Value11]
 Meter=String
 Text=#WeatherLocation#
@@ -99,31 +100,8 @@ MeterStyle=Set.String:S | Set.Value:S
 [WeatherUnits]
 Meter=Shape
 MeterStyle=Set.TextBox:S
-Y=([Option12:Y]-#Set.P#-30/2+8)
+Y=([Option12:Y]-#Set.P#+(-30/2+8)*#Set.S#)
 [Value12]
 Meter=String
 Text=#WeatherUnits#
 MeterStyle=Set.String:S | Set.Value:S
-
-;================================================================================================================================================================================
-
-[Input]
-Measure=Plugin
-Plugin=InputText
-SolidColor=171717
-FontColor=255,255,255
-FontFace=Seqoe UI
-FontSize=(10*#Set.S#)
-StringAlign=LeftCenter
-W=(150-10)
-H=(30-10)
-DynamicVariables=1
-DefaultValue="[##Editing#]"
-Command1=[!SetVariable #Editing# "$UserInput$"][!UpdateMeasure SaveAndLoad:M]
-
-[SaveAndLoad:M]
-Measure=Calc
-DynamicVariables=1
-OnUpdateAction=[!WriteKeyvalue Variables #Editing# "[##Editing#]" "#@#Vars.inc"][!UpdateMeter *][!Redraw]
-Disabled=1
-Group=NUOL

@@ -1,3 +1,4 @@
+@includeOverrides=#ROOTCONFIGPATH#CoreSecOverrides#Skin.Name#-#Skin.Set_Page#.inc
 [General:Category]
 Meter=String
 MeterStyle=Set.String:S
@@ -13,9 +14,9 @@ FontColor=150,150,150
 Meter=Shape
 Y=(10*#Set.S#)R
 MeterStyle=PageBox:S
-Fill=Fill Color 255,255,255,(#BarHandler# = 1 ? 220 : 0)
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,(#BarHandler# = 1 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,(#BarHandler# = 1 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Fill=Fill Color #Set.Opp_Color#,(#BarHandler# = 1 ? 220 : 0)
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 1 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 1 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 
 [InfoIcon]
 Meter=Image
@@ -33,9 +34,9 @@ MeterStyle=Set.String:S | PageText:S
 Meter=Shape
 Y=(10*#Set.S#)R
 MeterStyle=PageBox:S
-Fill=Fill Color 255,255,255,(#BarHandler# = 2 ? 220 : 0)
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,(#BarHandler# = 2 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,(#BarHandler# = 2 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Fill=Fill Color #Set.Opp_Color#,(#BarHandler# = 2 ? 220 : 0)
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 2 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 2 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 
 [GeneralIcon]
 Meter=Image
@@ -52,9 +53,9 @@ MeterStyle=Set.String:S | PageText:S
 Meter=Shape
 Y=(10*#Set.S#)R
 MeterStyle=PageBox:S
-Fill=Fill Color 255,255,255,(#BarHandler# = 3 ? 220 : 0)
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,(#BarHandler# = 3 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,(#BarHandler# = 3 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Fill=Fill Color #Set.Opp_Color#,(#BarHandler# = 3 ? 220 : 0)
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 3 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 3 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 
 [AppearanceIcon]
 Meter=Image
@@ -71,9 +72,9 @@ MeterStyle=Set.String:S | PageText:S
 Meter=Shape
 Y=(10*#Set.S#)R
 MeterStyle=PageBox:S
-Fill=Fill Color 255,255,255,(#BarHandler# = 6 ? 220 : 0)
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,(#BarHandler# = 6 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,(#BarHandler# = 6 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Fill=Fill Color #Set.Opp_Color#,(#BarHandler# = 6 ? 220 : 0)
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 6 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 6 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 
 [RenderIcon]
 Meter=Image
@@ -92,7 +93,7 @@ MeterStyle=Set.String:S
 Text=HELP
 FontFace=Segoe UI
 X=#Set.P#
-Y=(#Set.H#-140)
+Y=(#Set.H#-140*#Set.S#)
 StringAlign=Left
 FontSize=(8*#Set.S#)
 Container=
@@ -101,9 +102,9 @@ FontColor=150,150,150
 Meter=Shape
 Y=(10*#Set.S#)R
 MeterStyle=PageBox:S
-Fill=Fill Color 255,255,255,(#BarHandler# = 11 ? 220 : 0)
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,(#BarHandler# = 11 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,(#BarHandler# = 11 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Fill=Fill Color #Set.Opp_Color#,(#BarHandler# = 11 ? 220 : 0)
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 11 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 11 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 
 [HelpIcon]
 Meter=Image
@@ -120,9 +121,9 @@ MeterStyle=Set.String:S | PageText:S
 Meter=Shape
 Y=(10*#Set.S#)R
 MeterStyle=PageBox:S
-Fill=Fill Color 255,255,255,(#BarHandler# = 12 ? 220 : 0)
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,(#BarHandler# = 12 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,(#BarHandler# = 12 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Fill=Fill Color #Set.Opp_Color#,(#BarHandler# = 12 ? 220 : 0)
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 12 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 12 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 
 [FAQIcon]
 Meter=Image

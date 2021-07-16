@@ -17,6 +17,7 @@ InlinePattern=\s(.*)
 InlineSetting=Size | 10
 InlinePattern2=\s(.*)
 InlineSetting2=Color | 150,150,150
+Group=Shorthand
 
 [Export]
 Measure=String
@@ -61,15 +62,15 @@ Container=ContentContainer
 X=(10*#Set.S#+#Sec.Padding#)R
 y=(-#Sec.Padding#)r
 Shape=Rectangle 0,0,(#Sec.BoxSize#+#Sec.Padding#*2),(#Sec.BoxSize#+#Sec.Padding#*2),5,5 | StrokeWidth 0 | Extend this
-this=Fill Color 255,255,255,10
+this=Fill Color #Set.Opp_Color#,10
 Container=ContentContainer
-MouseOverAction=[!SetOption #CURRENTSECTION# this "Fill Color 255,255,255,25"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# this "Fill Color 255,255,255,10"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseOverAction=[!SetOption #CURRENTSECTION# this "Fill Color #Set.Opp_Color#,25"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# this "Fill Color #Set.Opp_Color#,10"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 [MediaBoxSelectedStyle]
 X=(10*#Set.S#+#Sec.Padding#)R
 y=(-#Sec.Padding#)r
 Shape=Rectangle 0,0,(#Sec.BoxSize#+#Sec.Padding#*2),(#Sec.BoxSize#+#Sec.Padding#*2),5,5 | StrokeWidth 0 | Extend this
-this=Fill Color 255,255,255,75
+this=Fill Color #Set.Opp_Color#,75
 Container=ContentContainer
 
 [Box1]

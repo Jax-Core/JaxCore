@@ -22,7 +22,7 @@ Container=ContentContainer
 
 [HELPICONTHING]
 Meter=Image
-ImageName=#@#Icons\HelpIcon.png
+ImageName=#@#Icons\Settings\HelpIcon.png
 X=(#Set.W#-#Set.L#-#Set.P#-16-30)
 Y=([Option01:Y]-16)
 DynamicVariables=1

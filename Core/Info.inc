@@ -55,8 +55,8 @@ MeterStyle=Set.String:S
 
 [WebParser]
 Measure=WebParser
-URL=https://api.github.com/repos/EnhancedJax/#Skin.Name#/releases/latest
-RegExp=(?siU)\{.*"tag_name":"v(.*)".*}
+URL=https://raw.githubusercontent.com/EnhancedJax/#Skin.Name#/main/%40Resources/Version.inc
+RegExp==(.*)$
 FinishAction=[!Delay 1000][!EnableMeasure mC4U][!UpdateMeasure mC4U]
 
 [mVer]
