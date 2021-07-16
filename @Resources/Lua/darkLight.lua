@@ -26,5 +26,4 @@ function SwitchColor(mode)
             SKIN:Bang('!WriteKeyValue', 'Variables', 'Set.Opp_Color', '0,0,0', saveLocation)
         end
     end
-    SKIN:Bang('!Refresh')
 end

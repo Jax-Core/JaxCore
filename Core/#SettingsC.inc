@@ -1,4 +1,3 @@
-@includeOverrides=#ROOTCONFIGPATH#CoreSecOverrides#Skin.Name#-#Skin.Set_Page#.inc
 [General:Category]
 Meter=String
 MeterStyle=Set.String:S
@@ -68,23 +67,23 @@ Meter=String
 Text=Appearance
 DynamicVariables-1
 MeterStyle=Set.String:S | PageText:S
-[Render]
+[Media]
 Meter=Shape
 Y=(10*#Set.S#)R
 MeterStyle=PageBox:S
-Fill=Fill Color #Set.Opp_Color#,(#BarHandler# = 6 ? 220 : 0)
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 6 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 6 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Fill=Fill Color #Set.Opp_Color#,(#BarHandler# = 5 ? 220 : 0)
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 5 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 5 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 
-[RenderIcon]
+[MediaIcon]
 Meter=Image
 MeterStyle=PageIcon:S
-Greyscale=(#BarHandler# = 6 ? 1 : 0)
-ImageTint=(#BarHandler# = 6 ? 0 : 255),(#BarHandler# = 6 ? 0 : 255),(#BarHandler# = 6 ? 0 : 255)
+Greyscale=(#BarHandler# = 5 ? 1 : 0)
+ImageTint=(#BarHandler# = 5 ? 0 : 255),(#BarHandler# = 5 ? 0 : 255),(#BarHandler# = 5 ? 0 : 255)
 
-[6]
+[5]
 Meter=String
-Text=Render
+Text=Media
 DynamicVariables-1
 MeterStyle=Set.String:S | PageText:S
 [Help:Category]

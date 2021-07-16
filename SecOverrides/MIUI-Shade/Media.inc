@@ -20,18 +20,10 @@ Container=ContentContainer
 
 ;================================================================================================================================================================================
 
-[HELPICONTHING]
-Meter=Image
-ImageName=#@#Icons\Settings\HelpIcon.png
-X=(#Set.W#-#Set.L#-#Set.P#-16-30)
-Y=([Option01:Y]-16)
-DynamicVariables=1
-Leftmouseupaction=[!ActivateConfig "ModularPlayers\@Settings" "FAQ.ini"]
-Container=ContentContainer
 
 [Music]
 Meter=Shape
 MeterStyle=Set.Bool:S
-Y=([Option00:Y]-#Set.P#-20/2+8)
+Y=([Option00:Y]-#Set.P#+(-20/2+8)*#Set.S#)
 
 

@@ -11,8 +11,7 @@ function Initialize()
 	-- /////////////////////////////////////////////////////////
 	-- /////////////////////////////////////////////////////////
 	-- category general
-	File:write('@includeOverrides=#ROOTCONFIGPATH#\Core\SecOverrides\#Skin.Name#-#Skin.Set_Page#.inc\n'
-	,'[General:Category]\n'
+	File:write('[General:Category]\n'
 	,'Meter=String\n'
 	,'MeterStyle=Set.String:S\n'
 	,'Text=GENERAL\n'

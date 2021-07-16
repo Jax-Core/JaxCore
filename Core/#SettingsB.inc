@@ -57,7 +57,7 @@ Shape=Ellipse (#Set.W#-15*#Set.S#),(15*#Set.S#),(5*#Set.S#),(5*#Set.S#) | Stroke
 FillE=Fill Color #Set.Opp_Color#,50
 MouseOverAction=[!SetOption Esc FillE "Fill Color #Set.Opp_Color#"][!UpdateMeter Esc][!Redraw]
 MouseLeaveAction=[!SetOption Esc FillE "Fill Color #Set.Opp_Color#,50"][!UpdateMeter Esc][!Redraw]
-LeftMouseUpAction=[!DeactivateConfig][!DeactivateConfig "#JaxCore\Main\Com"][!ActivateConfig "#Skin.Name#\Main"]
+LeftMouseUpAction=[!DeactivateConfig]
 
 
 

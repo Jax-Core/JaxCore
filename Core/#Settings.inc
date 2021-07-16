@@ -1,8 +1,8 @@
 
 [Variables]
 
-; Set.S=0.9
-Set.S=(#SCREENAREAWIDTH#/1920)
+Set.S=0.9
+; Set.S=(#SCREENAREAWIDTH#/1920)
 Set.P=(20*#Set.S#)
 Set.R=(20*#Set.S#)
 Set.W=(1200*#Set.S#)
@@ -49,7 +49,6 @@ Fill=Stroke Color #Set.Opp_Color#,50
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Opp_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Opp_Color#,50"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 Leftmouseupaction=[!SetVariable Editing "#CURRENTSECTION#"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5)"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5)"][!CommandMeasure Input:M "ExecuteBatch 1"]
-
 [Set.Value:S]
 X=(5*#Set.S#)r
 Y=(15*#Set.S#)r
@@ -67,13 +66,25 @@ Container=#Sec.Container#
 Leftmouseupaction=[!WriteKeyvalue Variables "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)" "#Sec.SaveLocation#"][!Refresh][!UpdateMeasure Auto_Refresh:M]
 
 [Set.Color:S]
-X=(#Set.W#-#Set.L#-#Set.P#*2-150)
+X=(#Set.W#-#Set.L#-#Set.P#*2-150*#Set.S#)
 DynamicVariables=1
 Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 2 | Fill Color [##CURRENTSECTION#] | Extend Fill | Scale #Set.S#,#Set.S#,0,0
 Fill=Stroke Color #Set.Opp_Color#,10
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Opp_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Opp_Color#,15"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 LeftMouseUpAction=[!CommandMeasure ColorPickerUI "Change('#CURRENTSECTION#', '[&ColorPickerUI:sub('#Sec.SaveLocation#')]', '[&ColorPickerUI:sub('#CURRENTCONFIG#')]')"]
+Container=#Sec.Container#
+
+[Set.Button:S]
+X=(#Set.W#-#Set.L#-#Set.P#*2-150*#Set.S#)
+OverColor=255,255,255,50
+LeaveColor=255,255,255,25
+DynamicVariables=1
+Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 0 | Extend Fill | Scale #Set.S#,#Set.S#,0,0
+Fill=Fill Color [&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'LeaveColor')]
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color [&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'OverColor')]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color [&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'LeaveColor')]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+LeftMouseUpAction=[&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'Act')][!UpdateMeasure Auto_Refresh:M]
 Container=#Sec.Container#
 
 [Set.Pick:S]
@@ -88,14 +99,14 @@ X=(300/4*#Set.S#)r
 Y=(35/2*#Set.S#)r
 Padding=(300/6*#Set.S#),(35/4*#Set.S#),(300/6*#Set.S#),(35/4*#Set.S#)
 DynamicVariables=1
-LeftMouseUpAction=[!WriteKeyValue Variables [&Jax.Func:secVLocalGroup('#CURRENTSECTION#')] 0 "#Sec.SaveLocation#"][&Jax.Func:secVLocalGroup('#CURRENTSECTION#', '0Act')][!UpdateMeasure Auto_Refresh:M]
+LeftMouseUpAction=[!WriteKeyValue Variables [&Jax.Func:secVLocalGroup('#CURRENTSECTION#')] 0 "#Sec.SaveLocation#"][&Jax.Func:secVLocalGroup('#CURRENTSECTION#', '0Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
 StringAlign=CenterCenter
 [Set.PickOption_1:S]
 X=(300/2*#Set.S#)r
 Y=r
 Padding=(300/6*#Set.S#),(35/4*#Set.S#),(300/6*#Set.S#),(35/4*#Set.S#)
 DynamicVariables=1
-LeftMouseUpAction=[!WriteKeyValue Variables [&Jax.Func:secVLocalGroup('#CURRENTSECTION#')] 1 "#Sec.SaveLocation#"][&Jax.Func:secVLocalGroup('#CURRENTSECTION#', '1Act')][!UpdateMeasure Auto_Refresh:M]
+LeftMouseUpAction=[!WriteKeyValue Variables [&Jax.Func:secVLocalGroup('#CURRENTSECTION#')] 1 "#Sec.SaveLocation#"][&Jax.Func:secVLocalGroup('#CURRENTSECTION#', '1Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
 StringAlign=CenterCenter
 
 
@@ -129,13 +140,13 @@ Group=Set.SideButtons
 ; [BoolVarName]
 ; Meter=Shape
 ; MeterStyle=Set.Bool:S
-; Y=([VarOption:Y]-#Set.P#-20/2+8)
+; Y=([VarOption:Y]-#Set.P#+(-20/2+8)*#Set.S#)
 
 ;; TEXT INPUT EXAMPLE
 ; [TextVarName]
 ; Meter=Shape
 ; MeterStyle=Set.TextBox:S
-; Y=([VarOption:Y]-#Set.P#-30/2+8)
+; Y=([VarOption:Y]-#Set.P#+(-30/2+8)*#Set.S#)
 ; [VarOptionNumber]
 ; Meter=String
 ; Text=TextVarName
@@ -148,7 +159,7 @@ Group=Set.SideButtons
 Measure=String
 String=#Set.Auto_Refresh#
 IFMatch=1
-Ifmatchaction=[!Delay 500][!Refresh "#Skin.Name#\Main"][!Log refresh]
+Ifmatchaction=[!Delay 500][!Refresh "#Skin.Name#\Main"]
 IfMatchMode=1
 Group=NUOL
 Disabled=1
