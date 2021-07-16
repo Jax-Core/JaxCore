@@ -5,13 +5,11 @@
 @includeSkinVer=#SKINSPATH##Skin.Name#\@Resources\Version.inc
 ;get current skin data
 Skin.Appearance=Combilaunch | Plainext | ModularClocks | MIUIShade | ModularPlayers
-Skin.Layout=Combilaunch | MIUIShade
+Skin.Layout=Combilaunch
 ; Skin.General=Combilaunch | Plainext | ModularClocks | MIUIShade | ModularPlayers
-Skin.Media=Plainext | MIUIShade | ModularPlayers
+Skin.Media=MIUIShade | ModularPlayers
 Skin.Render=ModularClocks
-Skin.FAQ=Plainext | MIUIShade | ModularClocks | ModularPlayers
-
-Skin.Override=MIUIShade.00100
+Skin.FAQ=MIUIShade | ModularClocks | ModularPlayers
 
 [Set.GeneratePages:M]
 Measure=Script

@@ -26,6 +26,7 @@ DynamicVariables=1
 StringAlign=CenterCenter
 Text=#Skin.Name#
 FontSize=(30*#Set.S#)
+FontFace=Roboto Medium
 MeterStyle=Set.String:S
 Leftmouseupaction=[https://github.com/EnhancedJax/#Skin.Name#/releases/latest]
 [Subheader]
@@ -36,7 +37,7 @@ StringAlign=CenterCenter
 Text=CHECKING FOR UPDATES
 FontColor=150,150,150
 FontSize=(12*#Set.S#)
-FontWeight=400
+FontFace=Roboto Light
 MeterStyle=Set.String:S
 
 [DownloadButton]

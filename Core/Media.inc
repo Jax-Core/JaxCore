@@ -38,10 +38,20 @@ ifmatchmode=1
 
 ;================================================================================================================================================================================
 
+
+[HELPICONTHING]
+Meter=Image
+ImageName=#@#Icons\Settings\HelpIcon.png
+X=(#Set.W#-#Set.L#-#Set.P#-16-30)
+Y=([Option01:Y]-16)
+DynamicVariables=1
+Leftmouseupaction=[!ActivateConfig "ModularPlayers\@Settings" "FAQ.ini"]
+Container=ContentContainer
+
 [Option01]
 Meter=String
-X=r
-Y=(15*#Set.S#)R
+X=(25*#Set.S#)
+Y=(60*#Set.S#)
 FontSize=(10*#Set.S#)
 Text=Select your music player.
 MeterStyle=Set.String:S

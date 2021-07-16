@@ -1,4 +1,3 @@
-@includeOverrides=#ROOTCONFIGPATH#CoreSecOverrides#Skin.Name#-#Skin.Set_Page#.inc
 [General:Category]
 Meter=String
 MeterStyle=Set.String:S
