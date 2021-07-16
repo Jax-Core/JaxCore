@@ -1,8 +1,8 @@
 
 [Variables]
 
-Set.S=0.9
-; Set.S=(#SCREENAREAWIDTH#/1920)
+; Set.S=0.9
+Set.S=(#SCREENAREAWIDTH#/1920)
 Set.P=(20*#Set.S#)
 Set.R=(20*#Set.S#)
 Set.W=(1200*#Set.S#)

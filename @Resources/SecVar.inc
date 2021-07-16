@@ -1,5 +1,5 @@
 [Variables]
-Skin.Name=MIUI-Shade
+Skin.Name=ModularClocks
 Skin.Shorthand=
 
 Skin.Set_Page=Info
