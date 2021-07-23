@@ -7,7 +7,7 @@ H=#Sec.P#
 Shape=Path This | StrokeWidth 2 | StrokeColor 255,255,255,120 | Scale -1,1
 This=0,-10 | LineTo 10,0 | LineTo 0,10
 SolidColor=0,0,0,1
-LeftMouseupAction=[!WriteKeyValue Variables Page ([#Page]-1)][!CommandMeasure mTween "Reverse(1)"][!CommandMeasure mTween "Reverse(2)"][!Delay 1000][!Refresh]
+LeftMouseupAction=[!WriteKeyValue Variables Page ([#Page]-1)][!CommandMeasure mTween "Reverse(1)"][!CommandMeasure mTween "Reverse(2)"][!Delay #Ani.Speed#][!Refresh]
 
 [ArrowRight]
 Meter=Shape
@@ -18,24 +18,24 @@ H=#Sec.P#
 Shape=Path This | StrokeWidth 2 | StrokeColor 255,255,255,120 | Scale 1,1
 This=0,-10 | LineTo 10,0 | LineTo 0,10
 SolidColor=0,0,0,1
-LeftMouseupAction=[!WriteKeyValue Variables Page 1][!CommandMeasure mTween "Reverse(1)"][!CommandMeasure mTween "Reverse(2)"][!Delay 1000][!DeactivateConfig][!ActivateConfig "#JaxCore\Main" "Home.ini"]
+LeftMouseupAction=[!WriteKeyValue Variables Page 1][!CommandMeasure mTween "Reverse(1)"][!CommandMeasure mTween "Reverse(2)"][!WriteKeyValue Variables New.Executed 1 "#ROOTCONFIGPATH#Main\Home.ini"][!Delay #Ani.Speed#][!DeactivateConfig][!ActivateConfig "#JaxCore\Main" "Home.ini"]
 
 ;CONTENT+=============================================================================
 ;CONTENT+=============================================================================
 
 [mL]
 Measure=String
-OnUpdateAction=[!Delay 100][!CommandMeasure mTween "Start(0)"][!Delay 1000][!CommandMeasure mTween "Start(1)"][!Delay 1000][!CommandMeasure mTween "Start(2)"]
+OnUpdateAction=[!Delay 100][!CommandMeasure mTween "Start(0)"][!Delay #Ani.Speed#][!CommandMeasure mTween "Start(1)"][!Delay #Ani.Speed#][!CommandMeasure mTween "Start(2)"]
 
 
 [mTween]
 Measure=Script
 ScriptFile=#@#LuaTween/Main.lua
 TweenGroup=Tweenable
-Tween0=Single | Variable | TweenNode1 | 0 | 100 | 1000
-Tween1=Single | Variable | TweenNode2 | 0 | 100 | 1000
-Tween2=Single | Variable | TweenNode3 | 0 | 100 | 1000
-; Tween3=Single | Variable | TweenNode4 | 0 | 100 | 1000
+Tween0=Single | Variable | TweenNode1 | 0 | 100 | #Ani.Speed#
+Tween1=Single | Variable | TweenNode2 | 0 | 100 | #Ani.Speed#
+Tween2=Single | Variable | TweenNode3 | 0 | 100 | #Ani.Speed#
+; Tween3=Single | Variable | TweenNode4 | 0 | 100 | #Ani.Speed#
 Optional0=Easing InOutQuart
 Optional1=Easing InOutExpo
 Optional2=Easing InOutExpo

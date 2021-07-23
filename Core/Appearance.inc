@@ -3,7 +3,7 @@ BarHandler=3
 
 [darkLight.Func]
 Measure=Script
-ScriptFile=#@#Lua\DarkLight.lua
+ScriptFile=#@#Lua\darkLight.lua
 [ColorPickerUI]
 Measure=Script
 ScriptFile=#ROOTCONFIGPATH#ColorPickerUI\Resources\Scripts\ColorPickerUIActivator.lua

@@ -117,7 +117,7 @@ Y=r
 MeterStyle=Box
 [BoxAdd]
 Meter=Shape
-X=189
+X=590
 Y=r
 DynamicVariables=1
 Fill=Fill Color 255,255,255,50

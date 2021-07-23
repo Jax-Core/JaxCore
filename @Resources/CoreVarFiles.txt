@@ -1,0 +1,1 @@
+#JaxCore\@Resources\UserVars.inc

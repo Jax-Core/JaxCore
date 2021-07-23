@@ -2,7 +2,6 @@
 [Variables]
 BarHandler=1
 
-
 [ImageContainer]
 Meter=Shape
 X=#Set.L#

@@ -1,13 +1,13 @@
 [mL]
 Measure=String
-OnUpdateAction=[!CommandMeasure mTween "Start(0)"][!Delay 500][!CommandMeasure mTween "Start(1)"][!Delay 1500][!HideMeter MeterRotate][!SetOption MeterRotate Group ""][!ShowMeter Logo][!SetOption Logo Group "Tweenable"][!UpdateMeter Logo]
+OnUpdateAction=[!CommandMeasure mTween "Start(0)"][!Delay 500][!CommandMeasure mTween "Start(1)"][!Delay (1.5*1000)][!HideMeter MeterRotate][!SetOption MeterRotate Group ""][!ShowMeter Logo][!SetOption Logo Group "Tweenable"][!UpdateMeter Logo]
 
 
 [mTween]
 Measure=Script
 ScriptFile=#@#LuaTween/Main.lua
 TweenGroup=Tweenable
-Tween0=Single | Variable | TweenNode1 | 0 | 100 | 2000
+Tween0=Single | Variable | TweenNode1 | 0 | 100 | (2*1000)
 Tween1=Single | Variable | TweenNode2 | 0 | 100 | 1000
 Tween2=Single | Variable | TweenNode3 | 0 | 100 | 1000
 Optional0=Easing InOutQuart
@@ -70,4 +70,4 @@ H=(256+256*#TweenNode3#/50)
 DynamicVariables=1
 Hidden=1
 ImageAlpha=((100 - #TweenNode3#)/100*255)
-Leftmouseupaction=[!CommandMeasure mTween "Reverse(0)"][!CommandMeasure mTween "Start(2)"][!Delay 1500][!WriteKeyValue Variables Page 2][!Refresh]
+Leftmouseupaction=[!CommandMeasure mTween "Reverse(0)"][!CommandMeasure mTween "Start(2)"][!Delay (1.5*1000)][!WriteKeyValue Variables Page 2][!Refresh]

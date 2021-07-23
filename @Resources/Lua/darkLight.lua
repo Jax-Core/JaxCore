@@ -13,6 +13,15 @@ function SwitchColor(mode)
             SKIN:Bang('!WriteKeyValue', 'Variables', 'OffColor', '211, 211, 211', saveLocation)
         SKIN:Bang('!Refresh', currentSkin .. '\\Main')
         end
+    elseif string.match(currentSkin, "ModularPlayers") then
+        if mode == 0 then
+            SKIN:Bang('!WriteKeyValue', 'Variables', 'MainColor', '12,12,12', saveLocation)
+            SKIN:Bang('!WriteKeyValue', 'Variables', 'OppositeColor', '255,255,255', saveLocation)
+        else
+            SKIN:Bang('!WriteKeyValue', 'Variables', 'MainColor', '250,250,250', saveLocation)
+            SKIN:Bang('!WriteKeyValue', 'Variables', 'OppositeColor', '0, 0, 0', saveLocation)
+        SKIN:Bang('!Refresh', currentSkin .. '\\Main')
+        end
     elseif string.match(currentSkin, "n/a") then
         if mode == 0 then
             SKIN:Bang('!WriteKeyValue', 'Variables', 'Set.Pri_Color', '19, 19, 19', saveLocation)
