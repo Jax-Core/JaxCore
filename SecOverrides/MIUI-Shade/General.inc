@@ -1,3 +1,6 @@
+[Variables]
+Drag=0
+
 [HotkeysTitle]
 Meter=String
 X=(30*#Set.S#)
@@ -13,45 +16,16 @@ Meter=String
 X=r
 Y=(15*#Set.S#)R
 FontSize=(10*#Set.S#)
-Text=Hotkey activator type
-MeterStyle=Set.String:S
-Container=ContentContainer
-[Set.Div:S19032213112312313238]
-Meter=Shape
-MeterStyle=Set.Div:S
-[Option011]
-Meter=String
-X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
-Text=HotKey - Key [Formatting]
+Text=HotKey
 InlinePattern=.*(\[.*\])
 InlineSetting=Size | 8
 InlinePattern2=.*(\[.*\])
 InlineSetting2=Color | 150,150,150
 MeterStyle=Set.String:S
-Hidden=#KeyHook#
-Leftmouseupaction=["https://www.autohotkey.com/docs/Hotkeys.htm"]
 Container=ContentContainer
-[Option012]
-Meter=String
-X=r
-Y=r
-FontSize=(10*#Set.S#)
-Text=KeyHook - Key [Formatting]
-InlinePattern=.*(\[.*\])
-InlineSetting=Size | 8
-InlinePattern2=.*(\[.*\])
-InlineSetting2=Color | 150,150,150
-MeterStyle=Set.String:S
-Hidden=(1-#KeyHook#)
-Leftmouseupaction=["https://github.com/brianferguson/HotKey.dll#pre-defined-hotkey-keywords"]
-Container=ContentContainer
-[Set.Div:S19032213238]
+[Set.Div:S19131238]
 Meter=Shape
-y=(27*#Set.S#)r
 MeterStyle=Set.Div:S
-
 [Option02]
 Meter=String
 X=r
@@ -126,49 +100,61 @@ Text=Unit (Metric/Imperial)
 MeterStyle=Set.String:S
 Container=ContentContainer
 
+;================================================================================================================================================================================
+
+[DragTitle]
+Meter=String
+X=(30*#Set.S#)
+Y=(30*#Set.S#)R
+FontSize=(14*#Set.S#)
+FontWeight=500
+Text=Dragging
+MeterStyle=Set.String:S
+Container=ContentContainer
+
+[Option30]
+Meter=String
+X=r
+Y=(15*#Set.S#)R
+FontSize=(10*#Set.S#)
+Text=Drag to launch skin
+MeterStyle=Set.String:S
+Container=ContentContainer
+[Set.Div:238]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option31]
+Meter=String
+X=r
+Y=(15*#Set.S#)R
+FontSize=(10*#Set.S#)
+Text=Dragging area width
+MeterStyle=Set.String:S
+Container=ContentContainer
+[Set.Div:w2s0328]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option32]
+Meter=String
+X=r
+Y=(15*#Set.S#)R
+FontSize=(10*#Set.S#)
+Text=Dragging area location
+MeterStyle=Set.String:S
+Container=ContentContainer
+
+
 
 ;================================================================================================================================================================================
 
-[KeyHook:]
+[Button01]
 Meter=Shape
-SecVar=KeyHook
-0Act=
-1Act=
-MeterStyle=Set.Pick:S
-Y=([Option01:Y]-#Set.P#+(-35/2+8)*#Set.S#)
-[KeyHook:0]
-Meter=String
-Text=Hotkey
-FontColor=(#KeyHook# = 0 ? 0 : 255),(#KeyHook# = 0 ? 0 : 255),(#KeyHook# = 0 ? 0 : 255)
-MeterStyle=Set.String:S | Set.PickOption_0:S
-[KeyHook:1]
-Meter=String
-Text=Keyhook
-FontColor=(#KeyHook# = 1 ? 0 : 255),(#KeyHook# = 1 ? 0 : 255),(#KeyHook# = 1 ? 0 : 255)
-MeterStyle=Set.String:S | Set.PickOption_1:S
-
-;================================================================================================================================================================================
-
-[Key]
-Meter=Shape
-MeterStyle=Set.Textbox:S
-Y=([Option011:Y]-#Set.P#+(-30/2+8)*#Set.S#)
-Leftmouseupaction=[!SetVariable Editing "#CURRENTSECTION#"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5)"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5)"][!CommandMeasure Input:M "ExecuteBatch 2"]
-Hidden=(#KeyHook#)
-[Value011]
+MeterStyle=Set.Button:S
+Y=([Option01:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+Act=[!ActivateConfig "#JaxCore\Main\Hotkey"]
+[Value01]
 Meter=String
 Text=#Key#
-Hidden=(#KeyHook#)
-MeterStyle=Set.String:S | Set.Value:S
-[HotKey]
-Meter=Shape
-MeterStyle=Set.Textbox:S
-Y=([Option012:Y]-#Set.P#+(-30/2+8)*#Set.S#)
-Hidden=(1-#KeyHook#)
-[Value012]
-Meter=String
-Text=#HotKey#
-Hidden=(1-#KeyHook#)
 MeterStyle=Set.String:S | Set.Value:S
 [HideOnFullScreen]
 Meter=Shape
@@ -207,15 +193,60 @@ Meter=String
 Text=#WeatherUnits#
 MeterStyle=Set.String:S | Set.Value:S
 
-;================================================================================================================================================================================
+[ActiveChecker]
+Measure=Plugin
+Plugin=ConfigActive
+ConfigName=#Skin.Name#\Activator
+IfCondition=ActiveChecker = 1
+IfTrueAction=[!SetVariable Drag 1][!UpdateMeter Drag][!Redraw]
 
+[Drag]
+Meter=Shape
+MeterStyle=Set.Bool:S | Drag#Drag#
+Y=([Option30:Y]-#Set.P#+(-20/2+8)*#Set.S#)
+[Drag0]
+Leftmouseupaction=[!ActivateConfig "#Skin.Name#\Activator"][!Refresh]
+[Drag1]
+Leftmouseupaction=[!DeactivateConfig "#Skin.Name#\Activator"][!Refresh]
+
+[Detect.Size]
+Meter=Shape
+MeterStyle=Set.Textbox:S
+Y=([Option31:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+Leftmouseupaction=[!SetVariable Editing "#CURRENTSECTION#"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5)"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5)"][!CommandMeasure Input:M "ExecuteBatch 2"]
+[Value31]
+Meter=String
+Text=#Detect.Size#
+MeterStyle=Set.String:S | Set.Value:S
+
+[Detect.Location:]
+Meter=Shape
+SecVar=Detect.Location
+0Act=[!CommandMeasure darkLight.Func "SwitchColor(0)"]
+1Act=[!CommandMeasure darkLight.Func "SwitchColor(1)"]
+MeterStyle=Set.Pick:S
+Y=([Option32:Y]-#Set.P#+(-35/2+8)*#Set.S#)
+[Detect.Location:0]
+Meter=String
+Text=Left
+FontColor=(#Detect.Location# = 0 ? 0 : 255),(#Detect.Location# = 0 ? 0 : 255),(#Detect.Location# = 0 ? 0 : 255)
+MeterStyle=Set.String:S | Set.PickOption_0:S
+LeftMouseUpAction=[!WriteKeyValue Variables [&Jax.Func:secVLocalGroup('#CURRENTSECTION#')] 0 "#Sec.SaveLocation#"][&Jax.Func:secVLocalGroup('#CURRENTSECTION#', '0Act')][!Refresh][!Refresh "#Skin.Name#\Activator"]
+[Detect.Location:1]
+Meter=String
+Text=Right
+FontColor=(#Detect.Location# = 1 ? 0 : 255),(#Detect.Location# = 1 ? 0 : 255),(#Detect.Location# = 1 ? 0 : 255)
+MeterStyle=Set.String:S | Set.PickOption_1:S
+LeftMouseUpAction=[!WriteKeyValue Variables [&Jax.Func:secVLocalGroup('#CURRENTSECTION#')] 1 "#Sec.SaveLocation#"][&Jax.Func:secVLocalGroup('#CURRENTSECTION#', '1Act')][!Refresh][!Refresh "#Skin.Name#\Activator"]
+
+;================================================================================================================================================================================
 [Input:M]
 Command2=[!SetVariable #Editing# "$UserInput$"][!UpdateMeasure SaveAndLoad2:M]
 
 [SaveAndLoad2:M]
 Measure=Calc
 DynamicVariables=1
-OnUpdateAction=[!WriteKeyvalue Variables #Editing# "[##Editing#]" "#SKINSPATH#MIUI-Shade\@Resources\Actions\HotKeys.ini"][!UpdateMeter *][!Redraw][!UpdateMeasure Auto_Refresh:M]
+OnUpdateAction=[!WriteKeyvalue Variables #Editing# "[##Editing#]" "#Sec.SaveLocation#"][!UpdateMeter *][!Redraw][!Refresh "#Skin.Name#\Activator"]
 Disabled=1
 Group=NUOL
 

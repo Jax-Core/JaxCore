@@ -18,7 +18,7 @@ Set.Shadow=13,13,13
 Sec.SaveLocation=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 
 Set.Auto_Refresh=1
-Set.Background_Check=1
+Set.Background_Check_MS=60000
 ;Size, Pad, Round, Width, Height, ListWidth
 
 Scroll=0
@@ -77,14 +77,14 @@ Container=#Sec.Container#
 
 [Set.Button:S]
 X=(#Set.W#-#Set.L#-#Set.P#*2-150*#Set.S#)
-OverColor=255,255,255,50
-LeaveColor=255,255,255,25
+OverColor=100,100,100,200
+LeaveColor=100,100,100,100
 DynamicVariables=1
 Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 0 | Extend Fill | Scale #Set.S#,#Set.S#,0,0
 Fill=Fill Color [&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'LeaveColor')]
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color [&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'OverColor')]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color [&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'LeaveColor')]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-LeftMouseUpAction=[&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'Act')][!UpdateMeasure Auto_Refresh:M]
+LeftMouseUpAction=[&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'Act')]
 Container=#Sec.Container#
 
 [Set.Pick:S]

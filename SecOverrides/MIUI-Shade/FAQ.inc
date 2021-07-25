@@ -1,4 +1,3 @@
-
 [Q1]
 Meter=String
 Text=The animation seems to be lagging?
@@ -53,7 +52,7 @@ Text=Why does the hotkey not work?
 MeterStyle=Set.String:S | Sec.Q:S
 [A5]
 Meter=String
-Text=If you've changed the keys yourself, make sure they are following the right formatting. Additionally if you are using keyhook, some key pressing orders might not work.
+Text=If you've changed the keys yourself, make sure they are following the right formatting.
 MeterStyle=Set.String:S | Sec.A:S
 [Set.Div:S10105]
 Meter=Shape
