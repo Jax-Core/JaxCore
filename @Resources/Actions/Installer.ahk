@@ -9,6 +9,8 @@ SplashTextOn , 400, 100, Rainmeter, "Downloading skin..."
 UrlDownloadToFile, %DownloadLink%, INSTALL.rmskin
 SplashTextOff
 Run, INSTALL.rmskin
-Run, %comspec% /c del "%A_ScriptFullPath%\..",,Hide ;works on both compiled and non compiled
-ExitApp
+WinWait, Rainmeter Skin Installer
+Sleep, 100
+Send, {Enter}
+
 ExitApp

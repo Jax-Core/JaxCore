@@ -1,9 +1,7 @@
-$Folder = '../../../@CoreUpdateTemp'
-if (Test-Path -Path $Folder) {
-    "Path exists!"
-} else {
-    New-Item -Path "../../.." -Name "@CoreUpdateTemp" -ItemType "directory"
-}
-Copy-Item -Path "../Actions/AHK.exe" -Destination "../../../@CoreUpdateTemp"
-Copy-Item -Path "../Actions/InstallData.ini" -Destination "../../../@CoreUpdateTemp"
-Copy-Item -Path "../Actions/Installer.ahk" -Destination "../../../@CoreUpdateTemp"
+$scriptpath = $MyInvocation.MyCommand.Path
+$dir = Split-Path $scriptpath
+Remove-Item -Path "$dir/../../../@CoreUpdateTemp" -Recurse
+New-Item -Path "$dir/../../.." -Name "@CoreUpdateTemp" -ItemType "directory"
+Copy-Item -Path "$dir/../Actions/AHK.exe" -Destination "$dir/../../../@CoreUpdateTemp"
+Copy-Item -Path "$dir/../Actions/InstallData.ini" -Destination "$dir/../../../@CoreUpdateTemp"
+Copy-Item -Path "$dir/../Actions/Installer.ahk" -Destination "$dir/../../../@CoreUpdateTemp"
