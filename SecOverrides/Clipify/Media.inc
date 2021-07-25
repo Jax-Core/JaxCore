@@ -1,29 +1,29 @@
 
-;================================================================================================================================================================================
-
-[Behavior]
+[Options]
 Meter=String
 X=(30*#Set.S#)
 Y=(30*#Set.S#)R
 FontSize=(14*#Set.S#)
 FontWeight=500
-Text=Behavior
+Text=Options
 MeterStyle=Set.String:S
 Container=ContentContainer
 
-[Option01]
+[Option00]
 Meter=String
 X=r
 Y=(15*#Set.S#)R
 FontSize=(10*#Set.S#)
-Text=Auto hide music player when not playing
+Text=Show media notification
 MeterStyle=Set.String:S
 Container=ContentContainer
 
-
 ;================================================================================================================================================================================
 
-[AutoHide]
+
+[Music]
 Meter=Shape
 MeterStyle=Set.Bool:S
-Y=([Option01:Y]-#Set.P#+(-20/2+8)*#Set.S#)
+Y=([Option00:Y]-#Set.P#+(-20/2+8)*#Set.S#)
+
+

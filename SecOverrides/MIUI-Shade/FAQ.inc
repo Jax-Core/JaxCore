@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-=======
-
 [Q1]
 Meter=String
 Text=The animation seems to be lagging?
@@ -120,4 +117,3 @@ MeterStyle=Set.String:S | Sec.A:S
 [Set.Div:S101010]
 Meter=Shape
 MeterStyle=Set.Div:S
->>>>>>> Stashed changes

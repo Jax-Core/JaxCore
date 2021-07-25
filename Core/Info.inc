@@ -4,7 +4,6 @@ BarHandler=1
 Sec.BottomWidth=(130*#set.S#)
 Sec.BottomHeight=(30*#Set.S#)
 
-
 [ImageContainer]
 Meter=Shape
 X=#Set.L#

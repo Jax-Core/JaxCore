@@ -7,6 +7,7 @@ Sec.BoxSize=(((#Set.W#-#Set.L#-#Set.P#)-30*2)/6-10*5*#Set.S#)
 Meter=String
 X=(20*#Set.S#)
 Y=(20*#Set.S#)
+DynamicVariables=1
 Text=Media /#Skin.Shorthand#
 FontSize=(20*#Set.S#)
 FontWeight=450
