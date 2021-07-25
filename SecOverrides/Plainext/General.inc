@@ -252,7 +252,7 @@ MeterStyle=Set.Button:S
 OverColor=0,255,10,200
 LeaveColor=0,255,10,100
 Y=([Option32:Y]-#Set.P#+(-30/2+8)*#Set.S#)
-Act=[!CommandMeasure DrivesGen:M "GenDrive(#DriveCount#, '#DriveChar#')"]
+Act=[!CommandMeasure DrivesGen:M "GenDrive(#DriveCount#, '#DriveChar#')"][!UpdateMeasure Auto_Refresh:M]
 [Value32]
 Meter=String
 Text=Generate

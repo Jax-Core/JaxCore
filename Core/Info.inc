@@ -1,6 +1,8 @@
 
 [Variables]
 BarHandler=1
+Sec.BottomWidth=(130*#set.S#)
+Sec.BottomHeight=(30*#Set.S#)
 
 
 [ImageContainer]
@@ -53,6 +55,48 @@ Hidden=1
 DynamicVariables=1
 Leftmouseupaction=[!WriteKeyValue Data DownloadLink "https://github.com/EnhancedJax/#Skin.Name#/releases/download/v[mVer]/#Skin.Name#_v[mVer].rmskin" "#@#Actions\InstallData.ini"][!WriteKeyValue Data SaveLocation "#@#Actions" "#@#Actions\InstallData.ini"]["#@#Actions\AHK.exe" "#@#Actions\Installer.ahk"]
 MeterStyle=Set.String:S
+
+;===========================================================================================================================
+
+[ActiveChecker]
+Measure=Plugin
+Plugin=ConfigActive
+ConfigName=#Skin.Name#\Main
+IfCondition=ActiveChecker = 1
+IfTrueAction=[!SetOption BottomButton MeterStyle BottomButton1][!SetOption BottomText MeterStyle "Set.String:S | BottomText1"][!UpdateMeter *][!Redraw]
+
+[BottomButton]
+Meter=Shape
+Shape=Rectangle 0,0,#Sec.BottomWidth#,#Sec.BottomHeight#,(#Set.R#/4) | StrokeWidth 0 | Extend THis
+This=fill Color [&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'ColorLeave')]
+X=(-#sec.BottomWidth#/2+[ContentContainer:W]/2)r
+Y=([ContentContainer:H]-#Sec.BottomHeight#+#Set.P#/2)
+DynamicVariables=1
+MouseOverAction=[!SetOption #CURRENTSECTION# this "Fill Color [&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'ColorOver')]"][!SetOption #Sec.#CURRENTSECTION## FontColor "#Set.Opp_Color#"][!UpdateMeter *][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# this "Fill Color [&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'ColorLeave')]"][!SetOption #Sec.#CURRENTSECTION## FontColor "#Set.Opp_Color#,150"][!UpdateMeter *][!Redraw]
+MeterStyle=BottomButton0
+[BottomButton0]
+ColorLeave=100,100,100,100
+ColorOver=100,100,100,200
+Leftmouseupaction=[!ActivateConfig "#Skin.Name#\Main"][!Refresh]
+[BottomButton1]
+ColorLeave=0,255,0,100
+ColorOver=0,255,0,200
+Leftmouseupaction=[!DeactivateConfig "#Skin.Name#\Main"]["#@#Actions\AHK.exe" "#@#Actions\CloseMIUI.ahk"][!Refresh]
+[BottomText]
+Meter=String
+X=(#sec.BottomWidth#/2)r
+Y=(#Sec.BottomHeight#/2)r
+DynamicVariables=1
+Container=
+FontSize=10
+MeterStyle=Set.String:S | BottomText0
+StringAlign=CenterCenter
+[BottomText0]
+Text=Activate Skin
+[BottomText1]
+Text=Deactivate Skin
+;===========================================================================================================================
 
 [WebParser]
 Measure=WebParser
