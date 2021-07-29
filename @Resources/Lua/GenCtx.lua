@@ -3,7 +3,7 @@ function Update()
 	local File = io.open(SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Ctx\\#ContextC.inc','w')
 	local Left = tonumber(SKIN:GetVariable('Sec.Ctx.Left', '0'))
 	local Center = tonumber(SKIN:GetVariable('Sec.Ctx.Center', '0'))
-	local Blur = tonumber(SKIN:GetVariable('Sec.Ctx.Blur', '0'))
+	-- local Blur = tonumber(SKIN:GetVariable('Sec.Ctx.Blur', '0'))
 	local Settings = tonumber(SKIN:GetVariable('Sec.Ctx.Settings', '1'))
 	local Unload = tonumber(SKIN:GetVariable('Sec.Ctx.Unload', '0'))
 	local SAW = tonumber(SKIN:GetVariable('SCREENAREAWIDTH'))
@@ -49,29 +49,30 @@ function Update()
 		,'MeterStyle=Ctx.String:S | CtxText:S\n')
 		end
 
-	if (Blur == 1 or Settings == 1 or Unload == 1) then
+	-- if (Blur == 1 or Settings == 1 or Unload == 1) then
+	if (Settings == 1 or Unload == 1) then
 		File:write('[Divider1]\n'
 		,'Meter=Shape\n'
 		,'MeterStyle=Ctx.Div:S\n')
 	end
 		
-	if Blur == 1 then
-		File:write('[Blur]\n'
-		,'Meter=Shape\n'
-		,'MeterStyle=CtxBox:S\n'
-		,'Fill=Fill Color #Set.Pri_Color#,0\n'
-		,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,110"][!SetOption #CURRENTSECTION#Icon ImageTint "234,234,230"][!SetOption 11 FontColor "234,234,230"][!UpdateMeter *][!Redraw]\n'
-		,'MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,0"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Pri_Color#"][!SetOption 11 FontColor "#Set.Pri_Color#"][!UpdateMeter *][!Redraw]\n'
-		,'LeftMouseUpAction=[!UpdateMeasure RefreshBlur "#Sec.Skin#\\Main"][!DeactivateConfig]\n'
-		,'DynamicVariables=1\n'
-		,'[BlurIcon]\n'
-		,'Meter=Image\n'
-		,'MeterStyle=CtxIcon:S\n'
-		,'[11]\n'
-		,'Meter=String\n'
-		,'Text=Refresh blur\n'
-		,'MeterStyle=Ctx.String:S | CtxText:S\n')
-		end
+	-- if Blur == 1 then
+	-- 	File:write('[Blur]\n'
+	-- 	,'Meter=Shape\n'
+	-- 	,'MeterStyle=CtxBox:S\n'
+	-- 	,'Fill=Fill Color #Set.Pri_Color#,0\n'
+	-- 	,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,110"][!SetOption #CURRENTSECTION#Icon ImageTint "234,234,230"][!SetOption 11 FontColor "234,234,230"][!UpdateMeter *][!Redraw]\n'
+	-- 	,'MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,0"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Pri_Color#"][!SetOption 11 FontColor "#Set.Pri_Color#"][!UpdateMeter *][!Redraw]\n'
+	-- 	,'LeftMouseUpAction=[!UpdateMeasure RefreshBlur "#Sec.Skin#\\Main"][!DeactivateConfig]\n'
+	-- 	,'DynamicVariables=1\n'
+	-- 	,'[BlurIcon]\n'
+	-- 	,'Meter=Image\n'
+	-- 	,'MeterStyle=CtxIcon:S\n'
+	-- 	,'[11]\n'
+	-- 	,'Meter=String\n'
+	-- 	,'Text=Refresh blur\n'
+	-- 	,'MeterStyle=Ctx.String:S | CtxText:S\n')
+	-- 	end
 		
 	if Settings == 1 then
 		File:write('[Settings]\n'

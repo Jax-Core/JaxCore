@@ -74,11 +74,11 @@ MeterStyle=RenderStyle
 [Blur]
 Meter=Image
 MeterStyle=RenderStyle
-[Bar]
-Meter=Image
-MeterStyle=RenderStyle
-ImageAlpha=50
-Leftmouseupaction=[]
+; [Bar]
+; Meter=Image
+; MeterStyle=RenderStyle
+; ImageAlpha=50
+; Leftmouseupaction=[]
 
 ;================================================================================================================================================================================
 
@@ -273,16 +273,16 @@ MeterStyle=Set.String:S | Set.Value:S
 
 ;===========================
 
-[BarBackpacity]
-Meter=Shape
-MeterStyle=Set.TextBox:S
-Group=Bar
-Y=([Option21:Y]-#Set.P#+(-30/2+8)*#Set.S#)
-[Value21]
-Meter=String
-Text=#BarBackpacity#
-Group=Bar
-MeterStyle=Set.String:S | Set.Value:S
+; [BarBackpacity]
+; Meter=Shape
+; MeterStyle=Set.TextBox:S
+; Group=Bar
+; Y=([Option21:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+; [Value21]
+; Meter=String
+; Text=#BarBackpacity#
+; Group=Bar
+; MeterStyle=Set.String:S | Set.Value:S
 
 
 

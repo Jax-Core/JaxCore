@@ -16,12 +16,12 @@ UpdateDivider=-1
 
 
 
-[RefreshBlur]
-Measure=Calc
-Group=NUOL
-Disabled=1
-UpdateDivider=-1
-OnUpdateAction=[!Delay 1000][!CommandMeasure ImageBlur Update]
+; [RefreshBlur]
+; Measure=Calc
+; Group=NUOL
+; Disabled=1
+; UpdateDivider=-1
+; OnUpdateAction=[!Delay 1000][!CommandMeasure ImageBlur Update]
 
 [Ctx.Gen:M]
 Measure=Script

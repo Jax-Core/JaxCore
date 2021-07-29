@@ -18,8 +18,13 @@ H=#Sec.P#
 Shape=Path This | StrokeWidth 2 | StrokeColor 255,255,255,120 | Scale 1,1
 This=0,-10 | LineTo 10,0 | LineTo 0,10
 SolidColor=0,0,0,1
-LeftMouseupAction=[!WriteKeyValue Variables Page 1][!CommandMeasure mTween "Reverse(1)"][!CommandMeasure mTween "Reverse(2)"][!WriteKeyValue Variables New.Executed 1 "#@#UserVars.inc"][!Delay #Ani.Speed#][!DeactivateConfig][!ActivateConfig "#JaxCore\Main" "Home.ini"]
-
+DynamicVariables=1
+LeftMouseupAction=[!WriteKeyValue Variables Page 1][!CommandMeasure mTween "Reverse(1)"][!CommandMeasure mTween "Reverse(2)"][!WriteKeyValue Variables New.Executed "[MeasureUser]" "#@#UserVars.inc"][!Delay #Ani.Speed#][!DeactivateConfig][!ActivateConfig "#JaxCore\Main" "Home.ini"]
+[MeasureUser]
+Measure=Plugin
+Plugin=SysInfo
+SysInfoType=USER_NAME
+UpdateDivider=-1
 ;CONTENT+=============================================================================
 ;CONTENT+=============================================================================
 
