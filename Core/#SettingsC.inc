@@ -67,25 +67,6 @@ Meter=String
 Text=Appearance
 DynamicVariables-1
 MeterStyle=Set.String:S | PageText:S
-[Render]
-Meter=Shape
-Y=(10*#Set.S#)R
-MeterStyle=PageBox:S
-Fill=Fill Color #Set.Opp_Color#,(#BarHandler# = 6 ? 220 : 0)
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 6 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 6 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-
-[RenderIcon]
-Meter=Image
-MeterStyle=PageIcon:S
-Greyscale=(#BarHandler# = 6 ? 1 : 0)
-ImageTint=(#BarHandler# = 6 ? 0 : 255),(#BarHandler# = 6 ? 0 : 255),(#BarHandler# = 6 ? 0 : 255)
-
-[6]
-Meter=String
-Text=Render
-DynamicVariables-1
-MeterStyle=Set.String:S | PageText:S
 [Help:Category]
 Meter=String
 MeterStyle=Set.String:S
@@ -114,24 +95,5 @@ ImageTint=(#BarHandler# = 11 ? 0 : 255),(#BarHandler# = 11 ? 0 : 255),(#BarHandl
 [11]
 Meter=String
 Text=Help
-DynamicVariables-1
-MeterStyle=Set.String:S | PageText:S
-[FAQ]
-Meter=Shape
-Y=(10*#Set.S#)R
-MeterStyle=PageBox:S
-Fill=Fill Color #Set.Opp_Color#,(#BarHandler# = 12 ? 220 : 0)
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 12 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 12 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-
-[FAQIcon]
-Meter=Image
-MeterStyle=PageIcon:S
-Greyscale=(#BarHandler# = 12 ? 1 : 0)
-ImageTint=(#BarHandler# = 12 ? 0 : 255),(#BarHandler# = 12 ? 0 : 255),(#BarHandler# = 12 ? 0 : 255)
-
-[12]
-Meter=String
-Text=FAQ
 DynamicVariables-1
 MeterStyle=Set.String:S | PageText:S

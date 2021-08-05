@@ -9,8 +9,14 @@ IfMatch3=Graph
 IfNotMatchAction3=[!HideMeterGroup Graph]
 IfMatch4=Smart
 IfNotMatchAction4=[!HideMeterGroup Smart]
-IfMatch5=Text
-IfNotMatchAction5=[!HideMeterGroup Text]
+IfMatch5=^CircTech$
+IfNotMatchAction5=[!HideMeterGroup CircTech]
+IfMatch6=^Tech$
+IfNotMatchAction6=[!HideMeterGroup Tech]
+IfMatch7=Arc
+IfNotMatchAction7=[!HideMeterGroup Arc]
+IfMatch8=Light
+IfNotMatchAction8=[!HideMeterGroup Light]
 
 [Export2:M]
 Measure=String
@@ -61,7 +67,17 @@ FontSize=(10*#Set.S#)
 Text=Colors
 MeterStyle=Set.String:S
 Container=ContentContainer
-
+[Divider19w2sds0ssdsd]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option000]
+Meter=String
+X=r
+Y=(15*#Set.S#)R
+FontSize=(10*#Set.S#)
+Text=Animated update rate
+MeterStyle=Set.String:S
+Container=ContentContainer
 
 ;================================================================================================================================================================================
 
@@ -89,7 +105,7 @@ MeterStyle=Set.String:S | Set.PickOption_1:S
 [CurrentClock]
 Meter=String
 X=(20*#Set.S#)
-Y=(50*#Set.S#)r
+Y=(70*#Set.S#)r
 FontSize=(10*#Set.S#)
 FontWeight=400
 Text=Clock layout (#Style#)
@@ -424,7 +440,14 @@ Container=ContentContainer
 ; Meter=String
 ; Text=TextVarName
 ; MeterStyle=Set.String:S | Set.Value:S
-
+[Rm.Update]
+Meter=Shape
+MeterStyle=Set.TextBox:S
+Y=([Option000:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+[Value000]
+Meter=String
+Text=#Rm.update#
+MeterStyle=Set.String:S | Set.Value:S
 
 [Scale]
 Meter=Shape
