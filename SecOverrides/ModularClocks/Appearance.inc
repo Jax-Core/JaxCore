@@ -9,8 +9,23 @@ IfMatch3=Graph
 IfNotMatchAction3=[!HideMeterGroup Graph]
 IfMatch4=Smart
 IfNotMatchAction4=[!HideMeterGroup Smart]
-IfMatch5=Text
-IfNotMatchAction5=[!HideMeterGroup Text]
+IfMatch5=^CircTech$
+IfNotMatchAction5=[!HideMeterGroup CircTech]
+IfMatch6=^Tech$
+IfNotMatchAction6=[!HideMeterGroup Tech]
+IfMatch7=Arc
+IfNotMatchAction7=[!HideMeterGroup Arc]
+IfMatch8=Light
+IfNotMatchAction8=[!HideMeterGroup Light]
+
+[Export2:M]
+Measure=String
+String=#VersionPage#
+IfMatch=1
+IfMatchAction=[!HideMeterGroup V2]
+IfMatch2=2
+IfMatchAction2=[!HideMeterGroup V1]
+
 
 [Header]
 Meter=String
@@ -28,6 +43,9 @@ InlinePattern2=\s(.*)
 InlineSetting2=Color | 150,150,150
 
 ;================================================================================================================================================================================
+
+[Variables]
+VersionPage=2
 
 ;================================================================================================================================================================================
 
@@ -49,7 +67,17 @@ FontSize=(10*#Set.S#)
 Text=Colors
 MeterStyle=Set.String:S
 Container=ContentContainer
-
+[Divider19w2sds0ssdsd]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option000]
+Meter=String
+X=r
+Y=(15*#Set.S#)R
+FontSize=(10*#Set.S#)
+Text=Animated update rate
+MeterStyle=Set.String:S
+Container=ContentContainer
 
 ;================================================================================================================================================================================
 
@@ -77,7 +105,7 @@ MeterStyle=Set.String:S | Set.PickOption_1:S
 [CurrentClock]
 Meter=String
 X=(20*#Set.S#)
-Y=(50*#Set.S#)r
+Y=(70*#Set.S#)r
 FontSize=(10*#Set.S#)
 FontWeight=400
 Text=Clock layout (#Style#)
@@ -117,7 +145,7 @@ Y=r
 MeterStyle=Box
 [BoxAdd]
 Meter=Shape
-X=590
+X=20
 Y=r
 DynamicVariables=1
 Fill=Fill Color 255,255,255,50
@@ -136,6 +164,7 @@ H=(170*#Set.S#)
 Solidcolor=0,0,0,1
 Leftmouseupaction=[!WriteKeyValue Variables Style #CURRENTSECTION# "#Sec.SaveLocation#"][!WriteKeyValue BoxAdd X "([#CURRENTSECTION#:X]-[ContentContainer:X])" "#ROOTCONFIGPATH#SecOverrides\ModularClocks\Appearance.inc"][!Refresh][!UpdateMeasure Auto_Refresh:M]
 DynamicVariables=1
+Group=V1
 
 [Measure]
 Meter=Image
@@ -164,6 +193,71 @@ X=(20*#Set.S#)R
 Y=r
 MeterStyle=Center
 Leftmouseupaction=[!WriteKeyValue Variables Style #CURRENTSECTION# "#Sec.SaveLocation#"][!WriteKeyValue BoxAdd X "([#CURRENTSECTION#:X]-[ContentContainer:X])" "#ROOTCONFIGPATH#SecOverrides\ModularClocks\Appearance.inc"][!Refresh][!UpdateMeasure Auto_Refresh:M]
+
+[CircTech]
+Meter=Image
+Imagename=#SKINSPATH#ModularClocks\@Resources\Images\Preview\#CURRENTSECTION#.png
+X=([Box1:X])
+Y=([Box1:Y])
+W=(170*#Set.S#)
+H=(170*#Set.S#)
+Solidcolor=0,0,0,1
+Leftmouseupaction=[!WriteKeyValue Variables Style #CURRENTSECTION# "#Sec.SaveLocation#"][!WriteKeyValue BoxAdd X "([#CURRENTSECTION#:X]-[ContentContainer:X])" "#ROOTCONFIGPATH#SecOverrides\ModularClocks\Appearance.inc"][!Refresh][!UpdateMeasure Auto_Refresh:M]
+DynamicVariables=1
+Group=V2
+
+[Tech]
+Meter=Image
+X=(20*#Set.S#)R
+Y=r
+MeterStyle=CircTech
+Leftmouseupaction=[!WriteKeyValue Variables Style #CURRENTSECTION# "#Sec.SaveLocation#"][!WriteKeyValue BoxAdd X "([#CURRENTSECTION#:X]-[ContentContainer:X])" "#ROOTCONFIGPATH#SecOverrides\ModularClocks\Appearance.inc"][!Refresh][!UpdateMeasure Auto_Refresh:M]
+
+[Arc]
+Meter=Image
+X=(20*#Set.S#)R
+Y=r
+MeterStyle=CircTech
+Leftmouseupaction=[!WriteKeyValue Variables Style #CURRENTSECTION# "#Sec.SaveLocation#"][!WriteKeyValue BoxAdd X "([#CURRENTSECTION#:X]-[ContentContainer:X])" "#ROOTCONFIGPATH#SecOverrides\ModularClocks\Appearance.inc"][!Refresh][!UpdateMeasure Auto_Refresh:M]
+
+[Light]
+Meter=Image
+X=(20*#Set.S#)R
+Y=r
+MeterStyle=CircTech
+Leftmouseupaction=[!WriteKeyValue Variables Style #CURRENTSECTION# "#Sec.SaveLocation#"][!WriteKeyValue BoxAdd X "([#CURRENTSECTION#:X]-[ContentContainer:X])" "#ROOTCONFIGPATH#SecOverrides\ModularClocks\Appearance.inc"][!Refresh][!UpdateMeasure Auto_Refresh:M]
+
+[VersionBox]
+Shape=Rectangle 0,0,455,30,(10/2) | StrokeWidth 0 | Extend Fill | Scale #Set.S#,#set.S#,0,0
+Fill=Fill Color 255,255,255,10
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,10"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Container=ContentContainer
+[Ver1]
+Meter=Shape
+X=(20*#Set.S#)
+Y=(10*#Set.S#)R
+MeterStyle=VersionBox
+Leftmouseupaction=[!WriteKeyvalue Variables VersionPage 1 "#SKINSPATH##JaxCore\SecOverrides\#Skin.Name#\Appearance.inc"][!Refresh]
+[Ver1Text]
+Meter=String
+X=(455/2*#set.S#)r
+Y=(15*#Set.S#)r
+FontSize=(10*#Set.S#)
+Text=Version 1 Styles
+StringAlign=CenterCenter
+MeterStyle=Set.String:S
+[Ver2]
+Meter=Shape
+X=((455/2+20)*#set.S#)r
+Y=(-15*#Set.S#)r
+MeterStyle=VersionBox
+Leftmouseupaction=[!WriteKeyvalue Variables VersionPage 2 "#SKINSPATH##JaxCore\SecOverrides\#Skin.Name#\Appearance.inc"][!Refresh]
+[Ver2Text]
+Meter=String
+Text=Version 2 Styles
+MeterStyle=Set.String:S | Ver1Text
+
 
 ;================================================================================================================================================================================
 
@@ -300,6 +394,35 @@ MeterStyle=Set.String:S
 Group=Graph
 Container=ContentContainer
 
+[Divider19w2sdsds0ssdsd]
+Meter=Shape
+MeterStyle=Set.Div:S
+Y=([Option01:Y]-#Set.P#+15*2)
+DynamicVariables=1
+Group=Tech
+[Option11]
+Meter=String
+X=r
+Y=(15*#Set.S#)R
+FontSize=(10*#Set.S#)
+Text=Show additional time details
+MeterStyle=Set.String:S
+Group=Tech
+Container=ContentContainer
+[Divider19wdwqeqewqeqweaw328]
+Meter=Shape
+MeterStyle=Set.Div:S
+Group=Tech
+[Option12]
+Meter=String
+X=r
+Y=(15*#Set.S#)R
+FontSize=(10*#Set.S#)
+Text=Use the runic font
+MeterStyle=Set.String:S
+Group=Tech
+Container=ContentContainer
+
 ; ;================================================================================================================================================================================
 
 ;; BOOL EXMAPLE
@@ -317,7 +440,14 @@ Container=ContentContainer
 ; Meter=String
 ; Text=TextVarName
 ; MeterStyle=Set.String:S | Set.Value:S
-
+[Rm.Update]
+Meter=Shape
+MeterStyle=Set.TextBox:S
+Y=([Option000:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+[Value000]
+Meter=String
+Text=#Rm.update#
+MeterStyle=Set.String:S | Set.Value:S
 
 [Scale]
 Meter=Shape
@@ -401,3 +531,15 @@ Text=#LineWidth#
 Group=Graph
 MeterStyle=Set.String:S | Set.Value:S
 
+
+[ShowDetails]
+Meter=Shape
+MeterStyle=Set.Bool:S
+Group=Tech
+Y=([Option11:Y]-#Set.P#+(-20/2+8)*#Set.S#)
+
+[Runic]
+Meter=Shape
+MeterStyle=Set.Bool:S
+Group=Tech
+Y=([Option12:Y]-#Set.P#+(-20/2+8)*#Set.S#)

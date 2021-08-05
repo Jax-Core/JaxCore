@@ -1,21 +1,4 @@
 
-[Header]
-Meter=String
-X=(20*#Set.S#)
-Y=(20*#Set.S#+#Scroll#)
-Text=Appearance /Text
-FontSize=(20*#Set.S#)
-FontWeight=600
-MeterStyle=Set.String:S
-Container=ContentContainer
-Leftmouseupaction=[!Refresh]
-InlinePattern=\s(.*)
-InlineSetting=Size | 10
-InlinePattern2=\s(.*)
-InlineSetting2=Color | 150,150,150
-
-;================================================================================================================================================================================
-
 [Padding]
 Meter=String
 X=(30*#Set.S#)

@@ -14,7 +14,7 @@ Set.Pri_Color=19, 19, 19
 Set.Sec_Color=23,23,23
 Set.Ter_Color=30, 30, 30
 Set.Opp_Color=255,255,255
-Set.Shadow=13,13,13
+Set.Shadow=125,125,125
 Sec.SaveLocation=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 
 Set.Auto_Refresh=1
@@ -72,8 +72,26 @@ Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 2 | Fill Color [##CURRENTSECTION#] 
 Fill=Stroke Color #Set.Opp_Color#,10
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Opp_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Opp_Color#,15"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-LeftMouseUpAction=[!CommandMeasure ColorPickerUI "Change('#CURRENTSECTION#', '[&ColorPickerUI:sub('#Sec.SaveLocation#')]', '[&ColorPickerUI:sub('#CURRENTCONFIG#')]')"]
+LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
+SomeAction=[!Log Update]
 Container=#Sec.Container#
+
+[Set.Grad0:S]
+X=(#Set.W#-#Set.L#-#Set.P#*2-150*#Set.S#)
+DynamicVariables=1
+Shape=Rectangle 0,0,75,30,3,3 | StrokeWidth 0 | Fill LinearGradient Grad | Scale #Set.S#,#Set.S#,0,0
+Grad=180 | [#[&Jax.Func:secVLocalGroup('#CURRENTSECTION#', 'Grad0')]] ; 0.0 | [#[&Jax.Func:secVLocalGroup('#CURRENTSECTION#', 'Grad1')]] ; 2
+LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=[&Jax.Func:secVLocalGroup('#CURRENTSECTION#', 'Grad0')]" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
+Container=#Sec.Container#
+[Set.Grad1:S]
+X=r
+Y=r
+DynamicVariables=1
+Shape=Rectangle 75,0,75,30,3,3 | StrokeWidth 0 | Fill LinearGradient Grad | Scale #Set.S#,#Set.S#,0,0
+Grad=180 | [#[&Jax.Func:secVLocalGroup('#CURRENTSECTION#', 'Grad0')]] ; -1 | [#[&Jax.Func:secVLocalGroup('#CURRENTSECTION#', 'Grad1')]] ; 1
+LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=[&Jax.Func:secVLocalGroup('#CURRENTSECTION#', 'Grad1')]" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
+Container=#Sec.Container#
+
 
 [Set.Button:S]
 X=(#Set.W#-#Set.L#-#Set.P#*2-150*#Set.S#)
@@ -187,11 +205,6 @@ H=((30-10)*#Set.S#)
 DynamicVariables=1
 DefaultValue="[##Editing#]"
 Command1=[!SetVariable #Editing# "$UserInput$"][!UpdateMeasure SaveAndLoad:M]
-
-
-[ColorPickerUI]
-Measure=Script
-ScriptFile=#ROOTCONFIGPATH#ColorPickerUI\Resources\Scripts\ColorPickerUIActivator.lua
 
 [SaveAndLoad:M]
 Measure=Calc

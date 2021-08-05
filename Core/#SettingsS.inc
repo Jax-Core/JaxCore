@@ -4,7 +4,7 @@
 @includeSkinVars=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 @includeSkinVer=#SKINSPATH##Skin.Name#\@Resources\Version.inc
 ;get current skin data
-Skin.Appearance=Combilaunch | Plainext | ModularClocks | MIUIShade | ModularPlayers
+Skin.Appearance=Combilaunch | Plainext | ModularClocks | MIUIShade | ModularPlayers | WatchOS
 Skin.Layout=Combilaunch
 ; Skin.General=Combilaunch | Plainext | ModularClocks | MIUIShade | ModularPlayers
 Skin.Media=MIUIShade | ModularPlayers

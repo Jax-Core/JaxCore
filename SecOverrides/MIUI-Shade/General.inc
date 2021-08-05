@@ -151,7 +151,7 @@ Container=ContentContainer
 Meter=Shape
 MeterStyle=Set.Button:S
 Y=([Option01:Y]-#Set.P#+(-30/2+8)*#Set.S#)
-Act=[!ActivateConfig "#JaxCore\Main\Hotkey"]
+Act=[!ActivateConfig "#JaxCore\Main\Hotkey"][!Move (#CURRENTCONFIGX#+#CURRENTCONFIGWIDTH#/2-500/2) (#CURRENTCONFIGY#+#CURRENTCONFIGHEIGHT#/2-500/2) "#JaxCore\Main\Hotkey"]
 [Value01]
 Meter=String
 Text=#Key#
