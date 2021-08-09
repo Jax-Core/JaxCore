@@ -3,22 +3,13 @@
 
 [Color]
 Meter=String
-X=(30*#Set.S#)
-Y=(30*#Set.S#)R
-FontSize=(14*#Set.S#)
-FontWeight=500
 Text=Color
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionCat:S
 
 [Option01]
 Meter=String
-X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
 Text=Colors
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionName:S
 
 
 ;================================================================================================================================================================================
@@ -29,7 +20,7 @@ SecVar=ColorMode
 0Act=[!CommandMeasure darkLight.Func "SwitchColor(0)"]
 1Act=[!CommandMeasure darkLight.Func "SwitchColor(1)"]
 MeterStyle=Set.Pick:S
-Y=([Option01:Y]-#Set.P#+(-35/2+8)*#Set.S#)
+Y=([Option01:Y]-#Set.P#+(-35/2+8)*[Set.S])
 [ColorMode:0]
 Meter=String
 Text=Dark
@@ -44,9 +35,9 @@ MeterStyle=Set.String:S | Set.PickOption_1:S
 
 [Padding]
 Meter=String
-X=(30*#Set.S#)
-Y=(10*#Set.S#)R
-FontSize=(14*#Set.S#)
+X=(30*[Set.S])
+Y=(10*[Set.S])R
+FontSize=(14*[Set.S])
 FontWeight=500
 Text=Padding
 MeterStyle=Set.String:S
@@ -54,83 +45,53 @@ Container=ContentContainer
 
 [Option02]
 Meter=String
-X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
 Text=Screen side padding (in pixels)
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionName:S
 
 ;================================================================================================================================================================================
 
 [ScaleNsize]
 Meter=String
-X=(30*#Set.S#)
-Y=(30*#Set.S#)R
-FontSize=(14*#Set.S#)
-FontWeight=500
 Text=Scale and size
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionCat:S
 
 [Option10]
 Meter=String
-X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
 Text=Global size
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionName:S
 [Set.Div:S192038sdsds]
 Meter=Shape
 MeterStyle=Set.Div:S
 [Option11]
 Meter=String
-X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
 Text=Corner size
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionName:S
 [Set.Div:S192038]
 Meter=Shape
 MeterStyle=Set.Div:S
 [Option12]
 Meter=String
-X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
 Text=Object spacing
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionName:S
 
 ;================================================================================================================================================================================
 
 [Anim]
 Meter=String
-X=(30*#Set.S#)
-Y=(30*#Set.S#)R
-FontSize=(14*#Set.S#)
-FontWeight=500
 Text=Animations
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionCat:S
 
 [Option20]
 Meter=String
-X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
 Text=Animations (Turn off for better performance on low-end devices)
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionName:S
 
 ;================================================================================================================================================================================
 
 [P]
 Meter=Shape
-MeterStyle=Set.TextBox:S
-Y=([Option02:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+MeterStyle=Set.Textbox:S
+Y=([Option02:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value02]
 Meter=String
 Text=#P#
@@ -138,8 +99,8 @@ MeterStyle=Set.String:S | Set.Value:S
 
 [Scale]
 Meter=Shape
-MeterStyle=Set.TextBox:S
-Y=([Option10:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+MeterStyle=Set.Textbox:S
+Y=([Option10:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value10]
 Meter=String
 Text=#Scale#
@@ -147,8 +108,8 @@ MeterStyle=Set.String:S | Set.Value:S
 
 [R]
 Meter=Shape
-MeterStyle=Set.TextBox:S
-Y=([Option11:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+MeterStyle=Set.Textbox:S
+Y=([Option11:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value11]
 Meter=String
 Text=#R#
@@ -156,8 +117,8 @@ MeterStyle=Set.String:S | Set.Value:S
 
 [GlobalP]
 Meter=Shape
-MeterStyle=Set.TextBox:S
-Y=([Option12:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+MeterStyle=Set.Textbox:S
+Y=([Option12:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value12]
 Meter=String
 Text=#GlobalP#
@@ -166,4 +127,4 @@ MeterStyle=Set.String:S | Set.Value:S
 [Animation]
 Meter=Shape
 MeterStyle=Set.Bool:S
-Y=([Option20:Y]-#Set.P#+(-20/2+8)*#Set.S#)
+Y=([Option20:Y]-#Set.P#+(-20/2+8)*[Set.S])

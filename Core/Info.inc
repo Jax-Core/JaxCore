@@ -1,8 +1,8 @@
 
 [Variables]
 BarHandler=1
-Sec.BottomWidth=(130*#set.S#)
-Sec.BottomHeight=(30*#Set.S#)
+Sec.BottomWidth=(130*[Set.S])
+Sec.BottomHeight=(30*[Set.S])
 
 [ImageContainer]
 Meter=Shape
@@ -26,7 +26,7 @@ Y=([ContentContainer:H]/2)
 DynamicVariables=1
 StringAlign=CenterCenter
 Text=#Skin.Name#
-FontSize=(30*#Set.S#)
+FontSize=(30*[Set.S])
 FontFace=Roboto Medium
 MeterStyle=Set.String:S
 Leftmouseupaction=[https://github.com/EnhancedJax/#Skin.Name#/releases/latest]
@@ -37,18 +37,18 @@ Y=R
 StringAlign=CenterCenter
 Text=CHECKING FOR UPDATES
 FontColor=150,150,150
-FontSize=(12*#Set.S#)
+FontSize=(12*[Set.S])
 FontFace=Roboto Light
 MeterStyle=Set.String:S
 
 [DownloadButton]
 Meter=String
 X=r
-Y=(5*#Set.S#)R
+Y=(5*[Set.S])R
 StringAlign=CenterCenter
 Text=< Click here for express installation >
 FontColor=0,255,100
-FontSize=(12*#Set.S#)
+FontSize=(12*[Set.S])
 FontWeight=400
 Hidden=1
 DynamicVariables=1
@@ -67,12 +67,12 @@ IfTrueAction=[!SetOption BottomButton MeterStyle BottomButton1][!SetOption Botto
 [BottomButton]
 Meter=Shape
 Shape=Rectangle 0,0,#Sec.BottomWidth#,#Sec.BottomHeight#,(#Set.R#/4) | StrokeWidth 0 | Extend THis
-This=fill Color [&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'ColorLeave')]
+This=fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorLeave')]
 X=(-#sec.BottomWidth#/2+[ContentContainer:W]/2)r
 Y=([ContentContainer:H]-#Sec.BottomHeight#+#Set.P#/2)
 DynamicVariables=1
-MouseOverAction=[!SetOption #CURRENTSECTION# this "Fill Color [&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'ColorOver')]"][!SetOption #Sec.#CURRENTSECTION## FontColor "#Set.Opp_Color#"][!UpdateMeter *][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# this "Fill Color [&Jax.Func:secVCurrentSec('#CURRENTSECTION#', 'ColorLeave')]"][!SetOption #Sec.#CURRENTSECTION## FontColor "#Set.Opp_Color#,150"][!UpdateMeter *][!Redraw]
+MouseOverAction=[!SetOption #CURRENTSECTION# this "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorOver')]"][!SetOption #Sec.#CURRENTSECTION## FontColor "#Set.Text_Color#"][!UpdateMeter *][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# this "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorLeave')]"][!SetOption #Sec.#CURRENTSECTION## FontColor "#Set.Text_Color#,150"][!UpdateMeter *][!Redraw]
 MeterStyle=BottomButton0
 [BottomButton0]
 ColorLeave=100,100,100,100
@@ -81,7 +81,7 @@ Leftmouseupaction=[!ActivateConfig "#Skin.Name#\Main"][!Refresh]
 [BottomButton1]
 ColorLeave=0,255,0,100
 ColorOver=0,255,0,200
-Leftmouseupaction=[!DeactivateConfig "#Skin.Name#\Main"]["#@#Actions\AHK.exe" "#@#Actions\CloseMIUI.ahk"][!Refresh]
+Leftmouseupaction=[!DeactivateConfig "#Skin.Name#\Main"]["#@#Addons\AHKv1.exe" "#@#Addons\CloseMIUI.ahk"][!Refresh]
 [BottomText]
 Meter=String
 X=(#sec.BottomWidth#/2)r

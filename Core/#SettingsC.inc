@@ -6,16 +6,15 @@ FontFace=Segoe UI
 X=#Set.P#
 Y=(#Set.P#*2+64)
 StringAlign=Left
-FontSize=(8*#Set.S#)
+FontSize=(8*[Set.S])
 Container=
 FontColor=150,150,150
 [Info]
 Meter=Shape
-Y=(10*#Set.S#)R
+Y=(10*[Set.S])R
 MeterStyle=PageBox:S
-Fill=Fill Color #Set.Opp_Color#,(#BarHandler# = 1 ? 220 : 0)
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 1 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 1 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Fill=Fill Color #Set.Text_Color#,(#BarHandler# = 1 ? 220 : 0)
+Handle=1
 
 [InfoIcon]
 Meter=Image
@@ -31,11 +30,10 @@ MeterStyle=Set.String:S | PageText:S
 
 [General]
 Meter=Shape
-Y=(10*#Set.S#)R
+Y=(10*[Set.S])R
 MeterStyle=PageBox:S
-Fill=Fill Color #Set.Opp_Color#,(#BarHandler# = 2 ? 220 : 0)
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 2 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 2 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Fill=Fill Color #Set.Text_Color#,(#BarHandler# = 2 ? 220 : 0)
+Handle=2
 
 [GeneralIcon]
 Meter=Image
@@ -50,11 +48,10 @@ DynamicVariables-1
 MeterStyle=Set.String:S | PageText:S
 [Appearance]
 Meter=Shape
-Y=(10*#Set.S#)R
+Y=(10*[Set.S])R
 MeterStyle=PageBox:S
-Fill=Fill Color #Set.Opp_Color#,(#BarHandler# = 3 ? 220 : 0)
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 3 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 3 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Fill=Fill Color #Set.Text_Color#,(#BarHandler# = 3 ? 220 : 0)
+Handle=3
 
 [AppearanceIcon]
 Meter=Image
@@ -73,18 +70,17 @@ MeterStyle=Set.String:S
 Text=HELP
 FontFace=Segoe UI
 X=#Set.P#
-Y=(#Set.H#-140*#Set.S#)
+Y=(#Set.H#-140*[Set.S])
 StringAlign=Left
-FontSize=(8*#Set.S#)
+FontSize=(8*[Set.S])
 Container=
 FontColor=150,150,150
 [Help]
 Meter=Shape
-Y=(10*#Set.S#)R
+Y=(10*[Set.S])R
 MeterStyle=PageBox:S
-Fill=Fill Color #Set.Opp_Color#,(#BarHandler# = 11 ? 220 : 0)
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 11 ? 220 : 100)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Opp_Color#,(#BarHandler# = 11 ? 220 : 0)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Fill=Fill Color #Set.Text_Color#,(#BarHandler# = 11 ? 220 : 0)
+Handle=11
 
 [HelpIcon]
 Meter=Image

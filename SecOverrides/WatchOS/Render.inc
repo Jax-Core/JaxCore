@@ -65,8 +65,8 @@ Group=NUOL
 [Option01]
 Meter=String
 X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
+Y=(15*[Set.S])R
+FontSize=(10*[Set.S])
 Text=Wallpaper (Used for blurring)
 InlinePattern=.*(\[.*\])
 InlineSetting=Size | 8
@@ -76,23 +76,15 @@ MeterStyle=Set.String:S
 Container=ContentContainer
 [Option011]
 Meter=String
-X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
 Text=Current image: #ImageName#
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionName:S
 [Set.Div:S19131238]
 Meter=Shape
 MeterStyle=Set.Div:S
 [Option02]
 Meter=String
-X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
 Text=Blur matrix
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionName:S
 ; ---------------------------------------------------------------------------- ;
 ;                                 Interactions                                 ;
 ; ---------------------------------------------------------------------------- ;
@@ -102,7 +94,7 @@ Meter=Shape
 MeterStyle=Set.Button:S
 ; OverColor=0,255,10,200
 ; LeaveColor=0,255,10,100
-Y=([Option01:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+Class=01
 Act=[!CommandMeasure MeasureChoose "ChooseImage 1"]
 [Value01]
 Meter=String
@@ -112,7 +104,7 @@ MeterStyle=Set.String:S | Set.Value:S
 [BlurMatrix]
 Meter=Shape
 MeterStyle=Set.Textbox:S
-Y=([Option02:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+Y=([Option02:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value02]
 Meter=String
 Text=#BlurMatrix#

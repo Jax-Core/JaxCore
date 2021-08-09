@@ -1,4 +1,8 @@
-function secVLocalGroup(SectionExtract, Option)
+function Update()
+	return
+end
+
+function GroupVar(SectionExtract, Option)
 	Option = Option or 'SecVar'
 	config = SectionExtract:match("(.+:).*")
 	Meter = SKIN:GetMeter(config)
@@ -6,7 +10,7 @@ function secVLocalGroup(SectionExtract, Option)
 	return GetVar
 end
 
-function secVCurrentSec(Section, Option)
+function LocalVar(Section, Option)
 	Meter = SKIN:GetMeter(Section)
 	GetVar = Meter:GetOption(Option, 'Error')
 	return GetVar

@@ -30,11 +30,11 @@ IfNotMatchAction4=[!HideMeterGroup Bar]
 
 [Header]
 Meter=String
-X=(20*#Set.S#)
-Y=(20*#Set.S#+#Scroll#)
+X=(20*[Set.S])
+Y=(20*[Set.S]+#Scroll#)
 DynamicVariables=1
 Text=General /Clocks
-FontSize=(20*#Set.S#)
+FontSize=(20*[Set.S])
 FontWeight=450
 MeterStyle=Set.String:S
 Container=ContentContainer
@@ -48,16 +48,11 @@ InlineSetting2=Color | 150,150,150
 
 [Look]
 Meter=String
-X=(30*#Set.S#)
-Y=(30*#Set.S#)R
-FontSize=(14*#Set.S#)
-FontWeight=500
 Text=Rendering (#Render#)
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionCat:S
 
 [RenderStyle]
-X=(15*#Set.S#)R
+X=(15*[Set.S])R
 Y=r
 W=((#Set.W#-#Set.L#-#Set.P#-20*5)/4)
 Container=ContentContainer
@@ -66,7 +61,7 @@ Leftmouseupaction=[!WriteKeyValue Variables Render #CURRENTSECTION# "#Sec.SaveLo
 [Chameleon]
 Meter=Image
 X=r
-Y=(15*#Set.S#)R
+Y=(15*[Set.S])R
 MeterStyle=RenderStyle
 [Shadow]
 Meter=Image
@@ -84,22 +79,13 @@ MeterStyle=RenderStyle
 
 [SmartOptipojs]
 Meter=String
-X=(30*#Set.S#)
-Y=(30*#Set.S#)R
-FontSize=(14*#Set.S#)
-FontWeight=500
 Text=#Render# Options
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionCat:S
 
 [Option01]
 Meter=String
-X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
 Text=Opacity
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionName:S
 Group=Shadow
 [Divider1328]
 Meter=Shape
@@ -108,8 +94,8 @@ Group=Shadow
 [Option02]
 Meter=String
 X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
+Y=(15*[Set.S])R
+FontSize=(10*[Set.S])
 Text=Sigma
 MeterStyle=Set.String:S
 Group=Shadow
@@ -121,8 +107,8 @@ Group=Shadow
 [Option03]
 Meter=String
 X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
+Y=(15*[Set.S])R
+FontSize=(10*[Set.S])
 Text=Offset
 MeterStyle=Set.String:S
 Group=Shadow
@@ -136,7 +122,7 @@ Group=Shadow
 Meter=String
 X=r
 Y=([Option01:Y]-#Set.P#)
-FontSize=(10*#Set.S#)
+FontSize=(10*[Set.S])
 Text=Modulate (Brightness, Saturation, Hue)
 MeterStyle=Set.String:S
 Container=ContentContainer
@@ -149,8 +135,8 @@ Group=Blur
 [Option12]
 Meter=String
 X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
+Y=(15*[Set.S])R
+FontSize=(10*[Set.S])
 Text=Sigma
 MeterStyle=Set.String:S
 Group=Blur
@@ -162,8 +148,8 @@ Group=Blur
 [Option13]
 Meter=String
 X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
+Y=(15*[Set.S])R
+FontSize=(10*[Set.S])
 Text=Radius
 MeterStyle=Set.String:S
 Group=Blur
@@ -177,7 +163,7 @@ Group=Blur
 Meter=String
 X=r
 Y=([Option01:Y]-#Set.P#)
-FontSize=(10*#Set.S#)
+FontSize=(10*[Set.S])
 Text=Background opacity
 MeterStyle=Set.String:S
 Container=ContentContainer
@@ -190,13 +176,13 @@ DynamicVariables=1
 ; [BoolVarName]
 ; Meter=Shape
 ; MeterStyle=Set.Bool:S
-; Y=([VarOption:Y]-#Set.P#+(-20/2+8)*#Set.S#)
+; Y=([VarOption:Y]-#Set.P#+(-20/2+8)*[Set.S])
 
 ;; TEXT INPUT EXAMPLE
 ; [TextVarName]
 ; Meter=Shape
 ; MeterStyle=Set.TextBox:S
-; Y=([VarOption:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+; Y=([VarOption:Y]-#Set.P#+(-30/2+8)*[Set.S])
 ; [VarOptionNumber]
 ; Meter=String
 ; Text=TextVarName
@@ -207,7 +193,7 @@ DynamicVariables=1
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Shadow
-Y=([Option01:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+Class=01
 [Value01]
 Meter=String
 Text=#ShadowOpacity#
@@ -218,7 +204,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Shadow
-Y=([Option02:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+Class=02
 [Value02]
 Meter=String
 Text=#ShadowSigma#
@@ -229,7 +215,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Shadow
-Y=([Option03:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+Class=03
 [Value03]
 Meter=String
 Text=#ShadowOffset#
@@ -242,7 +228,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Blur
-Y=([Option11:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+Class=11
 [Value11]
 Meter=String
 Text=#BlurModulate#
@@ -253,7 +239,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Blur
-Y=([Option12:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+Class=12
 [Value12]
 Meter=String
 Text=#BlurSigma#
@@ -264,7 +250,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Blur
-Y=([Option13:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+Class=13
 [Value13]
 Meter=String
 Text=#BlurRadius#
@@ -277,7 +263,7 @@ MeterStyle=Set.String:S | Set.Value:S
 ; Meter=Shape
 ; MeterStyle=Set.TextBox:S
 ; Group=Bar
-; Y=([Option21:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+; Class=21
 ; [Value21]
 ; Meter=String
 ; Text=#BarBackpacity#
@@ -294,7 +280,7 @@ Plugin=InputText
 SolidColor=171717
 FontColor=255,255,255
 FontFace=Seqoe UI
-FontSize=(10*#Set.S#)
+FontSize=(10*[Set.S])
 StringAlign=LeftCenter
 W=(150-10)
 H=(30-10)

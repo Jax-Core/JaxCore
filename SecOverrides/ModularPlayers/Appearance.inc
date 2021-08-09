@@ -26,22 +26,13 @@ IfNotMatchAction9=[!HideMeterGroup BigCirc]
 
 [Color]
 Meter=String
-X=(30*#Set.S#)
-Y=(30*#Set.S#)R
-FontSize=(14*#Set.S#)
-FontWeight=500
 Text=Color
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionCat:S
 
 [Option00]
 Meter=String
-X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
 Text=Colors
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionName:S
 
 
 ;================================================================================================================================================================================
@@ -52,7 +43,7 @@ SecVar=ColorMode
 0Act=[!CommandMeasure darkLight.Func "SwitchColor(0)"]
 1Act=[!CommandMeasure darkLight.Func "SwitchColor(1)"]
 MeterStyle=Set.Pick:S
-Y=([Option00:Y]-#Set.P#+(-35/2+8)*#Set.S#)
+Y=([Option00:Y]-#Set.P#+(-35/2+8)*[Set.S])
 [ColorMode:0]
 Meter=String
 Text=Dark
@@ -69,9 +60,9 @@ MeterStyle=Set.String:S | Set.PickOption_1:S
 
 [CurrentClock]
 Meter=String
-X=(20*#Set.S#)
-Y=(50*#Set.S#)r
-FontSize=(10*#Set.S#)
+X=(20*[Set.S])
+Y=(50*[Set.S])r
+FontSize=(10*[Set.S])
 FontWeight=400
 Text=Player layout (#Style#)
 MeterStyle=Set.String:S
@@ -79,17 +70,17 @@ Container=ContentContainer
 
 
 [Box]
-X=(190*#Set.S#)r
+X=(190*[Set.S])r
 Y=r
-Shape=Rectangle  0,0,170,170,10,10 | StrokeWidth 0 | Extend Fill | Scale #Set.S#,#set.S#,0,0
+Shape=Rectangle  0,0,170,170,10,10 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
 Fill=Fill Color 255,255,255,10
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,10"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 Container=ContentContainer
 [Box1]
 Meter=Shape
-X=(20*#Set.S#)
-Y=(10*#Set.S#)R
+X=(20*[Set.S])
+Y=(10*[Set.S])R
 MeterStyle=Box
 [Box2]
 Meter=Shape
@@ -105,8 +96,8 @@ Meter=Shape
 MeterStyle=Box
 [Box6]
 Meter=Shape
-X=(20*#Set.S#)
-Y=(10*#Set.S#)R
+X=(20*[Set.S])
+Y=(10*[Set.S])R
 MeterStyle=Box
 [Box7]
 Meter=Shape
@@ -136,15 +127,15 @@ Meter=Image
 Imagename=#SKINSPATH#ModularPlayers\@Resources\Images\Preview\#CURRENTSECTION#.png
 X=([Box1:X])
 Y=([Box1:Y])
-W=(170*#Set.S#)
-H=(170*#Set.S#)
+W=(170*[Set.S])
+H=(170*[Set.S])
 Solidcolor=0,0,0,1
 Leftmouseupaction=[!WriteKeyValue Variables Style #CURRENTSECTION# "#Sec.SaveLocation#"][!WriteKeyValue BoxAdd X "([#CURRENTSECTION#:X]-[ContentContainer:X])" "#ROOTCONFIGPATH#SecOverrides\ModularPlayers\Appearance.inc"][!WriteKeyValue BoxAdd Y "([#CURRENTSECTION#:Y]-[ContentContainer:Y]+#*Scroll*#)" "#ROOTCONFIGPATH#SecOverrides\ModularPlayers\Appearance.inc"][!Refresh][!UpdateMeasure Auto_Refresh:M]
 DynamicVariables=1
 
 [Card]
 Meter=Image
-X=(190*#Set.S#)r
+X=(190*[Set.S])r
 Y=r
 MeterStyle=MIUI
 
@@ -153,20 +144,20 @@ Meter=Image
 ImageName=#@#Icons\Settings\MagickMeterIcon.png
 X=r
 y=r
-W=(24*#Set.S#)
-H=(24*#Set.S#)
+W=(24*[Set.S])
+H=(24*[Set.S])
 Padding=5,5,5,5
 LeftMouseUpAction=[!ActivateConfig "#Skin.Name#\@Start"]
 
 [Side]
 Meter=Image
-X=(190*#Set.S#)r
+X=(190*[Set.S])r
 Y=r
 MeterStyle=MIUI
 
 [Neumorphism]
 Meter=Image
-X=(190*#Set.S#)r
+X=(190*[Set.S])r
 Y=r
 MeterStyle=MIUI
 
@@ -176,7 +167,7 @@ MeterStyle=MMI1
 
 [Simple]
 Meter=Image
-X=(190*#Set.S#)r
+X=(190*[Set.S])r
 Y=r
 MeterStyle=MIUI
 
@@ -188,13 +179,13 @@ MeterStyle=MIUI
 
 [Android]
 Meter=Image
-X=(190*#Set.S#)r
+X=(190*[Set.S])r
 Y=r
 MeterStyle=MIUI
 
 [Blur]
 Meter=Image
-X=(190*#Set.S#)r
+X=(190*[Set.S])r
 Y=r
 MeterStyle=MIUI
 
@@ -204,7 +195,7 @@ MeterStyle=MMI1
 
 [BigCirc]
 Meter=Image
-X=(190*#Set.S#)r
+X=(190*[Set.S])r
 Y=r
 MeterStyle=MIUI
 
@@ -216,10 +207,10 @@ MeterStyle=MMI1
 
 [Options]
 Meter=String
-X=(30*#Set.S#)
-Y=([Box6:Y]+200*#Set.S#)
+X=(30*[Set.S])
+Y=([Box6:Y]+200*[Set.S])
 DynamicVariables=1
-FontSize=(14*#Set.S#)
+FontSize=(14*[Set.S])
 FontWeight=500
 Text=Options
 MeterStyle=Set.String:S
@@ -227,19 +218,15 @@ Container=ContentContainer
 
 [Option01]
 Meter=String
-X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
 Text=Skin scaling
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionName:S
 
 
 [BlurOptions]
 Meter=String
-X=(30*#Set.S#)
-Y=(30*#Set.S#)R
-FontSize=(14*#Set.S#)
+X=(30*[Set.S])
+Y=(30*[Set.S])R
+FontSize=(14*[Set.S])
 FontWeight=500
 Text=Blur options
 Group=Blur
@@ -248,8 +235,8 @@ Container=ContentContainer
 [Option11]
 Meter=String
 X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
+Y=(15*[Set.S])R
+FontSize=(10*[Set.S])
 Text=Sigma
 MeterStyle=Set.String:S
 Group=Blur
@@ -261,8 +248,8 @@ Group=Blur
 [Option12]
 Meter=String
 X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
+Y=(15*[Set.S])R
+FontSize=(10*[Set.S])
 Text=Radius
 MeterStyle=Set.String:S
 Group=Blur
@@ -270,9 +257,9 @@ Container=ContentContainer
 
 [AlbumO]
 Meter=String
-X=(30*#Set.S#)
+X=(30*[Set.S])
 Y=([BlurOptions:Y]-#set.P#)
-FontSize=(14*#Set.S#)
+FontSize=(14*[Set.S])
 FontWeight=500
 Text=Side options
 Group=Side
@@ -282,8 +269,8 @@ Container=ContentContainer
 [Option21]
 Meter=String
 X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
+Y=(15*[Set.S])R
+FontSize=(10*[Set.S])
 Text=Reduce album art to bar
 MeterStyle=Set.String:S
 Group=Side
@@ -295,8 +282,8 @@ Group=Side
 [Option22]
 Meter=String
 X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
+Y=(15*[Set.S])R
+FontSize=(10*[Set.S])
 Text=Side glow
 MeterStyle=Set.String:S
 Group=Side
@@ -305,8 +292,8 @@ Container=ContentContainer
 
 [Scale]
 Meter=Shape
-MeterStyle=Set.TextBox:S
-Y=([Option01:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+MeterStyle=Set.Textbox:S
+Y=([Option01:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value01]
 Meter=String
 Text=#Scale#
@@ -316,7 +303,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Blur
-Y=([Option11:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+Class=11
 [Value11]
 Meter=String
 Text=#BlurSigma#
@@ -326,7 +313,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Blur
-Y=([Option12:Y]-#Set.P#+(-30/2+8)*#Set.S#)
+Class=12
 [Value12]
 Meter=String
 Text=#BlurRadius#
@@ -336,10 +323,10 @@ MeterStyle=Set.String:S | Set.Value:S
 [HideAlbum]
 Meter=Shape
 MeterStyle=Set.Bool:S
-Y=([Option21:Y]-#Set.P#+(-20/2+8)*#Set.S#)
+Y=([Option21:Y]-#Set.P#+(-20/2+8)*[Set.S])
 Group=Side
 [SideGlow]
 Meter=Shape
 MeterStyle=Set.Bool:S
-Y=([Option22:Y]-#Set.P#+(-20/2+8)*#Set.S#)
+Y=([Option22:Y]-#Set.P#+(-20/2+8)*[Set.S])
 Group=Side

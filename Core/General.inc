@@ -3,11 +3,11 @@ BarHandler=2
 
 [Header]
 Meter=String
-X=(20*#Set.S#)
-Y=(20*#Set.S#+#Scroll#)
+X=(20*[Set.S])
+Y=(20*[Set.S]+#Scroll#)
 DynamicVariables=1
 Text=General /#Skin.Shorthand#
-FontSize=(20*#Set.S#)
+FontSize=(20*[Set.S])
 FontWeight=450
 MeterStyle=Set.String:S
 Container=ContentContainer

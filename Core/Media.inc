@@ -1,15 +1,15 @@
 [Variables]
 BarHandler=5
-Sec.Padding=(20*#Set.S#)
-Sec.BoxSize=(((#Set.W#-#Set.L#-#Set.P#)-30*2)/6-10*5*#Set.S#)
+Sec.Padding=(20*[Set.S])
+Sec.BoxSize=(((#Set.W#-#Set.L#-#Set.P#)-30*2)/6-10*5*[Set.S])
 
 [Header]
 Meter=String
-X=(20*#Set.S#)
-Y=(20*#Set.S#)
+X=(20*[Set.S])
+Y=(20*[Set.S])
 DynamicVariables=1
 Text=Media /#Skin.Shorthand#
-FontSize=(20*#Set.S#)
+FontSize=(20*[Set.S])
 FontWeight=450
 MeterStyle=Set.String:S
 Container=ContentContainer
@@ -51,9 +51,9 @@ Container=ContentContainer
 
 [Option01]
 Meter=String
-X=(25*#Set.S#)
-Y=(60*#Set.S#)
-FontSize=(10*#Set.S#)
+X=(25*[Set.S])
+Y=(60*[Set.S])
+FontSize=(10*[Set.S])
 Text=Select your music player.
 MeterStyle=Set.String:S
 Container=ContentContainer
@@ -70,24 +70,24 @@ H=#Sec.BoxSize#
 PreserveAspectRatio=1
 Container=ContentContainer
 [MediaBoxStyle]
-X=(10*#Set.S#+#Sec.Padding#)R
+X=(10*[Set.S]+#Sec.Padding#)R
 y=(-#Sec.Padding#)r
 Shape=Rectangle 0,0,(#Sec.BoxSize#+#Sec.Padding#*2),(#Sec.BoxSize#+#Sec.Padding#*2),5,5 | StrokeWidth 0 | Extend this
-this=Fill Color #Set.Opp_Color#,10
+this=Fill Color #Set.Text_Color#,10
 Container=ContentContainer
-MouseOverAction=[!SetOption #CURRENTSECTION# this "Fill Color #Set.Opp_Color#,25"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# this "Fill Color #Set.Opp_Color#,10"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseOverAction=[!SetOption #CURRENTSECTION# this "Fill Color #Set.Text_Color#,25"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# this "Fill Color #Set.Text_Color#,10"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 [MediaBoxSelectedStyle]
-X=(10*#Set.S#+#Sec.Padding#)R
+X=(10*[Set.S]+#Sec.Padding#)R
 y=(-#Sec.Padding#)r
 Shape=Rectangle 0,0,(#Sec.BoxSize#+#Sec.Padding#*2),(#Sec.BoxSize#+#Sec.Padding#*2),5,5 | StrokeWidth 0 | Extend this
-this=Fill Color #Set.Opp_Color#,75
+this=Fill Color #Set.Text_Color#,75
 Container=ContentContainer
 
 [Box1]
 Meter=Shape
 X=r
-y=(10*#Set.S#)r
+y=(10*[Set.S])r
 MeterStyle=MediaBoxStyle
 Leftmouseupaction=[!WriteKEyValue Variables PLayer "WNP" "#SKINSPATH##Skin.Name#\@Resources\Vars.inc"][!WriteKEyValue Variables NPName "Spotify" "#SKINSPATH##Skin.Name#\@Resources\Vars.inc"][!Refresh]
 [Spotify]
