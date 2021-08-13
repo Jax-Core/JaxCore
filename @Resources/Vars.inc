@@ -23,4 +23,4 @@ Core.Master=3
 
 [Set.S]
 Measure=Calc
-Formula=0.97
+Formula=1
