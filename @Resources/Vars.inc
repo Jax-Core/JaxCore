@@ -19,6 +19,7 @@ Sec.SaveLocation=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 ; ------------------------ Background check variables ------------------------ ;
 Set.Auto_Refresh=1
 Set.BackgroundCheckTime=1
+Core.Master=3
 
 [Set.S]
 Measure=Calc
