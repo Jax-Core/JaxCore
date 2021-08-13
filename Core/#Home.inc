@@ -1,7 +1,7 @@
 [MIUI-Shade]
 Meter=Image
 X=r
-Y=(10*[Set.S])R
+Y=([RecommendedSkins:H]*([Set.S]-1)+10*[Set.S])R
 ImageName=#@#Images\Cards\MIUI-Shade.png
 MeterStyle=SkinIcon:S
 [MIUI-ShadeDes]
@@ -16,27 +16,37 @@ MeterStyle=SkinIcon:S
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
 Text=ModularClocks#CRLF# Modern, Time, Animated
-[Plainext]
+[Keystrokes]
 Meter=Image
-ImageName=#@#Images\Cards\Plainext.png
+ImageName=#@#Images\Cards\Keystrokes.png
 MeterStyle=SkinIcon:S
-[PlainextDes]
+[KeystrokesDes]
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
-Text=Plainext#CRLF# System, Retro
+Text=Keystrokes#CRLF# Overlay, Gaming, Hotkey
 [All]
 Meter=String
 Text=All Skins
 MeterStyle=Set.String:S
 X=(#Set.P#)
 Y=(35*[Set.S])R
-FontSize=(15*[Set.S])
+Group=Scroll
+FontSize=15
 StringAlign=LeftTop
 FontFace=Poppins SemiBold
-[ModularPlayers]
+TransformationMatrix=[Set.S];0;0;[Set.S];((1-[Set.S])*[#CURRENTSECTION#:X]);((1-[Set.S])*[#CURRENTSECTION#:Y])
+[Plainext]
 Meter=Image
 X=r
-Y=(10*[Set.S])R
+Y=([All:H]*([Set.S]-1)+10*[Set.S])R
+ImageName=#@#Images\Cards\Plainext.png
+MeterStyle=SkinIcon:S
+[PlainextDes]
+Meter=String
+MeterStyle=Set.String:S | SkinText:S
+Text=Plainext#CRLF# System, Retro
+[ModularPlayers]
+Meter=Image
 ImageName=#@#Images\Cards\ModularPlayers.png
 MeterStyle=SkinIcon:S
 [ModularPlayersDes]
@@ -51,14 +61,6 @@ MeterStyle=SkinIcon:S
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
 Text=Combilaunch#CRLF# Launcher, Minimal
-[Keystrokes]
-Meter=Image
-ImageName=#@#Images\Cards\Keystrokes.png
-MeterStyle=SkinIcon:S
-[KeystrokesDes]
-Meter=String
-MeterStyle=Set.String:S | SkinText:S
-Text=Keystrokes#CRLF# Overlay, Gaming, Hotkey
 [WatchOS]
 Meter=Image
 X=(#Set.P#)

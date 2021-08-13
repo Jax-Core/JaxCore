@@ -4,7 +4,6 @@ Update=-1
 [Variables]
 BarHandler=6
 Scroll=0
-@includeCommon=Components\Common.inc
 
 [LaunchVis]
 Measure=Calc
@@ -54,7 +53,8 @@ MeterStyle=Set.String:S | Set.OptionCat:S
 [RenderStyle]
 X=(15*[Set.S])R
 Y=r
-W=((#Set.W#-#Set.L#-#Set.P#-20*5)/4)
+W=(([ContentContainer:W]-80*[Set.S])/3)
+DynamicVariables=1
 Container=ContentContainer
 ImageName=#SKINSPATH#ModularCLocks\@Resources\Images\Preview\Render\#CURRENTSECTION#.png
 Leftmouseupaction=[!WriteKeyValue Variables Render #CURRENTSECTION# "#Sec.SaveLocation#"][!Refresh][!UpdateMeasure Auto_Refresh:M]
@@ -193,7 +193,7 @@ DynamicVariables=1
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Shadow
-Class=01
+Y=([Option01:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value01]
 Meter=String
 Text=#ShadowOpacity#
@@ -204,7 +204,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Shadow
-Class=02
+Y=([Option02:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value02]
 Meter=String
 Text=#ShadowSigma#
@@ -215,7 +215,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Shadow
-Class=03
+Y=([Option03:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value03]
 Meter=String
 Text=#ShadowOffset#
@@ -228,7 +228,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Blur
-Class=11
+Y=([Option11:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value11]
 Meter=String
 Text=#BlurModulate#
@@ -239,7 +239,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Blur
-Class=12
+Y=([Option12:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value12]
 Meter=String
 Text=#BlurSigma#
@@ -250,7 +250,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Blur
-Class=13
+Y=([Option13:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value13]
 Meter=String
 Text=#BlurRadius#
@@ -273,24 +273,3 @@ MeterStyle=Set.String:S | Set.Value:S
 
 
 ;================================================================================================================================================================================
-
-[Input]
-Measure=Plugin
-Plugin=InputText
-SolidColor=171717
-FontColor=255,255,255
-FontFace=Seqoe UI
-FontSize=(10*[Set.S])
-StringAlign=LeftCenter
-W=(150-10)
-H=(30-10)
-DynamicVariables=1
-DefaultValue="[##Editing#]"
-Command1=[!SetVariable #Editing# "$UserInput$"][!UpdateMeasure SaveAndLoad]
-
-[SaveAndLoad]
-Measure=Calc
-DynamicVariables=1
-OnUpdateAction=[!WriteKeyvalue Variables #Editing# "[##Editing#]" "#Sec.SaveLocation#"][!UpdateMeter *][!Redraw][!Delay 1000][!UpdateMeasure Auto_Refresh:M]
-Disabled=1
-Group=NUOL

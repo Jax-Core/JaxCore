@@ -1,7 +1,0 @@
-MIUI-Shade | Control, Hotkey, Animated
-ModularClocks | Modern, Time, Animated
-Plainext | System, Retro
-ModularPlayers | Modern, Music, Minimal
-Combilaunch | Launcher, Minimal
-Keystrokes | Overlay, Gaming, Hotkey
-WatchOS | Modern, Time

@@ -45,7 +45,7 @@ InlineSetting2=Color | 150,150,150
 ;================================================================================================================================================================================
 
 [Variables]
-VersionPage=1
+VersionPage=2
 
 ;================================================================================================================================================================================
 
@@ -89,26 +89,22 @@ MeterStyle=Set.String:S | Set.PickOption_1:S
 
 ;================================================================================================================================================================================
 
-[CurrentClock]
+[Clock]
 Meter=String
-X=(20*[Set.S])
-Y=(70*[Set.S])r
-FontSize=(10*[Set.S])
-FontWeight=400
-Text=Clock layout (#Style#)
-MeterStyle=Set.String:S
-Container=ContentContainer
+Text=Clock style // #Style#
+MeterStyle=Set.String:S | Set.OptionCat:S
 
 [Box]
-Shape=Rectangle  0,0,170,170,10,10 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
+Shape=Rectangle  0,0,(([ContentContainer:W]-120*[Set.S])/5),(([ContentContainer:W]-120*[Set.S])/5),#set.R# | StrokeWidth 0 | Extend Fill
 Fill=Fill Color 255,255,255,10
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,10"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+DynamicVariables=1
 Container=ContentContainer
 [Box1]
 Meter=Shape
 X=r
-Y=(10*[Set.S])R
+Y=(20*[Set.S])R
 MeterStyle=Box
 [Box2]
 Meter=Shape
@@ -132,7 +128,7 @@ Y=r
 MeterStyle=Box
 [BoxAdd]
 Meter=Shape
-X=20
+X=30
 Y=r
 DynamicVariables=1
 Fill=Fill Color 255,255,255,50
@@ -146,8 +142,8 @@ Meter=Image
 Imagename=#SKINSPATH#ModularClocks\@Resources\Images\Preview\#CURRENTSECTION#.png
 X=([Box1:X])
 Y=([Box1:Y])
-W=(170*[Set.S])
-H=(170*[Set.S])
+W=(([ContentContainer:W]-120*[Set.S])/5)
+H=(([ContentContainer:W]-120*[Set.S])/5)
 Solidcolor=0,0,0,1
 Leftmouseupaction=[!WriteKeyValue Variables Style #CURRENTSECTION# "#Sec.SaveLocation#"][!WriteKeyValue BoxAdd X "([#CURRENTSECTION#:X]-[ContentContainer:X])" "#ROOTCONFIGPATH#SecOverrides\ModularClocks\Appearance.inc"][!Refresh][!UpdateMeasure Auto_Refresh:M]
 DynamicVariables=1
@@ -186,8 +182,8 @@ Meter=Image
 Imagename=#SKINSPATH#ModularClocks\@Resources\Images\Preview\#CURRENTSECTION#.png
 X=([Box1:X])
 Y=([Box1:Y])
-W=(170*[Set.S])
-H=(170*[Set.S])
+W=(([ContentContainer:W]-120*[Set.S])/5)
+H=(([ContentContainer:W]-120*[Set.S])/5)
 Solidcolor=0,0,0,1
 Leftmouseupaction=[!WriteKeyValue Variables Style #CURRENTSECTION# "#Sec.SaveLocation#"][!WriteKeyValue BoxAdd X "([#CURRENTSECTION#:X]-[ContentContainer:X])" "#ROOTCONFIGPATH#SecOverrides\ModularClocks\Appearance.inc"][!Refresh][!UpdateMeasure Auto_Refresh:M]
 DynamicVariables=1
@@ -215,8 +211,9 @@ MeterStyle=CircTech
 Leftmouseupaction=[!WriteKeyValue Variables Style #CURRENTSECTION# "#Sec.SaveLocation#"][!WriteKeyValue BoxAdd X "([#CURRENTSECTION#:X]-[ContentContainer:X])" "#ROOTCONFIGPATH#SecOverrides\ModularClocks\Appearance.inc"][!Refresh][!UpdateMeasure Auto_Refresh:M]
 
 [VersionBox]
-Shape=Rectangle 0,0,455,30,(10/2) | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
+Shape=Rectangle 0,0,(([ContentContainer:W]-60*[Set.S])/2),(30*[Set.S]),(10/2) | StrokeWidth 0 | Extend Fill
 Fill=Fill Color 255,255,255,10
+DynamicVariables=1
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,10"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 Container=ContentContainer
@@ -228,15 +225,16 @@ MeterStyle=VersionBox
 Leftmouseupaction=[!WriteKeyvalue Variables VersionPage 1 "#SKINSPATH##JaxCore\SecOverrides\#Skin.Name#\Appearance.inc"][!Refresh]
 [Ver1Text]
 Meter=String
-X=(455/2*[Set.S])r
+X=([Ver1:W]/2)r
 Y=(15*[Set.S])r
 FontSize=(10*[Set.S])
 Text=Version 1 Styles
 StringAlign=CenterCenter
+Container=ContentContainer
 MeterStyle=Set.String:S
 [Ver2]
 Meter=Shape
-X=((455/2+20)*[Set.S])r
+X=(([Ver1:W]/2)+20*[Set.S])r
 Y=(-15*[Set.S])r
 MeterStyle=VersionBox
 Leftmouseupaction=[!WriteKeyvalue Variables VersionPage 2 "#SKINSPATH##JaxCore\SecOverrides\#Skin.Name#\Appearance.inc"][!Refresh]
@@ -440,7 +438,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Smart
-Class=02
+Y=([Option02:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value02]
 Meter=String
 Text=#Align#
@@ -451,19 +449,19 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.Bool:S
 Group=Smart
-Class=03
+Y=([Option03:Y]-#Set.P#+(-20/2+8)*[Set.S])
 
 [Date]
 Meter=Shape
 MeterStyle=Set.Bool:S
 Group=Smart
-Class=04
+Y=([Option04:Y]-#Set.P#+(-20/2+8)*[Set.S])
 
 [DateTimeRatio]
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Smart
-Class=05
+Y=([Option05:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value05]
 Meter=String
 Text=#DateTimeRatio#
@@ -474,7 +472,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Measure
-Class=06
+Y=([Option06:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value06]
 Meter=String
 Text=#Rotation#
@@ -485,7 +483,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Measure
-Class=07
+Y=([Option07:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value07]
 Meter=String
 Text=#Stroke#
@@ -496,13 +494,13 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.Bool:S
 Group=Graph
-Class=08
+Y=([Option08:Y]-#Set.P#+(-20/2+8)*[Set.S])
 
 [LineWidth]
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Graph
-Class=09
+Y=([Option09:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value09]
 Meter=String
 Text=#LineWidth#
@@ -514,10 +512,10 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.Bool:S
 Group=Tech
-Class=11
+Y=([Option11:Y]-#Set.P#+(-20/2+8)*[Set.S])
 
 [Runic]
 Meter=Shape
 MeterStyle=Set.Bool:S
 Group=Tech
-Class=12
+Y=([Option12:Y]-#Set.P#+(-20/2+8)*[Set.S])

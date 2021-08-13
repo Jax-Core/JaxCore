@@ -42,6 +42,7 @@ Text=#PrefixText#
 StringAlign=Left
 FontSize=(10*[Set.S])
 MeterStyle=Set.String:S
+Container=ContentContainer
 DynamicVariables=1
 
 ;================================================================================================================================================================================

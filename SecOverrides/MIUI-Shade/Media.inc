@@ -1,4 +1,11 @@
 
+[Div]
+meter=Shape
+X=(25*[Set.S])
+Y=([WMPShape:YH]-[ContentContainer:Y]+#set.P#/2)
+DynamicVariables=1
+MeterStyle=Set.Div:S
+
 [Options]
 Meter=String
 Text=Options

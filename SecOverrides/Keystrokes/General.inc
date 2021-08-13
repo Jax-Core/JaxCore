@@ -5,14 +5,14 @@ MeterStyle=Set.String:S | Set.OptionCat:S
 
 [Option01]
 Meter=String
-Text=HotKey
+Text=Toggle visibility
 MeterStyle=Set.String:S | Set.OptionName:S
-[Set.Div:S19131238]
+[Set.Div:S19s138]
 Meter=Shape
 MeterStyle=Set.Div:S
 [Option02]
 Meter=String
-Text=Terminate service
+Text=Toggle draggability
 MeterStyle=Set.String:S | Set.OptionName:S
 
 [Mouse]
@@ -31,15 +31,19 @@ MeterStyle=Set.Div:S
 Meter=String
 Text=Mouse Y maximum acceleration
 MeterStyle=Set.String:S | Set.OptionName:S
-
-[Updatre]
+[Set.Div:S191s38]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option13]
 Meter=String
-Text=Update
-MeterStyle=Set.String:S |  Set.OptionCat:S
-
-[Option21]
+Text=Mouse acceleration fetching rate
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:S191s3s8]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option14]
 Meter=String
-Text=RGB update rate
+Text=Show mouse CPS
 MeterStyle=Set.String:S | Set.OptionName:S
 
 ; ---------------------------------------------------------------------------- ;
@@ -50,10 +54,19 @@ MeterStyle=Set.String:S | Set.OptionName:S
 Meter=Shape
 MeterStyle=Set.Button:S
 Y=([Option01:Y]-#Set.P#+(-30/2+8)*[Set.S])
-Act=[!ActivateConfig "#JaxCore\Main\Hotkey"][!Move (#CURRENTCONFIGX#+#CURRENTCONFIGWIDTH#/2-500/2) (#CURRENTCONFIGY#+#CURRENTCONFIGHEIGHT#/2-500/2) "#JaxCore\Main\Hotkey"]
+Act=[!ActivateConfig "#JaxCore\Accessories\Hotkey"][!Move (#CURRENTCONFIGX#+#CURRENTCONFIGWIDTH#/2-500/2) (#CURRENTCONFIGY#+#CURRENTCONFIGHEIGHT#/2-500/2) "#JaxCore\Accessories\Hotkey"]
 [Value01]
 Meter=String
 Text=#Key#
+MeterStyle=Set.String:S | Set.Value:S
+[Button02]
+Meter=Shape
+MeterStyle=Set.Button:S
+Y=([Option02:Y]-#Set.P#+(-30/2+8)*[Set.S])
+Act=[!ActivateConfig "#JaxCore\Accessories\Hotkey"][!SetVariable Sec.Num 2 "#JaxCore\Accessories\Hotkey"][!Move (#CURRENTCONFIGX#+#CURRENTCONFIGWIDTH#/2-500/2) (#CURRENTCONFIGY#+#CURRENTCONFIGHEIGHT#/2-500/2) "#JaxCore\Accessories\Hotkey"]
+[Value02]
+Meter=String
+Text=#Key2#
 MeterStyle=Set.String:S | Set.Value:S
 
 [MaxX]
@@ -72,16 +85,18 @@ Y=([Option12:Y]-#Set.P#+(-30/2+8)*[Set.S])
 Meter=String
 Text=#MaxY#
 MeterStyle=Set.String:S | Set.Value:S
-
-
-[Rm.AniUpdate]
+[MouseFetchDelay]
 Meter=Shape
 MeterStyle=Set.Textbox:S
-Y=([Option21:Y]-#Set.P#+(-30/2+8)*[Set.S])
-[Value21]
+Y=([Option13:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Value13]
 Meter=String
-Text=#Rm.AniUpdate#
+Text=#MouseFetchDelay#
 MeterStyle=Set.String:S | Set.Value:S
+[MouseCPS]
+Meter=Shape
+MeterStyle=Set.Bool:S
+Y=([Option14:Y]-#Set.P#+(-20/2+8)*[Set.S])
 
 
 @includeKeys=#SKINSPATH##Skin.Name#\@Resources\Actions\HotKeys.ini

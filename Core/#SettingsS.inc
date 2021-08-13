@@ -10,11 +10,3 @@ Skin.Layout=Keystrokes
 Skin.Media=MIUIShade | ModularPlayers
 Skin.Render=ModularClocks
 Skin.FAQ=MIUIShade | ModularClocks | ModularPlayers
-
-[Set.GeneratePages:M]
-Measure=Script
-ScriptFile=#@#Lua\GenSet.lua
-[Set.Refresh:M]
-Measure=Script
-ScriptFile=#@#Lua\Refresh.lua
-Refreshed=0

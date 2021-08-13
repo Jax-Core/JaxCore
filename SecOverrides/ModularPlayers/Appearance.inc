@@ -58,24 +58,20 @@ MeterStyle=Set.String:S | Set.PickOption_1:S
 
 ;================================================================================================================================================================================
 
-[CurrentClock]
+[Clock]
 Meter=String
-X=(20*[Set.S])
-Y=(50*[Set.S])r
-FontSize=(10*[Set.S])
-FontWeight=400
-Text=Player layout (#Style#)
-MeterStyle=Set.String:S
-Container=ContentContainer
+Text=Player style // #Style#
+MeterStyle=Set.String:S | Set.OptionCat:S
 
 
 [Box]
-X=(190*[Set.S])r
+X=(20*[Set.S])R
 Y=r
-Shape=Rectangle  0,0,170,170,10,10 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
+Shape=Rectangle  0,0,(([ContentContainer:W]-120*[Set.S])/5),(([ContentContainer:W]-120*[Set.S])/5),#set.R# | StrokeWidth 0 | Extend Fill
 Fill=Fill Color 255,255,255,10
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,10"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+DynamicVariables=1
 Container=ContentContainer
 [Box1]
 Meter=Shape
@@ -110,32 +106,20 @@ Meter=Shape
 MeterStyle=Box
 
 
-[BoxAdd]
-Meter=Shape
-X=590
-Y=(408-20+#Scroll#)
-DynamicVariables=1
-Fill=Fill Color 255,255,255,50
-Mouseoveraction=[]
-MouseLeaveAction=[]
-MeterStyle=Box
-
-
-
 [MIUI]
 Meter=Image
 Imagename=#SKINSPATH#ModularPlayers\@Resources\Images\Preview\#CURRENTSECTION#.png
 X=([Box1:X])
 Y=([Box1:Y])
-W=(170*[Set.S])
-H=(170*[Set.S])
+W=(([ContentContainer:W]-120*[Set.S])/5)
+H=(([ContentContainer:W]-120*[Set.S])/5)
 Solidcolor=0,0,0,1
-Leftmouseupaction=[!WriteKeyValue Variables Style #CURRENTSECTION# "#Sec.SaveLocation#"][!WriteKeyValue BoxAdd X "([#CURRENTSECTION#:X]-[ContentContainer:X])" "#ROOTCONFIGPATH#SecOverrides\ModularPlayers\Appearance.inc"][!WriteKeyValue BoxAdd Y "([#CURRENTSECTION#:Y]-[ContentContainer:Y]+#*Scroll*#)" "#ROOTCONFIGPATH#SecOverrides\ModularPlayers\Appearance.inc"][!Refresh][!UpdateMeasure Auto_Refresh:M]
+Leftmouseupaction=[!WriteKeyValue Variables Style #CURRENTSECTION# "#Sec.SaveLocation#"][!Refresh][!UpdateMeasure Auto_Refresh:M]
 DynamicVariables=1
 
 [Card]
 Meter=Image
-X=(190*[Set.S])r
+X=([Box1:W]+20*[Set.S])r
 Y=r
 MeterStyle=MIUI
 
@@ -151,13 +135,13 @@ LeftMouseUpAction=[!ActivateConfig "#Skin.Name#\@Start"]
 
 [Side]
 Meter=Image
-X=(190*[Set.S])r
+X=([Box1:W]+20*[Set.S])r
 Y=r
 MeterStyle=MIUI
 
 [Neumorphism]
 Meter=Image
-X=(190*[Set.S])r
+X=([Box1:W]+20*[Set.S])r
 Y=r
 MeterStyle=MIUI
 
@@ -167,7 +151,7 @@ MeterStyle=MMI1
 
 [Simple]
 Meter=Image
-X=(190*[Set.S])r
+X=([Box1:W]+20*[Set.S])r
 Y=r
 MeterStyle=MIUI
 
@@ -179,13 +163,13 @@ MeterStyle=MIUI
 
 [Android]
 Meter=Image
-X=(190*[Set.S])r
+X=([Box1:W]+20*[Set.S])r
 Y=r
 MeterStyle=MIUI
 
 [Blur]
 Meter=Image
-X=(190*[Set.S])r
+X=([Box1:W]+20*[Set.S])r
 Y=r
 MeterStyle=MIUI
 
@@ -195,7 +179,7 @@ MeterStyle=MMI1
 
 [BigCirc]
 Meter=Image
-X=(190*[Set.S])r
+X=([Box1:W]+20*[Set.S])r
 Y=r
 MeterStyle=MIUI
 
@@ -208,7 +192,7 @@ MeterStyle=MMI1
 [Options]
 Meter=String
 X=(30*[Set.S])
-Y=([Box6:Y]+200*[Set.S])
+Y=([Box6:YH])
 DynamicVariables=1
 FontSize=(14*[Set.S])
 FontWeight=500

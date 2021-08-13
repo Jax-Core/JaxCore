@@ -95,6 +95,11 @@ local ResizeBorder = nil
 local offsetX = 0
 local offsetY = 0
 
+function round(num, numDecimalPlaces)
+	local mult = 10^(numDecimalPlaces or 0)
+	return math.floor(num * mult + 0.5) / mult
+  end
+
 function MouseMovedCallback(mouseX, mouseY)
 	if not Resizing then 
 		print("Error, MouseMovedCallback called when not resizing")
@@ -168,7 +173,7 @@ function MouseMovedCallback(mouseX, mouseY)
 		-- 	if 
 		-- end
 		if newWindowWidth < (windowHeight * resolution) then
-			local scaling = newWindowWidth / scaleWindowWidth
+			local scaling = round((newWindowWidth / scaleWindowWidth), 2)
 			if scaling > 1 then scaling = 1 end
 			bang = bang .. "[!SetOption Set.S Formula " .. scaling .. "][!UpdateMeasure Set.S]" 
 		end
@@ -190,7 +195,7 @@ function MouseMovedCallback(mouseX, mouseY)
 		if newWindowHeight > maxWindowHeight then newWindowHeight = maxWindowHeight end
 		-- --------------------------------- scalingH -------------------------------- --
 		if newWindowHeight < (windowWidth / resolution) then
-			local scaling = newWindowHeight / (scaleWindowWidth / resolution)
+			local scaling = round((newWindowHeight / (scaleWindowWidth / resolution)), 2)
 			if scaling > 1 then scaling = 1 end
 			bang = bang .. "[!SetOption Set.S Formula " .. scaling .. "][!UpdateMeasure Set.S]"
 		end
