@@ -1,22 +1,20 @@
 
+[Div]
+meter=Shape
+X=(25*[Set.S])
+Y=([WMPShape:YH]-[ContentContainer:Y]+#set.P#/2)
+DynamicVariables=1
+MeterStyle=Set.Div:S
+
 [Options]
 Meter=String
-X=(30*#Set.S#)
-Y=(30*#Set.S#)R
-FontSize=(14*#Set.S#)
-FontWeight=500
 Text=Options
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionCat:S
 
 [Option00]
 Meter=String
-X=r
-Y=(15*#Set.S#)R
-FontSize=(10*#Set.S#)
 Text=Show media notification
-MeterStyle=Set.String:S
-Container=ContentContainer
+MeterStyle=Set.String:S | Set.OptionName:S
 
 ;================================================================================================================================================================================
 
@@ -24,6 +22,6 @@ Container=ContentContainer
 [Music]
 Meter=Shape
 MeterStyle=Set.Bool:S
-Y=([Option00:Y]-#Set.P#+(-20/2+8)*#Set.S#)
+Y=([Option00:Y]-#Set.P#+(-20/2+8)*[Set.S])
 
 

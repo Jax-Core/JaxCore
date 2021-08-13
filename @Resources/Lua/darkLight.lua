@@ -27,12 +27,12 @@ function SwitchColor(mode)
             SKIN:Bang('!WriteKeyValue', 'Variables', 'Set.Pri_Color', '19, 19, 19', saveLocation)
             SKIN:Bang('!WriteKeyValue', 'Variables', 'Set.Sec_Color', '23,23,23', saveLocation)
             SKIN:Bang('!WriteKeyValue', 'Variables', 'Set.Ter_Color', '30, 30, 30', saveLocation)
-            SKIN:Bang('!WriteKeyValue', 'Variables', 'Set.Opp_Color', '255,255,255', saveLocation)
+            SKIN:Bang('!WriteKeyValue', 'Variables', 'Set.Text_Color', '255,255,255', saveLocation)
         else
             SKIN:Bang('!WriteKeyValue', 'Variables', 'Set.Pri_Color', '232, 232, 232', saveLocation)
             SKIN:Bang('!WriteKeyValue', 'Variables', 'Set.Sec_Color', '255,255,255', saveLocation)
             SKIN:Bang('!WriteKeyValue', 'Variables', 'Set.Ter_Color', '232, 232, 232', saveLocation)
-            SKIN:Bang('!WriteKeyValue', 'Variables', 'Set.Opp_Color', '0,0,0', saveLocation)
+            SKIN:Bang('!WriteKeyValue', 'Variables', 'Set.Text_Color', '0,0,0', saveLocation)
         end
     end
 end
