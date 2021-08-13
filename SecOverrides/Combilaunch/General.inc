@@ -34,6 +34,7 @@ Text=Although you can customize settings for Combilaunch in the core, it does no
 FontSize=(10*[Set.S])
 FontCOlor=150,150,150
 MeterStyle=Set.String:S
+Container=ContentContainer
 
 ; ---------------------------------------------------------------------------- ;
 ;                                     Input                                    ;
