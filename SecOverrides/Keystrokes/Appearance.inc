@@ -151,22 +151,34 @@ Text=#RGBSpeed#
 MeterStyle=Set.String:S | Set.Value:S
 
 
-[BackgroundColor]
+[Background]
 Meter=Shape
-MeterStyle=Set.Color:S
+MeterStyle=Set.ColorPacity:S
 Y=([Option21:Y]-#Set.P#+(-30/2+8)*[Set.S])
-[DefaultColor]
+[Value21]
+Meter=String
+Text=#BackgroundOpacity#
+MeterStyle=Set.String:S | Set.Pacity:S
+[Default]
 Meter=Shape
-MeterStyle=Set.Color:S
+MeterStyle=Set.ColorPacity:S
 Y=([Option22:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Value22]
+Meter=String
+Text=#DefaultOpacity#
+MeterStyle=Set.String:S | Set.Pacity:S
 [DefaultFontCOlor]
 Meter=Shape
 MeterStyle=Set.Color:S
 Y=([Option23:Y]-#Set.P#+(-30/2+8)*[Set.S])
-[PressedColor]
+[Pressed]
 Meter=Shape
-MeterStyle=Set.Color:S
+MeterStyle=Set.ColorPacity:S
 Y=([Option24:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Value24]
+Meter=String
+Text=#PressedOpacity#
+MeterStyle=Set.String:S | Set.Pacity:S
 [PressedFontColor]
 Meter=Shape
 MeterStyle=Set.Color:S
