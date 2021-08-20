@@ -27,7 +27,6 @@ Sec.Container=
 [Func]
 Measure=Script
 ScriptFile=#@#Lua\Func.lua
-UpdateDivider=1
 
 [Auto_Refresh:M]
 Measure=String
@@ -51,7 +50,7 @@ WindowIcon=#@#Images\Logo.ico
 [Input:M]
 Measure=Plugin
 Plugin=InputText
-SolidColor=171717
+SolidColor=#Set.Pri_Color#
 FontColor=#Set.Text_Color#
 FontFace=Seqoe UI
 FontSize=(10*[Set.S])
@@ -60,7 +59,8 @@ W=((150-10)*[Set.S])
 H=((30-10)*[Set.S])
 DynamicVariables=1
 DefaultValue="[##Editing#]"
-Command1=[!SetVariable #Editing# "$UserInput$"][!UpdateMeasure SaveAndLoad:M]
+Command1=[!SetOption Input:M SolidColor "#Set.Pri_Color#"][!SetVariable #Editing# "$UserInput$"][!UpdateMeasure SaveAndLoad:M]
+OnDismissAction=[!SetOption Input:M SolidColor "a"]
 
 [SaveAndLoad:M]
 Measure=Calc
@@ -150,7 +150,6 @@ Fill=Stroke Color #Set.Text_Color#,10
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,15"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
-SomeAction=[!Log Update]
 Container=ContentContainer
 
 [Set.Grad0:S]
@@ -170,8 +169,26 @@ Grad=180 | [#[&Func:GroupVar('#CURRENTSECTION#', 'Grad0')]] ; -1 | [#[&Func:Grou
 LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=[&Func:GroupVar('#CURRENTSECTION#', 'Grad1')]" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 Container=ContentContainer
 
-
-
+[Set.ColorPacity:S]
+X=(#Set.W#-#Set.L#-#Set.P#*2-150*[Set.S])
+; Y=([Option[&Func:LocalVar('#CURRENTSECTION#', 'Class')]:Y]-#Set.P#+(-30/2+8)*[Set.S])
+DynamicVariables=1
+Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 2 | Fill Color [##CURRENTSECTION#Color] | Extend Fill | Scale [Set.S],[Set.S],0,0
+Fill=Stroke Color #Set.Text_Color#,10
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,15"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#Color" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
+RightMOuseUpAction=[!SetVariable Editing "#CURRENTSECTION#Opacity"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5)"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5)"][!SetOption Input:M SolidColor "[##CURRENTSECTION#Color]"][!CommandMeasure Input:M "ExecuteBatch 1"]
+Container=ContentContainer
+[Set.Pacity:S]
+X=(5*[Set.S])r
+Y=(15*[Set.S])r
+StringAlign=LeftCenter
+FontSize=(10*[Set.S])
+Container=ContentContainer
+Stringeffect=Shadow
+Prefix="Opacity// "
+DynamicVariables=1
 
 ; ------------------------------ Action buttons ------------------------------ ;
 
