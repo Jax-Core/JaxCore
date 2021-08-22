@@ -60,7 +60,7 @@ H=((30-10)*[Set.S])
 DynamicVariables=1
 DefaultValue="[##Editing#]"
 Command1=[!SetOption Input:M SolidColor "#Set.Pri_Color#"][!SetVariable #Editing# "$UserInput$"][!UpdateMeasure SaveAndLoad:M]
-OnDismissAction=[!SetOption Input:M SolidColor "a"]
+OnDismissAction=[!SetOption Input:M SolidColor "#Set.Pri_Color#"]
 
 [SaveAndLoad:M]
 Measure=Calc
