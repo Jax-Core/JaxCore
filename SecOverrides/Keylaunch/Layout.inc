@@ -16,6 +16,7 @@ IfMatch3=^Slide$
 Ifmatchaction3=[!SetOption Slide MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
 IfMatch4=^Bounce$
 Ifmatchaction4=[!SetOption Bounce MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
+; OnUpdateAction=[!SetOption Center MeterStyle "Select:S | Selected:S"][!SetOption Bottom MeterStyle "Select:S | Selected:S"][!SetOption Slide MeterStyle "Select:S | Selected:S"][!SetOption Bounce MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
 
 [Select:S]
 X=r

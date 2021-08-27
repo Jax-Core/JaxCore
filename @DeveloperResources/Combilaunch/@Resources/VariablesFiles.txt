@@ -1,0 +1,1 @@
+Combilaunch\@Resources\Vars.inc | Combilaunch\@Resources\Variables\ChecksExtension.inc | Combilaunch\@Resources\Variables\MatchActions.inc | Combilaunch\@Resources\Variables\Names.inc | Combilaunch\@Resources\Variables\Patterns.inc

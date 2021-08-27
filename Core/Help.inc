@@ -5,7 +5,7 @@ BarHandler=11
 [Header]
 Meter=String
 X=([ContentContainer:W]/2)
-Y=([ContentContainer:H]/2-[GitHub:W]/2-5/2)
+Y=([ContentContainer:H]/2-5/2)
 DynamicVariables=1
 StringAlign=CenterCenter
 Text=Need help?
@@ -13,36 +13,25 @@ FontFace=Poppins Medium
 FontSize=(30*[Set.S])
 MeterStyle=Set.String:S
 Container=ContentContainer
-[Subheader]
-Meter=String
-X=r
+
+[Obj.6]
+Meter=Shape
+X=(-200/2)r
 Y=R
+DynamicVariables=1
+Shape=Rectangle 0,0,200,50,(#Set.R#) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend THis
+OverColor=88,101,242
+LeaveColor=88,101,242,200
+Leftmouseupaction=["https://discord.gg/JmgehPSDD6"]
+MeterStyle=Shape.Over:S
+Container=ContentContainer
+[Obj.6.Child]
+Meter=String
+X=(200/2*[Set.S])r
+y=(25*[Set.S])r
+FontSize=(10*[Set.S])
+FontFace=Poppins 
 StringAlign=CenterCenter
-Text=Visit the github / DM me Jax#7000 on discord:
-FontColor=150,150,150
-FontSize=(12*[Set.S])
-FontFace=Poppins Light
-; InlinePattern=Jax\s-\s(.*)
-; InlineSetting=Color | #TC#,150
-MeterStyle=Set.String:S
+Text="Join the discord server!"
 Container=ContentContainer
-[GitHub]
-Meter=Image
-Y=(5*[Set.S])R
-X=([ContentContainer:W]/2-(64*[Set.S])-5)
-W=(64*[Set.S])
-H=(64*[Set.S])
-DynamicVariables=1
-Container=ContentContainer
-ImageName=#@#Icons\#CURRENTSECTION#.png
-Leftmouseupaction=["https://github.com/EnhancedJax/#Skin.Name#"]
-[Discord]
-Meter=Image
-Y=r
-X=(10)R
-W=(64*[Set.S])
-H=(64*[Set.S])
-DynamicVariables=1
-Container=ContentContainer
-ImageName=#@#Icons\#CURRENTSECTION#.png
-Leftmouseupaction=[!SetClip "Jax#7000"][!SetOption Header Text "Copied to clipboard"][!UpdateMeter Header][!Redraw][!Delay 1000][!SetOption Header Text "Need help?"][!UpdateMeter Header][!Redraw]
+MeterStyle=SEt.String:S | ButtonT:S

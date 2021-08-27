@@ -54,7 +54,7 @@ FontSize=(12*[Set.S])
 FontWeight=400
 Hidden=1
 DynamicVariables=1
-Leftmouseupaction=[!WriteKeyValue Data DownloadLink "https://github.com/EnhancedJax/#Skin.Name#/releases/download/v[mVer]/#Skin.Name#_v[mVer].rmskin" "#@#Actions\InstallData.ini"][!WriteKeyValue Data SaveLocation "#@#Actions" "#@#Actions\InstallData.ini"]["#@#Actions\AHK.exe" "#@#Actions\Installer.ahk"]
+Leftmouseupaction=[!WriteKeyValue Data DownloadLink "https://github.com/EnhancedJax/#Skin.Name#/releases/download/v[mVer]/#Skin.Name#_v[mVer].rmskin" "#@#Actions\InstallData.ini"][!WriteKeyValue Data SaveLocation "#@#Actions" "#@#Actions\InstallData.ini"]["#@#Actions\AHKv1.exe" "#@#Actions\Installer.ahk"]
 MeterStyle=Set.String:S
 Container=ContentContainer
 

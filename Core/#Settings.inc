@@ -131,7 +131,7 @@ Shape2=Ellipse ([##CURRENTSECTION#] = 1 ? (40*[Set.S]) : (10*[Set.S])),(10*[Set.
 DynamicVariables=1
 Fill=Fill Color ([##CURRENTSECTION#] = 1 ? 35 : 181),([##CURRENTSECTION#] = 1 ? 209 : 181),([##CURRENTSECTION#] = 1 ? 96 : 181)
 Container=ContentContainer
-Leftmouseupaction=[!WriteKeyvalue Variables "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)" "#Sec.SaveLocation#"][!Refresh][!UpdateMeasure Auto_Refresh:M]
+Leftmouseupaction=[!WriteKeyvalue Variables "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)" "#Sec.SaveLocation#"][!UpdateMeasure Auto_Refresh:M][!Refresh]
 
 
 
@@ -145,10 +145,8 @@ Leftmouseupaction=[!WriteKeyvalue Variables "#CURRENTSECTION#" "([##CURRENTSECTI
 X=(#Set.W#-#Set.L#-#Set.P#*2-150*[Set.S])
 ; Y=([Option[&Func:LocalVar('#CURRENTSECTION#', 'Class')]:Y]-#Set.P#+(-30/2+8)*[Set.S])
 DynamicVariables=1
-Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 2 | Fill Color [##CURRENTSECTION#] | Extend Fill | Scale [Set.S],[Set.S],0,0
-Fill=Stroke Color #Set.Text_Color#,10
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,15"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 0 | Fill Color 0,0,0,1 | Scale [Set.S],[Set.S],0,0
+Shape2=Ellipse (135*[Set.S]),(15*[Set.S]),(10*[Set.S]) | StrokeWidth 0 | Fill Color [##CURRENTSECTION#]
 LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 Container=ContentContainer
 
@@ -173,12 +171,14 @@ Container=ContentContainer
 X=(#Set.W#-#Set.L#-#Set.P#*2-150*[Set.S])
 ; Y=([Option[&Func:LocalVar('#CURRENTSECTION#', 'Class')]:Y]-#Set.P#+(-30/2+8)*[Set.S])
 DynamicVariables=1
-Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 2 | Fill Color [##CURRENTSECTION#Color] | Extend Fill | Scale [Set.S],[Set.S],0,0
+Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 2 | Fill Color 0,0,0,1 | Extend Fill | Scale [Set.S],[Set.S],0,0
+Shape2=Ellipse (135*[Set.S]),(15*[Set.S]),(10*[Set.S]) | StrokeWidth 0 | Fill Color [##CURRENTSECTION#]
 Fill=Stroke Color #Set.Text_Color#,10
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,15"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#Color" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
-RightMOuseUpAction=[!SetVariable Editing "#CURRENTSECTION#Opacity"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5)"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5)"][!SetOption Input:M SolidColor "[##CURRENTSECTION#Color]"][!CommandMeasure Input:M "ExecuteBatch 1"]
+RightMOuseUpAction=[!SetVariable Editing "#CURRENTSECTION#Opacity"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5)"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5)"][!CommandMeasure Input:M "ExecuteBatch 1"]
+; [!SetOption Input:M SolidColor "[##CURRENTSECTION#Color]"]
 Container=ContentContainer
 [Set.Pacity:S]
 X=(5*[Set.S])r
