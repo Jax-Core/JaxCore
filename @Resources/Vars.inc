@@ -19,9 +19,9 @@ Set.SubText_Color=120,120,120
 Sec.SaveLocation=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 ; ------------------------ Background check variables ------------------------ ;
 Set.Auto_Refresh=1
-Set.BackgroundCheckTime=1
+Set.BackgroundCheckTime=30
 Core.Master=3
 
 [Set.S]
 Measure=Calc
-Formula=1
+Formula=0.9

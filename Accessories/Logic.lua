@@ -12,5 +12,7 @@ function check()
         print('Update required - '..ParsedVer..'>='..CoreVer)
         SKIN:Bang('!WriteKeyValue', 'Data', 'DownloadLink', 'https://github.com/EnhancedJax/-JaxCore/releases/download/v'..ParsedVerFull..'/JaxCore_v'..ParsedVerFull..'.rmskin', SavePos)
         SKIN:Bang('!ShowMeterGroup', 'Notif')
+        SKIN:Bang('!UpdateMeterGroup', 'Notif')
+        SKIN:Bang('!Redraw')
     end
 end

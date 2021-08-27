@@ -1,5 +1,5 @@
 [Variables]
-Skin.Name=Keystrokes
+Skin.Name=Keylaunch
 ; Skin.Shorthand=
 
 Skin.Set_Page=Info
