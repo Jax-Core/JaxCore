@@ -287,7 +287,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Blur
-Class=11
+Y=([Option11:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value11]
 Meter=String
 Text=#BlurSigma#
@@ -297,7 +297,7 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.TextBox:S
 Group=Blur
-Class=12
+Y=([Option12:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value12]
 Meter=String
 Text=#BlurRadius#

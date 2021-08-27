@@ -4,8 +4,8 @@
 @includeSkinVars=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 @includeSkinVer=#SKINSPATH##Skin.Name#\@Resources\Version.inc
 ;get current skin data
-Skin.Appearance=Plainext | ModularClocks | MIUIShade | ModularPlayers | WatchOS | Keystrokes
-Skin.Layout=Keystrokes
+Skin.Appearance=Plainext | ModularClocks | MIUIShade | ModularPlayers | WatchOS | Keystrokes | Keylaunch
+Skin.Layout=Keystrokes | Keylaunch
 ; Skin.General=Combilaunch | Plainext | ModularClocks | MIUIShade | ModularPlayers
 Skin.Media=MIUIShade | ModularPlayers
 Skin.Render=ModularClocks

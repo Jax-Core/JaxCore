@@ -1,5 +1,5 @@
 [Variables]
-Skin.Name=Combilaunch
+Skin.Name=Keystrokes
 ; Skin.Shorthand=
 
 Skin.Set_Page=Info

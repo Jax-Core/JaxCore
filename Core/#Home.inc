@@ -8,14 +8,14 @@ MeterStyle=SkinIcon:S
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
 Text=MIUI-Shade#CRLF# Control, Hotkey, Animated
-[ModularClocks]
+[Keylaunch]
 Meter=Image
-ImageName=#@#Images\Cards\ModularClocks.png
+ImageName=#@#Images\Cards\Keylaunch.png
 MeterStyle=SkinIcon:S
-[ModularClocksDes]
+[KeylaunchDes]
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
-Text=ModularClocks#CRLF# Modern, Time, Animated
+Text=Keylaunch#CRLF# Workflow, Efficiency, Animated
 [Keystrokes]
 Meter=Image
 ImageName=#@#Images\Cards\Keystrokes.png
@@ -35,10 +35,18 @@ FontSize=15
 StringAlign=LeftTop
 FontFace=Poppins SemiBold
 TransformationMatrix=[Set.S];0;0;[Set.S];((1-[Set.S])*[#CURRENTSECTION#:X]);((1-[Set.S])*[#CURRENTSECTION#:Y])
-[Plainext]
+[ModularClocks]
 Meter=Image
 X=r
 Y=([All:H]*([Set.S]-1)+10*[Set.S])R
+ImageName=#@#Images\Cards\ModularClocks.png
+MeterStyle=SkinIcon:S
+[ModularClocksDes]
+Meter=String
+MeterStyle=Set.String:S | SkinText:S
+Text=ModularClocks#CRLF# Modern, Time, Animated
+[Plainext]
+Meter=Image
 ImageName=#@#Images\Cards\Plainext.png
 MeterStyle=SkinIcon:S
 [PlainextDes]
@@ -55,19 +63,11 @@ MeterStyle=Set.String:S | SkinText:S
 Text=ModularPlayers#CRLF# Modern, Music, Minimal
 [Combilaunch]
 Meter=Image
+X=(#Set.P#)
+Y=(10*[Set.S])R
 ImageName=#@#Images\Cards\Combilaunch.png
 MeterStyle=SkinIcon:S
 [CombilaunchDes]
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
 Text=Combilaunch#CRLF# Launcher, Minimal
-[WatchOS]
-Meter=Image
-X=(#Set.P#)
-Y=(10*[Set.S])R
-ImageName=#@#Images\Cards\WatchOS.png
-MeterStyle=SkinIcon:S
-[WatchOSDes]
-Meter=String
-MeterStyle=Set.String:S | SkinText:S
-Text=WatchOS#CRLF# Modern, Time
