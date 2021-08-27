@@ -69,16 +69,16 @@ MeterStyle=Set.String:S | SupportText:S
 Meter=Shape
 Y=10R
 MeterStyle=Support:S
-LeftMouseUpAction=["https://www.deviantart.com/jaxoriginals"]
+LeftMouseUpAction=["https://discord.gg/JmgehPSDD6"]
 [SupportImage.2]
 Meter=Image
 X=(#Sec.W#/2-([#CURRENTSECTION#:W]+[SupportText.2:W]+5)/2)
-ImageName=#@#Icons\Comment.png
-ImageTint=#SET.Accent_Color#
+ImageName=#@#Icons\Discord.png
+ImageTint=108, 130, 206
 MeterStyle=SupportImage:S
 [SupportText.2]
 MEter=String
-Text=Give feedback on skins
+Text=Join my discord server!
 MeterStyle=Set.String:S | SupportText:S
 
 ; ---------------------------------------------------------------------------- ;

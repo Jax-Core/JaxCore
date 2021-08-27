@@ -22,15 +22,15 @@ function Check {
 }
 
 function Desktop {
-    Copy-Item -Path "../../Main/Shortcut/#CoreHome.lnk" -Destination "$DesktopPath"
+    Copy-Item -Path "../../Accessories/Shortcut/#CoreHome.lnk" -Destination "$DesktopPath"
 }
 
 function StartFolder {
-    Copy-Item -Path "../../Main/Shortcut/#CoreHome.lnk" -Destination "$Startpath\Microsoft\Windows\Start Menu\Programs"
+    Copy-Item -Path "../../Accessories/Shortcut/#CoreHome.lnk" -Destination "$Startpath\Microsoft\Windows\Start Menu\Programs"
 }
 
 function RemoveDeskop {
-    Remove-Item "$DesktopPath\#CoreHome.lnk"
+    Remove-Item "$DesktopPath\#CoreHome.lnk" -Recurse
 }
 
 function RemoveStartFolder {

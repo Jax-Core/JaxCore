@@ -1,6 +1,6 @@
 [Variables]
-Skin.Name=Keylaunch
+Skin.Name=ModularClocks
 ; Skin.Shorthand=
 
-Skin.Set_Page=Info
+Skin.Set_Page=Appearance
 Skin.Ctx_Ctx=Refresh

@@ -1,5 +1,5 @@
 [Variables]
-UserNameCheckVariable=Jax Tam
+UserNameCheckVariable=Jax Tam 
 LastVersionNumber=00000
 ; ----------------------------- Scaling variables ---------------------------- ;
 ; Set.S=0.9
@@ -24,4 +24,4 @@ Core.Master=3
 
 [Set.S]
 Measure=Calc
-Formula=0.9
+Formula=0.87
