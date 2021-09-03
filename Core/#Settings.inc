@@ -1,7 +1,7 @@
 [Rainmeter]
 DynamicWindowSize=1
 AccurateText=1
-OnRefreshAction=[!FadeDuration 250][!KeepOnScreen 0][!Delay 100][!EnableMeasureGroup NUOL][!DisableMouseActionGroup * Unreleased]
+OnRefreshAction=["#@#Addons\RainFocus.exe" "#CURRENTCONFIG#"][!FadeDuration 250][!KeepOnScreen 0][!Delay 100][!EnableMeasureGroup NUOL][!DisableMouseActionGroup * Unreleased]
 
 [Variables]
 @includeCoreVars=#@#Vars.inc
@@ -172,7 +172,7 @@ X=(#Set.W#-#Set.L#-#Set.P#*2-150*[Set.S])
 ; Y=([Option[&Func:LocalVar('#CURRENTSECTION#', 'Class')]:Y]-#Set.P#+(-30/2+8)*[Set.S])
 DynamicVariables=1
 Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 2 | Fill Color 0,0,0,1 | Extend Fill | Scale [Set.S],[Set.S],0,0
-Shape2=Ellipse (135*[Set.S]),(15*[Set.S]),(10*[Set.S]) | StrokeWidth 0 | Fill Color [##CURRENTSECTION#]
+Shape2=Ellipse (135*[Set.S]),(15*[Set.S]),(10*[Set.S]) | StrokeWidth 0 | Fill Color [##CURRENTSECTION#Color]
 Fill=Stroke Color #Set.Text_Color#,10
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,15"][!UpdateMeter #CURRENTSECTION#][!Redraw]

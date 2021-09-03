@@ -1,9 +1,0 @@
-[Variables]
-PerW=50
-PerH=50
-PerX=60
-PerY=0
-Padding=150
-Round=5
-Row=1
-Column=-1

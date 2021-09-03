@@ -14,9 +14,9 @@ IfMatch2=^Bottom$
 Ifmatchaction2=[!SetOption Bottom MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
 IfMatch3=^Slide$
 Ifmatchaction3=[!SetOption Slide MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
-IfMatch4=^Bounce$
-Ifmatchaction4=[!SetOption Bounce MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
-; OnUpdateAction=[!SetOption Center MeterStyle "Select:S | Selected:S"][!SetOption Bottom MeterStyle "Select:S | Selected:S"][!SetOption Slide MeterStyle "Select:S | Selected:S"][!SetOption Bounce MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
+IfMatch4=^Spin$
+Ifmatchaction4=[!SetOption Spin MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
+; OnUpdateAction=[!SetOption Center MeterStyle "Select:S | Selected:S"][!SetOption Bottom MeterStyle "Select:S | Selected:S"][!SetOption Slide MeterStyle "Select:S | Selected:S"][!SetOption Spin MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
 
 [Select:S]
 X=r
@@ -53,7 +53,7 @@ MEterStyle=Select:S
 Meter=Shape
 MEterStyle=Select:S
 
-[Bounce]
+[Spin]
 Meter=Shape
 MEterStyle=Select:S
 
@@ -87,8 +87,8 @@ DynamicVariables=1
 [KeylaunchLayout4]
 Meter=Image
 ImageName=#@#Images\#CURRENTSECTIOn#.png
-Container=Bounce
-W=([Bounce:W])
-H=([Bounce:H])
+Container=Spin
+W=([Spin:W])
+H=([Spin:H])
 PreserveAspectRatio=2
 DynamicVariables=1

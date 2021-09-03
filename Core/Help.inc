@@ -16,7 +16,7 @@ Container=ContentContainer
 
 [Obj.6]
 Meter=Shape
-X=(-200/2)r
+X=(-200/2*[Set.S])r
 Y=R
 DynamicVariables=1
 Shape=Rectangle 0,0,200,50,(#Set.R#) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend THis
@@ -29,7 +29,7 @@ Container=ContentContainer
 Meter=String
 X=(200/2*[Set.S])r
 y=(25*[Set.S])r
-FontSize=(10*[Set.S])
+FontSize=(11*[Set.S])
 FontFace=Poppins 
 StringAlign=CenterCenter
 Text="Join the discord server!"

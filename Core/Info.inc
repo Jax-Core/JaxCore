@@ -54,12 +54,36 @@ FontSize=(12*[Set.S])
 FontWeight=400
 Hidden=1
 DynamicVariables=1
-Leftmouseupaction=[!WriteKeyValue Data DownloadLink "https://github.com/EnhancedJax/#Skin.Name#/releases/download/v[mVer]/#Skin.Name#_v[mVer].rmskin" "#@#Actions\InstallData.ini"][!WriteKeyValue Data SaveLocation "#@#Actions" "#@#Actions\InstallData.ini"]["#@#Actions\AHKv1.exe" "#@#Actions\Installer.ahk"]
+Leftmouseupaction=[!WriteKeyValue Data DownloadLink "https://github.com/EnhancedJax/#Skin.Name#/releases/download/v[mVer]/#Skin.Name#_v[mVer].rmskin" "#@#Actions\InstallData.ini"][!WriteKeyValue Data SaveLocation "#@#Actions" "#@#Actions\InstallData.ini"]["https://www.deviantart.com/jaxoriginals/art/-v1-0-[##SKIN.Name#.L]"]["#@#Actions\AHKv1.exe" "#@#Actions\Installer.ahk"]
 MeterStyle=Set.String:S
 Container=ContentContainer
 
 ;===========================================================================================================================
 
+[GitHub]
+Meter=Image
+Y=(5*[Set.S])R
+X=([ContentContainer:W]/2-(48*[Set.S])-5)
+W=(48*[Set.S])
+H=(48*[Set.S])
+Greyscale=1
+ImageTint=#Set.SubText_Color#
+DynamicVariables=1
+Container=ContentContainer
+ImageName=#@#Icons\#CURRENTSECTION#.png
+Leftmouseupaction=["https://github.com/EnhancedJax/#Skin.Name#"]
+[DA]
+Meter=Image
+Y=r
+X=(10)R
+W=(48*[Set.S])
+H=(48*[Set.S])
+Greyscale=1
+ImageTint=#Set.SubText_Color#
+DynamicVariables=1
+Container=ContentContainer
+ImageName=#@#Icons\#CURRENTSECTION#.png
+Leftmouseupaction=["https://www.deviantart.com/jaxoriginals/art/-v1-0-[##SKIN.Name#.L]"]
 
 ;===========================================================================================================================
 
