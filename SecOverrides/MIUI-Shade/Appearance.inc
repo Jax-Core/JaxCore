@@ -84,7 +84,7 @@ SecVar=ColorMode
 0Act=[!CommandMeasure darkLight.Func "SwitchColor(0)"]
 1Act=[!CommandMeasure darkLight.Func "SwitchColor(1)"]
 MeterStyle=Set.Pick:S
-Y=([Option01:Y]-#Set.P#+(-35/2+8)*[Set.S])
+Y=([Option01:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [ColorMode:0]
 Meter=String
 Text=Dark
@@ -98,20 +98,22 @@ MeterStyle=Set.String:S | Set.PickOption_1:S
 
 [BlurBool:]
 Meter=Shape
-SecVar=BlurBool
+Shape2=Rectangle ([&Func:returnBool('BlurType', 'Acrylic')] = 0 ? 0 : (150*[Set.S])),0,(150*[Set.S]),(30*[Set.S]),(7*[Set.S]) | Fill Color 255,255,255 | StrokeWidth 0 |
 0Act=[!WriteKeyValue Variables BlurType "Blur" "#Sec.SaveLocation#"]
 1Act=[!WriteKeyValue Variables BlurType "Acrylic" "#Sec.SaveLocation#"]
 MeterStyle=Set.Pick:S
-Y=([Option02:Y]-#Set.P#+(-35/2+8)*[Set.S])
+Y=([Option02:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [BlurBool:0]
 Meter=String
 Text=Blur
-FontColor=(#BlurBool# = 0 ? 0 : 255),(#BlurBool# = 0 ? 0 : 255),(#BlurBool# = 0 ? 0 : 255)
+FontColor=([&Func:returnBool('BlurType', 'Acrylic')] = 0 ? 0 : 255),([&Func:returnBool('BlurType', 'Acrylic')] = 0 ? 0 : 255),([&Func:returnBool('BlurType', 'Acrylic')] = 0 ? 0 : 255)
+LeftMouseUpAction=[&Func:GroupVar('#CURRENTSECTION#', '0Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
 MeterStyle=Set.String:S | Set.PickOption_0:S
 [BlurBool:1]
 Meter=String
 Text=Acrylic
-FontColor=(#BlurBool# = 1 ? 0 : 255),(#BlurBool# = 1 ? 0 : 255),(#BlurBool# = 1 ? 0 : 255)
+FontColor=([&Func:returnBool('BlurType', 'Acrylic')] = 1 ? 0 : 255),([&Func:returnBool('BlurType', 'Acrylic')] = 1 ? 0 : 255),([&Func:returnBool('BlurType', 'Acrylic')] = 1 ? 0 : 255)
+LeftMouseUpAction=[&Func:GroupVar('#CURRENTSECTION#', '1Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
 MeterStyle=Set.String:S | Set.PickOption_1:S
 ;================================================================================================================================================================================
 

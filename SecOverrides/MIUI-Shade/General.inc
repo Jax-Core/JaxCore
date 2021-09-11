@@ -133,11 +133,11 @@ Meter=String
 Text=#WeatherUnits#
 MeterStyle=Set.String:S | Set.Value:S
 
-[ActiveChecker]
+[ActiveChecker2]
 Measure=Plugin
 Plugin=ConfigActive
 ConfigName=#Skin.Name#\Activator
-IfCondition=ActiveChecker = 1
+IfCondition=ActiveChecker2 = 1
 IfTrueAction=[!SetVariable Drag 1][!UpdateMeter Drag][!Redraw]
 
 [Drag]
@@ -165,7 +165,7 @@ SecVar=Detect.Location
 0Act=[!CommandMeasure darkLight.Func "SwitchColor(0)"]
 1Act=[!CommandMeasure darkLight.Func "SwitchColor(1)"]
 MeterStyle=Set.Pick:S
-Y=([Option32:Y]-#Set.P#+(-35/2+8)*[Set.S])
+Y=([Option32:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Detect.Location:0]
 Meter=String
 Text=Left

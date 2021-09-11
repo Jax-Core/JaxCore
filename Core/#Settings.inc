@@ -1,7 +1,7 @@
 [Rainmeter]
 DynamicWindowSize=1
 AccurateText=1
-OnRefreshAction=["#@#Addons\RainFocus.exe" "#CURRENTCONFIG#"][!FadeDuration 250][!KeepOnScreen 0][!Delay 100][!EnableMeasureGroup NUOL][!DisableMouseActionGroup * Unreleased]
+OnRefreshAction=["#@#Addons\RainFocus.exe" "#CURRENTCONFIG#"][!FadeDuration 250][!KeepOnScreen 0][!EnableMeasureGroup NUOL][!DisableMouseActionGroup * Unreleased]
 
 [Variables]
 @includeCoreVars=#@#Vars.inc
@@ -18,12 +18,6 @@ Sec.Container=
 @IncludeWindow=#@#Includes/Window.ini
 @IncludeMouse=#@#Includes/ScriptMouseHandler.ini
 
-; [FrostedGlass]
-; Measure=Plugin
-; Plugin=FrostedGlass
-; Type=Blur
-; Border=All
-
 [Func]
 Measure=Script
 ScriptFile=#@#Lua\Func.lua
@@ -36,10 +30,6 @@ Ifmatchaction=[!Delay 500][!Refresh "#Skin.Name#\Main"]
 IfMatchMode=1
 Group=NUOL
 Disabled=1
-
-; [Set.Get_Shorthand:M]
-; Measure=Script
-; ScriptFile=#@#Lua\GetShorthand.lua
 
 [Set.Toolbar:M]
 Measure=Plugin
@@ -65,8 +55,7 @@ OnDismissAction=[!SetOption Input:M SolidColor "#Set.Pri_Color#"]
 [SaveAndLoad:M]
 Measure=Calc
 DynamicVariables=1
-OnUpdateAction=[!WriteKeyvalue Variables #Editing# "[##Editing#]" "#Sec.SaveLocation#"][!UpdateMeter *][!Redraw][!UpdateMeasure Auto_Refresh:M]
-; OnUpdateAction=[!Log "Yes"]
+OnUpdateAction=[!WriteKeyvalue Variables #Editing# "[##Editing#]" "#Sec.SaveLocation#"][!SetVariable #Editing# "[##Editing#]"][!UpdateMeter *][!Redraw][!UpdateMeasure Auto_Refresh:M]
 Disabled=1
 Group=NUOL
 
@@ -101,7 +90,8 @@ Container=ContentContainer
 
 [Set.Div:S]
 X=r
-y=(15)R
+y=(15*[Set.S])R
+DynamicVariables=1
 Container=ContentContainer
 Shape=Line 0,0,(#Set.W#-#Set.L#-#Set.P#*3),0 | StrokeWidth 1 | Fill Color #Set.Pri_Color#,0 | Stroke Color #Set.Text_Color#,25
 
@@ -218,15 +208,16 @@ Container=ContentContainer
 
 [Set.Pick:S]
 X=(#Set.W#-#Set.L#-#Set.P#*2-302*[Set.S])
-Shape=Rectangle 0,0,300,35,7 | StrokeWidth 2 | Extend Fill | Scale [Set.S],[Set.S],0,0 | Stroke Color #Set.Text_Color#
+Shape=Rectangle 0,0,300,30,7 | StrokeWidth 2 | Extend Fill | Scale [Set.S],[Set.S],0,0 | Stroke Color #Set.Text_Color#
 Fill=Fill Color #Set.Text_Color#,25
-Shape2=Rectangle ([#[&Func:GroupVar('#CURRENTSECTION#')]] = 0 ? 0 : (150*[Set.S])),0,(150*[Set.S]),(35*[Set.S]),(7*[Set.S]) | Fill Color 255,255,255 | StrokeWidth 0 |
+Shape2=Rectangle ([#[&Func:GroupVar('#CURRENTSECTION#')]] = 0 ? 0 : (150*[Set.S])),0,(150*[Set.S]),(30*[Set.S]),(7*[Set.S]) | Fill Color 255,255,255 | StrokeWidth 0 |
 DynamicVariables=1
 Container=ContentContainer
 [Set.PickOption_0:S]
 X=(300/4*[Set.S])r
-Y=(35/2*[Set.S])r
-Padding=(300/6*[Set.S]),(35/4*[Set.S]),(300/6*[Set.S]),(35/4*[Set.S])
+Y=(30/2*[Set.S])r
+FontSize=(10*[Set.S])
+Padding=(300/6*[Set.S]),(30/4*[Set.S]),(300/6*[Set.S]),(30/4*[Set.S])
 DynamicVariables=1
 LeftMouseUpAction=[!WriteKeyValue Variables [&Func:GroupVar('#CURRENTSECTION#')] 0 "#Sec.SaveLocation#"][&Func:GroupVar('#CURRENTSECTION#', '0Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
 StringAlign=CenterCenter
@@ -234,9 +225,56 @@ Container=ContentContainer
 [Set.PickOption_1:S]
 X=(300/2*[Set.S])r
 Y=r
-Padding=(300/6*[Set.S]),(35/4*[Set.S]),(300/6*[Set.S]),(35/4*[Set.S])
+FontSize=(10*[Set.S])
+Padding=(300/6*[Set.S]),(30/4*[Set.S]),(300/6*[Set.S]),(30/4*[Set.S])
 DynamicVariables=1
 LeftMouseUpAction=[!WriteKeyValue Variables [&Func:GroupVar('#CURRENTSECTION#')] 1 "#Sec.SaveLocation#"][&Func:GroupVar('#CURRENTSECTION#', '1Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
+StringAlign=CenterCenter
+Container=ContentContainer
+
+
+
+
+
+
+
+
+; --------------------------------- 3 picker --------------------------------- ;
+
+
+
+
+[Set.Pick3:S]
+X=(#Set.W#-#Set.L#-#Set.P#*2-302*[Set.S])
+Shape=Rectangle 0,0,300,30,7 | StrokeWidth 2 | Extend Fill | Scale [Set.S],[Set.S],0,0 | Stroke Color #Set.Text_Color#
+Fill=Fill Color #Set.Text_Color#,25
+DynamicVariables=1
+Container=ContentContainer
+[Set.PickOption3_0:S]
+X=(300/6*[Set.S])r
+Y=(30/2*[Set.S])r
+FontSize=(10*[Set.S])
+Padding=(300/6*[Set.S]),(30/4*[Set.S]),(300/6*[Set.S]),(30/4*[Set.S])
+DynamicVariables=1
+LeftMouseUpAction=[&Func:GroupVar('#CURRENTSECTION#', '0Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
+StringAlign=CenterCenter
+Container=ContentContainer
+[Set.PickOption3_1:S]
+X=(300/3*[Set.S])r
+Y=r
+FontSize=(10*[Set.S])
+Padding=(300/6*[Set.S]),(30/4*[Set.S]),(300/6*[Set.S]),(30/4*[Set.S])
+DynamicVariables=1
+LeftMouseUpAction=[&Func:GroupVar('#CURRENTSECTION#', '1Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
+StringAlign=CenterCenter
+Container=ContentContainer
+[Set.PickOption3_2:S]
+X=(300/3*[Set.S])r
+Y=r
+FontSize=(10*[Set.S])
+Padding=(300/6*[Set.S]),(30/4*[Set.S]),(300/6*[Set.S]),(30/4*[Set.S])
+DynamicVariables=1
+LeftMouseUpAction=[&Func:GroupVar('#CURRENTSECTION#', '2Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
 StringAlign=CenterCenter
 Container=ContentContainer
 
@@ -248,28 +286,28 @@ Container=ContentContainer
 
 
 
-[Set.DropDown:S]
-X=(#Set.W#-#Set.L#-#Set.P#*2-150*[Set.S])
-NumOfOption=2
-Group=DropDown
-Container=ContentContainer
-DynamicVariables=1
-Fill=Stroke Color #Set.Text_Color#,50
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,50"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-[Set.DD0]
-Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 2 | Fill Color 0,0,0,1 | Extend Fill | Scale [Set.S],[Set.S],0,0
-LeftMouseupaction=[!SetOption #CURRENTSECTION# MeterStyle "Set.DropDown:S | Set.DD1"][!ShowMeterGroup "DD[&Func:LocalVar('#CURRENTSECTION#', 'Index')]"][!HideMeterGroup "DDNo[&Func:LocalVar('#CURRENTSECTION#', 'Index')]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-[Set.DD1]
-Shape=Rectangle 0,0,150,(30*[&Func:LocalVar('#CURRENTSECTION#', 'NumOfOption')]),3,3 | StrokeWidth 2 | Fill Color 0,0,0,1 | Extend Fill | Scale [Set.S],[Set.S],0,0
-LeftMouseupaction=[!SetOption #CURRENTSECTION# MeterStyle "Set.DropDown:S | Set.DD0"][!HideMeterGroup "DD[&Func:LocalVar('#CURRENTSECTION#', 'Index')]"][!ShowMEterGroup DD0][!UpdateMeter #CURRENTSECTION#][!Redraw]
-[Set.DropText:S]
-X=r
-Y=(15*[Set.S])r
-StringAlign=LeftCenter
-Hidden=1
-FontSize=(10*[Set.S])
-DynamicVariables=1
+; [Set.DropDown:S]
+; X=(#Set.W#-#Set.L#-#Set.P#*2-150*[Set.S])
+; NumOfOption=2
+; Group=DropDown
+; Container=ContentContainer
+; DynamicVariables=1
+; Fill=Stroke Color #Set.Text_Color#,50
+; MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+; MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,50"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+; [Set.DD0]
+; Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 2 | Fill Color 0,0,0,1 | Extend Fill | Scale [Set.S],[Set.S],0,0
+; LeftMouseupaction=[!SetOption #CURRENTSECTION# MeterStyle "Set.DropDown:S | Set.DD1"][!ShowMeterGroup "DD[&Func:LocalVar('#CURRENTSECTION#', 'Index')]"][!HideMeterGroup "DDNo[&Func:LocalVar('#CURRENTSECTION#', 'Index')]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+; [Set.DD1]
+; Shape=Rectangle 0,0,150,(30*[&Func:LocalVar('#CURRENTSECTION#', 'NumOfOption')]),3,3 | StrokeWidth 2 | Fill Color 0,0,0,1 | Extend Fill | Scale [Set.S],[Set.S],0,0
+; LeftMouseupaction=[!SetOption #CURRENTSECTION# MeterStyle "Set.DropDown:S | Set.DD0"][!HideMeterGroup "DD[&Func:LocalVar('#CURRENTSECTION#', 'Index')]"][!ShowMEterGroup DD0][!UpdateMeter #CURRENTSECTION#][!Redraw]
+; [Set.DropText:S]
+; X=r
+; Y=(15*[Set.S])r
+; StringAlign=LeftCenter
+; Hidden=1
+; FontSize=(10*[Set.S])
+; DynamicVariables=1
 
 
 
@@ -294,7 +332,7 @@ X=(#Set.P#-5*[Set.S])
 Y=((24/2*[Set.S])+#Set.P#/1.5)r
 Shape=Rectangle 0,0,(#Set.L#-#Set.P#*2),(40*[Set.S]),(#Set.R#/2) | StrokeWidth 0 | Extend This
 Shape2=Rectangle (5*[Set.S]),(5*[Set.S]),(30*[Set.S]),(30*[Set.S]),(#Set.R#) | StrokeWidth 0 | Extend Fill 
-Leftmouseupaction=[!WriteKeyvalue Variables "Skin.Set_Page" "#CURRENTSECTION#" "#@#SecVar.inc"][!Refresh]
+Leftmouseupaction=[!WriteKeyvalue Variables "Skin.Set_Page" "#CURRENTSECTION#" "#@#SecVar.inc"][!UpdateMeasure CheckPreview][!Refresh]
 This=Fill Color 0,0,0,1
 MouseOverAction=[!SetOption #CURRENTSECTION# This "Fill Color #Set.Sec_Color#"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# This "Fill Color 0,0,0,1"][!UpdateMeter #CURRENTSECTION#][!Redraw]
@@ -383,4 +421,13 @@ Shape=Ellipse (#Set.W#-15*[Set.S]),(15*[Set.S]),(5*[Set.S]),(5*[Set.S]) | Stroke
 FillE=Fill Color #Set.Text_Color#,50
 MouseOverAction=[!SetOption Esc FillE "Fill Color #Set.Text_Color#"][!UpdateMeter Esc][!Redraw]
 MouseLeaveAction=[!SetOption Esc FillE "Fill Color #Set.Text_Color#,50"][!UpdateMeter Esc][!Redraw]
-LeftMouseUpAction=[!ActivateConfig "#CURRENTCONFIG#" "Home.ini"]
+LeftMouseUpAction=[!UpdateMeasure CheckPreview][!ActivateConfig "#CURRENTCONFIG#" "Home.ini"]
+
+[CheckPreview]
+Measure=String
+String=#SKIn.Name# #Skin.Set_Page#
+Ifmatch=^ModularClocks Appearance$
+Ifmatchaction=[!CommandMeasure Script:M "Restore()"]
+ifmatchmode=1
+disabled=1
+group=nuol

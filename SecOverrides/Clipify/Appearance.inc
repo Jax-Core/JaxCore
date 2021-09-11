@@ -20,7 +20,7 @@ SecVar=ColorMode
 0Act=[!CommandMeasure darkLight.Func "SwitchColor(0)"]
 1Act=[!CommandMeasure darkLight.Func "SwitchColor(1)"]
 MeterStyle=Set.Pick:S
-Y=([Option01:Y]-#Set.P#+(-35/2+8)*[Set.S])
+Y=([Option01:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [ColorMode:0]
 Meter=String
 Text=Dark

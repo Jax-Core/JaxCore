@@ -91,7 +91,7 @@ Leftmouseupaction=["https://www.deviantart.com/jaxoriginals/art/-v1-0-[##SKIN.Na
 Measure=WebParser
 URL=https://raw.githubusercontent.com/EnhancedJax/#Skin.Name#/main/%40Resources/Version.inc
 RegExp==(.*)$
-FinishAction=[!Delay 1000][!EnableMeasure mC4U][!UpdateMeasure mC4U]
+FinishAction=[!EnableMeasure mC4U][!UpdateMeasure mC4U]
 
 [mVer]
 Measure=WebParser
@@ -129,7 +129,9 @@ IfMatchMode=1
 Measure=Script
 ScriptFile=#@#Lua\GenSet.lua
 
-[Set.Refresh:M]
-Measure=Script
-ScriptFile=#@#Lua\Refresh.lua
-Refreshed=0
+[Refresher]
+Measure=Calc
+Formula=0
+Ifcondition=Refresher = 0
+IfTrueAction=[!WriteKeyvalue #CURRENTSECTION# Formula 1 "#ROOTCONFIGPATH#Core\Info.inc"][!Delay 100][!Refresh]
+IfFalseAction=[!WriteKeyvalue #CURRENTSECTION# Formula 0 "#ROOTCONFIGPATH#Core\Info.inc"]

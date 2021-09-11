@@ -9,13 +9,13 @@ Text=Animation layout
 Measure=String
 String=#AniStyle#
 IfMatch=^Center$
-Ifmatchaction=[!SetOption Center MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
+Ifmatchaction=[!SetOption Center MeterStyle "Select:S | Selected:S"][!UpdateMEasure Center][!Redraw]
 IfMatch2=^Bottom$
-Ifmatchaction2=[!SetOption Bottom MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
+Ifmatchaction2=[!SetOption Bottom MeterStyle "Select:S | Selected:S"][!UpdateMEasure Bottom][!Redraw]
 IfMatch3=^Slide$
-Ifmatchaction3=[!SetOption Slide MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
+Ifmatchaction3=[!SetOption Slide MeterStyle "Select:S | Selected:S"][!UpdateMEasure Slide][!Redraw]
 IfMatch4=^Spin$
-Ifmatchaction4=[!SetOption Spin MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
+Ifmatchaction4=[!SetOption Spin MeterStyle "Select:S | Selected:S"][!UpdateMEasure Spin][!Redraw]
 ; OnUpdateAction=[!SetOption Center MeterStyle "Select:S | Selected:S"][!SetOption Bottom MeterStyle "Select:S | Selected:S"][!SetOption Slide MeterStyle "Select:S | Selected:S"][!SetOption Spin MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
 
 [Select:S]

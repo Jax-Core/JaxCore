@@ -8,5 +8,5 @@ Skin.Appearance=Plainext | ModularClocks | MIUIShade | ModularPlayers | WatchOS 
 Skin.Layout=Keystrokes | Keylaunch
 ; Skin.General=Combilaunch | Plainext | ModularClocks | MIUIShade | ModularPlayers
 Skin.Media=MIUIShade | ModularPlayers
-Skin.Render=ModularClocks
+Skin.Render=
 Skin.FAQ=MIUIShade | ModularClocks | ModularPlayers

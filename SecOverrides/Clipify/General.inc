@@ -70,7 +70,7 @@ SecVar=KeyHook
 0Act=
 1Act=
 MeterStyle=Set.Pick:S
-Y=([Option01:Y]-#Set.P#+(-35/2+8)*[Set.S])
+Y=([Option01:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [KeyHook:0]
 Meter=String
 Text=Hotkey

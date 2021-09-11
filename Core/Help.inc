@@ -1,6 +1,23 @@
 [Variables]
 BarHandler=11
 
+; [ImageContainer]
+; Meter=Shape
+; X=(#Set.L#+#Set.P#)
+; Y=#Set.P#
+; Shape=Rectangle (0),(0),(#Set.W#-#Set.L#-#Set.P#*2),(#Set.H#-#Set.P#*2),(#Set.R#/2),(#Set.R#/2) | StrokeWidth 0 | Fill LinearGradient1 This
+; This=180 | 0,0,0,0 ; 0.0 | 0,0,0,25; 0.45 | 0,0,0,25 ; 0.55 | 0,0,0,0 ; 1.0
+; DynamicVariables=1
+; [Image]
+; Meter=Image
+; X=((#Set.W#-#Set.L#-#Set.P#*2)/2-(256*[Set.S])/2)
+; Y=((#Set.H#-#Set.P#*2)/2-(256/2*[Set.S]))
+; W=(256*[Set.S])
+; H=(256*[Set.S])
+; Container=ImageContainer
+; DynamicVariables=1
+; ImageName=#@#Icons\Discord.png
+; PreserveAspectRatio=1
 
 [Header]
 Meter=String
