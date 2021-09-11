@@ -1,4 +1,4 @@
-
+[Rainmeter]
 Rightmouseupaction=[]
 OnRefreshAction=[!ZPos 1][!Move (#SCREENAREAWIDTH#/2-#Sec.W#/2) (#SCREENAREAHEIGHT#/2-#Sec.H#/2)][!SetOption Dep3 MeterStyle "Dep.Shape:S | Dep.ShapeYes:S"][!UpdateMEter *][!Redraw]
 
@@ -9,6 +9,12 @@ OnRefreshAction=[!ZPos 1][!Move (#SCREENAREAWIDTH#/2-#Sec.W#/2) (#SCREENAREAHEIG
 [ExportVariables]
 Measure=Calc
 OnUpdateAction=[!WriteKeyValue Variables RMPATH "#PROGRAMPATH#Rainmeter.exe" "#@#Actions\Hotkeys.ini"][!Delay 100][!EnableMeasureGroup NUOL]
+
+[CheckModular]
+Measure=String
+String=#ROOTCONFIG#
+IFmatch=ModularClocks|ModularPlayers
+IfNotMatchAction=[!HideMeter Dep2][!HideMeter Deptext2][!Redraw]
 
 [Variables]
 @includeVersion=#@#Version.inc
@@ -99,7 +105,16 @@ H=#Sec.H#
 W=#Sec.L#
 PreserveAspectRatio=2
 Leftmouseupaction=[!Refresh]
-ImageName=ModularClocks.png
+ImageName=#ROOTCONFIG#.png
+
+[Esc]
+Meter=Shape
+DynamicVariables=1
+Shape=Ellipse (#Sec.W#-15),(15),(5),(5) | StrokeWidth 10 | StrokeColor 0,0,0,1 | Extend FillE
+FillE=Fill Color #Text_Color#,50
+MouseOverAction=[!SetOption Esc FillE "Fill Color #Text_Color#"][!UpdateMeter Esc][!Redraw]
+MouseLeaveAction=[!SetOption Esc FillE "Fill Color #Text_Color#,50"][!UpdateMeter Esc][!Redraw]
+LeftMouseUpAction=[!DeactivateConfig]
 
 ; --------------------------------- Left --------------------------------- ;
 
@@ -107,7 +122,7 @@ ImageName=ModularClocks.png
 Meter=String
 X=(#Sec.P#)
 Y=#Sec.P#
-Text=ModularClocks by Jax | #Version#
+Text=#ROOTCONFIG# by Jax | #Version#
 StringAlign=LEftTOp
 FontFace=Roboto Bold
 FontSize=25
@@ -138,21 +153,21 @@ Meter=String
 Text=JaxCore3 // Checking...
 MeterStyle=Dep.Text:S
 
+[Dep3]
+Meter=Shape
+MEterStyle=Dep.Shape:S
+[DepText3]
+Meter=String
+Text=Your appreciation
+MeterStyle=Dep.Text:S
+
 [Dep2]
 Meter=Shape
 MEterStyle=Dep.Shape:S
 Leftmouseupaction=["https://github.com/khanhas/MagickMeter#how-to-install"]
 [DepText2]
 Meter=String
-Text=ImageMagick // optional - required for parts of the skin, follow this guide for installation
-MeterStyle=Dep.Text:S
-
-[Dep3]
-Meter=Shape
-MEterStyle=Dep.Shape:S | Dep.ShapeYes:S
-[DepText3]
-Meter=String
-Text=Your appreciation
+Text=ImageMagick // optional - required for Modular skins
 MeterStyle=Dep.Text:S
 
 ; ------------------------------------ Bot ----------------------------------- ;
@@ -217,4 +232,4 @@ OnUpdateAction=[!SetOption Dep1 MeterStyle "Dep.Shape:S | Dep.ShapeYes:S"][!SetO
 Measure=String
 Group=NUOL
 Disabled=1
-OnUpdateAction=[!SetOption Dep1 MeterStyle "Dep.Shape:S | Dep.ShapeNo:S"][!SetOption DepText1 Text "JaxCore3 // click here to install"][!SetOption Dep1 Leftmouseupaction """["#@#Actions\AHKv1.exe" "#@#Actions\Installer.ahk"]"""][!UpdateMEter *][!Redraw]
+OnUpdateAction=[!SetOption Dep1 MeterStyle "Dep.Shape:S | Dep.ShapeNo:S"][!SetOption DepText1 Text "JaxCore3 // click here to install"][!SetOption Dep1 Leftmouseupaction """["#@#Actions\AHKv1.exe" "#@#Actions\Installer.ahk"][!SetOption DepText1 Text "JaxCore3 // download here if it doesn't automatically install"][!SetOption Dep1 Leftmouseupaction """["https://github.com/EnhancedJax/-JaxCore/releases/latest"][!UpdateMEter *][!Redraw]"""][!UpdateMEter *][!Redraw]"""][!UpdateMEter *][!Redraw]
