@@ -1,7 +1,3 @@
-[DisableAutoRefresh:M]
-Measure=Calc
-OnUpdateAction=[!Delay 200][!DisableMeasure Auto_Refresh:M]
-
 [HotkeysTitle]
 Meter=String
 Text=General
@@ -60,6 +56,13 @@ MeterStyle=Set.String:S | Set.OptionName:S
 [Set.Div:S1913sadsas138]
 Meter=Shape
 MeterStyle=Set.Div:S
+[Option26]
+Meter=String
+Text=Animation display monitor index
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:dsas138]
+Meter=Shape
+MeterStyle=Set.Div:S
 [Option22]
 Meter=String
 Text=Animation frame interval (0 for true 60fps)
@@ -69,14 +72,21 @@ Meter=Shape
 MeterStyle=Set.Div:S
 [Option23]
 Meter=String
-Text=Animation duration modifier
+Text=Text size modifier
 MeterStyle=Set.String:S | Set.OptionName:S
-[Set.Div:S191zqweq3s138]
+[Set.Div:S191qweq]
 Meter=Shape
 MeterStyle=Set.Div:S
 [Option24]
 Meter=String
-Text=Text size modifier
+Text=Animation start duration
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:s138]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option25]
+Meter=String
+Text=Animation end duration
 MeterStyle=Set.String:S | Set.OptionName:S
 
 ; ---------------------------------------------------------------------------- ;
@@ -130,6 +140,14 @@ MeterStyle=Set.String:S | Set.Pacity:S
 Meter=Shape
 MeterStyle=Set.Bool:S
 Y=([Option21:Y]-#Set.P#+(-20/2+8)*[Set.S])
+[LaunchAt]
+Meter=Shape
+MeterStyle=Set.Textbox:S
+Y=([Option26:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Value26]
+Meter=String
+Text=#LaunchAt#
+MeterStyle=Set.String:S | Set.Value:S
 [UpdateRate]
 Meter=Shape
 MeterStyle=Set.Textbox:S
@@ -138,19 +156,27 @@ Y=([Option22:Y]-#Set.P#+(-30/2+8)*[Set.S])
 Meter=String
 Text=#UpdateRate#
 MeterStyle=Set.String:S | Set.Value:S
-[AniSpeedModifier]
+[FontSizeModifier]
 Meter=Shape
 MeterStyle=Set.Textbox:S
 Y=([Option23:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value23]
 Meter=String
-Text=#AniSpeedModifier#
+Text=#FontSizeModifier#
 MeterStyle=Set.String:S | Set.Value:S
-[FontSizeModifier]
+[LongDelay]
 Meter=Shape
 MeterStyle=Set.Textbox:S
 Y=([Option24:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value24]
 Meter=String
-Text=#FontSizeModifier#
+Text=#LongDelay#
+MeterStyle=Set.String:S | Set.Value:S
+[ShortDelay]
+Meter=Shape
+MeterStyle=Set.Textbox:S
+Y=([Option25:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Value25]
+Meter=String
+Text=#ShortDelay#
 MeterStyle=Set.String:S | Set.Value:S
