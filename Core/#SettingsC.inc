@@ -55,20 +55,3 @@ Meter=String
 Text=Appearance
 DynamicVariables-1
 MeterStyle=Set.String:S | PageText:S
-[Layout]
-Meter=Shape
-Y=(10*[Set.S])R
-MeterStyle=PageBox:S
-Fill=Fill Color #Set.Accent_Color#,(#BarHandler# = 4 ? 255: 0)
-Handle=4
-
-[LayoutIcon]
-Meter=Image
-MeterStyle=PageIcon:S
-Greyscale=(#BarHandler# = 4 ? 1 : 0)
-
-[4]
-Meter=String
-Text=Layout
-DynamicVariables-1
-MeterStyle=Set.String:S | PageText:S

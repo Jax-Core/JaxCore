@@ -2,12 +2,17 @@ function Initialize()
     root = SKIN:GetVariable('ROOTCONFIGPATH')
     saveLocation = root..'SecOverrides\\ModularClocks\\Appearance.inc'
     SavedStatus = SKIN:GetVariable('Sec.Active')
+    _G["CurrentPage"] = tonumber(SKIN:GetVariable('Sec.Page'))
     -- ---------------------------- Saving mechanism ---------------------------- --
-    if SavedStatus == 'NotSaved' then 
-        print('Status not saved, saving...')
-        SKIN:Bang('!CommandMeasure', 'PSRM', 'FetchVars')
-    else 
-        print('This is a refresh, pend loading variables')
+    if _G["CurrentPage"] == 1 then
+        if SavedStatus == 'NotSaved' then 
+            print('Status not saved, saving...')
+            SKIN:Bang('!EnableMeasure', 'PSRMDelayer')
+        else 
+            print('This is a refresh, pend loading variables')
+        end
+    else
+        print('Currently not on the customization page.')
     end
 end
 
@@ -47,35 +52,38 @@ function Move()
 end
 
 function Restore()
-    if _G["Active"] == nil then
-        _G["Active"] = SKIN:GetVariable('Sec.Active')
-        _G["X"] = SKIN:GetVariable('Sec.X')
-        _G["Y"] = SKIN:GetVariable('Sec.Y')
-        _G["Thru"] = SKIN:GetVariable('Sec.Thru')
-        _G["Drag"] = SKIN:GetVariable('Sec.Drag')
-        _G["Snap"] = SKIN:GetVariable('Sec.Snap')
-        _G["Keep"] = SKIN:GetVariable('Sec.Keep')
-        _G["ZPos"] = SKIN:GetVariable('Sec.ZPos')
-    end
-    
     SKIN:Bang('!Draggable', '1')
+    
+    if _G["CurrentPage"] == 1 then
+        print("Restoring...")
+        if _G["Active"] == nil then
+            _G["Active"] = SKIN:GetVariable('Sec.Active')
+            _G["X"] = SKIN:GetVariable('Sec.X')
+            _G["Y"] = SKIN:GetVariable('Sec.Y')
+            _G["Thru"] = SKIN:GetVariable('Sec.Thru')
+            _G["Drag"] = SKIN:GetVariable('Sec.Drag')
+            _G["Snap"] = SKIN:GetVariable('Sec.Snap')
+            _G["Keep"] = SKIN:GetVariable('Sec.Keep')
+            _G["ZPos"] = SKIN:GetVariable('Sec.ZPos')
+        end
 
-    SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.Active', 'NotSaved', saveLocation)
-    SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.X', ' ', saveLocation)
-    SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.Y', ' ', saveLocation)
-    SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.Thru', ' ', saveLocation)
-    SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.Drag', ' ', saveLocation)
-    SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.Snap', ' ', saveLocation)
-    SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.Keep', ' ', saveLocation)
-    SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.ZPos', ' ', saveLocation)
+        SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.Active', 'NotSaved', saveLocation)
+        SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.X', ' ', saveLocation)
+        SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.Y', ' ', saveLocation)
+        SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.Thru', ' ', saveLocation)
+        SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.Drag', ' ', saveLocation)
+        SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.Snap', ' ', saveLocation)
+        SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.Keep', ' ', saveLocation)
+        SKIN:Bang('!WriteKeyValue', 'Variables', 'Sec.ZPos', ' ', saveLocation)
 
-    SKIN:Bang('!Move', _G["X"], _G["Y"], 'ModularClocks\\Main')
-    SKIN:Bang('!ClickThrough', _G["Thru"], 'ModularClocks\\Main')
-    SKIN:Bang('!Draggable', _G["Drag"], 'ModularClocks\\Main')
-    SKIN:Bang('!SnapEdges', _G["Snap"], 'ModularClocks\\Main')
-    SKIN:Bang('!KeepOnScreen', _G["Keep"], 'ModularClocks\\Main')
-    SKIN:Bang('!Zpos', _G["ZPos"], 'ModularClocks\\Main')
-    if Active == 0 then
-        SKIN:Bang('!DeactivateConfig', 'ModularClocks\\Main')
+        SKIN:Bang('!Move', _G["X"], _G["Y"], 'ModularClocks\\Main')
+        SKIN:Bang('!ClickThrough', _G["Thru"], 'ModularClocks\\Main')
+        SKIN:Bang('!Draggable', _G["Drag"], 'ModularClocks\\Main')
+        SKIN:Bang('!SnapEdges', _G["Snap"], 'ModularClocks\\Main')
+        SKIN:Bang('!KeepOnScreen', _G["Keep"], 'ModularClocks\\Main')
+        SKIN:Bang('!Zpos', _G["ZPos"], 'ModularClocks\\Main')
+        if Active == 0 then
+            SKIN:Bang('!DeactivateConfig', 'ModularClocks\\Main')
+        end
     end
 end

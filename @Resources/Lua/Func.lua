@@ -20,3 +20,17 @@ function returnBool(Variable, Match)
 		return(0)
 	end
 end
+
+function startDrop(variant, handler, skin)
+	local skin = skin or SKIN:GetVariable('Skin.Name')
+	local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Dropdown\\Main.ini'
+	local MyMeter = SKIN:GetMeter(handler)
+	local PosX = SKIN:GetX() + MyMeter:GetX()
+	local PosY = SKIN:GetY() + MyMeter:GetY()
+	local scale = SKIN:GetMeasure('Set.S'):GetValue()
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.name', skin, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
+	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Dropdown')
+	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Dropdown')
+end

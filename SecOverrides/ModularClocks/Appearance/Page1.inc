@@ -103,74 +103,31 @@ Meter=String
 Text=Personalization options
 MeterStyle=Set.String:S | Set.SpecialCat:S
 
+; ------------------------------- Fill settings ------------------------------ ;
+
 @includeFillOptions=CogsOptions\Fill#Fill#.inc
+
+; ------------------------------ Common settings ----------------------------- ;
+
+[Option001]
+Meter=String
+Text=Clock seperator
+MeterStyle=Set.String:S | Set.OptionName:S
+[Option002]
+Meter=String
+Text=Subscript seperator
+MeterStyle=Set.String:S | Set.OptionName:S
+
+; ------------------------------- Date settings ------------------------------ ;
+
 @includeDateOptions=CogsOptions\Date#Date#.inc
 @includeDatePositionOptions=CogsOptions\DatePos#Date#.inc
-
-; [Option21]
-; Meter=String
-; Text=Primary color
-; MeterStyle=Set.String:S | Set.OptionName:S
-; [Option22]
-; Meter=String
-; Text=Secondary color
-; MeterStyle=Set.String:S | Set.OptionName:S
-; [Option23]
-; Meter=String
-; Text=Tertiary color
-; MeterStyle=Set.String:S | Set.OptionName:S
-; [Option24]
-; Meter=String
-; Text=Glow sigma
-; MeterStyle=Set.String:S | Set.OptionName:S | Set.OptionName[&Func:returnBool('Fill', 'Glow')]:S
-; [Option25]
-; Meter=String
-; Text=Gradient angle
-; MeterStyle=Set.String:S | Set.OptionName:S
-; [Option26]
-; Meter=String
-; Text=FontSize
-; MeterStyle=Set.String:S | Set.OptionName:S
-; [Option27]
-; Meter=String
-; Text=FontSize3
-; MeterStyle=Set.String:S | Set.OptionName:S
-; [Option28]
-; Meter=String
-; Text=FontSize4
-; MeterStyle=Set.String:S | Set.OptionName:S
-; [Option29]
-; Meter=String
-; Text=FontWeight
-; MeterStyle=Set.String:S | Set.OptionName:S
-; [Option30]
-; Meter=String
-; Text=FontFace
-; MeterStyle=Set.String:S | Set.OptionName:S
-; [Option31]
-; Meter=String
-; Text=FontFace2
-; MeterStyle=Set.String:S | Set.OptionName:S
-; [Option32]
-; Meter=String
-; Text=Seperator
-; MeterStyle=Set.String:S | Set.OptionName:S
-; [Option33]
-; Meter=String
-; Text=Seperator2
-; MeterStyle=Set.String:S | Set.OptionName:S
-; [Option34]
-; Meter=String
-; Text=AdditionalText
-; MeterStyle=Set.String:S | Set.OptionName:S
-; [Option35]
-; Meter=String
-; Text=Font AntiAlias
-; MeterStyle=Set.String:S | Set.OptionName:S
 
 ; ---------------------------------------------------------------------------- ;
 ;                                     INput                                    ;
 ; ---------------------------------------------------------------------------- ;
+
+; ----------------------------------- Super ---------------------------------- ;
 
 [Scale]
 Meter=Shape
@@ -255,7 +212,7 @@ MeterStyle=Set.String:S | Set.PickOption3_2:S
 [Button13]
 Meter=Shape
 MeterStyle=Set.Button:S
-Act=[!UpdateMeasureGroup CurPos.XY][!ActivateConfig "#JaxCore\Accessories\Dropbuttons" "mClockFilling.ini"]
+Act=[!commandMeasure Func "startDrop('Filling', '#CURRENTSECTION#')"]
 Y=([Option13:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value13]
 Meter=String
@@ -265,6 +222,7 @@ MeterStyle=Set.String:S | Set.Value:S
 [Button14]
 Meter=Shape
 MeterStyle=Set.Button:S
+Act=[!commandMeasure Func "startDrop('Image', '#CURRENTSECTION#')"]
 Y=([Option14:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value14]
 Meter=String
@@ -337,3 +295,29 @@ Meter=String
 Text=Empty
 FontColor=(#Sec# = 2 ? 0 : 255),(#Sec# = 2 ? 0 : 255),(#Sec# = 2 ? 0 : 255)
 MeterStyle=Set.String:S | Set.PickOption3_2:S
+
+
+
+
+
+
+
+; ---------------------------------- Common ---------------------------------- ;
+
+[Seperator]
+Meter=Shape
+MeterStyle=Set.Textbox:S
+Y=([Option001:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Value001]
+Meter=String
+Text=#Seperator#
+MeterStyle=Set.String:S | Set.Value:S
+
+[Seperator2]
+Meter=Shape
+MeterStyle=Set.Textbox:S
+Y=([Option002:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Value002]
+Meter=String
+Text=#Seperator2#
+MeterStyle=Set.String:S | Set.Value:S

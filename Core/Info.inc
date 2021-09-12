@@ -2,6 +2,14 @@
 [Variables]
 BarHandler=1
 
+Combilaunch.L=881177085
+Plainext.L=881628513
+ModularClocks.L=883898019
+MIUI-Shade.L=885183361
+ModularPlayers.L=886577256
+Keystrokes.L=889349339
+Keylaunch.L=890749449
+
 [ImageContainer]
 Meter=Shape
 X=(#Set.L#+#Set.P#)

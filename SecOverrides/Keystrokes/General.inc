@@ -57,7 +57,7 @@ Y=([Option01:Y]-#Set.P#+(-30/2+8)*[Set.S])
 Act=[!ActivateConfig "#JaxCore\Accessories\Hotkey"][!Move (#CURRENTCONFIGX#+#CURRENTCONFIGWIDTH#/2-500/2) (#CURRENTCONFIGY#+#CURRENTCONFIGHEIGHT#/2-500/2) "#JaxCore\Accessories\Hotkey"]
 [Value01]
 Meter=String
-Text=#Key#
+Text=#KeyInString#
 MeterStyle=Set.String:S | Set.Value:S
 [Button02]
 Meter=Shape
@@ -66,7 +66,7 @@ Y=([Option02:Y]-#Set.P#+(-30/2+8)*[Set.S])
 Act=[!ActivateConfig "#JaxCore\Accessories\Hotkey"][!SetVariable Sec.Num 2 "#JaxCore\Accessories\Hotkey"][!Move (#CURRENTCONFIGX#+#CURRENTCONFIGWIDTH#/2-500/2) (#CURRENTCONFIGY#+#CURRENTCONFIGHEIGHT#/2-500/2) "#JaxCore\Accessories\Hotkey"]
 [Value02]
 Meter=String
-Text=#Key2#
+Text=#Key2InString#
 MeterStyle=Set.String:S | Set.Value:S
 
 [MaxX]

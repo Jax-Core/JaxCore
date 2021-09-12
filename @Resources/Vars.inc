@@ -20,16 +20,8 @@ Sec.SaveLocation=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 ; ------------------------ Background check variables ------------------------ ;
 Set.Auto_Refresh=1
 Set.BackgroundCheckTime=30
-Core.Master=3
 ; ------------------------------ DeviantArtLinks ----------------------------- ;
-Combilaunch.L=881177085
-Plainext.L=881628513
-ModularClocks.L=883898019
-MIUI-Shade.L=885183361
-ModularPlayers.L=886577256
-Keystrokes.L=889349339
-Keylaunch.L=890749449
 
 [Set.S]
 Measure=Calc
-Formula=0.8
+Formula=1

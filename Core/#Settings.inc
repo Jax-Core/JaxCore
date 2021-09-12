@@ -114,7 +114,7 @@ Container=ContentContainer
 DynamicVariables=1
 
 [Set.Bool:S]
-X=(#Set.W#-#Set.L#-#Set.P#*2-50)
+X=(#Set.W#-#Set.L#-#Set.P#*2-50*[Set.S])
 ; Y=([Option[&Func:LocalVar('#CURRENTSECTION#', 'Class')]:Y]-#Set.P#+(-20/2+8)*[Set.S])
 Shape=Rectangle 0,0,50,20,10,10 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
 Shape2=Ellipse ([##CURRENTSECTION#] = 1 ? (40*[Set.S]) : (10*[Set.S])),(10*[Set.S]),(6*[Set.S]) | StrokeWidth 0 | Fill Color #Set.Text_Color#
@@ -416,12 +416,15 @@ MouseLeaveAction=[!SetOption #CURRENTSECTION# 1232412414 "45 | [&Func:LocalVar('
 
 [Esc]
 Meter=Shape
+X=(#Set.W#-15*[Set.S])
+Y=(15*[Set.S])
 DynamicVariables=1
-Shape=Ellipse (#Set.W#-15*[Set.S]),(15*[Set.S]),(5*[Set.S]),(5*[Set.S]) | StrokeWidth 10 | StrokeColor 0,0,0,1 | Extend FillE
+Shape=Ellipse 0,0,(5*[Set.S]),(5*[Set.S]) | StrokeWidth 20 | StrokeColor 0,0,0,1 | Extend FillE
 FillE=Fill Color #Set.Text_Color#,50
 MouseOverAction=[!SetOption Esc FillE "Fill Color #Set.Text_Color#"][!UpdateMeter Esc][!Redraw]
 MouseLeaveAction=[!SetOption Esc FillE "Fill Color #Set.Text_Color#,50"][!UpdateMeter Esc][!Redraw]
 LeftMouseUpAction=[!UpdateMeasure CheckPreview][!ActivateConfig "#CURRENTCONFIG#" "Home.ini"]
+RightMOuseUpAction=[!commandMeasure Func "startDrop('Window', '#CURRENTSECTION#', 'JaxCore')"]
 
 [CheckPreview]
 Measure=String
