@@ -16,13 +16,15 @@ MouseLeaveAction=[!SetOption #CURRENTSECTION# This "Fill Color #Set.Ter_Color#"]
 Dynamicvariables=1
 Container=ContentContainer
 [Image:S]
-ImageName=#ROOTCONFIGPATH#SecOverrides\ModularClocks\Appearance\FetchedImages\#CURRENTSECTION#.png
-X=r
-y=r
+MEasureName=Image[#CURRENTSECTION]
+; ImageName=#ROOTCONFIGPATH#\.DeveloperResources\WebResources\Clocks\Page1\Image1.png
+X=0r
+Y=0r
 W=(200*[Set.S])
 H=(200*[Set.S])
-Dynamicvariables=1
 Container=ContentContainer
+Dynamicvariables=1
+Group=ParsedDisplay
 
 ; ---------------------------------------------------------------------------- ;
 ;                                    Content                                   ;
@@ -33,7 +35,7 @@ Meter=Shape
 X=(30*[Set.S])
 y=(30*[Set.S])R
 MeterStyle=Shape:S
-[Image1]
+[0001]
 Meter=Image
 MeterStyle=Image:S
 
@@ -86,3 +88,9 @@ MeterStyle=Shape:S
 [Shape12]
 Meter=Shape
 MeterStyle=Shape:S
+
+
+; ---------------------------------------------------------------------------- ;
+;                                    Parser                                    ;
+; ---------------------------------------------------------------------------- ;
+; @includeWeb=WebParse\Measures.inc

@@ -8,13 +8,13 @@ Sec.Page=2
 Sec.L=(600*[Set.S])
 
 Sec.Active=NotSaved 
-Sec.X=                                                                                                                       
-Sec.Y=                                                                                                                       
-Sec.Thru=                                                                                                                       
-Sec.Drag=                                                                                                                       
-Sec.Snap=                                                                                                                       
-Sec.Keep=                                                                                                                       
-Sec.ZPos=                                                                                                                       
+Sec.X=                                                                                                                              
+Sec.Y=                                                                                                                              
+Sec.Thru=                                                                                                                              
+Sec.Drag=                                                                                                                              
+Sec.Snap=                                                                                                                              
+Sec.Keep=                                                                                                                              
+Sec.ZPos=                                                                                                                              
 
 [Script:M]
 Measure=Script

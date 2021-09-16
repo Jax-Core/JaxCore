@@ -1,6 +1,6 @@
 [Variables]
 UserNameCheckVariable=Jax Tam 
-LastVersionNumber=00036
+LastVersionNumber=03600
 ; ----------------------------- Scaling variables ---------------------------- ;
 ; Set.S=0.9
 Set.P=(40*[Set.S])
@@ -20,8 +20,10 @@ Sec.SaveLocation=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 ; ------------------------ Background check variables ------------------------ ;
 Set.Auto_Refresh=1
 Set.BackgroundCheckTime=30
-; ------------------------------ DeviantArtLinks ----------------------------- ;
+
+QoL=1
+QolPlugin=Plugin
 
 [Set.S]
 Measure=Calc
-Formula=1
+Formula=0.7

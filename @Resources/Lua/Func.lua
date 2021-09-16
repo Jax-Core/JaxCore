@@ -12,12 +12,14 @@ function LocalVar(Section, Option)
 	return GetVar
 end
 
-function returnBool(Variable, Match)
+function returnBool(Variable, Match, ReturnStringT, ReturnStringF)
 	Var = SKIN:GetVariable(Variable)
+	ReturnStringT = ReturnStringT or '1'
+	ReturnStringF = ReturnStringF or '0'
 	if string.find(Var, Match) then
-		return(1)
+		return(ReturnStringT)
 	  else
-		return(0)
+		return(ReturnStringF)
 	end
 end
 

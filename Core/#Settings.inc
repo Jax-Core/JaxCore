@@ -16,7 +16,7 @@ Sec.Container=
 
 
 @IncludeWindow=#@#Includes/Window.ini
-@IncludeMouse=#@#Includes/ScriptMouseHandler.ini
+@IncludeMouse=#@#Includes/ScriptMouseHandler#QoL#.ini
 
 [Func]
 Measure=Script
@@ -32,7 +32,7 @@ Group=NUOL
 Disabled=1
 
 [Set.Toolbar:M]
-Measure=Plugin
+Measure=#QolPlugin#
 Plugin=ShowInToolbar
 WindowTitle=Core3 /#Skin.Name#
 WindowIcon=#@#Images\Logo.ico

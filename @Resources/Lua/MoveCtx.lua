@@ -14,3 +14,15 @@ function Update()
 		error("Invalid Operation")
 	end
 end
+
+function openSub(handler)
+	if handler == nil then print('no handler found') end
+	local PosX = SKIN:GetX()
+	local PosY = SKIN:GetY()
+	local Skin = SKIN:GetVariable('Sec.Skin')
+	SKIN:Bang('!ActivateConfig', '#JaxCore\\Ctx\\Submenu', 'Pos.ini')
+	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Ctx\\Submenu')
+	SKIN:Bang('!SetVariable', 'Sec.Skin', Skin, '#JaxCore\\Ctx\\Submenu')
+	SKIN:Bang('!SetVariable', 'CCW', SKIN:GetVariable('CCW'), '#JaxCore\\Ctx\\Submenu')
+	SKIN:Bang('!SetVariable', 'CCH', SKIN:GetVariable('CCH'), '#JaxCore\\Ctx\\Submenu')
+end
