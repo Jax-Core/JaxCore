@@ -1,6 +1,7 @@
 [Variables]
 SaveLocation="#SKINSPATH#ModularCLocks\@Resources\Vars.inc"
 SaveKey=Fill
+RGBSpeed=1
 
 [RGBMeasure]
 Measure=Script

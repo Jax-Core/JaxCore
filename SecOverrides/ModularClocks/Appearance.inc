@@ -4,17 +4,17 @@ Measure=Calc
 OnUpdateAction=[!SetVariable Set.W #SCREENAREAWIDTH#][!SetVariable Set.H #WORKAREAHEIGHT#][!SetOption Set.S Formula (#SCREENAREAWIDTH#/1920)][!UpdateMeasure Set.S][!HideMeter bottomButton][!HideMeter BottomText][!HideMeterGroup WindowDragMargin][!UpdateMeter *][!Redraw][!Move 0 0][!Draggable 0]
 
 [Variables]
-Sec.Page=2
+Sec.Page=1
 Sec.L=(600*[Set.S])
 
 Sec.Active=NotSaved 
-Sec.X=                                                                                                                              
-Sec.Y=                                                                                                                              
-Sec.Thru=                                                                                                                              
-Sec.Drag=                                                                                                                              
-Sec.Snap=                                                                                                                              
-Sec.Keep=                                                                                                                              
-Sec.ZPos=                                                                                                                              
+Sec.X=                                                                                                                                                                
+Sec.Y=                                                                                                                                                                
+Sec.Thru=                                                                                                                                                                
+Sec.Drag=                                                                                                                                                                
+Sec.Snap=                                                                                                                                                                
+Sec.Keep=                                                                                                                                                                
+Sec.ZPos=                                                                                                                                                                
 
 [Script:M]
 Measure=Script

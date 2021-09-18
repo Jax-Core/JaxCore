@@ -26,4 +26,4 @@ QolPlugin=Plugin
 
 [Set.S]
 Measure=Calc
-Formula=0.7
+Formula=0.5

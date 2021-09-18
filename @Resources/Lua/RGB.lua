@@ -1,20 +1,26 @@
-r = 255
-g = 0
-b = 0
-function Update()
-    local spd = 5
-    if r >= 0 and g >= 0 and g < 255 and b <= 0 then
-        b = 0
-        r = r - spd
-        g = g + spd
-    elseif r <= 0 and g and b >= 0 and b < 255 then
-        r = 0
-        g = g - spd
-        b = b + spd
-    elseif r >= 0 and r < 255 and g <= 0 and b >= 0 then
-        g = 0
-        b = b - spd
-        r = r + spd
-    end
-    return (r .. ',' .. g .. ',' .. b)
+function Initialize()
+
+	dofile(SKIN:GetVariable('SKINSPATH')..'#JaxCore\\@Resources\\Lua\\HSBLib.lua')
+	
+	hue = 0.0
+    delta = 0.005 * SKIN:GetVariable('RGBSpeed')
+	
 end
+
+function Update()
+
+	red, green, blue = HSBtoRGB(hue, 1, 1)
+	
+	hue = Clamp(hue + delta, 0.0, 1.0)
+	if hue == 1.0 then hue = 0.0 end	
+	
+	return red..','..green..','..blue
+	
+end
+
+function Clamp(num, lower, upper)
+
+	return math.max(lower, math.min(upper, num))
+	
+end
+

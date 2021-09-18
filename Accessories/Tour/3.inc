@@ -46,7 +46,7 @@ DynamicVariables=1
 Group=Tweenable
 Shape=Rectangle 0,0,120,30,5 | StrokeWidth 0 | Fill Color #Set.Accent_Color#
 Container=ContentCOntainer
-Leftmouseupaction=[!ActivateConfig "#JaxCore\Accessories\Shortcut"][!Move (#CURRENTCONFIGX#+#CURRENTCONFIGWIDTH#/2-500*[Set.S]/2) (#CURRENTCONFIGY#+#CURRENTCONFIGHEIGHT#/2-250*[Set.S]/2) "#JaxCore\Accessories\Shortcut"]
+Leftmouseupaction=[!CommandMeasure Func "startPopup('shortcut')"]
 [addText:S]
 Meter=String
 Text=Sure!

@@ -2,5 +2,5 @@
 Skin.Name=ModularClocks
 ; Skin.Shorthand=
 
-Skin.Set_Page=Appearance
+Skin.Set_Page=Info
 Skin.Ctx_Ctx=Refresh

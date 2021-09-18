@@ -36,3 +36,34 @@ function startDrop(variant, handler, skin)
 	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Dropdown')
 	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Dropdown')
 end
+
+function startPopup(variant)
+	local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Popup\\Main.ini'
+	local scale = SKIN:GetMeasure('Set.S'):GetValue()
+	local PosX = SKIN:GetX() + SKIN:GetW() / 2 - 400 * scale / 2
+	local PosY = SKIN:GetY() + SKIN:GetH() / 2 - 500 * scale / 2
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
+	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Popup')
+	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Popup')
+end
+
+function startSide(variant, num)
+	local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Hotkey\\Main.ini'
+	local scale = SKIN:GetMeasure('Set.S'):GetValue()
+	local PosX = SKIN:GetX() + SKIN:GetW() - 400 * scale
+	local PosY = SKIN:GetY()
+	local DimH = SKIN:GetH()
+	local SkinName = SKIN:GetVariable('Skin.Name')
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.H', DimH, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Skin.Name', SkinName, File)
+	if num ~= nil then 
+		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Num', num, File) 
+	else
+		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Num', '', File) 
+	end
+	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Hotkey')
+	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Hotkey')
+end

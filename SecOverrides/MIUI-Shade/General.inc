@@ -91,7 +91,7 @@ MeterStyle=Set.String:S | Set.OptionName:S
 Meter=Shape
 MeterStyle=Set.Button:S
 Y=([Option01:Y]-#Set.P#+(-30/2+8)*[Set.S])
-Act=[!ActivateConfig "#JaxCore\Accessories\Hotkey"][!Move (#CURRENTCONFIGX#+#CURRENTCONFIGWIDTH#/2-500/2) (#CURRENTCONFIGY#+#CURRENTCONFIGHEIGHT#/2-500/2) "#JaxCore\Accessories\Hotkey"]
+Act=[!CommandMeasure Func "startSide('Hotkey')"]
 [Value01]
 Meter=String
 Text=#KeyInString#

@@ -1,7 +1,7 @@
-MIUI-Shade | Control, Hotkey, Animated
-Keylaunch | Workflow, Efficiency, Animated
-Keystrokes | Overlay, Gaming, Hotkey
 ModularClocks | Modern, Time, Animated
+Keylaunch | Workflow, Efficiency, Animated
+MIUI-Shade | Control, Hotkey, Animated
+Keystrokes | Overlay, Gaming, Hotkey
 Plainext | System, Retro
 ModularPlayers | Modern, Music, Minimal
 Combilaunch | Launcher, Minimal

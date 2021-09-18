@@ -8,11 +8,26 @@ Parse=1
 [mParseTimer]
 Measure=Plugin
 Plugin=ActionTimer
-ActionList1=Repeat Enable,500,7 | Done
-Enable=[!EnableMeasure Image000[#Parse]][!SetVariable Parse (#Parse#+1)][!UpdateMeasureGroup Parsers][!Log "Parsed #Parse#"]
+ActionList1=Wait 100 | StartBuffer | Repeat Enable,500,7 | Wait 1000 | Done
+; ActionList1=Wait 100 | StartBuffer
+StartBuffer=[!CommandMeasure Buffer "start()"]
+Enable=[!EnableMeasure "Image000[#Parse]"][!SetVariable Parse (#Parse#+1)][!UpdateMeasureGroup Parsers][!Log "Parsed #Parse#"]
 DynamicVariables=1
 Group=Parsers
-Done=[!Log "Finished parsing [#Parse]-1 items."][!UpdateMeterGroup ParsedDisplay][!Redraw]
+Done=[!Log "Finished parsing items."][!UpdateMeterGroup ParsedDisplay][!Redraw][!CommandMeasure Buffer "stop()"][!EnableMeasure CheckIfFailed][!UpdateMeasure CheckIfFailed]
+
+[Buffer]
+Measure=Script
+ScriptFile=#@#Lua\WebParseBuffer.lua
+
+[CheckIfFailed]
+Measure=String
+String=[Image0001] [Image0007]
+ifmatch=^\s*$
+IfMatchAction=[!ShowMeterGroup Connecterror][!Redraw]
+Disabled=1
+IfMatchMode=1
+DynamicVariables=1
 
 ; ---------------------------------- Parser ---------------------------------- ;
 
@@ -88,7 +103,7 @@ Group=Parsers
 ;DownloadFile=Image[#CURRENTSECTION].png
 Disabled=1
 
-[10]
+[Image00010]
 Measure=WebParser
 URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/mClocks3/.DeveloperResources/WebResources/Clocks/Page1/[#CURRENTSECTION].png
 Download=1
@@ -96,7 +111,7 @@ Group=Parsers
 ;DownloadFile=Image[#CURRENTSECTION].png
 Disabled=1
 
-[11]
+[Image00011]
 Measure=WebParser
 URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/mClocks3/.DeveloperResources/WebResources/Clocks/Page1/[#CURRENTSECTION].png
 Download=1
@@ -104,7 +119,7 @@ Group=Parsers
 ;DownloadFile=Image[#CURRENTSECTION].png
 Disabled=1
 
-[12]
+[Image00012]
 Measure=WebParser
 URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/mClocks3/.DeveloperResources/WebResources/Clocks/Page1/[#CURRENTSECTION].png
 Download=1
@@ -112,7 +127,7 @@ Group=Parsers
 ;DownloadFile=Image[#CURRENTSECTION].png
 Disabled=1
 
-[13]
+[Image00013]
 Measure=WebParser
 URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/mClocks3/.DeveloperResources/WebResources/Clocks/Page1/[#CURRENTSECTION].png
 Download=1
@@ -120,7 +135,7 @@ Group=Parsers
 ;DownloadFile=Image[#CURRENTSECTION].png
 Disabled=1
 
-[14]
+[Image00014]
 Measure=WebParser
 URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/mClocks3/.DeveloperResources/WebResources/Clocks/Page1/[#CURRENTSECTION].png
 Download=1
@@ -128,7 +143,7 @@ Group=Parsers
 ;DownloadFile=Image[#CURRENTSECTION].png
 Disabled=1
 
-[15]
+[Image00015]
 Measure=WebParser
 URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/mClocks3/.DeveloperResources/WebResources/Clocks/Page1/[#CURRENTSECTION].png
 Download=1
@@ -136,7 +151,7 @@ Group=Parsers
 ;DownloadFile=Image[#CURRENTSECTION].png
 Disabled=1
 
-[16]
+[Image00016]
 Measure=WebParser
 URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/mClocks3/.DeveloperResources/WebResources/Clocks/Page1/[#CURRENTSECTION].png
 Download=1
@@ -144,7 +159,7 @@ Group=Parsers
 ;DownloadFile=Image[#CURRENTSECTION].png
 Disabled=1
 
-[17]
+[Image00017]
 Measure=WebParser
 URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/mClocks3/.DeveloperResources/WebResources/Clocks/Page1/[#CURRENTSECTION].png
 Download=1
@@ -152,7 +167,7 @@ Group=Parsers
 ;DownloadFile=Image[#CURRENTSECTION].png
 Disabled=1
 
-[18]
+[Image00018]
 Measure=WebParser
 URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/mClocks3/.DeveloperResources/WebResources/Clocks/Page1/[#CURRENTSECTION].png
 Download=1
@@ -160,7 +175,7 @@ Group=Parsers
 ;DownloadFile=Image[#CURRENTSECTION].png
 Disabled=1
 
-[19]
+[Image00019]
 Measure=WebParser
 URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/mClocks3/.DeveloperResources/WebResources/Clocks/Page1/[#CURRENTSECTION].png
 Download=1

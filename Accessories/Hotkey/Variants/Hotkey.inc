@@ -1,82 +1,20 @@
-[Rainmeter]
-Update=-1
-rightmouseupaction=[]
-middlemouseupaction=[!refresh]
-OnRefreshAction=[!FadeDuration 100][!KeepOnScreen 0][!Draggable 0][!ZPos 2]["#@#Addons\RainFocus.exe" "#CURRENTCONFIG#"][!Delay 100][!EnableMeasureGroup NUOL]
-OnUnfocusAction=[!DeactivateConfig]
+; ---------------------------------------------------------------------------- ;
+;                                   Functions                                  ;
+; ---------------------------------------------------------------------------- ;
 
-[Variables]
-@includeSkin=#@#SecVar.inc
-@includeSkinVars=#@#Vars.inc
+[mActions]
+Custom2=[!Log """[!WriteKeyvalue Variables Key#Sec.Num# "#Sec.Input##Sec.Input_Char#" "#SKINSPATH##Skin.Name#\@Resources\Actions\HotKeys.ini"]"""][!WriteKeyvalue Variables Key#Sec.Num# "#Sec.Input##Sec.Input_Char#" "#SKINSPATH##Skin.Name#\@Resources\Actions\HotKeys.ini"][!WriteKeyvalue Variables Key#Sec.Num#InString "#Sec.Input_Phrase# #Sec.Input_Char#" "#SKINSPATH##Skin.Name#\@Resources\Actions\HotKeys.ini"][!UpdateMeasure Auto_Refresh:M "#JaxCore\Main"][!Refresh "#JaxCore\Main"]
 
 
-Sec.W=(500)
-Sec.H=(500)
-Sec.R=(20)
-Sec.P=(20)
-Sec.Border=2
-
-Sec.Num=
-Sec.Input=
-Sec.Input_Char=
-Sec.Input_Phrase=
-
-;CONTENT===========================================================================================
-;CONTENT===========================================================================================
-
-
-[Func]
-Measure=Script
-ScriptFile=#@#Lua\Func.lua
-
-[Sec.String:S]
-FontFace=Poppins
-AntiAlias=1
-FontSize=10
-ClipString=2
-W=(#Sec.W#-#Sec.P#*2)
-FontColor=255,255,255
-SolidColor=0,0,0,1
-
-[Sec.Button:S]
-X=(50/2+5)r
-Y=(-50/2)r
-Shape=Rectangle 0,0,50,50 | StrokeWidth 0 | Extend This
-This=fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorLeave')]
-DynamicVariables=1
-ColorLeave=100,100,100,100
-ColorOver=100,100,100,200
-MouseOverAction=[!SetOption #CURRENTSECTION# this "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorOver')]"][!SetOption #Sec.#CURRENTSECTION## FontColor "#Set.Text_Color#"][!UpdateMeter *][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# this "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorLeave')]"][!SetOption #Sec.#CURRENTSECTION## FontColor "#Set.Text_Color#,150"][!UpdateMeter *][!Redraw]
-Leftmouseupaction=[!Setvariable Sec.Input "#Sec.INput#[&Func:LocalVar('#CURRENTSECTION#', 'Class')]"][!Setvariable Sec.Input_Phrase "#Sec.Input_Phrase# [&Func:LocalVar('#CURRENTSECTION#', 'Class2')]"][!UpdateMeter *][!Redraw]
-
-[Sec.Text:S]
-X=(50/2)r
-Y=(50/2)r
-DynamicVariables=1
-StringAlign=CenterCenter
-
-[Set.Toolbar:M]
-Measure=Plugin
-Plugin=ShowInToolbar
-WindowTitle=Hotkey / Core3
-WindowIcon=#@#Images\Logo.ico
-
-;CONTENT===========================================================================================
-;CONTENT===========================================================================================
-
-
-
-[B]
-Meter = Shape
-Shape=Rectangle 0,0,(#Sec.W#),(#Sec.H#),#Set.R# | StrokeWidth 0 | Fill Color #Set.Ter_Color#
-DynamicVariables=1
+; ---------------------------------------------------------------------------- ;
+;                                    Content                                   ;
+; ---------------------------------------------------------------------------- ;
 
 [KeyLabel]
 Meter=String
 X=(#Sec.W#/2)
 Y=(#Sec.P#)
-FontSize=10
+FontSize=(10*#Sec.S#)
 FontColor=255,255,255,150
 Text=Click the modifiers below or click any alphabetical keys on your keyboard...
 StringAlign=Center
@@ -86,7 +24,7 @@ MeterStyle=Sec.String:S
 Meter=String
 X=(#Sec.W#/2)
 Y=(#Sec.H#/2)
-FontSize=20
+FontSize=(20*#Sec.S#)
 Text=#Sec.Input##Sec.Input_Char#
 Prefix="> "
 Postfix=" <"
@@ -98,7 +36,7 @@ MeterStyle=Sec.String:S
 Meter=String
 X=(#Sec.W#/2)
 Y=(#Sec.H#/2+30)
-FontSize=10
+FontSize=(10*#Sec.S#)
 Text=#Sec.Input_Phrase# #Sec.Input_Char#
 DynamicVariables=1
 StringAlign=CenterCenter
@@ -107,7 +45,7 @@ MeterStyle=Sec.String:S
 [Shape1]
 Meter=Shape
 X=((#Sec.W#-#Sec.P#*2)/2-(50*5+5*4)/2+#sec.P#)
-Y=390
+Y=(#Sec.H#*0.8)
 Class="#"
 Class2="LWin"
 MeterStyle=Sec.Button:S
@@ -152,16 +90,17 @@ Text=Clear
 MEterStyle=Sec.String:S | Sec.Text:S
 [ShapeConfirm]
 Meter=Shape
-X=(#Sec.W#/2-100/2)
-Shape=Rectangle 0,0,100,50 | StrokeWidth 0 | Extend This
-Y=445
-Leftmouseupaction=[!WriteKeyvalue Variables Key#Sec.Num# "#Sec.Input##Sec.Input_Char#" "#SKINSPATH##Skin.Name#\@Resources\Actions\HotKeys.ini"][!WriteKeyvalue Variables Key#Sec.Num#InString "#Sec.Input_Phrase# #Sec.Input_Char#" "#SKINSPATH##Skin.Name#\@Resources\Actions\HotKeys.ini"][!UpdateMeasure Auto_Refresh:M "#JaxCore\Main"][!Refresh "#JaxCore\Main"][!DeactivateConfig]
+X=(#Sec.W#/2-100/2*#Sec.S#)
+Shape=Rectangle 0,0,100,40 | StrokeWidth 0 | Extend This | Scale #Sec.S#,#Sec.S#
+Y=(#Sec.P#)R
+Leftmouseupaction=[!UpdateMeasure UnloadHandler1]
 ColorLeave=0,100,0,100
 ColorOver=0,100,0,200
 MeterStyle=Sec.Button:S
 [TextConfirm]
 Meter=String
-X=(100/2)r
+X=(100/2*#Sec.S#)r
+Y=(40/2*#Sec.S#)r
 Text=Confirm
 MEterStyle=Sec.String:S | Sec.Text:S
 

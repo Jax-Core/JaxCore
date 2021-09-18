@@ -1,13 +1,13 @@
-[MIUI-Shade]
+[ModularClocks]
 Meter=Image
 X=r
 Y=([RecommendedSkins:H]*([Set.S]-1)+10*[Set.S])R
-ImageName=#@#Images\Cards\MIUI-Shade.png
+ImageName=#@#Images\Cards\ModularClocks.png
 MeterStyle=SkinIcon:S
-[MIUI-ShadeDes]
+[ModularClocksDes]
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
-Text=MIUI-Shade#CRLF# Control, Hotkey, Animated
+Text=ModularClocks#CRLF# Modern, Time, Animated
 [Keylaunch]
 Meter=Image
 ImageName=#@#Images\Cards\Keylaunch.png
@@ -16,14 +16,14 @@ MeterStyle=SkinIcon:S
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
 Text=Keylaunch#CRLF# Workflow, Efficiency, Animated
-[Keystrokes]
+[MIUI-Shade]
 Meter=Image
-ImageName=#@#Images\Cards\Keystrokes.png
+ImageName=#@#Images\Cards\MIUI-Shade.png
 MeterStyle=SkinIcon:S
-[KeystrokesDes]
+[MIUI-ShadeDes]
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
-Text=Keystrokes#CRLF# Overlay, Gaming, Hotkey
+Text=MIUI-Shade#CRLF# Control, Hotkey, Animated
 [All]
 Meter=String
 Text=All Skins
@@ -35,16 +35,16 @@ FontSize=15
 StringAlign=LeftTop
 FontFace=Poppins SemiBold
 TransformationMatrix=[Set.S];0;0;[Set.S];((1-[Set.S])*[#CURRENTSECTION#:X]);((1-[Set.S])*[#CURRENTSECTION#:Y])
-[ModularClocks]
+[Keystrokes]
 Meter=Image
 X=r
 Y=([All:H]*([Set.S]-1)+10*[Set.S])R
-ImageName=#@#Images\Cards\ModularClocks.png
+ImageName=#@#Images\Cards\Keystrokes.png
 MeterStyle=SkinIcon:S
-[ModularClocksDes]
+[KeystrokesDes]
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
-Text=ModularClocks#CRLF# Modern, Time, Animated
+Text=Keystrokes#CRLF# Overlay, Gaming, Hotkey
 [Plainext]
 Meter=Image
 ImageName=#@#Images\Cards\Plainext.png

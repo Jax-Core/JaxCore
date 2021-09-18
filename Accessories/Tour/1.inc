@@ -1,7 +1,6 @@
 
-[Load:M]
-Measure=Calc
-OnUpdateAction=[!Delay 50][!CommandMeasure Tween2:M "Start(0)"][!Delay 1500][!CommandMeasure Tween2:M "Start(1)"][!Delay 1500][!CommandMeasure Tween2:M "Start(2)"][!Delay 750][!WriteKeyValue Variables Sec.Page (#Sec.Page#+1)][!Refresh]
+[LoadActions]
+ActionList1=Start0 | Wait 1500 | Start1 | Wait 1500 | Start2 | Wait 750 | NextPage
 
 [Tween2:M]
 Measure=Script
