@@ -192,81 +192,81 @@ function Write(t1, t2, t3)
     -- -------------------------------------------------------------------------- --
     --                              write variables                               --
     -- -------------------------------------------------------------------------- --
-    local File = io.open(SKIN:GetVariable('SKINSPATH')..'Keylaunch\\@Resources\\Act.inc','w')
-    File:write(
+    local File1 = io.open(SKIN:GetVariable('SKINSPATH')..'Keylaunch\\@Resources\\Act.inc','w')
+    File1:write(
         '[Variables]\n'
         ,'Total='..t1..'\n'
     )
     if t1 > t then l = t else l = t1 end
     for i=1,l do
-        File:write(
+        File1:write(
         ''..i..'Name='.._G["Name"..i]..'\n'
         ,''..i..'Action='.._G["Action"..i]..'\n'
         ,''..i..'Icon='.._G["Icon"..i]..'\n'
     )
     end
     if l == t then
-        File:write(
+        File1:write(
         ''..t1..'Name=Blank\n'
         ,''..t1..'Action=["!Log Action_is_Blank"]\n'
         ,''..t1..'Icon=folder_png\n'
         )
     end
-    File:close()
+    File1:close()
     -- -------------------------------------------------------------------------- --
     --                             write ahk variables                            --
     -- -------------------------------------------------------------------------- --
-    local File = io.open(SKIN:GetVariable('SKINSPATH')..'Keylaunch\\@Resources\\Actions\\Hotkeys.ini','w')
+    local File2 = io.open(SKIN:GetVariable('SKINSPATH')..'Keylaunch\\@Resources\\Actions\\Hotkeys.ini','w')
     local rmpath = SKIN:GetVariable('RMPATH')
-    File:write(
+    File2:write(
     '[Variables]\n'
     ,'RMPATH='..rmpath..'\n'
     )
     for i=1,t do
-        File:write(
+        File2:write(
             'Key'..i..'='.._G["Key"..i]..'\n'
             ,'Key'..i..'InString='.._G["KeyS"..i]..'\n'
         )
     end
-    File:write(
+    File2:write(
         'Key'..t1..'=\n'
         ,'Key'..t1..'InString=Edit...\n'
     )
-    File:close()
+    File2:close()
     -- -------------------------------------------------------------------------- --
     --                                  write ahk                                 --
     -- -------------------------------------------------------------------------- --
-    local File = io.open(SKIN:GetVariable('SKINSPATH')..'..\\CoreData\\Keylaunch\\Keylaunch.ahk','w')
-    File:write(
+    local File3 = io.open(SKIN:GetVariable('SKINSPATH')..'..\\CoreData\\Keylaunch\\Keylaunch.ahk','w')
+    File3:write(
     '#SingleInstance Force\n'
     ,'#NoTrayIcon\n'
     )
     for i=1,t1 do
-        File:write(
+        File3:write(
             'IniRead, Key'..i..', '..SKIN:GetVariable("SKINSPATH")..'Keylaunch\\@Resources\\Actions\\Hotkeys.ini, Variables, Key'..i..'\n'
         )
     end
     for i=1,t1 do
-        File:write(
+        File3:write(
             'Try Hotkey, %Key'..i..'%, Action'..i..'\n'
         )
     end
-    File:write(
+    File3:write(
             'Return\n'
     )
     for i=1,t1 do
-        File:write(
+        File3:write(
             'Action'..i..':\n'
             ,'\tSendToReceiver('..i..')\n'
             ,'\tReturn\n'
         )
     end
-    File:write(
+    File3:write(
         'SendToReceiver(index)\n'
         ,'{\n'
         ,'\tIniRead, RainmeterPath, '..SKIN:GetVariable("SKINSPATH")..'Keylaunch\\@Resources\\Actions\\Hotkeys.ini, Variables, RMPATH\n'
         ,'\tRun "%RainmeterPath% "!CommandMEasure "Receiver:M" "Launch(%index%)" "Keylaunch\\Main" " "\n'
         ,'}\n'
     )
-    File:close()
+    File3:close()
 end

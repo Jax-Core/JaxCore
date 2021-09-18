@@ -51,7 +51,7 @@ InlineSetting=GradientColor | 180 | CC1C15 ; -1.0 | FF700F ; 1.0
 
 [Support.1]
 Meter=Shape
-Y=60R
+Y=40R
 MeterStyle=Support:S
 LeftMouseUpAction=["https://www.deviantart.com/jaxoriginals"]
 [SupportImage.1]
@@ -63,6 +63,22 @@ MeterStyle=SupportImage:S
 [SupportText.1]
 MEter=String
 Text=Watch me on DeviantArt
+MeterStyle=Set.String:S | SupportText:S
+
+[Support.3]
+Meter=Shape
+Y=10R
+MeterStyle=Support:S
+LeftMouseUpAction=["https://ko-fi.com/jaxoriginals"]
+[SupportImage.3]
+Meter=Image
+X=(#Sec.W#/2-([#CURRENTSECTION#:W]+[SupportText.1:W]+5)/2)
+ImageName=#@#Icons\Donate.png
+ImageTint=009CDE
+MeterStyle=SupportImage:S
+[SupportText.3]
+MEter=String
+Text=Fund my University fees!
 MeterStyle=Set.String:S | SupportText:S
 
 [Support.2]

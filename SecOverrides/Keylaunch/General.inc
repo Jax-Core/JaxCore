@@ -21,6 +21,7 @@ ScriptFile=#@#Lua\GenKeylaunchKey.lua
 MEasure=Plugin
 Plugin=PowershellRM
 DynamicVariables=1
+OnUpdateAction=[!Delay 100][!CommandMeasure CheckForDataFolder "Check-Data"]
 ScriptFile=#@#Powershell\CheckData.ps1
 
 ; ---------------------------------------------------------------------------- ;
