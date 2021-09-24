@@ -1,0 +1,105 @@
+[BC]
+MouseScrollDownAction=
+MouseScrollUpAction=
+
+[Title.Text1]
+Meter=String
+MeterStyle=Set.String:S
+Text=Core
+X=(#Set.P#)
+Y=(#Set.H#*0.32)
+Group=Scroll
+FontSize=(40*[Set.S])
+FontFace=Poppins
+StringAlign=LeftCenter
+InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 2.0
+[Title.Text2]
+Meter=String
+MeterStyle=Set.String:S
+Text=Season 2
+X=r
+Y=R
+FontSize=(60*[Set.S])
+FontFace=Poppins SemiBold
+StringAlign=LeftCenter
+InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
+
+[Text.1]
+Meter=String
+MeterStyle=Set.String:S
+X=r
+Y=(78*[Set.S])r
+Text=JaxCore is an advanced hub for my skins. Core provides easy
+[Text.2]
+Meter=String
+MeterStyle=Set.String:S
+X=r
+Y=(10*[Set.S])R
+Text=access to configuration, updates and new releases.
+[Text.3]
+Meter=String
+MeterStyle=Set.String:S
+X=r
+Y=(10*[Set.S])R
+Text=Start your adventure of customization and fanciness right here in 
+[Text.4]
+Meter=String
+MeterStyle=Set.String:S
+X=r
+Y=(10*[Set.S])R
+Text=the Core!
+
+
+; ---------------------------------------------------------------------------- ;
+;                                    Buttons                                   ;
+; ---------------------------------------------------------------------------- ;
+[SkinsButton]
+Meter=Shape
+X=(#Set.P#)
+Y=(100*[Set.S])r
+MeterStyle=Shape.Over:S | Button:S
+OverColor=#Set.Accent_Color#
+LeaveColor=#Set.Accent_Color#
+Leftmouseupaction=[!WriteKeyValue "Variables" "Sec.Page" "3"][!Refresh]
+[SkinsText]
+Meter=String
+Text=Explore Skins
+MeterStyle=Set.String:S | ButtonText:S
+
+[NewsButton]
+Meter=Shape
+MeterStyle=Shape.Over:S | Button:S
+OverColor=#Set.Accent_Color_2#
+LeaveColor=#Set.Accent_Color_2#
+Leftmouseupaction=[!WriteKeyValue "Variables" "Sec.Page" "2"][!Refresh]
+[NewsText]
+Meter=String
+Text=News
+MeterStyle=Set.String:S | ButtonText:S
+
+; ---------------------------------------------------------------------------- ;
+;                                     Right                                    ;
+; ---------------------------------------------------------------------------- ;
+
+[ConvertedShape]
+Meter=Shape
+X=(#Set.W#-#Set.P#-295*[Set.S])
+Y=(#Set.H#/2-(434/2*[Set.S]))
+Container=BC
+Shape = Path Path1 | stroke color 140, 140, 140 | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Fill LinearGradient This
+This= 180 | CC1C1520 ; 0.0 | FF700F20 ; 1.0
+Path1 = 297.18398, 94.90905 | CurveTo 297.18398, 116.12225, 303.04184, 100.76691, 303.04184, 110.26439 | LineTo 227.50313, 185.8031 | LineTo 286.31111, 244.61108 | CurveTo 286.31111, 265.82428, 292.16897, 250.46894, 292.16897, 259.96642 | LineTo 116.12226, 436.01313 | CurveTo 94.90906, 436.01313, 110.2644, 441.87099, 100.76692, 441.87099 | LineTo 10.60661, 351.71068 | CurveTo 10.60661, 330.49748, 4.74875, 345.85282, 4.74875, 336.35534 | LineTo 80.28746, 260.81663 | LineTo 21.47948, 202.00865 | CurveTo 21.47948, 180.79545, 15.62162, 196.15079, 15.62162, 186.65331 | LineTo 191.66833, 10.6066 | CurveTo 212.88153, 10.6066, 197.52619, 4.74874, 207.02367, 4.74874 | ClosePath 1
+DynamicVariables=1
+
+[Logo]
+Meter=Image
+ImageName=#@#Images\Logo256.png
+X=(#Set.W#-#Set.P#-((256)*[Set.S]))
+Y=(#Set.H#/2-((256)*[Set.S])/2)
+W=(256*[Set.S])
+Y=(256*[Set.S])
+Container=BC
+; Hidden=(#QoL#)
+LeftMouseUpAction=[!commandMeasure Func "startDrop('Dev', '#CURRENTSECTION#', 'JaxCore')"]
+DynamicVariables=1
+

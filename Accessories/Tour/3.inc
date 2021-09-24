@@ -6,6 +6,11 @@ Container=ContentCOntainer
 ;                                   Contenet                                   ;
 ; ---------------------------------------------------------------------------- ;
 
+
+[Func]
+Measure=Script
+ScriptFile=#@#Lua\Func.lua
+
 [Header]
 Meter=String
 Text=Adding shortcut for easy access
@@ -40,27 +45,26 @@ InlineSetting=Color | 0,255,50
 
 [AddButton]
 Meter=Shape
-X=(#Sec.W#/2-120/2+(-120/2-2.5)*#TweenNode2#)
+X=(#Sec.W#/2-120/2*#Sec.S#+(-120/2-2.5)*#TweenNode2#*#Sec.S#)
 Y=(#Sec.H#*0.7)
 DynamicVariables=1
 Group=Tweenable
-Shape=Rectangle 0,0,120,30,5 | StrokeWidth 0 | Fill Color #Set.Accent_Color#
+Shape=Rectangle 0,0,120,30,5 | StrokeWidth 0 | Fill Color #Set.Accent_Color# | Scale #Sec.S#,#Sec.S#,0,0
 Container=ContentCOntainer
 Leftmouseupaction=[!CommandMeasure Func "startPopup('shortcut')"]
 [addText:S]
 Meter=String
 Text=Sure!
-X=(120/2)r
-Y=(30/2)r
-FontSize=10
+X=(120/2*#Sec.S#)r
+Y=(30/2*#Sec.S#)r
 FontFace=Poppins SemiBold
 StringAlign=CenterCEnter
 MeterStyle=Set.String:S
 
 [Button]
 Meter=Shape
-X=(120/2+5)r
-Shape=Rectangle 0,0,120,30,5 | StrokeWidth 0 | Fill Color #Set.Sec_Color#,(#TweenNode2#*255)
+X=((120/2+5)*#Sec.S#)r
+Shape=Rectangle 0,0,120,30,5 | StrokeWidth 0 | Fill Color #Set.Sec_Color#,(#TweenNode2#*255) | Scale #Sec.S#,#Sec.S#,0,0
 MeterStyle=Button:S
 [ButtonText]
 MEter=String

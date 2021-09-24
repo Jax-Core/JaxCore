@@ -1,6 +1,6 @@
 
 function Initialize()
-	local File = io.open(SKIN:GetVariable('ROOTCONFIGPATH')..'Core\\#SettingsC.inc','w')
+	local File = io.open(SKIN:GetVariable('ROOTCONFIGPATH')..'Core\\Setting\\Generated.inc','w')
 	local RawSkin = tostring(SKIN:GetVariable('Skin.Name'))
 	Skin = string.gsub(RawSkin, "-", "")
 	local Appearance = tostring(SKIN:GetVariable('Skin.Appearance'))

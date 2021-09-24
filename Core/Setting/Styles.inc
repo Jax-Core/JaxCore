@@ -1,13 +1,28 @@
 [Rainmeter]
 DynamicWindowSize=1
 AccurateText=1
-OnRefreshAction=["#@#Addons\RainFocus.exe" "#CURRENTCONFIG#"][!FadeDuration 250][!KeepOnScreen 0][!EnableMeasureGroup NUOL][!DisableMouseActionGroup * Unreleased]
+OnRefreshAction=[!CommandMeasure DefaultStartActions "Execute 1"]
+
+DefaultFadeDuration=100
+DefaultKeepOnscreen=1
+
+[DefaultStartActions]
+Measure=Plugin
+Plugin=ActionTimer
+ActionList1=Custom1 | Focus | Wait 100 | NUOLOn
+NUOLOn=[!EnableMeasureGroup NUOL]
+Focus=["#@#Addons\RainFocus.exe" "#CURRENTCONFIG#"]
+Custom1=
+Custom2=
+Deactivate=[!DeactivateConfig]
+
 
 [Variables]
 @includeCoreVars=#@#Vars.inc
 @includeVer=#@#Version.inc
 ; ----------------------------- Default variables ---------------------------- ;
 Scroll=0
+ContentContainerAlpha=255
 Sec.Container=
 
 ; ---------------------------------------------------------------------------- ;

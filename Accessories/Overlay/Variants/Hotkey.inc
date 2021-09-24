@@ -1,14 +1,89 @@
 ; ---------------------------------------------------------------------------- ;
 ;                                   Functions                                  ;
 ; ---------------------------------------------------------------------------- ;
+[Rainmeter]
+OnUnfocusAction=[!UpdateMeasure UnloadHandler2]
+
+[Variables]
+Drop.Animation_Time=300
+
+[mTween]
+Measure=Script
+ScriptFile=#@#LuaTween/Main.lua
+TweenGroup=Tweenable
+Tween0=Single | Variable | TweenNode1 | 0 | 1 | #Drop.Animation_Time#
+Optional0=Easing InOutCirc
+UpdateDivider=1
+
+[UnloadHandler1]
+Measure=String
+String=0
+Ifmatch=0
+ifmatchaction=[!CommandMeasure mActions "Execute 2"][!SetOptionGroup Handler String 1]
+ifnotmatchaction=
+IfMatchMode=1
+Group=NUOL | Handler
+disabled=1
+
+[UnloadHandler2]
+Measure=String
+String=0
+Ifmatch=0
+ifmatchaction=[!CommandMeasure mActions "Execute 3"][!SetOption Handler String 1]
+ifnotmatchaction=
+IfMatchMode=1
+Group=NUOL | Handler
+disabled=1
 
 [mActions]
-Custom2=[!Log """[!WriteKeyvalue Variables Key#Sec.Num# "#Sec.Input##Sec.Input_Char#" "#SKINSPATH##Skin.Name#\@Resources\Actions\HotKeys.ini"]"""][!WriteKeyvalue Variables Key#Sec.Num# "#Sec.Input##Sec.Input_Char#" "#SKINSPATH##Skin.Name#\@Resources\Actions\HotKeys.ini"][!WriteKeyvalue Variables Key#Sec.Num#InString "#Sec.Input_Phrase# #Sec.Input_Char#" "#SKINSPATH##Skin.Name#\@Resources\Actions\HotKeys.ini"][!UpdateMeasure Auto_Refresh:M "#JaxCore\Main"][!Refresh "#JaxCore\Main"]
+Measure=Plugin
+Plugin=ActionTimer
+ActionList1=Wait 100 | NUOLOn | Start0 | Wait #Drop.Animation_Time#
+ActionList2=Custom2 | Rewind0 | Wait #Drop.Animation_Time# | Deactivate
+ActionList3=Rewind0 | Wait #Drop.Animation_Time# | Deactivate
+NUOLOn=[!EnableMeasureGroup NUOL]
+Start0=[!CommandMeasure mTween "Start(0)"]
+Rewind0=[!CommandMeasure mTween "Rewind(0)"]
+Custom2=[!WriteKeyvalue Variables Key#Sec.Num# "#Sec.Input##Sec.Input_Char#" "#SKINSPATH##Skin.Name#\@Resources\Actions\HotKeys.ini"][!WriteKeyvalue Variables Key#Sec.Num#InString "#Sec.Input_Phrase# #Sec.Input_Char#" "#SKINSPATH##Skin.Name#\@Resources\Actions\HotKeys.ini"][!UpdateMeasure Auto_Refresh:M "#JaxCore\Main"][!Refresh "#JaxCore\Main"]
+Deactivate=[!DeactivateConfig]
+Group=Key
+DynamicVariables=1
 
 
+[Sec.Button:S]
+X=((50/2+5)*#Sec.S#)r
+Y=(-50/2*#Sec.S#)r
+Shape=Rectangle 0,0,50,50,(#Sec.R#/2) | StrokeWidth 0 | Extend This | Scale #Sec.S#,#Sec.S#,0,0
+This=fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorLeave')]
+DynamicVariables=1
+ColorLeave=100,100,100,100
+ColorOver=100,100,100,200
+Container=BC
+MouseOverAction=[!SetOption #CURRENTSECTION# this "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorOver')]"][!SetOption #Sec.#CURRENTSECTION## FontColor "255,255,255"][!UpdateMeter *][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# this "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorLeave')]"][!SetOption #Sec.#CURRENTSECTION## FontColor "255,255,255,150"][!UpdateMeter *][!Redraw]
+Leftmouseupaction=[!Setvariable Sec.Input "#Sec.INput#[&Func:LocalVar('#CURRENTSECTION#', 'Class')]"][!Setvariable Sec.Input_Phrase "#Sec.Input_Phrase# [&Func:LocalVar('#CURRENTSECTION#', 'Class2')]"][!UpdateMeter *][!Redraw]
+
+[Sec.Text:S]
+X=(50/2*#Sec.S#)r
+Y=(50/2*#Sec.S#)r
+DynamicVariables=1
+StringAlign=CenterCenter
 ; ---------------------------------------------------------------------------- ;
 ;                                    Content                                   ;
 ; ---------------------------------------------------------------------------- ;
+
+
+
+[BC]
+Meter = Shape
+Shape=Rectangle (#Sec.W#*(1-#TweenNode1#)),0,(#Sec.W#*#TweenNode1#),(#Sec.H#) | StrokeWidth 0 | Fill Color 34,34,34
+Group=Tweenable
+DynamicVariables=1
+
+[B]
+Meter = Shape
+Shape=Rectangle 0,0,(#Sec.W#),(#Sec.H#),#Sec.R# | StrokeWidth 0 | Fill Color 34,34,34
+Container=BC
 
 [KeyLabel]
 Meter=String
@@ -44,7 +119,7 @@ MeterStyle=Sec.String:S
 
 [Shape1]
 Meter=Shape
-X=((#Sec.W#-#Sec.P#*2)/2-(50*5+5*4)/2+#sec.P#)
+X=((#Sec.W#-#Sec.P#*2)/2-(50*5+5*4)*#Sec.S#/2+#sec.P#)
 Y=(#Sec.H#*0.8)
 Class="#"
 Class2="LWin"
@@ -91,7 +166,7 @@ MEterStyle=Sec.String:S | Sec.Text:S
 [ShapeConfirm]
 Meter=Shape
 X=(#Sec.W#/2-100/2*#Sec.S#)
-Shape=Rectangle 0,0,100,40 | StrokeWidth 0 | Extend This | Scale #Sec.S#,#Sec.S#
+Shape=Rectangle 0,0,100,40,(#Sec.R#/2) | StrokeWidth 0 | Extend This | Scale #Sec.S#,#Sec.S#,0,0
 Y=(#Sec.P#)R
 Leftmouseupaction=[!UpdateMeasure UnloadHandler1]
 ColorLeave=0,100,0,100

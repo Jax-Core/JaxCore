@@ -1,3 +1,23 @@
+function Initialize()
+	-- local function defaultValues()
+	-- 	SKIN:Bang('!Setvariable', 'Scroll', '0')
+	-- 	SKIN:Bang('!Setvariable', 'ContentContainerAlpha', '255')
+	-- 	SKIN:Bang('!UpdateMeter', '*')
+	-- end
+
+	-- if SKIN:GetVariable('Skin.Name') ~= nil and tonumber(SKIN:GetVariable('PageAni')) ~= 0 and SKIN:GetVariable('Skin.Set_Page') ~= 'Info' then
+	-- 	if SKIN:GetVariable('SKin.Name') == 'ModularClocks' and SKIN:GetVariable('Skin.Set_Page') ~= 'Appearance' then
+	-- 		SKIN:Bang('!CommandMEasure', 'AnimatedSettingsHandler', 'Execute 1')
+	-- 	elseif SKIN:GetVariable('SKin.Name') ~= 'ModularClocks' then
+	-- 		SKIN:Bang('!CommandMEasure', 'AnimatedSettingsHandler', 'Execute 1')
+	-- 	else
+	-- 		defaultValues()
+	-- 	end
+	-- else
+	-- 	defaultValues()
+	-- end
+end
+
 function GroupVar(SectionExtract, Option)
 	Option = Option or 'SecVar'
 	config = SectionExtract:match("(.+:).*")
@@ -49,7 +69,7 @@ function startPopup(variant)
 end
 
 function startSide(variant, num)
-	local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Hotkey\\Main.ini'
+	local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Overlay\\Main.ini'
 	local scale = SKIN:GetMeasure('Set.S'):GetValue()
 	local PosX = SKIN:GetX() + SKIN:GetW() - 400 * scale
 	local PosY = SKIN:GetY()
@@ -64,6 +84,22 @@ function startSide(variant, num)
 	else
 		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Num', '', File) 
 	end
-	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Hotkey')
-	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Hotkey')
+	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Overlay')
+	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Overlay')
+end
+
+function startJax()
+	if tonumber(SKIN:GetVariable('QoL')) == 1 then 
+		SKIN:Bang('!Draggable', '0')
+		local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Overlay\\Main.ini'
+		local scale = SKIN:GetMeasure('Set.S'):GetValue()
+		local PosX = SKIN:GetX() + tonumber(SKIN:GetMeter('Logo'):GetX())
+		local PosY = SKIN:GetY() + tonumber(SKIN:GetMeter('Logo'):GetY())
+		local DimH = 256 * scale
+		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', 'Logo', File)
+		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
+		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.H', DimH, File)
+		SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Overlay')
+		SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Overlay')
+	end
 end

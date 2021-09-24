@@ -151,7 +151,7 @@ function Write(t1, t2, t3)
         ,'X=(#Set.W#-#Set.L#-#Set.P#*2-190*[Set.S])\n'
         ,'Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0\n'
         ,'Y=([Option'..i..':Y]-#Set.P#+(-30/2+8)*[Set.S])\n'
-        ,'Act=[!ActivateConfig "#JaxCore\\Accessories\\Hotkey"][!SetVariable Sec.Num '..i..' "#JaxCore\\Accessories\\Hotkey"][!Move (#CURRENTCONFIGX#+#CURRENTCONFIGWIDTH#/2-500/2) (#CURRENTCONFIGY#+#CURRENTCONFIGHEIGHT#/2-500/2) "#JaxCore\\Accessories\\Hotkey"]\n'
+        ,'Act=[!CommandMeasure Func "startSide(\'Hotkey\', \''..i..'\')"]\n'
 
         ,'[Value'..i..']\n'
         ,'Meter=String\n'

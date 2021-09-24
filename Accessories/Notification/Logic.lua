@@ -10,15 +10,15 @@ function check()
     else
         print('Update required - '..ParsedVer..'>='..CoreVer)
         SKIN:Bang('!CommandMeasure', 'CheckForDataFolder' ,'Check-Data')
-        SKIN:Bang('!ShowMeterGroup', 'Notif')
-        SKIN:Bang('!UpdateMeterGroup', 'Notif')
-        SKIN:Bang('!Redraw')
+        SKIN:Bang('!WriteKeyValue', 'Variables', 'ParsedVer', ParsedVerFull, SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Notification\\Toast\\Main.ini')
+        SKIN:Bang('!ActivateConfig', '#JaxCore\\Accessories\\Notification\\Toast')
     end
 end
 
 function runUpdate()
     SavePos = SKIN:GetVariable('SKINSPATH'):gsub('Skins\\', '')..'CoreData\\Updater\\InstallData.ini'
     local File = io.open(SavePos, 'w')
+    ParsedVerFull = SKIN:GetVariable('ParsedVer')
     File:write(
         '[Data]\n'
         ,'DownloadLink=https://github.com/EnhancedJax/-JaxCore/releases/download/v'..ParsedVerFull..'/JaxCore_v'..ParsedVerFull..'.rmskin\n'
