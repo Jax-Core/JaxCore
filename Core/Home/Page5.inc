@@ -178,6 +178,13 @@ MeterStyle=Set.Div:S
 Meter=String
 Text=Restart rainmeter
 MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:S2asdadsdasda1]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option15]
+Meter=String
+Text=Open rainmeter...
+MeterStyle=Set.String:S | Set.OptionName:S
 ; ---------------------------------------------------------------------------- ;
 ;                                     Input                                    ;
 ; ---------------------------------------------------------------------------- ;
@@ -260,4 +267,14 @@ Y=([Option13:Y]-[ContentContainer:Y]+(-30/2+8)*[Set.S])
 [Value13]
 Meter=String
 Text=Restart
+MeterStyle=Set.String:S | Set.Value:S
+
+[Button15]
+Meter=Shape
+MeterStyle=Set.Button:S
+Act=[!commandMeasure Func "startDrop('Rainmeter', '#CURRENTSECTION#')"]
+Y=([Option15:Y]-[ContentContainer:Y]+(-30/2+8)*[Set.S])
+[Value15]
+Meter=String
+Text=Select...
 MeterStyle=Set.String:S | Set.Value:S

@@ -21,6 +21,13 @@ MeterStyle=Set.Div:S
 Meter=String
 Text=Show application after animation
 MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:38]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option04]
+Meter=String
+Text=Full capital letter names
+MeterStyle=Set.String:S | Set.OptionName:S
 
 [CoTitle]
 Meter=String
@@ -103,7 +110,7 @@ Text=#Blur#
 MeterStyle=Set.String:S | Set.Value:S
 [GlobalFont]
 Meter=Shape
-MeterStyle=Set.Textbox:S
+MeterStyle=Set.FontBox:S
 Y=([Option02:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value02]
 Meter=String
@@ -113,6 +120,10 @@ MeterStyle=Set.String:S | Set.Value:S
 Meter=Shape
 MeterStyle=Set.Bool:S
 Y=([Option03:Y]-#Set.P#+(-20/2+8)*[Set.S])
+[Caps]
+Meter=Shape
+MeterStyle=Set.Bool:S
+Y=([Option04:Y]-#Set.P#+(-20/2+8)*[Set.S])
 
 [MainC]
 Meter=Shape

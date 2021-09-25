@@ -9,7 +9,7 @@
 Text="Support me!"
 
 [Description]
-Text="Thanks for using my creations! You can support me by funding my university fees!"
+Text="Thanks for using my creations! If you wanted to support me buy me a cup of coffee on Ko-Fi!"
 
 [INfo]
 Text=""

@@ -9,6 +9,13 @@ MIUI-Shade.L=885183361
 ModularPlayers.L=886577256
 Keystrokes.L=889349339
 Keylaunch.L=890749449
+ValliLaunch.L=
+
+[Installer]
+Measure=Plugin
+Plugin=PowershellRM
+DynamicVariables=1
+ScriptFile=#@#Powershell\Installer.ps1
 
 [ImageContainer]
 Meter=Shape
@@ -62,7 +69,7 @@ FontSize=(12*[Set.S])
 FontWeight=400
 Hidden=1
 DynamicVariables=1
-Leftmouseupaction=[!WriteKeyValue Data DownloadLink "https://github.com/EnhancedJax/#Skin.Name#/releases/download/v[mVer]/#Skin.Name#_v[mVer].rmskin" "#@#Actions\InstallData.ini"][!WriteKeyValue Data SaveLocation "#@#Actions" "#@#Actions\InstallData.ini"]["https://www.deviantart.com/jaxoriginals/art/-v1-0-[##SKIN.Name#.L]"]["#@#Actions\AHKv1.exe" "#@#Actions\Installer.ahk"]
+Leftmouseupaction=[!SetVariable DownloadLink "https://github.com/EnhancedJax/#Skin.Name#/releases/download/v[mVer]/#Skin.Name#_v[mVer].rmskin"][!SetVariable DownloadName "#Skin.Name#[mVer]"]["https://www.deviantart.com/jaxoriginals/art/-v1-0-[##SKIN.Name#.L]"][!CommandMeasure Installer "Install"]
 MeterStyle=Set.String:S
 Container=ContentContainer
 

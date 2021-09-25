@@ -1,21 +1,35 @@
 
 ;================================================================================================================================================================================
 
-[Color]
+[Colsdadsor]
 Meter=String
-Text=Options
+Text=General
 MeterStyle=Set.String:S | Set.OptionCat:S
 
 [Option01]
 Meter=String
-Text=Colors
+Text=Font Face
 MeterStyle=Set.String:S | Set.OptionName:S
-[Set.Div:S19203s8sdsds]
+[Set.Div:sdsds]
 Meter=Shape
 MeterStyle=Set.Div:S
 [Option02]
 Meter=String
-Text=Blur type
+Text=Global scaling
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:S19203s8sdsds]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option03]
+Meter=String
+Text=Rounded corners
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:sdsdss]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option04]
+Meter=String
+Text=Legacy slide animations
 MeterStyle=Set.String:S | Set.OptionName:S
 
 
@@ -23,145 +37,174 @@ MeterStyle=Set.String:S | Set.OptionName:S
 
 [Padding]
 Meter=String
-Text=Padding
+Text=Media
 MeterStyle=Set.String:S | Set.OptionCat:S
 
 [Option10]
 Meter=String
-Text=Screen side padding (in pixels)
-MeterStyle=Set.String:S | Set.OptionName:S
-
-;================================================================================================================================================================================
-
-[ScaleNsize]
-Meter=String
-Text=Scale and size
-MeterStyle=Set.String:S | Set.OptionCat:S
-
-[Option20]
-Meter=String
-Text=Global size
-MeterStyle=Set.String:S | Set.OptionName:S
-[Set.Div:S192038sdsds]
-Meter=Shape
-MeterStyle=Set.Div:S
-[Option21]
-Meter=String
-Text=Corner size
-MeterStyle=Set.String:S | Set.OptionName:S
-[Set.Div:S192038]
-Meter=Shape
-MeterStyle=Set.Div:S
-[Option22]
-Meter=String
-Text=Object spacing
+Text=Retrive and display song thumbnail
 MeterStyle=Set.String:S | Set.OptionName:S
 
 ;================================================================================================================================================================================
 
 [Anim]
 Meter=String
-Text=Animations
+Text=Colors and filling
 MeterStyle=Set.String:S | Set.OptionCat:S
 
-[Option30]
+[Option20]
 Meter=String
-Text=Animations (Turn off for better performance on low-end devices)
+Text=Blur type
 MeterStyle=Set.String:S | Set.OptionName:S
-[Set.Div:S138]
+[Set.Div:S1381]
 Meter=Shape
 MeterStyle=Set.Div:S
-[Option31]
+[Option21]
 Meter=String
-Text=Animation duration (ms)
+Text=Panel opacity
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:S1382]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option22]
+Meter=String
+Text=Accent Color
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:S1383]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option23]
+Meter=String
+Text=Background Color
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:S1384]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option24]
+Meter=String
+Text=Border Color
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:S1385]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option25]
+Meter=String
+Text=Font Color
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:S1386]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option26]
+Meter=String
+Text=Dark Color
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:S1387]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option27]
+Meter=String
+Text=Box border Color
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:S1388]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option28]
+Meter=String
+Text=Box Color
 MeterStyle=Set.String:S | Set.OptionName:S
 
 ;================================================================================================================================================================================
 
-[ColorMode:]
+[Font]
 Meter=Shape
-SecVar=ColorMode
-0Act=[!CommandMeasure darkLight.Func "SwitchColor(0)"]
-1Act=[!CommandMeasure darkLight.Func "SwitchColor(1)"]
-MeterStyle=Set.Pick:S
+MeterStyle=Set.FontBox:S
 Y=([Option01:Y]-#Set.P#+(-30/2+8)*[Set.S])
-[ColorMode:0]
+[Value01]
 Meter=String
-Text=Dark
-FontColor=(#ColorMode# = 0 ? 0 : 255),(#ColorMode# = 0 ? 0 : 255),(#ColorMode# = 0 ? 0 : 255)
-MeterStyle=Set.String:S | Set.PickOption_0:S
-[ColorMode:1]
-Meter=String
-Text=Light
-FontColor=(#ColorMode# = 1 ? 0 : 255),(#ColorMode# = 1 ? 0 : 255),(#ColorMode# = 1 ? 0 : 255)
-MeterStyle=Set.String:S | Set.PickOption_1:S
-
-[BlurBool:]
-Meter=Shape
-Shape2=Rectangle ([&Func:returnBool('BlurType', 'Acrylic')] = 0 ? 0 : (150*[Set.S])),0,(150*[Set.S]),(30*[Set.S]),(7*[Set.S]) | Fill Color 255,255,255 | StrokeWidth 0 |
-0Act=[!WriteKeyValue Variables BlurType "Blur" "#Sec.SaveLocation#"]
-1Act=[!WriteKeyValue Variables BlurType "Acrylic" "#Sec.SaveLocation#"]
-MeterStyle=Set.Pick:S
-Y=([Option02:Y]-#Set.P#+(-30/2+8)*[Set.S])
-[BlurBool:0]
-Meter=String
-Text=Blur
-FontColor=([&Func:returnBool('BlurType', 'Acrylic')] = 0 ? 0 : 255),([&Func:returnBool('BlurType', 'Acrylic')] = 0 ? 0 : 255),([&Func:returnBool('BlurType', 'Acrylic')] = 0 ? 0 : 255)
-LeftMouseUpAction=[&Func:GroupVar('#CURRENTSECTION#', '0Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
-MeterStyle=Set.String:S | Set.PickOption_0:S
-[BlurBool:1]
-Meter=String
-Text=Acrylic
-FontColor=([&Func:returnBool('BlurType', 'Acrylic')] = 1 ? 0 : 255),([&Func:returnBool('BlurType', 'Acrylic')] = 1 ? 0 : 255),([&Func:returnBool('BlurType', 'Acrylic')] = 1 ? 0 : 255)
-LeftMouseUpAction=[&Func:GroupVar('#CURRENTSECTION#', '1Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
-MeterStyle=Set.String:S | Set.PickOption_1:S
-;================================================================================================================================================================================
-
-[P]
-Meter=Shape
-MeterStyle=Set.Textbox:S
-Y=([Option10:Y]-#Set.P#+(-30/2+8)*[Set.S])
-[Value10]
-Meter=String
-Text=#P#
+Text=#Font#
 MeterStyle=Set.String:S | Set.Value:S
 
 [Scale]
 Meter=Shape
-MeterStyle=Set.Textbox:S
-Y=([Option20:Y]-#Set.P#+(-30/2+8)*[Set.S])
-[Value20]
+MeterStyle=Set.TextBox:S
+Y=([Option02:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Value02]
 Meter=String
 Text=#Scale#
 MeterStyle=Set.String:S | Set.Value:S
 
-[R]
+[Edge]
 Meter=Shape
-MeterStyle=Set.Textbox:S
+MeterStyle=Set.Bool:S
+Y=([Option03:Y]-#Set.P#+(-20/2+8)*[Set.S])
+
+[Animated]
+Meter=Shape
+MeterStyle=Set.Bool:S
+Y=([Option04:Y]-#Set.P#+(-20/2+8)*[Set.S])
+
+[FetchImage]
+Meter=Shape
+MeterStyle=Set.Bool:S
+Y=([Option10:Y]-#Set.P#+(-20/2+8)*[Set.S])
+
+[Location:]
+Meter=Shape
+0Act=[!WriteKeyValue Variables Location "Bottom" "#Sec.SaveLocation#"]
+1Act=[!WriteKeyValue Variables Location "Center" "#Sec.SaveLocation#"]
+2Act=[!WriteKeyValue Variables Location "Corner" "#Sec.SaveLocation#"]
+MeterStyle=Set.Pick3:S
+Shape2=Rectangle (100*[Set.S]*([&Func:returnBool('Location', 'Center')]+[&Func:returnBool('Location', 'Corner')]*2)),0,(300/3*[Set.S]),(30*[Set.S]),(7*[Set.S]) | Fill Color #Set.Text_Color# | StrokeWidth 0
+Y=([Option20:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Location:0]
+Meter=String
+Text=Bottom
+FontColor=([&Func:returnBool('Location', 'Bottom')] = 1 ? 0 : 255),([&Func:returnBool('Location', 'Bottom')] = 1 ? 0 : 255),([&Func:returnBool('Location', 'Bottom')] = 1 ? 0 : 255)
+MeterStyle=Set.String:S | Set.PickOption3_0:S
+[Location:1]
+Meter=String
+Text=Center
+FontColor=([&Func:returnBool('Location', 'Center')] = 1 ? 0 : 255),([&Func:returnBool('Location', 'Center')] = 1 ? 0 : 255),([&Func:returnBool('Location', 'Center')] = 1 ? 0 : 255)
+MeterStyle=Set.String:S | Set.PickOption3_1:S
+[Location:2]
+Meter=String
+Text=Corner
+FontColor=([&Func:returnBool('Location', 'Corner')] = 1 ? 0 : 255),([&Func:returnBool('Location', 'Corner')] = 1 ? 0 : 255),([&Func:returnBool('Location', 'Corner')] = 1 ? 0 : 255)
+MeterStyle=Set.String:S | Set.PickOption3_2:S
+
+[Alpha]
+Meter=Shape
+MeterStyle=Set.TextBox:S
 Y=([Option21:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Value21]
 Meter=String
-Text=#R#
-MeterStyle=Set.String:S | Set.Value:S
-
-[GlobalP]
+Text=#Alpha#
+MeterStyle=Set.String:S | Set.value:S
+[Accent]
 Meter=Shape
-MeterStyle=Set.Textbox:S
+MeterStyle=Set.Color:S
 Y=([Option22:Y]-#Set.P#+(-30/2+8)*[Set.S])
-[Value22]
-Meter=String
-Text=#GlobalP#
-MeterStyle=Set.String:S | Set.Value:S
-
-[Animation]
+[Color]
 Meter=Shape
-MeterStyle=Set.Bool:S
-Y=([Option30:Y]-#Set.P#+(-20/2+8)*[Set.S])
-[TweenTime1]
+MeterStyle=Set.Color:S
+Y=([Option23:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Border]
 Meter=Shape
-MeterStyle=Set.Textbox:S
-Y=([Option31:Y]-#Set.P#+(-30/2+8)*[Set.S])
-[Value31]
-Meter=String
-Text=#TweenTime1#
-MeterStyle=Set.String:S | Set.Value:S
+MeterStyle=Set.Color:S
+Y=([Option24:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Fontcolor]
+Meter=Shape
+MeterStyle=Set.Color:S
+Y=([Option25:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[DarkColor]
+Meter=Shape
+MeterStyle=Set.Color:S
+Y=([Option26:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[BoxBorder]
+Meter=Shape
+MeterStyle=Set.Color:S
+Y=([Option27:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[BoxColor]
+Meter=Shape
+MeterStyle=Set.Color:S
+Y=([Option28:Y]-#Set.P#+(-30/2+8)*[Set.S])

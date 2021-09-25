@@ -1,5 +1,6 @@
 [Header]
 Text=Animation layout
+Y=(20*[Set.S]+#Scroll#)
 
 ; ---------------------------------------------------------------------------- ;
 ;                                    Styles                                    ;
@@ -9,28 +10,35 @@ Text=Animation layout
 Measure=String
 String=#AniStyle#
 IfMatch=^Center$
-Ifmatchaction=[!SetOption Center MeterStyle "Select:S | Selected:S"][!UpdateMEasure Center][!Redraw]
+Ifmatchaction=[!SetOption Center MeterStyle "Select:S | Selected:S"][!UpdateMeter Center][!Redraw]
 IfMatch2=^Bottom$
-Ifmatchaction2=[!SetOption Bottom MeterStyle "Select:S | Selected:S"][!UpdateMEasure Bottom][!Redraw]
+Ifmatchaction2=[!SetOption Bottom MeterStyle "Select:S | Selected:S"][!UpdateMeter Bottom][!Redraw]
 IfMatch3=^Slide$
-Ifmatchaction3=[!SetOption Slide MeterStyle "Select:S | Selected:S"][!UpdateMEasure Slide][!Redraw]
+Ifmatchaction3=[!SetOption Slide MeterStyle "Select:S | Selected:S"][!UpdateMeter Slide][!Redraw]
 IfMatch4=^Spin$
-Ifmatchaction4=[!SetOption Spin MeterStyle "Select:S | Selected:S"][!UpdateMEasure Spin][!Redraw]
+Ifmatchaction4=[!SetOption Spin MeterStyle "Select:S | Selected:S"][!UpdateMeter Spin][!Redraw]
+IfMatch5=^Expand$
+Ifmatchaction5=[!SetOption Expand MeterStyle "Select:S | Selected:S"][!UpdateMeter Expand][!Redraw]
 ; OnUpdateAction=[!SetOption Center MeterStyle "Select:S | Selected:S"][!SetOption Bottom MeterStyle "Select:S | Selected:S"][!SetOption Slide MeterStyle "Select:S | Selected:S"][!SetOption Spin MeterStyle "Select:S | Selected:S"][!UpdateMEasure WASD][!Redraw]
 
 [Select:S]
 X=r
-Y=10R
-Fill=Fill Color 255,255,255,50
-Shape=Rectangle 0,0,(650),(150),#Set.R# | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend FIll
-X=([Header:X])
-Y=([Header:Y]+50*[Set.S])
+Y=(20*[Set.S])R
+W=(650*[Set.S])
+H=(150*[Set.S])
+ImageName=#@#Images\KeylaunchLayout\#CURRENTSECTIOn#.png
 DynamicVariables=1
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 255,255,255,50"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+ImageAlpha=100
+MouseOverAction=[!SetOption #CURRENTSECTION# ImageAlpha "200"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# ImageAlpha "100"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 Leftmouseupaction=[!WriteKeyValue Variables AniStyle "#CURRENTSECTION#" "#Sec.SaveLocatioN#"][!UpdateMeasure Auto_Refresh:M][!Refresh]
+PreserveAspectRatio=2
+DynamicVariables=1
+MaskImageName=#@#Images\LayoutMask.png
+Container=ContentContainer
 [Selected:S]
 Fill=Fill Color 255,255,255,255
+ImageAlpha=255
 MouseOverAction=
 MouseLeaveAction=
 LeftMouseUpAction=
@@ -39,56 +47,25 @@ LeftMouseUpAction=
 ;                                    Content                                   ;
 ; ---------------------------------------------------------------------------- ;
 
+
+[Expand]
+Meter=Image
+X=r
+Y=(30*[Set.S])R
+MeterStyle=Select:S
+
 [Center]
-Meter=Shape
-X=([Header:X])
-Y=([Header:Y]+50*[Set.S])
-MEterStyle=Select:S
+Meter=Image
+MeterStyle=Select:S
 
 [Bottom]
-Meter=Shape
-MEterStyle=Select:S
+Meter=Image
+MeterStyle=Select:S
 
 [Slide]
-Meter=Shape
-MEterStyle=Select:S
+Meter=Image
+MeterStyle=Select:S
 
 [Spin]
-Meter=Shape
-MEterStyle=Select:S
-
-[KeylaunchLayout1]
 Meter=Image
-ImageName=#@#Images\#CURRENTSECTIOn#.png
-Container=Center
-W=([Center:W])
-H=([Center:H])
-PreserveAspectRatio=2
-DynamicVariables=1
-
-[KeylaunchLayout2]
-Meter=Image
-ImageName=#@#Images\#CURRENTSECTIOn#.png
-Container=Bottom
-W=([Bottom:W])
-H=([Bottom:H])
-PreserveAspectRatio=2
-DynamicVariables=1
-
-[KeylaunchLayout3]
-Meter=Image
-ImageName=#@#Images\#CURRENTSECTIOn#.png
-Container=Slide
-W=([Slide:W])
-H=([Slide:H])
-PreserveAspectRatio=2
-DynamicVariables=1
-
-[KeylaunchLayout4]
-Meter=Image
-ImageName=#@#Images\#CURRENTSECTIOn#.png
-Container=Spin
-W=([Spin:W])
-H=([Spin:H])
-PreserveAspectRatio=2
-DynamicVariables=1
+MeterStyle=Select:S

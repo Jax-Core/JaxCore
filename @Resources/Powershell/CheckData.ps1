@@ -14,6 +14,19 @@ function Create-Updater {
     $RmAPI.Log("Created: Updater")
 }
 
+function Create-ValliStart {
+    New-Item -Path "$SkinsPath..\CoreData" -Name "ValliStart" -ItemType "directory"
+    # New-Item -Path "$SkinsPath..\CoreData\ValliStart" -Name "IncludeInCore.inc" -ItemType "file"
+    # New-Item -Path "$SkinsPath..\CoreData\ValliStart" -Name "IncludeInSkin.inc" -ItemType "file"
+    $RmAPI.Log("Created: ValliStart")
+}
+
+function Create-VarInc {
+    $source      = $RmAPI.VariableStr('SKINSPATH')
+    $destination = Split-Path -Path $source -Parent
+    New-Item -Path "$SkinsPath..\CoreData" -Name "Vars.inc" -ItemType "file" -Value "[Variables]`nRAINMETERPATH=$destination"
+}
+
 function Check-Data {
     If (Test-Path -Path "$SkinsPath..\CoreData") {
             $RmAPI.Log("Found coredata in programs")
@@ -21,9 +34,17 @@ function Check-Data {
             } else {
                 Create-Keylaunch
             }
+            If (Test-Path -Path "$SkinsPath..\CoreData\ValliStart") {
+            } else {
+                Create-ValliStart
+            }
             If (Test-Path -Path "$SkinsPath..\CoreData\Updater") {
             } else {
                 Create-Updater
+            }
+            If (Test-Path -Path "$SkinsPath..\CoreData\Vars.inc") {
+            } else {
+                Create-VarInc
             }
         } else {
             $RmAPI.Log("Failed to find coredata in programs, generating")

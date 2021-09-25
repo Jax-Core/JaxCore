@@ -16,13 +16,9 @@ function check()
 end
 
 function runUpdate()
-    SavePos = SKIN:GetVariable('SKINSPATH'):gsub('Skins\\', '')..'CoreData\\Updater\\InstallData.ini'
-    local File = io.open(SavePos, 'w')
     ParsedVerFull = SKIN:GetVariable('ParsedVer')
-    File:write(
-        '[Data]\n'
-        ,'DownloadLink=https://github.com/EnhancedJax/-JaxCore/releases/download/v'..ParsedVerFull..'/JaxCore_v'..ParsedVerFull..'.rmskin\n'
-        ,'SaveLocation='..SKIN:GetVariable('SKINSPATH'):gsub('Skins\\', '')..'CoreData\\Updater'
-    )
-    File:close()
+    SKIN:Bang('!WriteKeyValue', 'Variables', 'ParsedVer', '0', SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Notification\\Toast\\Main.ini')
+    SKIN:Bang('!SetVariable', 'DownloadLink', 'https://github.com/EnhancedJax/-JaxCore/releases/download/v'..ParsedVerFull..'/JaxCore_v'..ParsedVerFull..'.rmskin\n')
+    SKIN:Bang('!SetVariable', 'DownloadName', 'JaxCore'..ParsedVerFull)
+    SKIN:Bang('!CommandMeasure', 'Installer', 'Install')
 end

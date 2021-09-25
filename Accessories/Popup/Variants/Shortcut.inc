@@ -19,7 +19,7 @@ ScriptFile=#@#Powershell\AddShortcut.ps1
 Text="Add shortcut"
 
 [Description]
-Text="Adding a #CoreHome shortcut would make it easier to access the core control panel."
+Text="Adding a JaxCore shortcut would make it easier to access the core control panel."
 
 [INfo]
 Text="Buttons will turn green when the shortcut exists in the directory."

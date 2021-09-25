@@ -1,3 +1,50 @@
+
+; ---------------------------------------------------------------------------- ;
+;                                 UpdateChecker                                ;
+; ---------------------------------------------------------------------------- ;
+
+[MeasureUser]
+Measure=Plugin
+Plugin=SysInfo
+SysInfoType=USER_NAME
+ifMatch=^#UserNameCheckVariable#$
+ifmatchaction=[!EnableMeasure Check4New:M][!UpdateMeasure "Check4New:M"]
+ifnotmatchaction=[!WriteKeyValue Variables Sec.Page 1 "#SKINSPATH#\#JaxCore\Accessories\Tour\Main.ini"][!ActivateConfig "#JaxCore\Accessories\Tour"][!ActivateConfig "#JaxCore\Accessories"][!DeactivateConfig]
+DynamicVariables=1
+UpdateDivider=-1
+
+[WebParser]
+Measure=WebParser
+URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/main/%40Resources/Version.inc
+RegExp==(.*)$
+Group=Updater
+FinishAction=[!Delay 100][!CommandMeasure LogicalScript "check()"]
+
+[mVer]
+Measure=WebParser
+URL=[WebParser]
+Group=Updater
+StringIndex=1
+; [mVer]
+; Measure=String
+; String=10000
+; OnUpdateAction=[!Delay 100][!CommandMeasure LogicalScript "check()"]
+; UpdateDivider=-1
+
+[LogicalScript]
+Measure=Script
+ScriptFile=#ROOTCONFIGPATH#Accessories\Notification\Logic.lua
+
+[CheckForDataFolder]
+MEasure=Plugin
+Plugin=PowershellRM
+DynamicVariables=1
+ScriptFile=#@#Powershell\CheckData.ps1
+
+; ---------------------------------------------------------------------------- ;
+;                                    Content                                   ;
+; ---------------------------------------------------------------------------- ;
+
 [BC]
 MouseScrollDownAction=
 MouseScrollUpAction=
@@ -53,6 +100,7 @@ Text=the Core!
 ; ---------------------------------------------------------------------------- ;
 ;                                    Buttons                                   ;
 ; ---------------------------------------------------------------------------- ;
+
 [SkinsButton]
 Meter=Shape
 X=(#Set.P#)
@@ -60,22 +108,75 @@ Y=(100*[Set.S])r
 MeterStyle=Shape.Over:S | Button:S
 OverColor=#Set.Accent_Color#
 LeaveColor=#Set.Accent_Color#
-Leftmouseupaction=[!WriteKeyValue "Variables" "Sec.Page" "3"][!Refresh]
+Leftmouseupaction=[!commandMeasure Func "startPopup('Donate')"]
 [SkinsText]
 Meter=String
-Text=Explore Skins
+Text=Support me
 MeterStyle=Set.String:S | ButtonText:S
 
-[NewsButton]
+[DiscordButton]
 Meter=Shape
-MeterStyle=Shape.Over:S | Button:S
-OverColor=#Set.Accent_Color_2#
-LeaveColor=#Set.Accent_Color_2#
-Leftmouseupaction=[!WriteKeyValue "Variables" "Sec.Page" "2"][!Refresh]
-[NewsText]
-Meter=String
-Text=News
-MeterStyle=Set.String:S | ButtonText:S
+X=(150/2*[Set.S]+#Set.P#/2)r
+Y=(-20*[Set.S])r
+DynamicVariables=1
+OverColor=88,101,242
+LeaveColor=88,101,242,200
+Shape=Rectangle 0,0,40,40,(#Set.R#/2) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend This
+MeterStyle=Shape.Over:S
+Leftmouseupaction=[!commandMeasure Func "startPopup('Discord')"]
+Container=BC
+[DiscordIcon]
+Meter=Image
+MeterStyle=TopButton:S
+ImageName=#@#Icons\Discord.png
+
+[DeviantArtButton]
+Meter=Shape
+X=(30*[Set.S]+#Set.P#/2)r
+Y=r
+DynamicVariables=1
+OverColor=399F59
+LeaveColor=399F59
+Shape=Rectangle 0,0,40,40,(#Set.R#/2) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend This
+MeterStyle=Shape.Over:S
+Leftmouseupaction=[!commandMeasure Func "startPopup('DeviantArt')"]
+Container=BC
+[DeviantArtIcon]
+Meter=Image
+MeterStyle=TopButton:S
+ImageName=#@#Icons\DA.png
+
+[DeviantArtButton]
+Meter=Shape
+X=(30*[Set.S]+#Set.P#/2)r
+Y=r
+DynamicVariables=1
+OverColor=399F59
+LeaveColor=399F59
+Shape=Rectangle 0,0,40,40,(#Set.R#/2) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend This
+MeterStyle=Shape.Over:S
+Leftmouseupaction=[!commandMeasure Func "startPopup('DeviantArt')"]
+Container=BC
+[DeviantArtIcon]
+Meter=Image
+MeterStyle=TopButton:S
+ImageName=#@#Icons\DA.png
+
+[ShortcutButton]
+Meter=Shape
+X=(30*[Set.S]+#Set.P#/2)r
+Y=r
+DynamicVariables=1
+OverColor=FF9834
+LeaveColor=FF9834
+Shape=Rectangle 0,0,40,40,(#Set.R#/2) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend This
+MeterStyle=Shape.Over:S
+Leftmouseupaction=[!commandMeasure Func "startPopup('Shortcut')"]
+Container=BC
+[ShortcutIcon]
+Meter=Image
+MeterStyle=TopButton:S
+ImageName=#@#Icons\Shortcut.png
 
 ; ---------------------------------------------------------------------------- ;
 ;                                     Right                                    ;

@@ -6,6 +6,9 @@ OnUnfocusAction=[!UpdateMeasure UnloadHandler2]
 
 [Variables]
 Drop.Animation_Time=300
+Sec.Input=
+Sec.Input_Char=
+Sec.Input_Phrase=
 
 [mTween]
 Measure=Script

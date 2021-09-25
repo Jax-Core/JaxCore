@@ -120,6 +120,17 @@ Fill=Stroke Color #Set.Text_Color#,50
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,50"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 Leftmouseupaction=[!SetVariable Editing "#CURRENTSECTION#"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5*[Set.S])"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5*[Set.S])"][!CommandMeasure Input:M "ExecuteBatch 1"]
+[Set.FontBox:S]
+X=(#Set.W#-#Set.L#-#Set.P#*2-150*[Set.S])
+; Y=([Option[&Func:LocalVar('#CURRENTSECTION#', 'Class')]:Y]-#Set.P#+(-30/2+8)*[Set.S])
+Container=ContentContainer
+DynamicVariables=1
+Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 2 | Fill Color 0,0,0,1 | Extend Fill | Scale [Set.S],[Set.S],0,0
+Fill=Stroke Color #Set.Text_Color#,50
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,50"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+LeftMouseUpAction=[!CommandMeasure Func "startSide('Font', '#CURRENTSECTION#')"]
+RightMouseUpAction=[!SetVariable Editing "#CURRENTSECTION#"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5*[Set.S])"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5*[Set.S])"][!CommandMeasure Input:M "ExecuteBatch 1"]
 [Set.Value:S]
 X=(5*[Set.S])r
 Y=(15*[Set.S])r

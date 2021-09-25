@@ -1,5 +1,10 @@
 [Variables]
-Spotlight=ValliStart
+Spotlight=Keylaunch
+
+[BC]
+MouseScrollDownAction=[!SetVariable Scroll "(Clamp(#Scroll#+60,0,(#Set.PageH#-#Set.H#)))"][!UpdateMeterGroup Scroll][!Redraw]
+MouseScrollUpAction=[!SetVariable Scroll "(Clamp(#Scroll#-60,0,(#Set.PageH#-#Set.H#)))"][!UpdateMeterGroup Scroll][!Redraw]
+Group=Scroll
 
 [SkinIcon:S]
 X=(#Set.P#/2+((#Set.W#-(#Set.P#*3))/3)-(10*[Set.S]))r
@@ -35,11 +40,12 @@ Container=BC
 
 [BarClip]
 Fill=Fill Color #Set.Pri_Color#,(#Scroll# > 0 ? 255 : 0)
+Group=Scroll
 
 [Image]
 Meter=Image
 W=(#Set.W#)
-H=(#Set.H#*0.4)
+H=(#Set.H#*0.5)
 Group=Scroll
 ImageAlpha=(#Scroll# > 0 ? 0 : 50)
 PreserveAspectRatio=2
@@ -91,7 +97,8 @@ InlineSetting=Size | (12*[Set.S])
 InlinePattern2=#CRLF#.*
 InlineSetting2=Face | Poppins Thin
 MeterStyle=Set.String:S
-Text=#Spotlight##CRLF#Replaces the start menu with a centered design. Originated from a concept art for Windows 10 SunValley update, it acts as an control center and a start menu.
+; Text=#Spotlight##CRLF#Replaces the start menu with a centered design. Originated from a concept art for Windows 10 SunValley update, it acts as an control center and a start menu.
+Text=#Spotlight##CRLF#Allows you to open any file or folder with a click of a hotkey, and shows a fluent animation. Super simple setup procedure, light usage. If you are on a low-end device, don't worry! You can turn off the animation and still have the skin functional!
 [SpotImage]
 Meter=Image
 X=(#Set.W#-#Set.P#-500*[Set.S])

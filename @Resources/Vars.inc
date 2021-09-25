@@ -1,5 +1,5 @@
 [Variables]
-UserNameCheckVariable=Jax Tam 
+UserNameCheckVariable=Jax Tam
 LastVersionNumber=03600
 ; ----------------------------- Scaling variables ---------------------------- ;
 ; Set.S=0.9
