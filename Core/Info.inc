@@ -9,7 +9,7 @@ MIUI-Shade.L=885183361
 ModularPlayers.L=886577256
 Keystrokes.L=889349339
 Keylaunch.L=890749449
-ValliLaunch.L=893506095
+ValliStart.L=893506095
 
 [Installer]
 Measure=Plugin
