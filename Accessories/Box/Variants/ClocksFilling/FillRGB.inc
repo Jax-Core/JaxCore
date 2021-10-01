@@ -1,0 +1,21 @@
+[12]
+Meter=String
+Text=Animation frame interval
+X=r
+Y=(#Sec.P#)R
+MeterStyle=Sec.String:S
+
+
+; ---------------------------------------------------------------------------- ;
+;                                     Input                                    ;
+; ---------------------------------------------------------------------------- ;
+
+[1st]
+Meter=Shape
+MeterStyle=Set.Button:S
+Act=[!commandMeasure Func "startDrop('AniFrame', '#CURRENTSECTION#')"]
+Y=[12:Y]
+[Value21]
+Meter=String
+Text=Configure
+MeterStyle=Sec.String:S | Set.Value:S

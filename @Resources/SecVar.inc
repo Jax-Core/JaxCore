@@ -1,5 +1,5 @@
 [Variables]
-Skin.Name=Keylaunch
+Skin.Name=ValliStart
 ; Skin.Shorthand=
 
 Skin.Set_Page=General
