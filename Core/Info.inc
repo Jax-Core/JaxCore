@@ -9,7 +9,7 @@ MIUI-Shade.L=885183361
 ModularPlayers.L=886577256
 Keystrokes.L=889349339
 Keylaunch.L=890749449
-ValliLaunch.L=
+ValliLaunch.L=893506095
 
 [Installer]
 Measure=Plugin
@@ -98,7 +98,7 @@ ImageTint=#Set.SubText_Color#
 DynamicVariables=1
 Container=ContentContainer
 ImageName=#@#Icons\#CURRENTSECTION#.png
-Leftmouseupaction=["https://www.deviantart.com/jaxoriginals/art/-v1-0-[##SKIN.Name#.L]"]
+Leftmouseupaction=["https://www.deviantart.com/jaxoriginals/art/[##SKIN.Name#.L]"]
 
 ;===========================================================================================================================
 

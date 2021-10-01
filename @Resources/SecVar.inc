@@ -1,6 +1,6 @@
 [Variables]
-Skin.Name=QuickNote
+Skin.Name=ValliStart
 ; Skin.Shorthand=
 
-Skin.Set_Page=Info
+Skin.Set_Page=General
 Skin.Ctx_Ctx=Refresh
