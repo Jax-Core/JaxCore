@@ -5,6 +5,7 @@ function Initialize()
 	Skin = string.gsub(RawSkin, "-", "")
 	local Appearance = tostring(SKIN:GetVariable('Skin.Appearance'))
 	local Layout = tostring(SKIN:GetVariable('Skin.Layout'))
+	local CS = tostring(SKIN:GetVariable('Skin.CS'))
 	local Media = tostring(SKIN:GetVariable('Skin.Media'))
 	local Render = tostring(SKIN:GetVariable('Skin.Render'))
 	local FAQ = tostring(SKIN:GetVariable('Skin.FAQ'))
@@ -97,6 +98,28 @@ function Initialize()
 		,'[4]\n'
 		,'Meter=String\n'
 		,'Text=Layout\n'
+		,'DynamicVariables-1\n'
+		,'MeterStyle=Set.String:S | PageText:S\n')
+		end
+	-- /////////////////////////////
+	if string.find(CS, Skin) then
+		File:write('[ColorScheme]\n'
+		,'Meter=Shape\n'
+		,'Y=(10*[Set.S])R\n'
+		,'MeterStyle=PageBox:S\n'
+		,'Fill=Fill Color #Set.Accent_Color#,(#BarHandler# = 4 ? 255: 0)\n'
+		,'Handle=4\n'
+		
+		,'\n'
+		,'[ColorSchemeIcon]\n'
+		,'Meter=Image\n'
+		,'MeterStyle=PageIcon:S\n'
+		,'Greyscale=(#BarHandler# = 4 ? 1 : 0)\n'
+		-- ,'ImageTint=(#BarHandler# = 4 ? 0 : 255),(#BarHandler# = 4 ? 0 : 255),(#BarHandler# = 4 ? 0 : 255)\n'
+		,'\n'
+		,'[4]\n'
+		,'Meter=String\n'
+		,'Text=Color scheme\n'
 		,'DynamicVariables-1\n'
 		,'MeterStyle=Set.String:S | PageText:S\n')
 		end
