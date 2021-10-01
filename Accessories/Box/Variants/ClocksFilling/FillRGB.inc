@@ -1,17 +1,21 @@
-[Option31]
+[12]
 Meter=String
-Text=Clock font size
-MeterStyle=Set.String:S | Set.OptionName:S
+Text=Animation frame interval
+X=r
+Y=(#Sec.P#)R
+MeterStyle=Sec.String:S
+
 
 ; ---------------------------------------------------------------------------- ;
 ;                                     Input                                    ;
 ; ---------------------------------------------------------------------------- ;
 
-[FontSize]
+[1st]
 Meter=Shape
-MeterStyle=Set.Textbox:S
-Y=([Option31:Y]-#Set.P#+(-30/2+8)*[Set.S])
-[Value31]
+MeterStyle=Set.Button:S
+Act=[!commandMeasure Func "startDrop('AniFrame', '#CURRENTSECTION#')"]
+Y=[12:Y]
+[Value21]
 Meter=String
-Text=#FontSize#
-MeterStyle=Set.String:S | Set.Value:S
+Text=Configure
+MeterStyle=Sec.String:S | Set.Value:S

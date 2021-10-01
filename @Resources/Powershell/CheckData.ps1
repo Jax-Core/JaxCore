@@ -16,8 +16,23 @@ function Create-Updater {
 
 function Create-ValliStart {
     New-Item -Path "$SkinsPath..\CoreData" -Name "ValliStart" -ItemType "directory"
-    # New-Item -Path "$SkinsPath..\CoreData\ValliStart" -Name "IncludeInCore.inc" -ItemType "file"
-    # New-Item -Path "$SkinsPath..\CoreData\ValliStart" -Name "IncludeInSkin.inc" -ItemType "file"
+
+    $RainmeterExe = $RmAPI.VariableStr('PROGRAMPATH')
+    $ResourceFolder = $RmAPI.VariableStr('@')
+    $WScriptShell = New-Object -ComObject WScript.Shell
+    $Shortcut = $WScriptShell.CreateShortcut("$SkinsPath..\CoreData\ValliStart\Config.lnk")
+    $Shortcut.TargetPath = "ms-settings:"
+    $shortcut.IconLocation = $ResourceFolder+"Images\Config.ico"
+    $Shortcut.Save()
+
+    
+    $WScriptShell = New-Object -ComObject WScript.Shell
+    $Shortcut = $WScriptShell.CreateShortcut("$SkinsPath..\CoreData\ValliStart\JaxCore.lnk")
+    $Shortcut.TargetPath = $RainmeterExe+"Rainmeter.exe"
+    $Shortcut.Arguments = '!ActivateConfig #JaxCore\Main Home.ini'
+    $shortcut.IconLocation = $ResourceFolder+"Images\Logo.ico"
+    $Shortcut.Save()
+
     $RmAPI.Log("Created: ValliStart")
 }
 

@@ -34,7 +34,7 @@ Container=BC
 [title.Text1]
 Meter=String
 MeterStyle=Set.String:S
-Text=Season 2 is out!
+Text=ValliStart released!
 X=(#Set.W#/2)
 Y=((110*[Set.S])-#Scroll#)
 FontSize=(40*[Set.S])
@@ -51,8 +51,8 @@ W=(#Set.W#*0.8)
 H=(#Set.H#*0.5)
 Clipstring=1
 StringAlign=Center
-Text=This marks a new beginning of Core. Thank you everyone who had supported me up till now! I will continue to make the most customizable, functional and aesthetically pleasing skins.#CRLF##CRLF#For now on, new skins will be released in a rate of 1 per 2-4 weeks in order for me to cope with my studies.#CRLF#A new skin, ValliStart will be released next week. Stay tuned!#CRLF##CRLF#If you want to support me, buy me a cup of coffee on ko-fi, or join my discord server and hang out!
-InlinePattern=Thank you | new skins will be released in a rate of 1 per 2-4 weeks | ValliStart
+Text=ValliStart have been released! Head over to the skins page and install it!#CRLF##CRLF#ValliStart replaces the start menu with a centered design. Originated from a concept art for Windows 10 SunValley update, it acts as an control center and a start menu. You can choose to have it replace the start menu, or a seperate menu which can be summoned with a hotkey.#CRLF##CRLF#If you want to support me, buy me a cup of coffee on ko-fi, or join my discord server and hang out!
+InlinePattern=Head over to the skins page and install it!|control center and a start menu
 InlineSetting=Color | #Set.Accent_Color#
 InlinePattern2=ko-fi
 InlineSetting2=Color | FFA56D
@@ -94,24 +94,24 @@ MeterStyle=Set.String:S | ButtonText:S
 
 
 
-[title.Text2]
-Meter=String
-MeterStyle=Set.String:S
-Text=Change log
-X=(#Set.W#/2)
-Y=(30*[Set.S])R
-FontSize=(20*[Set.S])
-FontFace=Poppins SemiBold
-StringAlign=Center
-InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
+; [title.Text2]
+; Meter=String
+; MeterStyle=Set.String:S
+; Text=Change log
+; X=(#Set.W#/2)
+; Y=(30*[Set.S])R
+; FontSize=(20*[Set.S])
+; FontFace=Poppins SemiBold
+; StringAlign=Center
+; InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
 
-[Text.2]
-Meter=String
-MeterStyle=Set.String:S
-X=r
-Y=(40*[Set.S])r
-W=(#Set.W#*0.8)
-H=(#Set.H#*0.5)
-Clipstring=1
-StringAlign=Center
-Text=Redesigned the core completely, again.#CRLF#Fixed shortcuts not working with some devices#CRLF#Added animations to a few accessories#CRLF#Reduced duration of welcome page#CRLF#Fixed keylaunch actions not registering quotes#CRLF#Added skin spotlight#CRLF#Added accessibility options to core to cope with crashes#CRLF#Added font gallery#CRLF#Text now scales properly in text boxes#CRLF#Update toast now allows you to dismiss#CRLF#Core updates now uses powershell instead of autohotkey
+; [Text.2]
+; Meter=String
+; MeterStyle=Set.String:S
+; X=r
+; Y=(40*[Set.S])r
+; W=(#Set.W#*0.8)
+; H=(#Set.H#*0.5)
+; Clipstring=1
+; StringAlign=Center
+; Text=Redesigned the core completely, again.#CRLF#Fixed shortcuts not working with some devices#CRLF#Added animations to a few accessories#CRLF#Reduced duration of welcome page#CRLF#Fixed keylaunch actions not registering quotes#CRLF#Added skin spotlight#CRLF#Added accessibility options to core to cope with crashes#CRLF#Added font gallery#CRLF#Text now scales properly in text boxes#CRLF#Update toast now allows you to dismiss#CRLF#Core updates now uses powershell instead of autohotkey

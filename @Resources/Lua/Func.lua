@@ -43,16 +43,18 @@ function returnBool(Variable, Match, ReturnStringT, ReturnStringF)
 	end
 end
 
-function startDrop(variant, handler, skin)
+function startDrop(variant, handler, skin, arg1)
 	local skin = skin or SKIN:GetVariable('Skin.Name')
 	local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Dropdown\\Main.ini'
 	local MyMeter = SKIN:GetMeter(handler)
 	local PosX = SKIN:GetX() + MyMeter:GetX()
 	local PosY = SKIN:GetY() + MyMeter:GetY()
-	local scale = SKIN:GetMeasure('Set.S'):GetValue()
+	local scalemeasure = SKIN:GetMeasure('Set.S')
+	if scalemeasure ~= nil then scale = scalemeasure:GetValue() else scale = tonumber(SKIN:GetVariable('Sec.S')) end
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.name', skin, File)
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
+	if arg1 then SKIN:Bang('!WriteKeyvalue', 'Variables', 'arg1', arg1, File) end
 	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Dropdown')
 	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Dropdown')
 end
@@ -66,6 +68,20 @@ function startPopup(variant)
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
 	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Popup')
 	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Popup')
+end
+
+function startBox(variant, arg1, arg2, arg3, arg4)
+	local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Box\\Main.ini'
+	local scale = SKIN:GetMeasure('Set.S'):GetValue()
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
+	if arg1 then SKIN:Bang('!WriteKeyvalue', 'Variables', 'arg1', arg1, File) end
+	if arg2 then SKIN:Bang('!WriteKeyvalue', 'Variables', 'arg2', arg2, File) end
+	if arg3 then SKIN:Bang('!WriteKeyvalue', 'Variables', 'arg3', arg3, File) end
+	if arg4 then SKIN:Bang('!WriteKeyvalue', 'Variables', 'arg4', arg4, File) end
+	SKIN:Bang('!DeactivateConfig', '#JaxCore\\Accessories\\Box')
+	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Box')
+	-- SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Box')
 end
 
 function startSide(variant, num)
@@ -88,18 +104,18 @@ function startSide(variant, num)
 	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Overlay')
 end
 
-function startJax()
-	if tonumber(SKIN:GetVariable('QoL')) == 1 then 
-		SKIN:Bang('!Draggable', '0')
-		local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Overlay\\Main.ini'
-		local scale = SKIN:GetMeasure('Set.S'):GetValue()
-		local PosX = SKIN:GetX() + tonumber(SKIN:GetMeter('Logo'):GetX())
-		local PosY = SKIN:GetY() + tonumber(SKIN:GetMeter('Logo'):GetY())
-		local DimH = 256 * scale
-		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', 'Logo', File)
-		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
-		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.H', DimH, File)
-		SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Overlay')
-		SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Overlay')
-	end
-end
+-- function startJax()
+-- 	if tonumber(SKIN:GetVariable('QoL')) == 1 then 
+-- 		SKIN:Bang('!Draggable', '0')
+-- 		local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Overlay\\Main.ini'
+-- 		local scale = SKIN:GetMeasure('Set.S'):GetValue()
+-- 		local PosX = SKIN:GetX() + tonumber(SKIN:GetMeter('Logo'):GetX())
+-- 		local PosY = SKIN:GetY() + tonumber(SKIN:GetMeter('Logo'):GetY())
+-- 		local DimH = 256 * scale
+-- 		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', 'Logo', File)
+-- 		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
+-- 		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.H', DimH, File)
+-- 		SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Overlay')
+-- 		SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Overlay')
+-- 	end
+-- end

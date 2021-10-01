@@ -1,5 +1,5 @@
 [Variables]
-Temp.Layout=QWERTY
+Temp.Layout=WASD
 Temp.Circ=1
 Temp.Mouse=1
 

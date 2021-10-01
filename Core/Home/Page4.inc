@@ -35,7 +35,7 @@ MeterStyle=Set.String:S
 X=r
 Y=(78*[Set.S])r
 StringAlign=Center
-Text=Stylize your desktop with a single click.
+Text=Stylize your desktop with a single click.#CRLF##CRLF#Scheduled to be released after CoreEnv.
 
 [Text.2]
 Meter=String

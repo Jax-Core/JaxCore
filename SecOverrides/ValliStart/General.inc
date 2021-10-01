@@ -26,33 +26,40 @@ MeterStyle=Set.String:S |  Set.OptionCat:S
 Meter=String
 Text=Time format: 24(H) 12(I)
 MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:238]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option12]
+Meter=String
+Text=Show seconds
+MeterStyle=Set.String:S | Set.OptionName:S
 
 
 ;================================================================================================================================================================================
 
 [S]
 Meter=String
-Text=Pinned shortcuts
+Text=Configuration
 MeterStyle=Set.String:S | Set.OptionCat:S
 
 [Option21]
 Meter=String
-Text=Open shortcuts folder
+Text=Pinned shortcuts directory
 MeterStyle=Set.String:S | Set.OptionName:S
-; [Set.Div:S190322131238]
-; Meter=Shape
-; MeterStyle=Set.Div:S
-; [Option22]
-; Meter=String
-; Text=Weather location
-; MeterStyle=Set.String:S | Set.OptionName:S
-; [Set.Div:S19w2s0328]
-; Meter=Shape
-; MeterStyle=Set.Div:S
-; [Option23]
-; Meter=String
-; Text=Unit (Metric/Imperial)
-; MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:S190322131238]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option22]
+Meter=String
+Text=Orb image
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:S19w2s0328]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option23]
+Meter=String
+Text=Start text
+MeterStyle=Set.String:S | Set.OptionName:S
 
 ;================================================================================================================================================================================
 
@@ -91,6 +98,10 @@ Text=24-hour
 FontColor=([&Func:returnBool('2412', 'H')] = 1 ? 0 : 255),([&Func:returnBool('2412', 'H')] = 1 ? 0 : 255),([&Func:returnBool('2412', 'H')] = 1 ? 0 : 255)
 LeftMouseUpAction=[&Func:GroupVar('#CURRENTSECTION#', '1Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
 MeterStyle=Set.String:S | Set.PickOption_1:S
+[ShowSec]
+Meter=Shape
+MeterStyle=Set.Bool:S
+Y=([Option12:Y]-#Set.P#+(-20/2+8)*[Set.S])
 
 [Button21]
 Meter=Shape
@@ -106,6 +117,25 @@ MEasure=Plugin
 Plugin=PowershellRM
 DynamicVariables=1
 ScriptFile=#@#Powershell\CheckData.ps1
+
+[Button22]
+Meter=Shape
+MeterStyle=Set.Button:S
+Act=[!CommandMEasure Func "startBox('ValliOrb', '#IconName#')"]
+Y=([Option22:Y]-[ContentContainer:Y]+(-30/2+8)*[Set.S])
+[Value22]
+Meter=String
+Text=#IconName#
+MeterStyle=Set.String:S | Set.Value:S
+
+[StartText]
+Meter=Shape
+MeterStyle=Set.TextBox:S
+Y=([Option23:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Value23]
+Meter=String
+Text=#StartText#
+MeterStyle=Set.String:S | Set.Value:S
 
 
 @includeKeys=#SKINSPATH##Skin.Name#\@Resources\Actions\HotKeys.ini

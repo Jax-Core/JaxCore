@@ -22,14 +22,28 @@ Meter=Shape
 MeterStyle=Set.Div:S
 [Option03]
 Meter=String
-Text=Rounded corners
+Text=Corner roundness
 MeterStyle=Set.String:S | Set.OptionName:S
 [Set.Div:sdsdss]
 Meter=Shape
 MeterStyle=Set.Div:S
 [Option04]
 Meter=String
-Text=Legacy slide animations
+Text=Slide animations
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:sdsds123s]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option05]
+Meter=String
+Text=Start location
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:s123s]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option06]
+Meter=String
+Text=Draw strokes
 MeterStyle=Set.String:S | Set.OptionName:S
 
 
@@ -135,18 +149,36 @@ MeterStyle=Set.String:S | Set.Value:S
 
 [Edge]
 Meter=Shape
-MeterStyle=Set.Bool:S
-Y=([Option03:Y]-#Set.P#+(-20/2+8)*[Set.S])
+MeterStyle=Set.TextBox:S
+Y=([Option03:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Value03]
+Meter=String
+Text=#Edge#
+MeterStyle=Set.String:S | Set.Value:S
 
-[Animated]
+[Animated:]
 Meter=Shape
-MeterStyle=Set.Bool:S
-Y=([Option04:Y]-#Set.P#+(-20/2+8)*[Set.S])
-
-[FetchImage]
-Meter=Shape
-MeterStyle=Set.Bool:S
-Y=([Option10:Y]-#Set.P#+(-20/2+8)*[Set.S])
+0Act=[!WriteKeyValue Variables Animated "0" "#Sec.SaveLocation#"]
+1Act=[!WriteKeyValue Variables Animated "1" "#Sec.SaveLocation#"]
+2Act=[!WriteKeyValue Variables Animated "2" "#Sec.SaveLocation#"]
+MeterStyle=Set.Pick3:S
+Shape2=Rectangle (100*[Set.S]*([&Func:returnBool('Animated', '1')]+[&Func:returnBool('Animated', '2')]*2)),0,(300/3*[Set.S]),(30*[Set.S]),(7*[Set.S]) | Fill Color #Set.Text_Color# | StrokeWidth 0
+Y=([Option04:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Animated:0]
+Meter=String
+Text=None
+FontColor=([&Func:returnBool('Animated', '0')] = 1 ? 0 : 255),([&Func:returnBool('Animated', '0')] = 1 ? 0 : 255),([&Func:returnBool('Animated', '0')] = 1 ? 0 : 255)
+MeterStyle=Set.String:S | Set.PickOption3_0:S
+[Animated:1]
+Meter=String
+Text=Legacy
+FontColor=([&Func:returnBool('Animated', '1')] = 1 ? 0 : 255),([&Func:returnBool('Animated', '1')] = 1 ? 0 : 255),([&Func:returnBool('Animated', '1')] = 1 ? 0 : 255)
+MeterStyle=Set.String:S | Set.PickOption3_1:S
+[Animated:2]
+Meter=String
+Text=Dynamic
+FontColor=([&Func:returnBool('Animated', '2')] = 1 ? 0 : 255),([&Func:returnBool('Animated', '2')] = 1 ? 0 : 255),([&Func:returnBool('Animated', '2')] = 1 ? 0 : 255)
+MeterStyle=Set.String:S | Set.PickOption3_2:S
 
 [Location:]
 Meter=Shape
@@ -155,7 +187,7 @@ Meter=Shape
 2Act=[!WriteKeyValue Variables Location "Corner" "#Sec.SaveLocation#"]
 MeterStyle=Set.Pick3:S
 Shape2=Rectangle (100*[Set.S]*([&Func:returnBool('Location', 'Center')]+[&Func:returnBool('Location', 'Corner')]*2)),0,(300/3*[Set.S]),(30*[Set.S]),(7*[Set.S]) | Fill Color #Set.Text_Color# | StrokeWidth 0
-Y=([Option20:Y]-#Set.P#+(-30/2+8)*[Set.S])
+Y=([Option05:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [Location:0]
 Meter=String
 Text=Bottom
@@ -170,6 +202,40 @@ MeterStyle=Set.String:S | Set.PickOption3_1:S
 Meter=String
 Text=Corner
 FontColor=([&Func:returnBool('Location', 'Corner')] = 1 ? 0 : 255),([&Func:returnBool('Location', 'Corner')] = 1 ? 0 : 255),([&Func:returnBool('Location', 'Corner')] = 1 ? 0 : 255)
+MeterStyle=Set.String:S | Set.PickOption3_2:S
+
+[Stroke]
+Meter=Shape
+MeterStyle=Set.Bool:S
+Y=([Option06:Y]-#Set.P#+(-20/2+8)*[Set.S])
+
+[FetchImage]
+Meter=Shape
+MeterStyle=Set.Bool:S
+Y=([Option10:Y]-#Set.P#+(-20/2+8)*[Set.S])
+
+[Blur:]
+Meter=Shape
+0Act=[!WriteKeyValue Variables Blur "None" "#Sec.SaveLocation#"]
+1Act=[!WriteKeyValue Variables Blur "Acrylic" "#Sec.SaveLocation#"]
+2Act=[!WriteKeyValue Variables Blur "Blur" "#Sec.SaveLocation#"]
+MeterStyle=Set.Pick3:S
+Shape2=Rectangle (100*[Set.S]*([&Func:returnBool('Blur', 'Acrylic')]+[&Func:returnBool('Blur', 'Blur')]*2)),0,(300/3*[Set.S]),(30*[Set.S]),(7*[Set.S]) | Fill Color #Set.Text_Color# | StrokeWidth 0
+Y=([Option20:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Blur:0]
+Meter=String
+Text=None
+FontColor=([&Func:returnBool('Blur', 'None')] = 1 ? 0 : 255),([&Func:returnBool('Blur', 'None')] = 1 ? 0 : 255),([&Func:returnBool('Blur', 'None')] = 1 ? 0 : 255)
+MeterStyle=Set.String:S | Set.PickOption3_0:S
+[Blur:1]
+Meter=String
+Text=Acrylic
+FontColor=([&Func:returnBool('Blur', 'Acrylic')] = 1 ? 0 : 255),([&Func:returnBool('Blur', 'Acrylic')] = 1 ? 0 : 255),([&Func:returnBool('Blur', 'Acrylic')] = 1 ? 0 : 255)
+MeterStyle=Set.String:S | Set.PickOption3_1:S
+[Blur:2]
+Meter=String
+Text=Standard
+FontColor=([&Func:returnBool('Blur', 'Blur')] = 1 ? 0 : 255),([&Func:returnBool('Blur', 'Blur')] = 1 ? 0 : 255),([&Func:returnBool('Blur', 'Blur')] = 1 ? 0 : 255)
 MeterStyle=Set.String:S | Set.PickOption3_2:S
 
 [Alpha]

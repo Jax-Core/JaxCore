@@ -1,15 +1,21 @@
-[Option21]
+[12]
 Meter=String
-Text=Text color
-MeterStyle=Set.String:S | Set.OptionName:S
-[Option22]
+Text=Fill color
+X=r
+Y=(#Sec.P#)R
+MeterStyle=Sec.String:S
+[13]
 Meter=String
 Text=Glow color
-MeterStyle=Set.String:S | Set.OptionName:S
-[Option23]
+X=r
+Y=(#Sec.P#)R
+MeterStyle=Sec.String:S
+[14]
 Meter=String
-Text=Glow Sigma
-MeterStyle=Set.String:S | Set.OptionName:S
+Text=Glow amount
+X=r
+Y=(#Sec.P#)R
+MeterStyle=Sec.String:S
 
 ; ---------------------------------------------------------------------------- ;
 ;                                     Input                                    ;
@@ -18,24 +24,25 @@ MeterStyle=Set.String:S | Set.OptionName:S
 [1st]
 Meter=Shape
 MeterStyle=Set.ColorPacity:S
-Y=([Option21:Y]-#Set.P#+(-30/2+8)*[Set.S])
+Y=[12:Y]
 [Value21]
 Meter=String
 Text=#1stOpacity#
-MeterStyle=Set.String:S | Set.Pacity:S
+MeterStyle=Sec.String:S | Set.Pacity:S
 [3rd]
 Meter=Shape
 MeterStyle=Set.ColorPacity:S
-Y=([Option22:Y]-#Set.P#+(-30/2+8)*[Set.S])
+Y=[13:Y]
 [Value22]
 Meter=String
 Text=#3rdOpacity#
-MeterStyle=Set.String:S | Set.Pacity:S
+MeterStyle=Sec.String:S | Set.Pacity:S
 [GlowSigma]
 Meter=Shape
 MeterStyle=Set.Textbox:S
-Y=([Option23:Y]-#Set.P#+(-30/2+8)*[Set.S])
+Leftmouseupaction=[!SetVariable Editing "#CURRENTSECTION#"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5*#Sec.S#)"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5*#Sec.S#)"][!CommandMeasure Input:M "ExecuteBatch 2"]
+Y=[14:Y]
 [Value23]
 Meter=String
 Text=#GlowSigma#
-MeterStyle=Set.String:S | Set.Value:S
+MeterStyle=Sec.String:S | Set.Value:S

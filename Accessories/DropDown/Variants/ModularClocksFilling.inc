@@ -1,5 +1,5 @@
 [Variables]
-SaveLocation="#SKINSPATH#ModularCLocks\@Resources\Vars.inc"
+SaveLocation="#SKINSPATH#ModularCLocks\@Resources\Data\#arg1#Data.inc"
 SaveKey=Fill
 RGBSpeed=1
 
@@ -10,7 +10,7 @@ UpdateDivider=1
 
 [String:S]
 Text=#CURRENTSECTION# Fill
-LeftMouseUpAction=[!WriteKeyValue Variables "#SaveKey#" "#CURRENTSECTION#" "#SaveLocatioN#"][!Refresh "#JaxCore\Main"][!Refresh "ModularClocks\Main"][!DeactivateConfig]
+LeftMouseUpAction=[!WriteKeyValue Variables "#arg1##SaveKey#" "#CURRENTSECTION#" "#SaveLocatioN#"][!Refresh "#JaxCore\Accessories\Box"][!Refresh "#JaxCore\Main"][!Delay 100][!CommandMeasure "Script:M" "generateBlur()" "#JaxCore\Main"][!DeactivateConfig]
 
 ; ---------------------------------------------------------------------------- ;
 ;                                    Content                                   ;
@@ -34,13 +34,13 @@ MeterStyle=Div:S
 Meter=String
 InlineSetting=Shadow | 0 | 0 | 2 | 255,255,255,255
 MeterStyle=String:S
-[Div:3]
-Meter=Shape
-MeterStyle=Div:S
-[Accent]
-Meter=String
-FontColor=FFE636
-MeterStyle=String:S
+; [Div:3]
+; Meter=Shape
+; MeterStyle=Div:S
+; [Accent]
+; Meter=String
+; FontColor=FFE636
+; MeterStyle=String:S
 [Div:4]
 Meter=Shape
 MeterStyle=Div:S

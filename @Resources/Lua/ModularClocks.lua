@@ -46,7 +46,7 @@ function Move()
     SAH = SKIN:GetVariable('SCREENAREAHEIGHT')
     Scale = SKIN:GetVariable('Scale')
     SetS = SKIN:GetMeasure('Set.S'):GetValue()
-    SKIN:Bang('!Move', '('..SAW..'-500*'..Scale..')', '('..SAH..'/2-500*#Scale#/2)', 'ModularClocks\\Main')
+    SKIN:Bang('!Move', '('..SAW..'-510*'..Scale..')', '('..SAH..'/2)', 'ModularClocks\\Main')
     SKIN:Bang('!ZPos', '1', 'ModularClocks\\Main')
     SKIN:Bang('!Draggable', '0', 'ModularClocks\\Main')
 end
@@ -86,4 +86,69 @@ function Restore()
             SKIN:Bang('!DeactivateConfig', 'ModularClocks\\Main')
         end
     end
+end
+
+function generateBlur()
+    local File = io.open(SKIN:GetVariable('SKINSPATH')..'ModularClocks\\@Resources\\Cog\\Fill\\Blur.inc','w')
+    if SKIN:GetVariable('Layout') == 'Single' then Main = 1 elseif SKIN:GetVariable('Layout') == 'Double' then Main = 2 end
+    if SKIN:GetVariable('Rows') == 'Double' then Rows = 1 elseif SKIN:GetVariable('Rows') == 'Triple' then Rows = 2 else Rows = 0 end
+    if Main >= 1 and SKIN:GetVariable('MainFill') == 'Blur' then
+        File:write(
+            '[img1]\n'
+            ,'Meter=Image\n'
+            ,'ImageName=#@#Export\\Blur.png\n'
+            ,'DynamicVariables=1\n'
+            ,'W=(#SCREENAREAWIDTH#)\n'
+            ,'H=(#SCREENAREAHEIGHT#)\n'
+            ,'X=(-#CURRENTCONFIGX#-[1:X])\n'
+            ,'Y=(-#CURRENTCONFIGY#-[1:Y])\n'
+            ,'COntainer=1\n'
+        )
+    end
+    if Main == 2 and SKIN:GetVariable('MainFill') == 'Blur' then
+        File:write(
+            '[img2]\n'
+            ,'Meter=Image\n'
+            ,'ImageName=#@#Export\\Blur.png\n'
+            ,'DynamicVariables=1\n'
+            ,'W=(#SCREENAREAWIDTH#)\n'
+            ,'H=(#SCREENAREAHEIGHT#)\n'
+            ,'X=(-#CURRENTCONFIGX#-[2:X])\n'
+            ,'Y=(-#CURRENTCONFIGY#-[2:Y])\n'
+            ,'COntainer=2\n'
+        )
+    end
+    if Rows >= 1 and SKIN:GetVariable('2Fill') == 'Blur' then
+        File:write(
+            '[img3]\n'
+            ,'Meter=Image\n'
+            ,'ImageName=#@#Export\\Blur.png\n'
+            ,'DynamicVariables=1\n'
+            ,'W=(#SCREENAREAWIDTH#)\n'
+            ,'H=(#SCREENAREAHEIGHT#)\n'
+            ,'X=(-#CURRENTCONFIGX#-[d1:X])\n'
+            ,'Y=(-#CURRENTCONFIGY#-[d1:Y])\n'
+            ,'COntainer=d1\n'
+        )
+    end
+    if Rows == 2 and SKIN:GetVariable('3Fill') == 'Blur' then
+        File:write(
+            '[img4]\n'
+            ,'Meter=Image\n'
+            ,'ImageName=#@#Export\\Blur.png\n'
+            ,'DynamicVariables=1\n'
+            ,'W=(#SCREENAREAWIDTH#)\n'
+            ,'H=(#SCREENAREAHEIGHT#)\n'
+            ,'X=(-#CURRENTCONFIGX#-[d2:X])\n'
+            ,'Y=(-#CURRENTCONFIGY#-[d2:Y])\n'
+            ,'COntainer=d2\n'
+        )
+    end
+    File:write(
+        '@includeWallpaper=#SKINSPATH##JaxCore\\@Resources\\Includes\\WallpaperCheck.inc\n'
+        ,'[MM]\n'
+        ,'Image=File #Cache.Wallpaper# | RenderSize (#Img.W#/4),(#Img.H#/4) | Modulate #BlurModulate# | Blur #BlurRadius#,#BlurSigma#\n'
+    )
+    File:close()
+    SKIN:Bang('!Refresh', 'ModularClocks\\Main')
 end
