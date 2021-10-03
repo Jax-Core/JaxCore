@@ -40,7 +40,7 @@ MeterStyle=Set.String:S | Set.OptionCat:S
 
 [Option20]
 Meter=String
-Text=Global size
+Text=Skin scale
 MeterStyle=Set.String:S | Set.OptionName:S
 [Set.Div:S192038sdsds]
 Meter=Shape

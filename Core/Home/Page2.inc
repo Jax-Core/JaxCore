@@ -94,24 +94,24 @@ MeterStyle=Set.String:S | ButtonText:S
 
 
 
-; [title.Text2]
-; Meter=String
-; MeterStyle=Set.String:S
-; Text=Change log
-; X=(#Set.W#/2)
-; Y=(30*[Set.S])R
-; FontSize=(20*[Set.S])
-; FontFace=Poppins SemiBold
-; StringAlign=Center
-; InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
+[title.Text2]
+Meter=String
+MeterStyle=Set.String:S
+Text=Change log
+X=(#Set.W#/2)
+Y=(30*[Set.S])R
+FontSize=(20*[Set.S])
+FontFace=Poppins SemiBold
+StringAlign=Center
+InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
 
-; [Text.2]
-; Meter=String
-; MeterStyle=Set.String:S
-; X=r
-; Y=(40*[Set.S])r
-; W=(#Set.W#*0.8)
-; H=(#Set.H#*0.5)
-; Clipstring=1
-; StringAlign=Center
-; Text=Redesigned the core completely, again.#CRLF#Fixed shortcuts not working with some devices#CRLF#Added animations to a few accessories#CRLF#Reduced duration of welcome page#CRLF#Fixed keylaunch actions not registering quotes#CRLF#Added skin spotlight#CRLF#Added accessibility options to core to cope with crashes#CRLF#Added font gallery#CRLF#Text now scales properly in text boxes#CRLF#Update toast now allows you to dismiss#CRLF#Core updates now uses powershell instead of autohotkey
+[Text.2]
+Meter=String
+MeterStyle=Set.String:S
+X=r
+Y=(40*[Set.S])r
+W=(#Set.W#*0.8)
+H=(#Set.H#*0.5)
+Clipstring=1
+StringAlign=Center
+Text=3611 - added customization support for Plainext1.6#CRLF#3611 - added hidden button to skip start animation in case it broke

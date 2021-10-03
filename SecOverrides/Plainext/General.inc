@@ -1,22 +1,3 @@
-[Header]
-Meter=String
-X=(20*[Set.S])
-Y=(20*[Set.S]+#Scroll#)
-DynamicVariables=1
-Text=General /Text
-FontSize=(20*[Set.S])
-FontWeight=450
-MeterStyle=Set.String:S
-Container=ContentContainer
-Leftmouseupaction=[!Refresh]
-InlinePattern=\s(.*)
-InlineSetting=Size | 10
-InlinePattern2=\s(.*)
-InlineSetting2=Color | 150,150,150
-;================================================================================================================================================================================
-
-;================================================================================================================================================================================
-
 
 [PrefixTextHeader]
 Meter=String
@@ -29,7 +10,7 @@ X=(30*[Set.S])
 Y=(10*[Set.S])R
 Container=ContentContainer
 DynamicVariables=1
-Shape=Rectangle 0,0,(#Set.W#-#Set.L#-#Set.P#*4),(120*[Set.S]),3,3 | StrokeWidth 2 | Fill Color 0,0,0,1 | Extend Fill
+Shape=Rectangle 0,0,(#Set.W#-#Set.L#-#Set.P#*4),(130*[Set.S]),3,3 | StrokeWidth 2 | Fill Color 0,0,0,1 | Extend Fill
 Fill=Stroke Color 255,255,255,50
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color 255,255,255,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color 255,255,255,50"][!UpdateMeter #CURRENTSECTION#][!Redraw]
@@ -45,12 +26,18 @@ MeterStyle=Set.String:S
 Container=ContentContainer
 DynamicVariables=1
 
+[Option01]
+Meter=String
+Y=(150*[Set.S])r
+Text=Line breaker
+MeterStyle=Set.String:S | Set.OptionName:S
+
 ;================================================================================================================================================================================
 
 [Components]
 Meter=String
 X=(30*[Set.S])
-Y=(135*[Set.S])r
+Y=(50*[Set.S])r
 FontSize=(14*[Set.S])
 FontWeight=500
 Text=Components
@@ -62,6 +49,13 @@ Meter=String
 Text=Prefix
 MeterStyle=Set.String:S | Set.OptionName:S
 [Set.Div:S19203wds]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option201]
+Meter=String
+Text=Name
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:3wds]
 Meter=Shape
 MeterStyle=Set.Div:S
 [Option21]
@@ -148,6 +142,14 @@ MeterStyle=Set.String:S | Set.OptionName:S
 ; Text=TextVarName
 ; MeterStyle=Set.String:S | Set.Value:S
 
+[BreakerString]
+Meter=Shape
+MeterStyle=Set.Textbox:S
+Y=([Option01:Y]-#Set.P#+(-30/2+8)*[Set.S])
+[Value01]
+Meter=String
+Text=#BreakerString#
+MeterStyle=Set.String:S | Set.Value:S
 
 ;================================================================================================================================================================================
 
@@ -155,6 +157,10 @@ MeterStyle=Set.String:S | Set.OptionName:S
 Meter=Shape
 MeterStyle=Set.Bool:S
 Y=([Option20:Y]-#Set.P#+(-20/2+8)*[Set.S])
+[Name]
+Meter=Shape
+MeterStyle=Set.Bool:S
+Y=([Option201:Y]-#Set.P#+(-20/2+8)*[Set.S])
 [time]
 Meter=Shape
 MeterStyle=Set.Bool:S

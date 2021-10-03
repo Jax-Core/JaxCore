@@ -202,7 +202,7 @@ Container=ContentContainer
 
 [Option01]
 Meter=String
-Text=Skin scaling
+Text=Skin scale
 MeterStyle=Set.String:S | Set.OptionName:S
 
 

@@ -5,7 +5,7 @@ MeterStyle=Set.String:S | Set.OptionCat:S
 
 [Option01]
 Meter=String
-Text=Scaling factor
+Text=Skin scale
 MeterStyle=Set.String:S | Set.OptionName:S
 [Set.Div:S19131238]
 Meter=Shape

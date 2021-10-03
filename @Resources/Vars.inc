@@ -1,5 +1,5 @@
 [Variables]
-UserNameCheckVariable=Jax Tam
+UserNameCheckVariable=Jax Tam 
 LastVersionNumber=03600
 ; ----------------------------- Scaling variables ---------------------------- ;
 ; Set.S=0.9
@@ -33,4 +33,4 @@ QolPlugin=Plugin
 
 [Set.S]
 Measure=Calc
-Formula=0.7
+Formula=0.73

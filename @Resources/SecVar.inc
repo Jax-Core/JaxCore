@@ -1,5 +1,5 @@
 [Variables]
-Skin.Name=ValliStart
+Skin.Name=Plainext
 ; Skin.Shorthand=
 
 Skin.Set_Page=Info

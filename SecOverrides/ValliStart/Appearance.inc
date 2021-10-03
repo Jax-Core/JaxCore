@@ -15,7 +15,7 @@ Meter=Shape
 MeterStyle=Set.Div:S
 [Option02]
 Meter=String
-Text=Global scaling
+Text=Skin scale
 MeterStyle=Set.String:S | Set.OptionName:S
 [Set.Div:S19203s8sdsds]
 Meter=Shape
