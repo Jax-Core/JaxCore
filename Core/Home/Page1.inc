@@ -13,6 +13,14 @@ ifnotmatchaction=[!WriteKeyValue Variables Sec.Page 1 "#SKINSPATH#\#JaxCore\Acce
 DynamicVariables=1
 UpdateDivider=-1
 
+[Check4New:M]
+Measure=String
+String=#LastVersionNumber#
+IfMatch=^#Core.Ver#$
+ifnotmatchaction=[!WriteKeyValue Variables Sec.Page 2][!WriteKeyValue Variables LastVersionNumber "#Core.Ver#" "#@#Vars.inc"][!Refresh]
+IfMatchMode=1
+DynamicVariables=1
+
 [WebParser]
 Measure=WebParser
 URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/main/%40Resources/Version.inc

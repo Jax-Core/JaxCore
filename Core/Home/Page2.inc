@@ -114,4 +114,4 @@ W=(#Set.W#*0.8)
 H=(#Set.H#*0.5)
 Clipstring=1
 StringAlign=Center
-Text=3611 - added customization support for Plainext1.6#CRLF#3611 - added hidden button to skip start animation in case it broke
+Text=3620 - ValliStart: You can toggle monitor configuration section off and open the start menu by clicking on a desired key#CRLF#3611 - added customization support for Plainext1.6#CRLF#3611 - added hidden button to skip start animation in case it broke

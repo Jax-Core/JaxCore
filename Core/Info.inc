@@ -140,13 +140,13 @@ IfMatchMode=1
 ; ---------------------------------------------------------------------------- ;
 
 
-[Set.GeneratePages:M]
-Measure=Script
-ScriptFile=#@#Lua\GenSet.lua
+; [Set.GeneratePages:M]
+; Measure=Script
+; ScriptFile=#@#Lua\GenSet.lua
 
-[Refresher]
-Measure=Calc
-Formula=0
-Ifcondition=Refresher = 0
-IfTrueAction=[!WriteKeyvalue #CURRENTSECTION# Formula 1 "#ROOTCONFIGPATH#Core\Info.inc"][!Delay 100][!Refresh]
-IfFalseAction=[!WriteKeyvalue #CURRENTSECTION# Formula 0 "#ROOTCONFIGPATH#Core\Info.inc"]
+; [Refresher]
+; Measure=Calc
+; Formula=0
+; Ifcondition=Refresher = 0
+; IfTrueAction=[!WriteKeyvalue #CURRENTSECTION# Formula 1 "#ROOTCONFIGPATH#Core\Info.inc"][!Delay 100][!Refresh]
+; IfFalseAction=[!WriteKeyvalue #CURRENTSECTION# Formula 0 "#ROOTCONFIGPATH#Core\Info.inc"]

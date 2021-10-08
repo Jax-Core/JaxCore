@@ -1,5 +1,5 @@
 [Variables]
-CCW=777
+CCW=765
 CCH=545
 [Position]
 Meter=Shape

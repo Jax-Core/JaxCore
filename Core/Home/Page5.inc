@@ -124,7 +124,7 @@ MeterStyle=Set.String:S | Set.OptionCat:S
 
 [Option01]
 Meter=String
-Text=Auto refresh skins
+Text=Animated context menu
 MeterStyle=Set.String:S | Set.OptionName:S
 [Set.Div:S190322131238]
 Meter=Shape
@@ -189,10 +189,11 @@ MeterStyle=Set.String:S | Set.OptionName:S
 ;                                     Input                                    ;
 ; ---------------------------------------------------------------------------- ;
 
-[Set.Auto_Refresh]
+[Ctx.Animated]
 Meter=Shape
 MeterStyle=Set.Bool:S
 Y=([Option01:Y]-[ContentContainer:Y]-(20/2-12/2)*[Set.S])
+LeftMouseupaction=[!WriteKeyvalue Variables "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)" "#Sec.SaveLocation#"][!WriteKeyvalue Variables "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)" "#ROOTCONFIGPATH#Ctx\Main.ini"][!Refresh]
 
 [ActiveChecker]
 Measure=Plugin

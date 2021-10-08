@@ -1,6 +1,6 @@
 [Variables]
-Skin.Name=Plainext
+Skin.Name=ValliStart
 ; Skin.Shorthand=
 
-Skin.Set_Page=Info
+Skin.Set_Page=ColorScheme
 Skin.Ctx_Ctx=Refresh

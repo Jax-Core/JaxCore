@@ -6,14 +6,21 @@ MeterStyle=Set.String:S | Set.OptionCat:S
 [Option01]
 Meter=String
 X=r
-Text=HotKey
+Text=Override the Start Menu (uses Win key as hotkey)
 MeterStyle=Set.String:S | Set.OptionName:S
 [Set.Div:S19131238]
 Meter=Shape
 MeterStyle=Set.Div:S
 [Option02]
 Meter=String
-Text=Override the Start Menu (uses Win key as hotkey)
+Text=Activation Hotkey
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:8]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option03]
+Meter=String
+Text=Type to search when menu is active
 MeterStyle=Set.String:S | Set.OptionName:S
 ;================================================================================================================================================================================
 
@@ -63,20 +70,26 @@ MeterStyle=Set.String:S | Set.OptionName:S
 
 ;================================================================================================================================================================================
 
-[Button01]
-Meter=Shape
-MeterStyle=Set.Button:S
-Y=([Option01:Y]-#Set.P#+(-30/2+8)*[Set.S])
-Act=[!CommandMeasure Func "startSide('Hotkey')"]
-[Value01]
-Meter=String
-Text=#KeyInString#
-MeterStyle=Set.String:S | Set.Value:S
 
 [ReplaceWin]
 Meter=Shape
 MeterStyle=Set.Bool:S
-Y=([Option02:Y]-#Set.P#+(-20/2+8)*[Set.S])
+Y=([Option01:Y]-#Set.P#+(-20/2+8)*[Set.S])
+
+[Button02]
+Meter=Shape
+MeterStyle=Set.Button:S
+Y=([Option02:Y]-#Set.P#+(-30/2+8)*[Set.S])
+Act=[!CommandMeasure Func "startSide('Hotkey')"]
+[Value02]
+Meter=String
+Text=#KeyInString#
+MeterStyle=Set.String:S | Set.Value:S
+
+[TypeToSearch]
+Meter=Shape
+MeterStyle=Set.Bool:S
+Y=([Option03:Y]-#Set.P#+(-20/2+8)*[Set.S])
 
 
 [2412:]
