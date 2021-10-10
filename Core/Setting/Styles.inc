@@ -2,16 +2,19 @@
 DynamicWindowSize=1
 AccurateText=1
 OnRefreshAction=[!CommandMeasure DefaultStartActions "Execute 1"]
-
 DefaultFadeDuration=100
 DefaultKeepOnscreen=1
+
+[Focus]
+Measure=Plugin
+Plugin=Focus
+FocusOnRefresh=1
 
 [DefaultStartActions]
 Measure=Plugin
 Plugin=ActionTimer
-ActionList1=Custom1 | Focus | Wait 100 | NUOLOn
+ActionList1=Custom1 | Wait 100 | NUOLOn
 NUOLOn=[!EnableMeasureGroup NUOL]
-Focus=["#@#Addons\RainFocus.exe" "#CURRENTCONFIG#"]
 Custom1=
 Custom2=
 Deactivate=[!DeactivateConfig]
