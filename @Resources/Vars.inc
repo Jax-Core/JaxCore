@@ -34,4 +34,4 @@ Ctx.Animated=0
 
 [Set.S]
 Measure=Calc
-Formula=0.69
+Formula=0.8

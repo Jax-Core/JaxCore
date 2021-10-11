@@ -1,6 +1,7 @@
 
 [LoadActions]
-ActionList1=Start0 | Wait 2000 | Start1 | Wait 1000 | NextPage
+ActionList1=Start0 | Wait 2000 | Start1 | Custom1 | Wait 1000 | NextPage
+Custom1=[!CommandMeasure CheckForDataFolder "Check-Data"]
 
 [Tween:M]
 Measure=Script
@@ -14,6 +15,12 @@ UpdateDivider=1
 
 [Set.string:S]
 Container=ContentContainer
+
+[CheckForDataFolder]
+MEasure=Plugin
+Plugin=PowershellRM
+DynamicVariables=1
+ScriptFile=#@#Powershell\CheckData.ps1
 
 ; ---------------------------------------------------------------------------- ;
 ;                                   Contenet                                   ;

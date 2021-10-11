@@ -16,13 +16,14 @@ function Create-Updater {
 
 function Create-ValliStart {
     New-Item -Path "$SkinsPath..\CoreData" -Name "ValliStart" -ItemType "directory"
+    $RainmeterFolder = Split-Path -Path $SkinsPath -Parent
 
     $RainmeterExe = $RmAPI.VariableStr('PROGRAMPATH')
     $ResourceFolder = $RmAPI.VariableStr('@')
     $WScriptShell = New-Object -ComObject WScript.Shell
     $Shortcut = $WScriptShell.CreateShortcut("$SkinsPath..\CoreData\ValliStart\Config.lnk")
-    $Shortcut.TargetPath = "ms-settings:"
-    $shortcut.IconLocation = $ResourceFolder+"Images\Config.ico"
+    $Shortcut.TargetPath = "$RainmeterFolder\CoreData\ValliStart"
+    $shortcut.IconLocation = $ResourceFolder+"Images\Add.ico"
     $Shortcut.Save()
 
     
