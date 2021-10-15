@@ -1,5 +1,5 @@
 [Variables]
-Spotlight=ValliStart
+Spotlight=QuickNote
 
 [BC]
 MouseScrollDownAction=[!SetVariable Scroll "(Clamp(#Scroll#+60,0,(#Set.PageH#-#Set.H#)))"][!UpdateMeterGroup Scroll][!Redraw]
@@ -97,7 +97,7 @@ InlineSetting=Size | (12*[Set.S])
 InlinePattern2=#CRLF#.*
 InlineSetting2=Face | Poppins Thin
 MeterStyle=Set.String:S
-Text=#Spotlight##CRLF#Replaces the start menu with a centered design. Originated from a concept art for Windows 10 SunValley update, it acts as an control center and a start menu. You can choose to have it replace the start menu, or a seperate menu which can be summoned with a hotkey.
+Text=#Spotlight##CRLF#A quick note skin to improve your productivity.#CRLF#QuickNote allows easy row manipulation and comes with some smooth transitional animations included. It also has a built-in checklist feature which you can use to make a to-do list. You have access to 5 different slots for saving your notes.#CRLF##CRLF#You can also choose between a custom hotkey and dragging from the top-left corner of your screen to summon the skin.
 [SpotImage]
 Meter=Image
 X=(#Set.W#-#Set.P#-500*[Set.S])

@@ -1,13 +1,13 @@
-[ModularClocks]
+[ValliStart]
 Meter=Image
 X=r
 Y=([RecommendedSkins:H]*([Set.S]-1)+10*[Set.S])R
-ImageName=#@#Images\Cards\ModularClocks.png
+ImageName=#@#Images\Cards\ValliStart.png
 MeterStyle=SkinIcon:S
-[ModularClocksDes]
+[ValliStartDes]
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
-Text=ModularClocks#CRLF# Modern, Time, Animated
+Text=ValliStart#CRLF# Visuals, Animated
 [Keylaunch]
 Meter=Image
 ImageName=#@#Images\Cards\Keylaunch.png
@@ -35,10 +35,18 @@ FontSize=15
 StringAlign=LeftTop
 FontFace=Poppins SemiBold
 TransformationMatrix=[Set.S];0;0;[Set.S];((1-[Set.S])*[#CURRENTSECTION#:X]);((1-[Set.S])*[#CURRENTSECTION#:Y])
-[Keystrokes]
+[ModularClocks]
 Meter=Image
 X=r
 Y=([All:H]*([Set.S]-1)+10*[Set.S])R
+ImageName=#@#Images\Cards\ModularClocks.png
+MeterStyle=SkinIcon:S
+[ModularClocksDes]
+Meter=String
+MeterStyle=Set.String:S | SkinText:S
+Text=ModularClocks#CRLF# Modern, Time, Animated
+[Keystrokes]
+Meter=Image
 ImageName=#@#Images\Cards\Keystrokes.png
 MeterStyle=SkinIcon:S
 [KeystrokesDes]
@@ -55,19 +63,11 @@ MeterStyle=Set.String:S | SkinText:S
 Text=Plainext#CRLF# System, Retro
 [ModularPlayers]
 Meter=Image
+X=(#Set.P#)
+Y=(10*[Set.S])R
 ImageName=#@#Images\Cards\ModularPlayers.png
 MeterStyle=SkinIcon:S
 [ModularPlayersDes]
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
 Text=ModularPlayers#CRLF# Modern, Music, Minimal
-[Combilaunch]
-Meter=Image
-X=(#Set.P#)
-Y=(10*[Set.S])R
-ImageName=#@#Images\Cards\Combilaunch.png
-MeterStyle=SkinIcon:S
-[CombilaunchDes]
-Meter=String
-MeterStyle=Set.String:S | SkinText:S
-Text=Combilaunch#CRLF# Launcher, Minimal

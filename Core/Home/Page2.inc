@@ -34,7 +34,7 @@ Container=BC
 [title.Text1]
 Meter=String
 MeterStyle=Set.String:S
-Text=ValliStart released!
+Text=QuickNote released!
 X=(#Set.W#/2)
 Y=((110*[Set.S])-#Scroll#)
 FontSize=(40*[Set.S])
@@ -51,8 +51,8 @@ W=(#Set.W#*0.8)
 H=(#Set.H#*0.5)
 Clipstring=1
 StringAlign=Center
-Text=ValliStart have been released! Head over to the skins page and install it!#CRLF##CRLF#ValliStart replaces the start menu with a centered design. Originated from a concept art for Windows 10 SunValley update, it acts as an control center and a start menu. You can choose to have it replace the start menu, or a seperate menu which can be summoned with a hotkey.#CRLF##CRLF#If you want to support me, buy me a cup of coffee on ko-fi, or join my discord server and hang out!
-InlinePattern=Head over to the skins page and install it!|control center and a start menu
+Text=QuickNote have been released! Head over to the skins page and install it!#CRLF##CRLF#Top choice for improving your productivity. Allows easy row manipulation with smooth transitional animations, built in checklist to make a to-do list, and 5 different slots for you to save notes. You can also choose to be able to summon it with a hotkey or by dragging from the top-left corner.#CRLF##CRLF#If you want to support me, buy me a cup of coffee on ko-fi, or join my discord server and hang out!
+InlinePattern=Head over to the skins page and install it!|increasing your productivity
 InlineSetting=Color | #Set.Accent_Color#
 InlinePattern2=ko-fi
 InlineSetting2=Color | FFA56D
@@ -67,7 +67,7 @@ X=(200/2*[Set.S])r
 [SkinsButton]
 Meter=Shape
 X=(#Set.W#/2-(200*2*[Set.S]+#Set.P#/2)/2)
-Y=(250*[Set.S])r
+Y=(200*[Set.S])r
 MeterStyle=Shape.Over:S | Button:S
 OverColor=FFA56D
 LeaveColor=FFA56D
@@ -94,24 +94,24 @@ MeterStyle=Set.String:S | ButtonText:S
 
 
 
-[title.Text2]
-Meter=String
-MeterStyle=Set.String:S
-Text=Change log
-X=(#Set.W#/2)
-Y=(30*[Set.S])R
-FontSize=(20*[Set.S])
-FontFace=Poppins SemiBold
-StringAlign=Center
-InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
+; [title.Text2]
+; Meter=String
+; MeterStyle=Set.String:S
+; Text=Change log
+; X=(#Set.W#/2)
+; Y=(30*[Set.S])R
+; FontSize=(20*[Set.S])
+; FontFace=Poppins SemiBold
+; StringAlign=Center
+; InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
 
-[Text.2]
-Meter=String
-MeterStyle=Set.String:S
-X=r
-Y=(40*[Set.S])r
-W=(#Set.W#*0.8)
-H=(#Set.H#*0.5)
-Clipstring=1
-StringAlign=Center
-Text=3620 - ValliStart: You can toggle monitor configuration section off and open the start menu by clicking on a desired key#CRLF#3611 - added customization support for Plainext1.6#CRLF#3611 - added hidden button to skip start animation in case it broke
+; [Text.2]
+; Meter=String
+; MeterStyle=Set.String:S
+; X=r
+; Y=(40*[Set.S])r
+; W=(#Set.W#*0.8)
+; H=(#Set.H#*0.5)
+; Clipstring=1
+; StringAlign=Center
+; Text=3620 - ValliStart: You can toggle monitor configuration section off and open the start menu by clicking on a desired key#CRLF#3611 - added customization support for Plainext1.6#CRLF#3611 - added hidden button to skip start animation in case it broke

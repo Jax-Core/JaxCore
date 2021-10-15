@@ -1,7 +1,7 @@
 function Update()
 	PosX = (SKIN:GetMeasure('CurPos.X')):GetValue()
 	PosY = (SKIN:GetMeasure('CurPos.Y')):GetValue()
-	-- CtxW = (SKIN:GetMeasure('Ctx.W:eX')):GetValue()
+	-- if SKIN:GetMeasure('mToggle') ~= nil then print(SKIN:GetMeasure('mToggle')) else print('no') end
 	CtxH = (SKIN:GetMeasure('Ctx.H:eX')):GetValue()
 	ScrnH = tonumber(SKIN:GetVariable('SCREENAREAHEIGHT', -1))
 	if (PosX and (PosY + CtxH) < ScrnH) then

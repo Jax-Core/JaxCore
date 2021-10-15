@@ -1,6 +1,7 @@
+ValliStart | Start menu replacement
+Keylaunch | Animated hotkey launcher
+MIUI-Shade | Animated control center
 ModularClocks | Modern, Time, Animated
-Keylaunch | Workflow, Efficiency, Animated
-MIUI-Shade | Control, Hotkey, Animated
 Keystrokes | Overlay, Gaming, Hotkey
 Plainext | System, Retro
 ModularPlayers | Modern, Music, Minimal

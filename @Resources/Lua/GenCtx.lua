@@ -1,5 +1,5 @@
 
-function Update()
+function Gen()
 	local File = io.open(SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Ctx\\#ContextC.inc','w')
 	local Pos = tonumber(SKIN:GetVariable('Sec.Ctx.Pos', '0'))
 	-- local Blur = tonumber(SKIN:GetVariable('Sec.Ctx.Blur', '0'))
@@ -94,6 +94,15 @@ function Update()
 		,'MeterStyle=Ctx.String:S | CtxText:S\n')
 		end
 	File:close()
+
+	if SKIN:GetMeasure('mToggle') then 
+		SKIN:Bang('!PauseMeasure', 'mToggle') 
+		SKIN:Bang('!WriteKeyValue', 'Variables', 'Ctx.Parent.Toggle', 1, SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Ctx\\Main.ini')
+	else
+		SKIN:Bang('!WriteKeyValue', 'Variables', 'Ctx.Parent.Toggle', 0, SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Ctx\\Main.ini')
+	end
+
+	SKIN:Bang('!WriteKeyValue', 'Variables', 'Ctx.Parent', SKIN:GetVariable('CURRENTCONFIG'), SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Ctx\\Main.ini')
 
 	end
 

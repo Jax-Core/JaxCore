@@ -9,7 +9,7 @@
 Text="Join the CoreCommunity!"
 
 [Description]
-Text="Get assistance, suggest features, participate in beta tests and more! Join the 300+ other members today!"
+Text="Get assistance, suggest features, participate in beta tests and more! Join the 800+ other members today!"
 
 [INfo]
 Text="Click here to be redirected to the server invite link."

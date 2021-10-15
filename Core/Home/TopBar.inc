@@ -29,17 +29,17 @@ Text=Settings
 X=(#Set.W#-#Set.P#)
 LeftMouseUpAction=[!WriteKeyValue "Variables" "Sec.Page" "5"][!Refresh]
 
-[Class.Side4]
-Meter=String
-MeterStyle=Set.String:S | Top.String:S
-X=(-31*[Set.S]-[Class.Side5:W])r
-Text=Suites
-LeftMouseUpAction=[!WriteKeyValue "Variables" "Sec.Page" "4"][!Refresh]
+; [Class.Side4]
+; Meter=String
+; MeterStyle=Set.String:S | Top.String:S
+; X=(-31*[Set.S]-[Class.Side5:W])r
+; Text=Suites
+; LeftMouseUpAction=[!WriteKeyValue "Variables" "Sec.Page" "4"][!Refresh]
 
 [Class.Side3]
 Meter=String
 MeterStyle=Set.String:S | Top.String:S
-X=(-31*[Set.S]-[Class.Side4:W])r
+X=(-31*[Set.S]-[Class.Side5:W])r
 Text=Skins
 LeftMouseUpAction=[!WriteKeyValue "Variables" "Sec.Page" "3"][!Refresh]
 

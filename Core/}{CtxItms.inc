@@ -1,5 +1,5 @@
 [Rainmeter]
-RightMouseUpAction=[!UpdateMeasureGroup CurPos.XY][!UpdateMeasure Ctx.Gen:M][!ActivateConfig "#JaxCore\Ctx"][!SetVariable Sec.Skin "#ROOTCONFIG#" "#JaxCore\Ctx"]
+RightMouseUpAction=[!UpdateMeasureGroup CurPos.XY][!CommandMEasure Ctx.Gen:M "Gen()"][!ActivateConfig "#JaxCore\Ctx"][!SetVariable Sec.Skin "#ROOTCONFIG#" "#JaxCore\Ctx"]
 
 [CurPos.X]
 Measure=Plugin

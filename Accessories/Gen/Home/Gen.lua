@@ -1,6 +1,6 @@
 function Update()
     local file = io.open(SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Accessories\\Gen\\Home\\List.txt','r')
-    local filewrite = io.open(SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Core\\#Home.inc','w')
+    local filewrite = io.open(SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Core\\Home\\Generated.inc','w')
     local count = 0
     for line in file:lines() do
         local name = string.gsub(line, "%s|.*$", "")
@@ -18,7 +18,7 @@ function Update()
             ,'Meter=String\n'
             ,'MeterStyle=Set.String:S | SkinText:S\n'
             ,'Text='.. name ..'#CRLF#'.. tags ..'\n')
-        elseif count < 3 or count > 3 and count < 6 then
+        elseif count < 3 or count > 3 and count < 6 or count > 6 then
             count = count + 1
             filewrite:write(
             '['.. name ..']\n'
