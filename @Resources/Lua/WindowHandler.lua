@@ -173,7 +173,7 @@ function MouseMovedCallback(mouseX, mouseY)
 		-- 	if 
 		-- end
 		if newWindowWidth < (windowHeight * resolution) then
-			local scaling = round((newWindowWidth / scaleWindowWidth), 1)
+			local scaling = round((newWindowWidth / scaleWindowWidth), 2)
 			if scaling > 1 then scaling = 1 end
 			bang = bang .. "[!SetOption Set.S Formula " .. scaling .. "][!UpdateMeasure Set.S]" 
 		end

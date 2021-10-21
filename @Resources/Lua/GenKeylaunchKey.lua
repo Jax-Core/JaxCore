@@ -38,6 +38,7 @@ function Edit(round, parm1, parm2, parm3, parm4)
         if parm1 == 0 then
             -- SKIN:Bang('!CommandMeasure', 'Choose:M', 'ChooseFile 1')
         SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Num', cacheIndex, root..'\\Accessories\\Action\\Main.ini')
+        SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', 'Keylaunch', root..'\\Accessories\\Action\\Main.ini')
         SKIN:Bang('!ActivateConfig', '#JaxCore\\Accessories\\Action')
         SKIN:Bang('!Update', '#JaxCore\\Accessories\\Action')
         SKIN:Bang('!Move', '(#CURRENTCONFIGX#+#CURRENTCONFIGWIDTH#/2-500/2)', '(#CURRENTCONFIGY#+#CURRENTCONFIGHEIGHT#/2-500/2)', '#JaxCore\\Accessories\\Action')

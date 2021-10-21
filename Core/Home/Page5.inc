@@ -61,7 +61,7 @@ DynamicVariables=1
 
 [ContentContainer]
 Meter=Shape
-Shape=Rectangle 0,0, #Set.W#, #Set.H# | StrokeWidth 0 | FIll Color 255,255,255,#ContentContainerAlpha#
+Shape=Rectangle 0,0, #Set.W#, #Set.H# | StrokeWidth 0 | FIll Color 255,255,255
 MouseActionCursor=0
 DynamicVariables=1
 ; MouseScrollDownAction=[!SetVariable Scroll "(Clamp(#Scroll#-60,-1000,0))"][!UpdateMeter *][!Redraw]

@@ -37,6 +37,13 @@ function Create-ValliStart {
     $RmAPI.Log("Created: ValliStart")
 }
 
+function Create-Combilaunch {
+    New-Item -Path "$SkinsPath..\CoreData" -Name "Combilaunch" -ItemType "directory"
+    New-Item -Path "$SkinsPath..\CoreData\Combilaunch" -Name "Include.inc" -ItemType "file"
+    New-Item -Path "$SkinsPath..\CoreData\Combilaunch" -Name "Actions.inc" -ItemType "file"
+    $RmAPI.Log("Created: Combilaunch")
+}
+
 function Create-VarInc {
     $source      = $RmAPI.VariableStr('SKINSPATH')
     $destination = Split-Path -Path $source -Parent
@@ -53,6 +60,10 @@ function Check-Data {
             If (Test-Path -Path "$SkinsPath..\CoreData\ValliStart") {
             } else {
                 Create-ValliStart
+            }
+            If (Test-Path -Path "$SkinsPath..\CoreData\Combilaunch") {
+            } else {
+                Create-Combilaunch
             }
             If (Test-Path -Path "$SkinsPath..\CoreData\Updater") {
             } else {

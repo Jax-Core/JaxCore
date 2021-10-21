@@ -1,23 +1,20 @@
 [Variables]
 BarHandler=11
 
-; [ImageContainer]
-; Meter=Shape
-; X=(#Set.L#+#Set.P#)
-; Y=#Set.P#
-; Shape=Rectangle (0),(0),(#Set.W#-#Set.L#-#Set.P#*2),(#Set.H#-#Set.P#*2),(#Set.R#/2),(#Set.R#/2) | StrokeWidth 0 | Fill LinearGradient1 This
-; This=180 | 0,0,0,0 ; 0.0 | 0,0,0,25; 0.45 | 0,0,0,25 ; 0.55 | 0,0,0,0 ; 1.0
-; DynamicVariables=1
-; [Image]
-; Meter=Image
-; X=((#Set.W#-#Set.L#-#Set.P#*2)/2-(256*[Set.S])/2)
-; Y=((#Set.H#-#Set.P#*2)/2-(256/2*[Set.S]))
-; W=(256*[Set.S])
-; H=(256*[Set.S])
-; Container=ImageContainer
-; DynamicVariables=1
-; ImageName=#@#Icons\Discord.png
-; PreserveAspectRatio=1
+[ContentContainer]
+X=(#Set.L#)
+Y=0
+Shape=Rectangle (0),(0),(#Set.W#-#Set.L#),(#Set.H#),(#Set.R#),(#Set.R#) | StrokeWidth 0 | Fill LinearGradient This
+This=180 | 255,255,255,0 ; 0.0 | 255,255,255 ; 0.2
+[Image]
+Meter=Image
+X=0
+W=[ContentContainer:W]
+H=[ContentContainer:H]
+Container=ContentContainer
+DynamicVariables=1
+ImageName=#@#Images\CoreWallpaper.png
+PreserveAspectRatio=2
 
 [Header]
 Meter=String
@@ -30,25 +27,36 @@ FontFace=Poppins Medium
 FontSize=(30*[Set.S])
 MeterStyle=Set.String:S
 Container=ContentContainer
+[Subheader]
+Meter=String
+X=r
+Y=(-10*[Set.S])R
+DynamicVariables=1
+StringAlign=CenterCenter
+Text=Join the Discord server!
+FontFace=Poppins
+FontSize=(12*[Set.S])
+MeterStyle=Set.String:S
+Container=ContentContainer
 
 [Obj.6]
 Meter=Shape
 X=(-200/2*[Set.S])r
-Y=R
+Y=(20*[Set.S])R
 DynamicVariables=1
-Shape=Rectangle 0,0,200,50,(#Set.R#) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend THis
-OverColor=88,101,242
-LeaveColor=88,101,242,200
+Shape=Rectangle 0,0,200,45,(#Set.R#) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend THis
+OverColor=106, 119, 252
+LeaveColor=88,101,242
 Leftmouseupaction=["https://discord.gg/JmgehPSDD6"]
 MeterStyle=Shape.Over:S
 Container=ContentContainer
 [Obj.6.Child]
 Meter=String
 X=(200/2*[Set.S])r
-y=(25*[Set.S])r
-FontSize=(11*[Set.S])
+y=(45/2*[Set.S])r
+FontSize=(15*[Set.S])
 FontFace=Poppins 
 StringAlign=CenterCenter
-Text="Join the discord server!"
+Text="Let's go!"
 Container=ContentContainer
 MeterStyle=SEt.String:S | ButtonT:S

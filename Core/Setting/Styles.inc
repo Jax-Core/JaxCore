@@ -13,11 +13,12 @@ FocusOnRefresh=1
 [DefaultStartActions]
 Measure=Plugin
 Plugin=ActionTimer
-ActionList1=Custom1 | Wait 100 | NUOLOn
+ActionList1=Custom1 | Custom2 | Wait 100 | NUOLOn
 NUOLOn=[!EnableMeasureGroup NUOL]
 Custom1=
 Custom2=
 Deactivate=[!DeactivateConfig]
+DynamicVariables=1
 
 
 [Variables]
@@ -25,7 +26,6 @@ Deactivate=[!DeactivateConfig]
 @includeVer=#@#Version.inc
 ; ----------------------------- Default variables ---------------------------- ;
 Scroll=0
-ContentContainerAlpha=255
 Sec.Container=
 
 ; ---------------------------------------------------------------------------- ;
@@ -135,7 +135,7 @@ MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color
 LeftMouseUpAction=[!CommandMeasure Func "startSide('Font', '#CURRENTSECTION#')"]
 RightMouseUpAction=[!SetVariable Editing "#CURRENTSECTION#"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5*[Set.S])"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5*[Set.S])"][!CommandMeasure Input:M "ExecuteBatch 1"]
 [Set.Value:S]
-X=(5*[Set.S])r
+X=(7.5*[Set.S])r
 Y=(15*[Set.S])r
 StringAlign=LeftCenter
 FontSize=(10*[Set.S])

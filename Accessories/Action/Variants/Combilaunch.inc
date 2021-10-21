@@ -1,35 +1,16 @@
-[Rainmeter]
-Update=-1
-AccurateText=1
-rightmouseupaction=[]
-middlemouseupaction=[!refresh]
-OnRefreshAction=[!FadeDuration 100][!KeepOnScreen 0][!Draggable 0][!ZPos 2][!Delay 100][!EnableMeasureGroup NUOL]
-OnUnfocusAction=[!UpdateMeasure Close:M]
 
-[Focus]
-Measure=Plugin
-Plugin=Focus
-FocusOnRefresh=1
 
 [Variables]
-@includeSkin=#SKINSPATH#Combilaunch\@Resources\Vars.inc
-@includeSkinVars=#@#Vars.inc
-SEc.Close=1
-Sec.Sec=1
-Sec.Text=Combilaunch Github
-Sec.Action=https://Whats up
-Sec.Chain=123698745
-Sec.W=(500*[Set.S])
-Sec.H=(600*[Set.S])
-Sec.R=(20)
-Sec.P=(20*[Set.S])
-Sec.Border=2
+@includeSkinVars=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
+@includeSkinActions=#SKINSPATH#..\CoreData\CombiLaunch\Actions.inc
+@includeRMPATH=#SKINSPATH#..\CoreData\Vars.inc
 
-CURRENTLINE=[&Lua:exportPath2('#Sec.Chain#')]
-CURRENT=
+Sec.SaveLocation=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
+
+CURRENTLINE=[&Lua:exportPath2('[#Chain#SEc.Num#]')]
+CURRENT=[#Chain#SEc.Num#]
 CURRENTPOS=
 EndActions=[!SetOptionGroup C MeterStyle "C"][!SetOption B MeterStyle ""][!SetVariable CURRENTPOS ""][!UpdateMeasureGroup EndUpdate][!UpdateMeter *][!Redraw]
-
 
 ; ---------------------------------------------------------------------------- ;
 ;                                   Functions                                  ;
@@ -37,21 +18,11 @@ EndActions=[!SetOptionGroup C MeterStyle "C"][!SetOption B MeterStyle ""][!SetVa
 
 [Lua]
 Measure=Script
-ScriptFile=#@#Lua\Combilaunch.lua
+ScriptFile=#SKINSPATH##Skin.Name#\Core\Combilaunch.lua
 
 [Func]
 Measure=Script
 ScriptFile=#@#Lua\Func.lua
-
-[Close:M]
-Measure=String
-String=#Sec.Close#
-ifmatch=1
-ifmatchaction=[!DeactivateConfig]
-ifmatchmode=1
-disabled=1
-DynamicVariables=1
-group=nuol
 
 [Sec.String:S]
 FontFace=Poppins
@@ -64,10 +35,10 @@ FontColor=255,255,255
 SolidColor=0,0,0,1
 
 [Button:S]
-X=(60*[Set.S]+#Sec.P#/2)r
-Y=(-20*[Set.S])r
+X=(60+#Sec.P#/2)r
+Y=(-20)r
 DynamicVariables=1
-Shape=Rectangle 0,0,120,40,(#Sec.R#/3) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend THis
+Shape=Rectangle 0,0,120,40,(#Sec.R#/3) | StrokeWidth 0 | Extend THis
 This=Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'LeaveColor')]
 OverColor=#Set.SubText_Color#
 LeaveColor=#Set.SubText_Color#,150
@@ -76,9 +47,9 @@ MouseOverAction=[!SetOption #CURRENTSECTION# This "Fill Color [&Func:LocalVar('#
 MouseLeaveAction=[!SetOption #CURRENTSECTION# This "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'LeaveColor')]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 
 [ButtonText:S]
-X=(60*[Set.S])r
-y=(20*[Set.S])r
-FontSize=(10*[Set.S])
+X=(60)r
+y=(20)r
+FontSize=(10)
 FontFace=Poppins Semibold
 StringAlign=CenterCenter
 
@@ -98,7 +69,7 @@ ReturnValue=WholePath
 FileInitialDirectory=
 ImageInitialDirectory=#CurrentPath#IconCache\
 DynamicVariables=1
-Command1=[!Log $Name$]
+Command1=[!CommandMEasure Lua "WriteKeyValue('Variables', 'Name#Sec.Num#', '$Name$', [[#RAINMETERPATH#\CoreData\Combilaunch\Actions.inc]])"][!CommandMEasure Lua "WriteKeyValue('Variables', 'Action#Sec.Num#', [[$Path$]], [[#RAINMETERPATH#\CoreData\Combilaunch\Actions.inc]])"][!Refresh]
 ; Command1=[!WriteKeyValue Variables "Name#Index#" "$Name$" "#@#Variables\Names.inc"][!WriteKeyValue Variables "MatchAction#Index#" """["$Path$"]""" "#@#Variables\MatchActions.inc"][!Refresh "Combilaunch\@Settings" "Actions.ini"]
 
 
@@ -115,9 +86,9 @@ DynamicVariables=1
 Meter=String
 X=(#Sec.W#/2)
 Y=(#Sec.P#)
-FontSize=(10*[Set.S])
+FontSize=(10)
 FontColor=255,255,255,150
-Text=Customizing combination #Sec.Sec#
+Text=Customizing combination #Sec.Num#
 StringAlign=Center
 MeterStyle=Sec.String:S
 
@@ -128,7 +99,7 @@ Meter=Shape
 X=[5:X]
 Y=[5:Y]
 DynamicVariables=1
-Shape=Rectangle (-95*#Gap#),(-95*#Gap#),(95*2*#Gap#),(95*2*#Gap#),5,5 | StrokeWidth 0 | Rotate 45 | Fill Color 0,0,0,(1+#ShowBackground#*149)
+Shape=Rectangle (-95*#Gap#),(-95*#Gap#),(95*2*#Gap#),(95*2*#Gap#),5,5 | StrokeWidth 0 | Rotate 45 | Fill Color #BackgroundColor#,#BackgroundOpacity#
 
 [InitB:S]
 MouseLeaveAction=#EndActions#
@@ -157,7 +128,7 @@ This=#CURRENTLINE#
 [1]
 Meter=Shape
 X=(#Sec.W#/2)
-Y=(#Sec.P#*5)
+Y=(#Sec.P#*4)
 MeterStyle=C
 [2]
 Meter=Shape
@@ -192,7 +163,7 @@ MeterStyle=C
 
 [Name]
 Meter=String
-Text=#Sec.Text#
+Text=[#Name#Sec.Num#]
 X=r
 Y=(#Sec.P#*3)r
 stringAlign=CenterCenter
@@ -202,18 +173,17 @@ MeterStyle=Sec.String:S
 
 [Action]
 Meter=String
-Text=#Sec.Action#
+Text=[#Action#Sec.Num#]
 X=r
-Y=(#Sec.P#/2)R
+Y=380
 stringAlign=CenterCenter
 FontSize=10
 MeterStyle=Sec.String:S
 
 [FileButton]
 Meter=Shape
-X=(#Sec.W#/2-(120*[Set.S]*3+#Sec.P#)/2)
-Y=(450*[Set.S])
-MouseOverAction=[!SetVariable Sec.Close 0][!UpdateMEasure Close:M]
+X=(#Sec.W#/2-(120*3+#Sec.P#/2*3)/2)
+Y=(410)
 leftmouseupaction=[!CommandMeasure Choose:M "ChooseFile 1"][!ZPos 1]
 MeterStyle=Button:S
 
@@ -246,7 +216,8 @@ X=(#Sec.W#/2)
 Y=(#Sec.H#-#Sec.P#)
 StringAlign=CenterBottom
 Text=Confirm
-FontColor=0,255,50
+FontColor=50,255,100
 FontSize=10
-leftmouseupaction=[!DeactivateConfig]
-MEterStyle=Sec.String:S
+MeterStyle=Sec.String:S | ButtonText:S
+DynamicVariables=1
+leftmouseupaction=[!CommandMEasure Lua "WriteKeyValue('Variables', 'Chain#Sec.Num#', '#CURRENT#', [[#RAINMETERPATH#\CoreData\Combilaunch\Actions.inc]])"][!DeactivateConfig][!UpdateMeasure Auto_Refresh:M "#JaxCore\Main"][!Refresh "#JaxCore\Main"]
