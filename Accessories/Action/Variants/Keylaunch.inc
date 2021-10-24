@@ -4,12 +4,13 @@
 
 [Variables]
 @includeSkinActions=#SKINSPATH##Skin.Name#\@Resources\Act.inc
+@includeRMPATH=#SKINSPATH#..\CoreData\Vars.inc
 
 Sec.SaveLocation=#SKINSPATH##Skin.Name#\@Resources\Act.inc
 
 [Script]
 Measure=Script
-ScriptFile=#@#Lua\GenKeylaunchKey.lua
+ScriptFile="#SKINSPATH##Skin.name#\Core\GenKeylaunchKey.lua"
 
 [Choose:M]
 Measure=Plugin
@@ -18,9 +19,8 @@ UseNewStyle=0
 GetTarget=0
 AllowNonstorageFolder=1
 CopyLink=1
-LinkCache=#SKINSPATH##Skin.Name#\@Resources\LinkCache\
 GetIcon=1
-IconCache=#SKINSPATH##Skin.Name#\@Resources\IconCache\
+IconCache=#SKINSPATH#..\CoreData\Keylaunch\IconCache\
 IconSize=3
 ReturnValue=WholePath
 FileInitialDirectory=
@@ -53,7 +53,7 @@ W=(#Sec.Size1#)
 H=(#Sec.Size1#)
 ImageAlpha=50
 DynamicVariables=1
-ImageName=#SKINSPATH##Skin.Name#\@Resources\IconCache\[##Sec.Num#Icon].png
+ImageName=#RainmeterPath#\CoreData\Keylaunch\IconCache\[##Sec.Num#Icon].png
 [Image2]
 MEter=Image
 X=(#Sec.W#/2-#Sec.Size2#/2)
@@ -63,7 +63,7 @@ H=(#Sec.Size2#)
 ImageAlpha=255
 DynamicVariables=1
 Leftmouseupaction=[!SetVariable Editing "#sec.Num#Icon"][!CommandMeasure Input:M "ExecuteBatch 1"]
-ImageName=#SKINSPATH##Skin.Name#\@Resources\IconCache\[##Sec.Num#Icon].png
+ImageName=#RainmeterPath#\CoreData\Keylaunch\IconCache\[##Sec.Num#Icon].png
 
 [Name]
 Meter=String

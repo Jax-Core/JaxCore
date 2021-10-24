@@ -1,6 +1,6 @@
 [Variables]
 UserNameCheckVariable=Jax Tam 
-LastVersionNumber=03630
+LastVersionNumber=03632
 ; ----------------------------- Scaling variables ---------------------------- ;
 ; Set.S=0.9
 Set.P=(40*[Set.S])
@@ -34,4 +34,4 @@ Ctx.Animated=0
 
 [Set.S]
 Measure=Calc
-Formula=0.81
+Formula=0.76

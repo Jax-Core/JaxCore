@@ -6,6 +6,8 @@ function Create-Keylaunch {
     New-Item -Path "$SkinsPath..\CoreData" -Name "Keylaunch" -ItemType "directory"
     New-Item -Path "$SkinsPath..\CoreData\Keylaunch" -Name "Keylaunch.ahk" -ItemType "file"
     New-Item -Path "$SkinsPath..\CoreData\Keylaunch" -Name "Include.inc" -ItemType "file"
+    New-Item -Path "$SkinsPath..\CoreData\Keylaunch" -Name "IconCache" -ItemType "directory"
+    New-Item -Path "$SkinsPath..\CoreData\Keylaunch\IconCache" -Name "folder.png" -ItemType "file"
     $RmAPI.Log("Created: Keylaunch")
 }
 function Create-Updater {
@@ -53,7 +55,7 @@ function Create-VarInc {
 function Check-Data {
     If (Test-Path -Path "$SkinsPath..\CoreData") {
             $RmAPI.Log("Found coredata in programs")
-            If (Test-Path -Path "$SkinsPath..\CoreData\Keylaunch") {
+            If (Test-Path -Path "$SkinsPath..\CoreData\Keylaunch\IconCache") {
             } else {
                 Create-Keylaunch
             }
