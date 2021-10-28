@@ -43,16 +43,16 @@ X=(-31*[Set.S]-[Class.Side5:W])r
 Text=Skins
 LeftMouseUpAction=[!WriteKeyValue "Variables" "Sec.Page" "3"][!Refresh]
 
-[Class.Side2]
-Meter=String
-MeterStyle=Set.String:S | Top.String:S
-X=(-31*[Set.S]-[Class.Side3:W])r
-Text=News
-LeftMouseUpAction=[!WriteKeyValue "Variables" "Sec.Page" "2"][!Refresh]
+; [Class.Side2]
+; Meter=String
+; MeterStyle=Set.String:S | Top.String:S
+; X=(-31*[Set.S]-[Class.Side3:W])r
+; Text=News
+; LeftMouseUpAction=[!WriteKeyValue "Variables" "Sec.Page" "2"][!Refresh]
 
 [Class.Side1]
 Meter=String
 MeterStyle=Set.String:S | Top.String:S
-X=(-31*[Set.S]-[Class.Side2:W])r
+X=(-31*[Set.S]-[Class.Side3:W])r
 Text=Home
 LeftMouseUpAction=[!WriteKeyValue "Variables" "Sec.Page" "1"][!Refresh]

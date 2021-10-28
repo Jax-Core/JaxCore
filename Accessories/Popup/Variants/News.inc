@@ -6,10 +6,16 @@
 ; ---------------------------------------------------------------------------- ;
 
 [Title]
-Text="Join the CoreCommunity!"
+Text="Celebrating 1000 members!"
+FontSize=(20*#Sec.S#)
+Clipstring=0
+inlinePattern=1000
+InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
 
 [Description]
-Text="Get assistance, suggest features, participate in beta tests and more! Join the 1000+ other members today!"
+Text="To show appreciation to every one of you awesome people,#CRLF#I am hosting 3 giveaways in the coming 3 days,#CRLF#along with IdleStyle's beta release!#CRLF##CRLF#Join the Discord server to participate!"
+inlinePattern=3 giveaways|beta release
+InlineSetting=Color | FF700F
 
 [INfo]
 Text="Click here to be redirected to the server invite link."

@@ -44,7 +44,7 @@ ScriptFile=#@#Lua\Func.lua
 Measure=String
 String=#Set.Auto_Refresh#
 IFMatch=1
-Ifmatchaction=[!Delay 500][!Refresh "#Skin.Name#\Main"]
+Ifmatchaction=[!Refresh "#Skin.Name#\Main"]
 IfMatchMode=1
 Group=NUOL
 Disabled=1
@@ -67,15 +67,7 @@ W=((150-10)*[Set.S])
 H=((30-10)*[Set.S])
 DynamicVariables=1
 DefaultValue="[##Editing#]"
-Command1=[!SetOption Input:M SolidColor "#Set.Pri_Color#"][!SetVariable #Editing# "$UserInput$"][!UpdateMeasure SaveAndLoad:M]
-OnDismissAction=[!SetOption Input:M SolidColor "#Set.Pri_Color#"]
-
-[SaveAndLoad:M]
-Measure=Calc
-DynamicVariables=1
-OnUpdateAction=[!WriteKeyvalue Variables #Editing# "[##Editing#]" "#Sec.SaveLocation#"][!SetVariable #Editing# "[##Editing#]"][!UpdateMeter *][!Redraw][!UpdateMeasure Auto_Refresh:M]
-Disabled=1
-Group=NUOL
+Command1=[!CommandMeasure Func "processInput('#Editing#', [[$UserInput$]])"]
 
 ; ---------------------------------------------------------------------------- ;
 ;                                 Meter styles                                 ;
@@ -197,8 +189,8 @@ MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,15"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#Color" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 RightMOuseUpAction=[!SetVariable Editing "#CURRENTSECTION#Opacity"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5)"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5)"][!CommandMeasure Input:M "ExecuteBatch 1"]
-; [!SetOption Input:M SolidColor "[##CURRENTSECTION#Color]"]
 Container=ContentContainer
+Type=Num|0|255
 [Set.Pacity:S]
 X=(5*[Set.S])r
 Y=(15*[Set.S])r

@@ -16,14 +16,14 @@ MeterStyle=SkinIcon:S
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
 Text=Keylaunch#CRLF# Animated hotkey launcher
-[MIUI-Shade]
+[IdleStyle]
 Meter=Image
-ImageName=#@#Images\Cards\MIUI-Shade.png
+ImageName=#@#Images\Cards\IdleStyle.png
 MeterStyle=SkinIcon:S
-[MIUI-ShadeDes]
+[IdleStyleDes]
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
-Text=MIUI-Shade#CRLF# Animated control center
+Text=IdleStyle#CRLF# Stylized screensaver 
 [All]
 Meter=String
 Text=All Skins
@@ -35,10 +35,18 @@ FontSize=15
 StringAlign=LeftTop
 FontFace=Poppins SemiBold
 TransformationMatrix=[Set.S];0;0;[Set.S];((1-[Set.S])*[#CURRENTSECTION#:X]);((1-[Set.S])*[#CURRENTSECTION#:Y])
-[ModularClocks]
+[MIUI-Shade]
 Meter=Image
 X=r
 Y=([All:H]*([Set.S]-1)+10*[Set.S])R
+ImageName=#@#Images\Cards\MIUI-Shade.png
+MeterStyle=SkinIcon:S
+[MIUI-ShadeDes]
+Meter=String
+MeterStyle=Set.String:S | SkinText:S
+Text=MIUI-Shade#CRLF# Animated control center
+[ModularClocks]
+Meter=Image
 ImageName=#@#Images\Cards\ModularClocks.png
 MeterStyle=SkinIcon:S
 [ModularClocksDes]
@@ -55,6 +63,8 @@ MeterStyle=Set.String:S | SkinText:S
 Text=Keystrokes#CRLF# Overlay, Gaming, Hotkey
 [Plainext]
 Meter=Image
+X=(#Set.P#)
+Y=(10*[Set.S])R
 ImageName=#@#Images\Cards\Plainext.png
 MeterStyle=SkinIcon:S
 [PlainextDes]
@@ -63,8 +73,6 @@ MeterStyle=Set.String:S | SkinText:S
 Text=Plainext#CRLF# System, Retro
 [ModularPlayers]
 Meter=Image
-X=(#Set.P#)
-Y=(10*[Set.S])R
 ImageName=#@#Images\Cards\ModularPlayers.png
 MeterStyle=SkinIcon:S
 [ModularPlayersDes]

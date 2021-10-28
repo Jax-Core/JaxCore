@@ -8,7 +8,7 @@ Measure=Plugin
 Plugin=SysInfo
 SysInfoType=USER_NAME
 ifMatch=^#UserNameCheckVariable#$
-; ifmatchaction=[!EnableMeasure Check4New:M][!UpdateMeasure "Check4New:M"]
+ifmatchaction=[!EnableMeasure Check4New:M][!UpdateMeasure "Check4New:M"]
 ifnotmatchaction=[!WriteKeyValue Variables Sec.Page 1 "#SKINSPATH#\#JaxCore\Accessories\Tour\Main.ini"][!ActivateConfig "#JaxCore\Accessories\Tour"][!ActivateConfig "#JaxCore\Accessories"][!DeactivateConfig]
 DynamicVariables=1
 UpdateDivider=-1
@@ -17,8 +17,9 @@ UpdateDivider=-1
 Measure=String
 String=#LastVersionNumber#
 IfMatch=^#Core.Ver#$
-ifnotmatchaction=[!WriteKeyValue Variables Sec.Page 2][!WriteKeyValue Variables LastVersionNumber "#Core.Ver#" "#@#Vars.inc"][!Refresh]
+ifnotmatchaction=[!commandMeasure Func "startPopup('News')"][!WriteKeyValue Variables LastVersionNumber "#Core.Ver#" "#@#Vars.inc"]
 IfMatchMode=1
+Disabled=1
 DynamicVariables=1
 
 [WebParser]

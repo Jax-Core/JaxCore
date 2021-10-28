@@ -1,6 +1,6 @@
 
 [LoadActions]
-ActionList1=Start0 | Wait 2000 | Start1 | Custom1 | Wait 1000 | NextPage
+ActionList1=Start0 | Wait 2000 | Start1 | Custom1 | Wait 1000 | 
 Custom1=[!CommandMeasure CheckForDataFolder "Check-Data"]
 
 [Tween:M]
@@ -22,6 +22,7 @@ Plugin=PowershellRM
 DynamicVariables=1
 ScriptFile=#@#Powershell\CheckData.ps1
 
+
 ; ---------------------------------------------------------------------------- ;
 ;                                   Contenet                                   ;
 ; ---------------------------------------------------------------------------- ;
@@ -40,3 +41,19 @@ ImageName=#@#Images\Logo256.png
 
 [Logo]
 Meter=
+
+[CheckForIdle]
+Measure=Calc
+Formula=CheckForIdle + 1
+IfCondition=CheckForIdle >= 20
+IfTrueAction=[!CommandMEasure CoreBridge "start('', 'An error had occured', [[Welcoming page failed to display properly.]], '', '5000')"][!WriteKeyValue Variables UserNameCheckVariable "[MeasureUser]" "#@#Vars.inc"][!WriteKeyValue Variables Sec.Page 1 "#ROOTCONFIGPATH#Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.ini"][!DeactivateConfig]
+DynamicVariables=1
+UpdateDivider=20
+[CoreBridge]
+Measure=Script
+ScriptFile=#SKINSPATH##JaxCore\@Resources\Lua\CoreElements\Toast.lua
+[MeasureUser]
+Measure=Plugin
+Plugin=SysInfo
+SysInfoType=USER_NAME
+UpdateDivider=-1

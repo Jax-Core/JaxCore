@@ -1,21 +1,16 @@
 function Initialize()
-	-- local function defaultValues()
-	-- 	SKIN:Bang('!Setvariable', 'Scroll', '0')
-	-- 	SKIN:Bang('!Setvariable', 'ContentContainerAlpha', '255')
-	-- 	SKIN:Bang('!UpdateMeter', '*')
-	-- end
+end
 
-	-- if SKIN:GetVariable('Skin.Name') ~= nil and tonumber(SKIN:GetVariable('PageAni')) ~= 0 and SKIN:GetVariable('Skin.Set_Page') ~= 'Info' then
-	-- 	if SKIN:GetVariable('SKin.Name') == 'ModularClocks' and SKIN:GetVariable('Skin.Set_Page') ~= 'Appearance' then
-	-- 		SKIN:Bang('!CommandMEasure', 'AnimatedSettingsHandler', 'Execute 1')
-	-- 	elseif SKIN:GetVariable('SKin.Name') ~= 'ModularClocks' then
-	-- 		SKIN:Bang('!CommandMEasure', 'AnimatedSettingsHandler', 'Execute 1')
-	-- 	else
-	-- 		defaultValues()
-	-- 	end
-	-- else
-	-- 	defaultValues()
-	-- end
+function start(variant, title, description, iconpath, timeout)
+	local File = SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Accessories\\Toast\\Main.ini'
+    if variant ~= nil then variant = 'Standard' end
+	if iconpath ~= nil then iconpath = '#SKINSPATH##JaxCore\\@Resources\\Images\\Logo.png' end
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Title', title, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Description', description, File)
+    SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Icon', iconpath, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Timeout', timeout, File)
+	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Toast')
 end
 
 function GroupVar(SectionExtract, Option)
@@ -40,6 +35,72 @@ function returnBool(Variable, Match, ReturnStringT, ReturnStringF)
 		return(ReturnStringT)
 	  else
 		return(ReturnStringF)
+	end
+end
+
+function processInput(EditingVar, EditedVal)
+	local Valuetype = SKIN:GetMeter(EditingVar:gsub('Opacity', '')):GetOption('Type', 'Any')
+	local Clamp1 = tonumber(Valuetype:match('.*|(.*)|.*'))
+	local Clamp2 = tonumber(Valuetype:match('.*|.*|(.*)'))
+	-- if Clamp1 == nil then Clamp1 = -100 end
+	-- if Clamp2 == nil then Clamp2 = 100 end
+	local SaveLocation = SKIN:GetVariable('Sec.SaveLocation')
+
+	local function saveAndProceed()
+		SKIN:Bang('!WriteKeyValue', 'Variables', EditingVar, EditedVal, SaveLocation)
+		SKIN:Bang('!SetVariable', EditingVar, EditedVal)
+		SKIN:Bang('!UpdateMeter', '*')
+		SKIN:Bang('!Redraw')
+		SKIN:Bang('!UpdateMeasure', 'Auto_Refresh:M')
+	end
+	
+	-- ------------------------------ any / no type ----------------------------- --
+	if Valuetype:match('Any') then 
+		saveAndProceed()
+	-- ------------------------------ integers type ----------------------------- --
+	elseif Valuetype:match('Int') then
+		if EditedVal:match("^%-?%d+$") ~= nil then
+			if Clamp1 ~= nil then
+				if tonumber(EditedVal) >= Clamp1 and tonumber(EditedVal) <= Clamp2 then 
+					saveAndProceed()
+				else
+					start('', 'Format error', 'You can only input integers between '..Clamp1..' and '..Clamp2, '', '1000')
+				end
+			else
+				saveAndProceed()
+			end
+		else
+			start('', 'Format error', 'You can only input integers in this field', '', '1000')
+		end
+	-- ------------------------------ Num type ------------------------------ --
+	elseif Valuetype:match('Num') then
+		if EditedVal:match("^%-?%d+%.*%d*$") ~= nil then
+			if Clamp1 ~= nil then
+				if tonumber(EditedVal) >= Clamp1 and tonumber(EditedVal) <= Clamp2 then 
+					saveAndProceed()
+				else
+					start('', 'Format error', 'You can only input numbers between '..Clamp1..' and '..Clamp2, '', '1000')
+				end
+			else
+				saveAndProceed()
+			end
+		else
+			start('', 'Format error', 'You can only input numbers in this field', '', '1000')
+		end
+	-- -------------------------------- time type ------------------------------- --
+	elseif Valuetype:match('Time') then
+		if EditedVal:find('^%d+[hms]%d*[hms]?%d*[hms]?') then
+			saveAndProceed()
+		else
+			start('', 'Format error', 'You can only input time durations in this field, example: 1h20m30s', '', '1000')
+		end
+	-- -------------------------------- Text type ------------------------------- --
+	elseif Valuetype:match('Txt') then
+		if not EditedVal:find('[%d.]') then
+			saveAndProceed()
+		else
+			start('', 'Format error', 'You can only input text in this field', '', '1000')
+		end
 	end
 end
 
@@ -103,19 +164,3 @@ function startSide(variant, num)
 	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Overlay')
 	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Overlay')
 end
-
--- function startJax()
--- 	if tonumber(SKIN:GetVariable('QoL')) == 1 then 
--- 		SKIN:Bang('!Draggable', '0')
--- 		local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Overlay\\Main.ini'
--- 		local scale = SKIN:GetMeasure('Set.S'):GetValue()
--- 		local PosX = SKIN:GetX() + tonumber(SKIN:GetMeter('Logo'):GetX())
--- 		local PosY = SKIN:GetY() + tonumber(SKIN:GetMeter('Logo'):GetY())
--- 		local DimH = 256 * scale
--- 		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', 'Logo', File)
--- 		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
--- 		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.H', DimH, File)
--- 		SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Overlay')
--- 		SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Overlay')
--- 	end
--- end
