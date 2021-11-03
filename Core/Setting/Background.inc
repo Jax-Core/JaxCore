@@ -17,6 +17,7 @@ FontSize=(14*[Set.S])
 DynamicVariables=1
 Group=Shorthand
 
+; [ImageContainer]
 
 [ContentContainer]
 Meter=Shape

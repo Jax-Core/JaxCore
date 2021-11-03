@@ -1,6 +1,7 @@
 [Variables]
 UserNameCheckVariable=Jax Tam 
-LastVersionNumber=03633
+LastVersionNumber=03700
+LastRollBackSkin=IdleStyle|1.4
 ; ----------------------------- Scaling variables ---------------------------- ;
 ; Set.S=0.9
 Set.P=(40*[Set.S])
@@ -34,4 +35,4 @@ Ctx.Animated=0
 
 [Set.S]
 Measure=Calc
-Formula=0.98
+Formula=1

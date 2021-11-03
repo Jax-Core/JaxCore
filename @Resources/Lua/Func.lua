@@ -113,7 +113,11 @@ function startDrop(variant, handler, skin, arg1)
 	local scalemeasure = SKIN:GetMeasure('Set.S')
 	if scalemeasure ~= nil then scale = scalemeasure:GetValue() else scale = tonumber(SKIN:GetVariable('Sec.S')) end
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.name', skin, File)
-	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
+	if variant:match('\\') then
+		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
+	else
+		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', 'Variants\\'..skin..variant..'.inc', File)
+	end
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
 	if arg1 then SKIN:Bang('!WriteKeyvalue', 'Variables', 'arg1', arg1, File) end
 	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Dropdown')

@@ -6,15 +6,15 @@
 ; ---------------------------------------------------------------------------- ;
 
 [Title]
-Text="Celebrating 1000 members!"
+Text="IdleStyle Beta"
 FontSize=(20*#Sec.S#)
 Clipstring=0
-inlinePattern=1000
+inlinePattern=Beta
 InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
 
 [Description]
-Text="To show appreciation to every one of you awesome people,#CRLF#I am hosting 3 giveaways in the coming 3 days,#CRLF#along with IdleStyle's beta release!#CRLF##CRLF#Join the Discord server to participate!"
-inlinePattern=3 giveaways|beta release
+Text="IdleStyle is an extensive skin that allows you to display various things when you go idle, including videos and animations!#CRLF##CRLF#Join the discord server, download the beta and participate in the discussion!"
+inlinePattern=IdleStyle|display various things|download the beta
 InlineSetting=Color | FF700F
 
 [INfo]
