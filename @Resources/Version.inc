@@ -1,2 +1,2 @@
 [Variables]
-Core.Ver=03710
+Core.Ver=03711

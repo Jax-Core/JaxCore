@@ -40,7 +40,7 @@ Meter=String
 Y=(40*[Set.S])
 Container=ContentContainer
 DynamicVariables=1
-FontFace=Poppins Bold
+FontFace=Poppins SemiBold
 MeterStyle=Set.String:S | Header:1
 InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
 ; InlineSetting2=Shadow | 0 | 0 | 2 | CC1C15
@@ -83,71 +83,78 @@ FontSize=(24*[Set.S])
 Text=Fetching latest version id...
 FontSize=(24*[Set.S])
 [Subheader:0]
-Text=Click here to be directed to the download page for #Skin.Name#
+Text=Click the download button to install #skin.name# v[mVer]
 FontSize=(15*[Set.S])
-
-[Obj.6]
-Meter=Shape
-X=r
-Y=(40*[Set.S])r
-DynamicVariables=1
-Shape=Rectangle 0,0,200,45,(#Set.R#) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend THis
-OverColor=#Set.Accent_Color#
-LeaveColor=#Set.Accent_Color#
-Leftmouseupaction=[!SetVariable DownloadLink "https://github.com/EnhancedJax/#Skin.Name#/releases/download/v[mVer]/#Skin.Name#_v[mVer].rmskin"][!SetVariable DownloadName "#Skin.Name#[mVer]"]["https://www.deviantart.com/jaxoriginals/art/-v1-0-[##SKIN.Name#.L]"][!CommandMeasure Installer "Install"]
-MeterStyle=Shape.Over:S
-Group=DownloadButton
-Hidden=1
-Container=ContentContainer
-[Obj.6.Child]
-Meter=String
-X=(200/2*[Set.S])r
-y=(45/2*[Set.S])r
-FontSize=(15*[Set.S])
-FontFace=Poppins 
-StringAlign=CenterCenter
-Text=Download
-Group=DownloadButton
-Hidden=1
-Container=ContentContainer
-MeterStyle=SEt.String:S | ButtonT:S
 
 ;===========================================================================================================================
 
 [Button21]
 Meter=Shape
-Shape=Rectangle 0,0,100,30,3,3 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
+Shape=Rectangle 0,0,100,100,3,3 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
 MeterStyle=Set.Button:S
 X=0
-Y=R
+Y=(30*[Set.S])R
 ; Y=(#Set.H#-#Set.P#*2-(30*3+5*2)*[Set.S])
 OverColor=399F59
 LeaveColor=57, 159, 89, 200
 Act=["https://www.deviantart.com/jaxoriginals/art/[##SKIN.Name#.L]"]
 [Value21]
-Meter=String
-X=(100/2*[Set.S])r
-StringAlign=CenterCenter
-Text=DeviantArt
-MeterStyle=Set.String:S | Set.Value:S
+Meter=Image
+Y=((100-48)/2*[Set.S])r
+X=((100-48)/2*[Set.S])r
+W=(48*[Set.S])
+H=(48*[Set.S])
+Greyscale=1
+DynamicVariables=1
+Container=ContentContainer
+Group=Buttons
+ImageName=#@#Icons\DA.png
 [Button22]
 Meter=Shape
-Shape=Rectangle 0,0,100,30,3,3 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
+Shape=Rectangle 0,0,100,100,3,3 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
 MeterStyle=Set.Button:S
-X=((100/2+10)*[Set.S])r
-Y=(-30/2*[Set.S])r
+X=((85)*[Set.S])r
+Y=(-(100-48)/2*[Set.S])r
 Act=["https://github.com/EnhancedJax/#Skin.Name#"]
 [Value22]
-Meter=String
-X=(100/2*[Set.S])r
-StringAlign=CenterCenter
-Text=Github
-MeterStyle=Set.String:S | Set.Value:S
+Meter=Image
+Y=((100-48)/2*[Set.S])r
+X=((100-48)/2*[Set.S])r
+W=(48*[Set.S])
+H=(48*[Set.S])
+Greyscale=1
+DynamicVariables=1
+Container=ContentContainer
+Group=Buttons
+ImageName=#@#Icons\Github.png
+[Button23]
+Meter=Shape
+Shape=Rectangle 0,0,100,100,3,3 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
+MeterStyle=Set.Button:S
+OverColor=#Set.Accent_Color#
+LeaveColor=#Set.Accent_Color#
+X=((85)*[Set.S])r
+Y=(-(100-48)/2*[Set.S])r
+Act=[!SetVariable DownloadLink "https://github.com/EnhancedJax/#Skin.Name#/releases/download/v[mVer]/#Skin.Name#_v[mVer].rmskin"][!SetVariable DownloadName "#Skin.Name#[mVer]"]["https://www.deviantart.com/jaxoriginals/art/-v1-0-[##SKIN.Name#.L]"][!CommandMeasure Installer "Install"]
+Group=DownloadButton
+Hidden=1
+[Value23]
+Meter=Image
+Y=((100-48)/2*[Set.S])r
+X=((100-48)/2*[Set.S])r
+W=(48*[Set.S])
+H=(48*[Set.S])
+Greyscale=1
+DynamicVariables=1
+Container=ContentContainer
+Group=DownloadButton
+ImageName=#@#Icons\Install.png
+Hidden=1
 
 [Description]
 Meter=String
 X=0
-Y=(#Set.P#)R
+Y=((100-48)/2+55*[Set.S])r
 W=(#Set.W#*0.4)
 ClipString=2
 FontSize=(12*[Set.S])
@@ -230,14 +237,14 @@ IfTrueAction=[!SetOption Subheader MeterStyle "Set.String:S | Subheader:1"][!Upd
 IfCondition2=mC4U < #Version#
 IfTrueAction2=[!SetOption Header MeterStyle "Set.String:S | Header:2"][!SetOption Subheader MeterStyle "Set.String:S | Subheader:2"][!UpdateMeter *][!Redraw]
 IfCondition3=mC4U > #Version#
-IfTrueAction3=[!SetOption Header MeterStyle "Set.String:S | Header:0"][!SetOption Subheader MeterStyle "Set.String:S | Subheader:0"][!ShowMeterGroup DownloadButton][!HideMeterGroup Buttons][!UpdateMeter *][!Redraw]
+IfTrueAction3=[!SetOption Header MeterStyle "Set.String:S | Header:0"][!SetOption Subheader MeterStyle "Set.String:S | Subheader:0"][!ShowMeterGroup DownloadButton][!UpdateMeter *][!Redraw]
 IfNotMatchAction=
 
 [mCheckforPresence]
 Measure=String
 String=#*Version*#
 IfMatch=#Version#
-IfMatchAction=[!SetOption Header Text "#Skin.Name# isn't installed"][!SetOption Subheader Text "Click here to be directed to the download page for #Skin.Name#"][!ShowMeterGroup DownloadButton][!HideMeterGroup Buttons][!DisableMouseActionGroup * Set.SideButtons][!SetOptionGroup Set.SideIcons ImageAlpha 100][!UpdateMeter *][!Redraw]
+IfMatchAction=[!SetOption Header Text "#Skin.Name# isn't installed"][!SetOption Subheader Text "Click here to be directed to the download page for #Skin.Name#"][!ShowMeterGroup DownloadButton][!DisableMouseActionGroup * Set.SideButtons][!SetOptionGroup Set.SideIcons ImageAlpha 100][!UpdateMeter *][!Redraw]
 IfMatchMode=1
 
 [VersionList]
