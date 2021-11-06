@@ -67,6 +67,8 @@ Container=ContentContainer
 Meter=String
 X=0
 Y=([Header:YH]-#Set.P#)
+W=([ContentContainer:W])
+ClipString=2
 InlinePattern=v#Version#
 Inlinesetting=Color | #SEt.Accent_Color#
 FontColor=150,150,150
@@ -84,6 +86,9 @@ Text=Fetching latest version id...
 FontSize=(24*[Set.S])
 [Subheader:0]
 Text=Click the download button to install #skin.name# v[mVer]
+FontSize=(15*[Set.S])
+[Subheader:3]
+Text=This skin isn't installed on your device. Click the download button to install #skin.name# v[mVer]
 FontSize=(15*[Set.S])
 
 ;===========================================================================================================================
@@ -244,7 +249,7 @@ IfNotMatchAction=
 Measure=String
 String=#*Version*#
 IfMatch=#Version#
-IfMatchAction=[!SetOption Header Text "#Skin.Name# isn't installed"][!SetOption Subheader Text "Click here to be directed to the download page for #Skin.Name#"][!ShowMeterGroup DownloadButton][!DisableMouseActionGroup * Set.SideButtons][!SetOptionGroup Set.SideIcons ImageAlpha 100][!UpdateMeter *][!Redraw]
+IfMatchAction=[!SetOption Header MeterStyle "Set.String:S | Header:1"][!SetOption Subheader MeterStyle "Set.String:S | Subheader:3"][!ShowMeterGroup DownloadButton][!DisableMouseActionGroup * Set.SideButtons][!SetOptionGroup Set.SideIcons ImageAlpha 100][!UpdateMeter *][!Redraw]
 IfMatchMode=1
 
 [VersionList]

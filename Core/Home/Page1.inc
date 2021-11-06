@@ -1,4 +1,5 @@
-
+[Variables]
+CurrentNewsID=03720
 ; ---------------------------------------------------------------------------- ;
 ;                                 UpdateChecker                                ;
 ; ---------------------------------------------------------------------------- ;
@@ -15,9 +16,9 @@ UpdateDivider=-1
 
 [Check4New:M]
 Measure=String
-String=#LastVersionNumber#
-IfMatch=^#Core.Ver#$
-ifnotmatchaction=[!commandMeasure Func "startPopup('News')"][!WriteKeyValue Variables LastVersionNumber "#Core.Ver#" "#@#Vars.inc"]
+String=#LastNewsID#
+IfMatch=^#CurrentNewsID#$
+ifnotmatchaction=[!commandMeasure Func "startPopup('News')"][!WriteKeyValue Variables LastNewsID "#CurrentNewsID#" "#@#Vars.inc"]
 IfMatchMode=1
 Disabled=1
 DynamicVariables=1

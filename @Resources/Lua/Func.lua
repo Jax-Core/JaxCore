@@ -124,13 +124,39 @@ function startDrop(variant, handler, skin, arg1)
 	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Dropdown')
 end
 
-function startPopup(variant)
+function startPopup(variant, style)
+	local style = style or 'classic'
 	local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Popup\\Main.ini'
 	local scale = SKIN:GetMeasure('Set.S'):GetValue()
-	local PosX = SKIN:GetX() + SKIN:GetW() / 2 - 400 * scale / 2
-	local PosY = SKIN:GetY() + SKIN:GetH() / 2 - 500 * scale / 2
+	if variant:match('^Info:') then 
+		local arg1 = tonumber(SKIN:GetMeter(variant):GetY()) - 40 * SKIN:GetMeasure('Set.S'):GetValue()
+		local arg2 = SKIN:GetMeter(variant:gsub('^Info:','')):GetOption('FontSize')
+		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.arg1', arg1, File)
+		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.arg2', arg2, File)
+		variant = SKIN:GetVariable('SKINSPATH')..SKIN:GetVariable('Skin.Name')..'\\Core\\Info\\'..SKIN:GetVariable('Skin.Set_Page')..'\\'..variant:gsub('^Info:','')..'.inc'
+	else
+		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.arg1', variant, File)
+		variant = 'Variants\\'..variant..'.inc'
+	end
+	if style == 'classic' then
+		DimW = 400
+		DimH = 500
+	elseif style == 'medium' then
+		DimW = tonumber(SKIN:GetW()) - 100
+		DimH = tonumber(SKIN:GetH()) - 100
+	elseif style == 'info' then
+		DimW = tonumber(SKIN:GetMeter('ContentCOntainer'):GetW())
+		DimH = tonumber(SKIN:GetMeter('ContentCOntainer'):GetH())
+		PosX = SKIN:GetX() + tonumber(SKIN:GetMeter('ContentCOntainer'):GetX())
+		PosY = SKIN:GetY() + tonumber(SKIN:GetMeter('ContentCOntainer'):GetY())
+	end
+	local PosX = PosX or SKIN:GetX() + SKIN:GetW() / 2 - DimW * scale / 2
+	local PosY = PosY or SKIN:GetY() + SKIN:GetH() / 2 - DimH * scale / 2
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Style', style, File)
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.W', DimW, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.H', DimH, File)
 	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Popup')
 	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Popup')
 end

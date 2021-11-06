@@ -106,7 +106,7 @@ Container=ContentContainer
 Shape=Line 0,0,(#Set.W#-#Set.L#-#Set.P#*3),0 | StrokeWidth 1 | Fill Color #Set.Pri_Color#,0 | Stroke Color #Set.Text_Color#,25
 
 [Set.TextBox:S]
-X=(#Set.W#-#Set.L#-#Set.P#*2-150*[Set.S])
+X=(#Set.W#-#Set.L#-#Set.P#*2-151*[Set.S])
 ; Y=([Option[&Func:LocalVar('#CURRENTSECTION#', 'Class')]:Y]-#Set.P#+(-30/2+8)*[Set.S])
 Container=ContentContainer
 DynamicVariables=1
@@ -116,7 +116,7 @@ MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,50"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 Leftmouseupaction=[!SetVariable Editing "#CURRENTSECTION#"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5*[Set.S])"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5*[Set.S])"][!CommandMeasure Input:M "ExecuteBatch 1"]
 [Set.FontBox:S]
-X=(#Set.W#-#Set.L#-#Set.P#*2-150*[Set.S])
+X=(#Set.W#-#Set.L#-#Set.P#*2-151*[Set.S])
 ; Y=([Option[&Func:LocalVar('#CURRENTSECTION#', 'Class')]:Y]-#Set.P#+(-30/2+8)*[Set.S])
 Container=ContentContainer
 DynamicVariables=1
@@ -153,16 +153,16 @@ Leftmouseupaction=[!WriteKeyvalue Variables "#CURRENTSECTION#" "([##CURRENTSECTI
 
 
 [Set.Color:S]
-X=(#Set.W#-#Set.L#-#Set.P#*2-150*[Set.S])
+X=(#Set.W#-#Set.L#-#Set.P#*2-151*[Set.S])
 ; Y=([Option[&Func:LocalVar('#CURRENTSECTION#', 'Class')]:Y]-#Set.P#+(-30/2+8)*[Set.S])
 DynamicVariables=1
 Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 0 | Fill Color 0,0,0,1 | Scale [Set.S],[Set.S],0,0
-Shape2=Ellipse (135*[Set.S]),(15*[Set.S]),(10*[Set.S]) | StrokeWidth 0 | Fill Color [##CURRENTSECTION#]
+Shape2=Ellipse (135*[Set.S]),(15*[Set.S]),(10*[Set.S]) | StrokeWidth 2 | Stroke Color #Set.Ter_Color# | Fill Color [##CURRENTSECTION#]
 LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 Container=ContentContainer
 
 [Set.Grad0:S]
-X=(#Set.W#-#Set.L#-#Set.P#*2-150*[Set.S])
+X=(#Set.W#-#Set.L#-#Set.P#*2-151*[Set.S])
 ; Y=([Option[&Func:LocalVar('#CURRENTSECTION#', 'Class')]:Y]-#Set.P#+(-30/2+8)*[Set.S])
 DynamicVariables=1
 Shape=Rectangle 0,0,75,30,3 | StrokeWidth 0 | Fill LinearGradient Grad | Scale [Set.S],[Set.S],0,0
@@ -179,11 +179,11 @@ LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=[&Func:GroupVar('#CURRENTSE
 Container=ContentContainer
 
 [Set.ColorPacity:S]
-X=(#Set.W#-#Set.L#-#Set.P#*2-150*[Set.S])
+X=(#Set.W#-#Set.L#-#Set.P#*2-151*[Set.S])
 ; Y=([Option[&Func:LocalVar('#CURRENTSECTION#', 'Class')]:Y]-#Set.P#+(-30/2+8)*[Set.S])
 DynamicVariables=1
 Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 2 | Fill Color 0,0,0,1 | Extend Fill | Scale [Set.S],[Set.S],0,0
-Shape2=Ellipse (135*[Set.S]),(15*[Set.S]),(10*[Set.S]) | StrokeWidth 0 | Fill Color [##CURRENTSECTION#Color]
+Shape2=Ellipse (135*[Set.S]),(15*[Set.S]),(10*[Set.S]) | StrokeWidth 2 | Stroke Color #Set.Ter_Color# | Fill Color [##CURRENTSECTION#Color]
 Fill=Stroke Color #Set.Text_Color#,10
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,15"][!UpdateMeter #CURRENTSECTION#][!Redraw]
@@ -207,7 +207,7 @@ DynamicVariables=1
 
 
 [Set.Button:S]
-X=(#Set.W#-#Set.L#-#Set.P#*2-150*[Set.S])
+X=(#Set.W#-#Set.L#-#Set.P#*2-151*[Set.S])
 ; Y=([&Option[&Func:LocalVar('#CURRENTSECTION#', 'Class')]:Y]-#Set.P#+(-30/2+8)*[Set.S])
 OverColor=100,100,100,200
 LeaveColor=100,100,100,100
@@ -219,7 +219,26 @@ MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color [&Func:LocalVar('
 LeftMouseUpAction=[&Func:LocalVar('#CURRENTSECTION#', 'Act')]
 Container=ContentContainer
 
-
+[Set.RectButton:S]
+X=(#Set.W#-#Set.L#-#Set.P#*2-30*[Set.S])
+OverColor=#Set.Accent_Color_2#,255
+LeaveColor=#Set.Accent_Color_2#,200
+Fill=Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'LeaveColor')]
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'OverColor')]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'LeaveColor')]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Shape=Rectangle 0,0,30,30,10 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
+LeftMouseUpAction=[!commandMeasure Func "startPopup('#CURRENTSECTION#', 'info')"]
+Container=ContentContainer
+DynamicVariables=1
+[Set.Icon:S]
+FontFace=Segoe MDL2 Assets
+X=(-15*[Set.S])R
+Y=(-15*[Set.S])R
+StringAlign=CenterCenter
+FontSize=(12*[Set.S])
+Text=[\xEA1F]
+Container=ContentContainer
+DynamicVariables=1
 
 
 ; --------------------------------- 2 picker --------------------------------- ;
@@ -308,7 +327,7 @@ Container=ContentContainer
 
 
 ; [Set.DropDown:S]
-; X=(#Set.W#-#Set.L#-#Set.P#*2-150*[Set.S])
+; X=(#Set.W#-#Set.L#-#Set.P#*2-151*[Set.S])
 ; NumOfOption=2
 ; Group=DropDown
 ; Container=ContentContainer
