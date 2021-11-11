@@ -6,15 +6,15 @@
 ; ---------------------------------------------------------------------------- ;
 
 [Title]
-Text="IdleStyle Beta"
+Text="IdleStyle Beta | inactivity"
 FontSize=(20*#Sec.S#)
 Clipstring=0
 inlinePattern=Beta
 InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
 
 [Description]
-Text="IdleStyle is an extensive skin that allows you to display various things when you go idle, including videos and animations!#CRLF##CRLF#Join the discord server, download the beta and participate in the discussion!"
-inlinePattern=IdleStyle|display various things|download the beta
+Text="IdleStyle is a skin that allows you to display various things when you go idle. The last beta version will be released on the 13th.#CRLF##CRLF#Due to exams, there will be minimal updates next and the week after."
+inlinePattern=IdleStyle|display various things|download the beta|minimal updates
 InlineSetting=Color | FF700F
 
 [INfo]

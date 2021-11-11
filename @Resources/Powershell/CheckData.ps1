@@ -25,23 +25,43 @@ function Create-Updater {
 
 function Create-ValliStart {
     New-Item -Path "$SkinsPath..\CoreData" -Name "ValliStart" -ItemType "directory"
-    $RainmeterFolder = Split-Path -Path $SkinsPath -Parent
-
-    $RainmeterExe = $RmAPI.VariableStr('PROGRAMPATH')
-    $ResourceFolder = $RmAPI.VariableStr('@')
-    $WScriptShell = New-Object -ComObject WScript.Shell
-    $Shortcut = $WScriptShell.CreateShortcut("$SkinsPath..\CoreData\ValliStart\Config.lnk")
-    $Shortcut.TargetPath = "$RainmeterFolder\CoreData\ValliStart"
-    $shortcut.IconLocation = $ResourceFolder+"Images\Add.ico"
-    $Shortcut.Save()
-
-    
-    $WScriptShell = New-Object -ComObject WScript.Shell
-    $Shortcut = $WScriptShell.CreateShortcut("$SkinsPath..\CoreData\ValliStart\JaxCore.lnk")
-    $Shortcut.TargetPath = $RainmeterExe+"Rainmeter.exe"
-    $Shortcut.Arguments = '!ActivateConfig #JaxCore\Main Home.ini'
-    $shortcut.IconLocation = $ResourceFolder+"Images\Logo.ico"
-    $Shortcut.Save()
+    New-Item -Path "$SkinsPath..\CoreData\ValliStart" -Name "Include.inc" -ItemType "file"
+    Set-Content "$SkinsPath..\CoreData\ValliStart\Include.inc" @" 
+[Box1]
+Meter=Shape
+X=(#scale#*25)
+Y=(#scale#*100)
+MeterStyle=BoxStyle
+[Box1Icon]
+Meter=Image
+MeterStyle=IconStyle
+[Box2]
+Meter=Shape
+MeterStyle=BoxStyle
+[Box2Icon]
+Meter=Image
+MeterStyle=IconStyle
+[Box3]
+Meter=Shape
+MeterStyle=BoxStyle
+[Box3Icon]
+Meter=Image
+MeterStyle=IconStyle
+[Box4]
+Meter=Shape
+MeterStyle=BoxStyle
+[Box4Icon]
+Meter=Image
+MeterStyle=IconStyle
+[Box5]
+Meter=Shape
+MeterStyle=BoxStyle
+[Box5Icon]
+Meter=Image
+MeterStyle=IconStyle
+"@
+    New-Item -Path "$SkinsPath..\CoreData\ValliStart" -Name "IconCache" -ItemType "directory"
+    New-Item -Path "$SkinsPath..\CoreData\ValliStart\IconCache" -Name "folder.png" -ItemType "file"
 
     $RmAPI.Log("Created: ValliStart")
 }

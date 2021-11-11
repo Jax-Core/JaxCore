@@ -1,3 +1,14 @@
+function Initialize()
+    if SKIN:GetVariable('Skin.Name') == SKIN:GetVariable('BetaSkinList') then
+        SKIN:Bang('!ShowMeterGroup', 'DiscordButton')
+        SKIN:Bang('!SetOption', 'SubHeader', 'MEterStyle', 'Set.String:S | Subheader:4')
+        SKIN:Bang('!UpdateMeter', '*')
+        SKIN:Bang('!Redraw')
+    else
+        SKIN:Bang('!EnableMeasureGroup', 'checkForBeta')
+    end
+end
+
 function activateParse()
     local LastParsed = SKIN:GetVariable('LastRollBackSkin')
     -- local LastParsedSkin = LastParsed:match('^.*|')

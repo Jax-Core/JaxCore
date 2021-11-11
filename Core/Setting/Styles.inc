@@ -232,8 +232,8 @@ Container=ContentContainer
 DynamicVariables=1
 [Set.Icon:S]
 FontFace=Segoe MDL2 Assets
-X=(-15*[Set.S])R
-Y=(-15*[Set.S])R
+X=(15*[Set.S])r
+Y=(15*[Set.S])r
 StringAlign=CenterCenter
 FontSize=(12*[Set.S])
 Text=[\xEA1F]
@@ -428,25 +428,6 @@ MouseLeaveAction=[!SetOption #CURRENTSECTION# 1232412414 "45 | [&Func:LocalVar('
 
 
 
-; ---------------------------------------------------------------------------- ;
-;                                   Examples                                   ;
-; ---------------------------------------------------------------------------- ;
-
-;; BOOL EXMAPLE
-; [BoolVarName]
-; Meter=Shape
-; MeterStyle=Set.Bool:S
-; Y=([VarOption:Y]-#Set.P#+(-20/2+8)*[Set.S])
-
-;; TEXT INPUT EXAMPLE
-; [TextVarName]
-; Meter=Shape
-; MeterStyle=Set.TextBox:S
-; Y=([VarOption:Y]-#Set.P#+(-30/2+8)*[Set.S])
-; [VarOptionNumber]
-; Meter=String
-; Text=TextVarName
-; MeterStyle=Set.String:S | Set.Value:S
 
 
 ; ---------------------------------------------------------------------------- ;

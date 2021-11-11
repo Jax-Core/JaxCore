@@ -12,6 +12,8 @@ Keylaunch.L=890749449
 ValliStart.L=893506095
 QuickNote.L=894951390
 
+BetaSkinList=IdleStyle
+
 [Installer]
 Measure=Plugin
 Plugin=PowershellRM
@@ -46,13 +48,13 @@ InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
 ; InlineSetting2=Shadow | 0 | 0 | 2 | CC1C15
 Leftmouseupaction=[https://github.com/EnhancedJax/#Skin.Name#/releases/latest]
 [Header:2]
-Text=One update ahead...
+Text="One update ahead..."
 FontSize=(40*[Set.S])
 [Header:1]
-Text=#Skin.Name#
+Text="#Skin.Name#"
 FontSize=(60*[Set.S])
 [Header:0]
-Text=Update available
+Text="Update available"
 FontSize=(40*[Set.S])
 [Shape]
 Meter=Shape
@@ -75,20 +77,24 @@ FontColor=150,150,150
 FontFace=Poppins Light
 MeterStyle=Set.String:S | Subheader:00
 Container=ContentContainer
+DynamicVariables=1
 [Subheader:2]
-Text=Currently on a beta build for #Skin.Name#
+Text="Currently on a beta build for #Skin.Name#"
 FontSize=(15*[Set.S])
 [Subheader:1]
-Text=On latest v#Version#
+Text="On latest v#Version#"
 FontSize=(24*[Set.S])
 [Subheader:00]
-Text=Fetching latest version id...
+Text="Fetching latest version id..."
 FontSize=(24*[Set.S])
 [Subheader:0]
-Text=Click the download button to install #skin.name# v[mVer]
+Text="Click the download button to install #skin.name# v[mVer]"
 FontSize=(15*[Set.S])
 [Subheader:3]
-Text=This skin isn't installed on your device. Click the download button to install #skin.name# v[mVer]
+Text="This skin isn't installed on your device. Click the download button to install #skin.name# v[mVer]"
+FontSize=(15*[Set.S])
+[Subheader:4]
+Text="This skin is currently in beta! Join the discord server to participate in the discussion!"
 FontSize=(15*[Set.S])
 
 ;===========================================================================================================================
@@ -145,8 +151,8 @@ Group=DownloadButton
 Hidden=1
 [Value23]
 Meter=Image
-Y=((100-48)/2*[Set.S])r
 X=((100-48)/2*[Set.S])r
+Y=((100-48)/2*[Set.S])r
 W=(48*[Set.S])
 H=(48*[Set.S])
 Greyscale=1
@@ -154,6 +160,29 @@ DynamicVariables=1
 Container=ContentContainer
 Group=DownloadButton
 ImageName=#@#Icons\Install.png
+Hidden=1
+[Button24]
+Meter=Shape
+Shape=Rectangle 0,0,100,100,3,3 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
+MeterStyle=Set.Button:S
+OverColor=88, 101, 242
+LeaveColor=88, 101, 242
+X=(-(100-48)/2*[Set.S])r
+Y=(-(100-48)/2*[Set.S])r
+Act=["https://discord.gg/JmgehPSDD6"]
+Group=DiscordButton
+Hidden=1
+[Value24]
+Meter=Image
+Y=((100-48)/2*[Set.S])r
+X=((100-48)/2*[Set.S])r
+W=(48*[Set.S])
+H=(48*[Set.S])
+Greyscale=1
+DynamicVariables=1
+Container=ContentContainer
+Group=DiscordButton
+ImageName=#@#Icons\Discord.png
 Hidden=1
 
 [Description]
@@ -221,7 +250,9 @@ MeterStyle=Set.String:S | Set.Value:S
 Measure=WebParser
 URL=https://raw.githubusercontent.com/EnhancedJax/#Skin.Name#/main/%40Resources/Version.inc
 RegExp==(.*)$
+Disabled=1
 FinishAction=[!EnableMeasure mC4U][!UpdateMeasure mC4U]
+Group=checkForBeta
 [mVer]
 Measure=WebParser
 URL=[WebParser]
@@ -251,6 +282,8 @@ String=#*Version*#
 IfMatch=#Version#
 IfMatchAction=[!SetOption Header MeterStyle "Set.String:S | Header:1"][!SetOption Subheader MeterStyle "Set.String:S | Subheader:3"][!ShowMeterGroup DownloadButton][!DisableMouseActionGroup * Set.SideButtons][!SetOptionGroup Set.SideIcons ImageAlpha 100][!UpdateMeter *][!Redraw]
 IfMatchMode=1
+Disabled=1
+Group=checkForBeta
 
 [VersionList]
 Measure=WebParser

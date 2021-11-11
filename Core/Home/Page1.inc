@@ -1,8 +1,8 @@
-[Variables]
-CurrentNewsID=03720
 ; ---------------------------------------------------------------------------- ;
 ;                                 UpdateChecker                                ;
 ; ---------------------------------------------------------------------------- ;
+[Variables]
+CurrentNewsID=03721
 
 [MeasureUser]
 Measure=Plugin
@@ -161,7 +161,7 @@ Meter=Shape
 X=(30*[Set.S]+#Set.P#/2)r
 Y=r
 DynamicVariables=1
-OverColor=399F59
+OverColor=84, 235, 131
 LeaveColor=399F59
 Shape=Rectangle 0,0,40,40,(#Set.R#/2) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend This
 MeterStyle=Shape.Over:S
@@ -177,7 +177,7 @@ Meter=Shape
 X=(30*[Set.S]+#Set.P#/2)r
 Y=r
 DynamicVariables=1
-OverColor=FF9834
+OverColor=255, 179, 51
 LeaveColor=FF9834
 Shape=Rectangle 0,0,40,40,(#Set.R#/2) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend This
 MeterStyle=Shape.Over:S
@@ -187,6 +187,22 @@ Container=BC
 Meter=Image
 MeterStyle=TopButton:S
 ImageName=#@#Icons\Shortcut.png
+
+[NewsButton]
+Meter=Shape
+X=(30*[Set.S]+#Set.P#/2)r
+Y=r
+DynamicVariables=1
+OverColor=255, 92, 22
+LeaveColor=219, 53, 19
+Shape=Rectangle 0,0,40,40,(#Set.R#/2) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend This
+MeterStyle=Shape.Over:S
+Leftmouseupaction=[!commandMeasure Func "startPopup('News')"]
+Container=BC
+[NewsIcon]
+Meter=Image
+MeterStyle=TopButton:S
+ImageName=#@#Icons\News.png
 
 ; ---------------------------------------------------------------------------- ;
 ;                                     Right                                    ;

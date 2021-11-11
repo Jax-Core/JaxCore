@@ -1,6 +1,6 @@
 
 [LoadActions]
-ActionList1=Start0 | Wait 2000 | Start1 | Custom1 | Wait 1000 | 
+ActionList1=Start0 | Wait 2000 | Start1 | Custom1 | Wait 1000 | NextPage
 Custom1=[!CommandMeasure CheckForDataFolder "Check-Data"]
 
 [Tween:M]

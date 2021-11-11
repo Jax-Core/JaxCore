@@ -1,6 +1,6 @@
 [Variables]
-UserNameCheckVariable=Jax Tam 
-LastNewsID=03710
+UserNameCheckVariable=Jax Tam
+LastNewsID=03720
 LastRollBackSkin=IdleStyle|1.4
 ; ----------------------------- Scaling variables ---------------------------- ;
 ; Set.S=0.9
@@ -27,7 +27,7 @@ Set.SubText_Color=120,120,120
 Sec.SaveLocation=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 ; ------------------------ Background check variables ------------------------ ;
 Set.Auto_Refresh=1
-Set.BackgroundCheckTime=30
+Set.BackgroundCheckTime=1
 
 QoL=1
 QolPlugin=Plugin
