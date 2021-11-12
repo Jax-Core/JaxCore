@@ -1,6 +1,6 @@
 [Variables]
-CCW=1100
-CCH=819
+CCW=734
+CCH=599
 [Position]
 Meter=Shape
 MeterStyle=CtxBox:S

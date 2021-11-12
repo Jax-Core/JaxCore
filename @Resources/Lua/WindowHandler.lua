@@ -232,7 +232,7 @@ function LeftMouseUpCallback(mouseX, mouseY)
 	bang = bang .. "[!WriteKeyValue Variables WindowPosY " .. skinPosY .. ' "#@#Includes\\Window.ini"]' 							   			-- Write Y pos in case of refresh
 	bang = bang .. "[!WriteKeyValue Variables Set.W " .. windowWidth .. ' "#@#Includes\\Window.ini"]' 					   			-- Write Width in case of refresh
 	bang = bang .. "[!WriteKeyValue Variables Set.H " .. windowHeight .. ' "#@#Includes\\Window.ini"]' 					   			-- Write Height in case of refresh
-	bang = bang .. "[!WriteKeyValue Set.S Formula " .. currentScale .. ' "#@#Vars.inc"]' 					   			-- Write Scale in case of refresh
+	bang = bang .. "[!WriteKeyValue Set.S Formula " .. currentScale .. ' "#@#Includes\\Window.ini"]' 					   			-- Write Scale in case of refresh
 	bang = bang .. "[!UpdateMeter *][!Redraw]"
 
 	SKIN:Bang(bang)
