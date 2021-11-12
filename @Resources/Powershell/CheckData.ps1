@@ -95,7 +95,7 @@ function Check-Data {
     } else {
         Create-IdleStyle
     }
-    If (Test-Path -Path "$SkinsPath..\CoreData\ValliStart") {
+    If (Test-Path -Path "$SkinsPath..\CoreData\ValliStart\IconCache") {
     } else {
         Create-ValliStart
     }
