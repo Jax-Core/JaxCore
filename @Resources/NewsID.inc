@@ -1,2 +1,2 @@
 [Variables]
-News.ID=0
+News.ID=1
