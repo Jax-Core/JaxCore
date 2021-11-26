@@ -1,7 +1,6 @@
 [Variables]
 UserNameCheckVariable=Jax Tam
-LastNewsID=03720
-LastRollBackSkin=IdleStyle|1.4
+LastRollBackSkin=ValliStart|2.91
 ; ----------------------------- Scaling variables ---------------------------- ;
 Set.P=(40*[Set.S])
 Set.Home.P=(100*[Set.S])

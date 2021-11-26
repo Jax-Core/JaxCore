@@ -1,5 +1,5 @@
 [Variables]
-Spotlight=QuickNote
+Spotlight=IdleStyle
 
 [BC]
 MouseScrollDownAction=[!SetVariable Scroll "(Clamp(#Scroll#+60,0,(#Set.PageH#-#Set.H#)))"][!UpdateMeterGroup Scroll][!Redraw]
@@ -47,7 +47,7 @@ Meter=Image
 W=(#Set.W#)
 H=(#Set.H#*0.5)
 Group=Scroll
-ImageAlpha=(#Scroll# > 0 ? 0 : 50)
+ImageAlpha=(#Scroll# > 0 ? 0 : 25)
 PreserveAspectRatio=2
 DynamicVariables=1
 ImageName=#@#Images\Cards\#Spotlight#.png
@@ -59,14 +59,20 @@ Container=BC
 [title.Text1]
 Meter=String
 MeterStyle=Set.String:S
-Text=Skin spotlight
+Text=Modules // Must have desktop utilities to get the most out of your desktop
 X=(#Set.P#)
 Y=((110*[Set.S])-#Scroll#)
+ClipString=2
 FontSize=40
 FontFace=Poppins SemiBold
 Group=Scroll
 StringAlign=LeftTop
+InlinePattern=(.*)//
 InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
+InlinePattern2=\/\/.*
+InlineSetting2=Size | (14*[Set.S])
+InlinePattern3=\/\/.*
+InlineSetting3=Face | Poppins Thin
 TransformationMatrix=[Set.S];0;0;[Set.S];((1-[Set.S])*[#CURRENTSECTION#:X]);((1-[Set.S])*[#CURRENTSECTION#:Y])
 
 ; [SpotLight]
@@ -97,7 +103,7 @@ InlineSetting=Size | (12*[Set.S])
 InlinePattern2=#CRLF#.*
 InlineSetting2=Face | Poppins Thin
 MeterStyle=Set.String:S
-Text=#Spotlight##CRLF#A quick note skin to improve your productivity.#CRLF#QuickNote allows easy row manipulation and comes with some smooth transitional animations included. It also has a built-in checklist feature which you can use to make a to-do list. You have access to 5 different slots for saving your notes.#CRLF##CRLF#You can also choose between a custom hotkey and dragging from the top-left corner of your screen to summon the skin.
+Text=#Spotlight##CRLF#Screensavers reimagined! Display various things including skins, animations and videos when you are idle! A must have if you want people to see the fancy side of your desktop!
 [SpotImage]
 Meter=Image
 X=(#Set.W#-#Set.P#-500*[Set.S])
@@ -112,7 +118,7 @@ LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name #Spotlight# "#@#SecVar.inc
 
 [RecommendedSkins]
 Meter=String
-Text=Recommended Skins
+Text=All skins
 MeterStyle=Set.String:S
 X=(#Set.P#)
 Y=(65*[Set.S])R

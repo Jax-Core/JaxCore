@@ -1,9 +1,10 @@
 ValliStart | Start menu replacement
 Keylaunch | Animated hotkey launcher
-IdleStyle | Stylized screensaver 
+QuickNote | Quick access notepad
 MIUI-Shade | Animated control center
-ModularClocks | Modern, Time, Animated
 Keystrokes | Overlay, Gaming, Hotkey
+===
 Plainext | System, Retro
 ModularPlayers | Modern, Music, Minimal
 Combilaunch | Launcher, Minimal
+Comin' soon | Stay tuned!

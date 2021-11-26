@@ -2,26 +2,44 @@
 ;                                 UpdateChecker                                ;
 ; ---------------------------------------------------------------------------- ;
 [Variables]
-CurrentNewsID=03721
+@includeNewsID=#@#NewsID.inc
 
 [MeasureUser]
 Measure=Plugin
 Plugin=SysInfo
 SysInfoType=USER_NAME
 ifMatch=^#UserNameCheckVariable#$
-ifmatchaction=[!EnableMeasure Check4New:M][!UpdateMeasure "Check4New:M"]
+; ifmatchaction=[!EnableMeasure Check4New:M][!UpdateMeasure "Check4New:M"]
 ifnotmatchaction=[!WriteKeyValue Variables Sec.Page 1 "#SKINSPATH#\#JaxCore\Accessories\Tour\Main.ini"][!ActivateConfig "#JaxCore\Accessories\Tour"][!ActivateConfig "#JaxCore\Accessories"][!DeactivateConfig]
 DynamicVariables=1
 UpdateDivider=-1
 
-[Check4New:M]
-Measure=String
-String=#LastNewsID#
-IfMatch=^#CurrentNewsID#$
-ifnotmatchaction=[!commandMeasure Func "startPopup('News')"][!WriteKeyValue Variables LastNewsID "#CurrentNewsID#" "#@#Vars.inc"]
-IfMatchMode=1
-Disabled=1
+; -------------------------------- News check -------------------------------- ;
+
+[NewsParser]
+Measure=WebParser
+URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/main/%40Resources/NewsID.inc
+RegExp==(.*)$
+Group=Updater
+FinishAction=[!CommandMeasure LogicalScript "checkNews()"]
+
+[mNewsID]
+Measure=WebParser
+URL=[NewsParser]
+Group=Updater
+StringIndex=1
+
+[ParseNews]
+Measure=WebParser
+URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/main/Accessories/Popup/Variants/News.inc
+RegExp=(?siU).*
+Debug=2
+Debug2File=#ROOTCONFIGPATH#Accessories\Popup\Variants\News.inc
 DynamicVariables=1
+Disabled=1
+FinishAction=[!commandMeasure Func "startPopup('News')"][!WriteKeyValue Variables News.ID [mNewsID] "#@#NewsID.inc"]
+
+; ------------------------------- Version check ------------------------------ ;
 
 [WebParser]
 Measure=WebParser
@@ -62,20 +80,20 @@ MouseScrollUpAction=
 [Title.Text1]
 Meter=String
 MeterStyle=Set.String:S
-Text=Core
-X=(#Set.P#)
+Text=Config hub
+X=(#Set.P#+10*[Set.S])
 Y=(#Set.H#*0.32)
 Group=Scroll
-FontSize=(40*[Set.S])
+FontSize=(20*[Set.S])
 FontFace=Poppins
 StringAlign=LeftCenter
 InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 2.0
 [Title.Text2]
 Meter=String
 MeterStyle=Set.String:S
-Text=Season 2
-X=r
-Y=R
+Text=JaxCore
+X=(-10*[Set.S])r
+Y=(60*[Set.s])r
 FontSize=(60*[Set.S])
 FontFace=Poppins SemiBold
 StringAlign=LeftCenter
@@ -86,25 +104,25 @@ Meter=String
 MeterStyle=Set.String:S
 X=r
 Y=(78*[Set.S])r
-Text=JaxCore is an advanced hub for my skins. Core provides easy
+Text=JaxCore is an on-going set of Rainmeter widgets that provide 
 [Text.2]
 Meter=String
 MeterStyle=Set.String:S
 X=r
 Y=(10*[Set.S])R
-Text=access to configuration, updates and new releases.
+Text=numerous functionalities to users
 [Text.3]
 Meter=String
 MeterStyle=Set.String:S
 X=r
 Y=(10*[Set.S])R
-Text=Start your adventure of customization and fanciness right here in 
+Text=This config hub provides easy access to configuration
 [Text.4]
 Meter=String
 MeterStyle=Set.String:S
 X=r
 Y=(10*[Set.S])R
-Text=the Core!
+Text=updates and new releases
 
 
 ; ---------------------------------------------------------------------------- ;
@@ -139,22 +157,6 @@ Container=BC
 Meter=Image
 MeterStyle=TopButton:S
 ImageName=#@#Icons\Discord.png
-
-[DeviantArtButton]
-Meter=Shape
-X=(30*[Set.S]+#Set.P#/2)r
-Y=r
-DynamicVariables=1
-OverColor=399F59
-LeaveColor=399F59
-Shape=Rectangle 0,0,40,40,(#Set.R#/2) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend This
-MeterStyle=Shape.Over:S
-Leftmouseupaction=[!commandMeasure Func "startPopup('DeviantArt')"]
-Container=BC
-[DeviantArtIcon]
-Meter=Image
-MeterStyle=TopButton:S
-ImageName=#@#Icons\DA.png
 
 [DeviantArtButton]
 Meter=Shape
@@ -229,4 +231,3 @@ Container=BC
 ; Hidden=(#QoL#)
 LeftMouseUpAction=[!commandMeasure Func "startDrop('Dev', '#CURRENTSECTION#', 'JaxCore')"]
 DynamicVariables=1
-

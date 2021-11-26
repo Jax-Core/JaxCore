@@ -11,8 +11,9 @@ Keystrokes.L=889349339
 Keylaunch.L=890749449
 ValliStart.L=893506095
 QuickNote.L=894951390
+IdleStyle.L=899004964
 
-BetaSkinList=IdleStyle
+BetaSkinList=MuzeFlyout
 
 [Installer]
 Measure=Plugin

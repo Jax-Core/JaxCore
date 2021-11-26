@@ -15,6 +15,20 @@ function check()
     end
 end
 
+function checkNews()
+    mNewsID = SKIN:GetMeasure('mNewsID')
+    CurrentNewsID = tonumber(SKIN:GetVariable('News.ID', '00000'))
+    LatestNewsID = tonumber(mNewsID:GetStringValue())
+    if LatestNewsID == CurrentNewsID then
+        print('News up to date')
+    elseif CurrentNewsID < LatestNewsID then
+        print('Fetching new news and showing popup')
+        SKIN:Bang('!EnableMeasure', 'ParseNews')
+        SKIN:Bang('!UpdateMeasure', 'ParseNews')
+        SKIN:Bang('!CommandMeasure', 'ParseNews', '"Update"')
+    end
+end
+
 function runUpdate()
     ParsedVerFull = SKIN:GetVariable('ParsedVer')
     SKIN:Bang('!WriteKeyValue', 'Variables', 'ParsedVer', '0', SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Notification\\Toast\\Main.ini')
