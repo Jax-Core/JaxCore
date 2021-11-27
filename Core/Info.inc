@@ -15,11 +15,15 @@ IdleStyle.L=899004964
 
 BetaSkinList=MuzeFlyout
 
-[Installer]
-Measure=Plugin
-Plugin=PowershellRM
-DynamicVariables=1
-ScriptFile=#@#Powershell\Installer.ps1
+; [Installer]
+; Measure=Plugin
+; Plugin=PowershellRM
+; DynamicVariables=1
+; ScriptFile=#@#Powershell\Installer.ps1
+
+[CoreBridge]
+Measure=Script
+ScriptFile=#SKINSPATH##JaxCore\@Resources\Lua\CoreElements\Installer.lua
 
 ; [ImageContainer]
 ; Meter=Shape
@@ -147,7 +151,8 @@ OverColor=#Set.Accent_Color#
 LeaveColor=#Set.Accent_Color#
 X=((85)*[Set.S])r
 Y=(-(100-48)/2*[Set.S])r
-Act=[!SetVariable DownloadLink "https://github.com/EnhancedJax/#Skin.Name#/releases/download/v[mVer]/#Skin.Name#_v[mVer].rmskin"][!SetVariable DownloadName "#Skin.Name#[mVer]"]["https://www.deviantart.com/jaxoriginals/art/-v1-0-[##SKIN.Name#.L]"][!CommandMeasure Installer "Install"]
+; Act=[!SetVariable DownloadLink "https://github.com/EnhancedJax/#Skin.Name#/releases/download/v[mVer]/#Skin.Name#_v[mVer].rmskin"][!SetVariable DownloadName "#Skin.Name#[mVer]"]["https://www.deviantart.com/jaxoriginals/art/-v1-0-[##SKIN.Name#.L]"][!CommandMeasure Installer "Install"]
+Act=[!CommandMeasure CoreBridge "install('#Skin.Name#')"]
 Group=DownloadButton
 Hidden=1
 [Value23]

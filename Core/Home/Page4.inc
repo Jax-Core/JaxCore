@@ -1,5 +1,5 @@
 [Variables]
-Spotlight=ModularClocks
+Spotlight=TheSimpleVisualizer
 
 [BC]
 MouseScrollDownAction=[!SetVariable Scroll "(Clamp(#Scroll#+60,0,(#Set.PageH#-#Set.H#)))"][!UpdateMeterGroup Scroll][!Redraw]

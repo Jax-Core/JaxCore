@@ -565,3 +565,101 @@ DynamicVariables=1
 HotKey=Num9
 KeyDownAction=[!Setvariable Sec.Input_Char "Numpad9"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
 Group=Key
+
+;===========================================================================================================================================================
+
+[Func1keyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=F1
+KeyDownAction=[!Setvariable Sec.Input_Char "F1"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[Func2keyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=F2
+KeyDownAction=[!Setvariable Sec.Input_Char "F2"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[Func3keyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=F3
+KeyDownAction=[!Setvariable Sec.Input_Char "F3"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[Func4keyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=F4
+KeyDownAction=[!Setvariable Sec.Input_Char "F4"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[Func5keyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=F5
+KeyDownAction=[!Setvariable Sec.Input_Char "F5"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[Func6keyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=F6
+KeyDownAction=[!Setvariable Sec.Input_Char "F6"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[Func7keyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=F7
+KeyDownAction=[!Setvariable Sec.Input_Char "F7"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[Func8keyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=F8
+KeyDownAction=[!Setvariable Sec.Input_Char "F8"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[Func9keyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=F9
+KeyDownAction=[!Setvariable Sec.Input_Char "F9"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[Func10keyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=F10
+KeyDownAction=[!Setvariable Sec.Input_Char "F10"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[Func11keyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=F11
+KeyDownAction=[!Setvariable Sec.Input_Char "F11"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[Func12keyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=F12
+KeyDownAction=[!Setvariable Sec.Input_Char "F12"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
