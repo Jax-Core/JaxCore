@@ -4,7 +4,7 @@ BarHandler=5
 [Header]
 Meter=String
 X=(20*[Set.S])
-Y=(20*[Set.S])
+Y=(20*[Set.S]+#Scroll#)
 DynamicVariables=1
 Text=Media 
 FontSize=(20*[Set.S])

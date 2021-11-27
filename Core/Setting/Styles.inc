@@ -444,7 +444,7 @@ Shape=Ellipse 0,0,(5*[Set.S]),(5*[Set.S]) | StrokeWidth 20 | StrokeColor 0,0,0,1
 FillE=Fill Color #Set.Text_Color#,50
 MouseOverAction=[!SetOption Esc FillE "Fill Color #Set.Text_Color#"][!UpdateMeter Esc][!Redraw]
 MouseLeaveAction=[!SetOption Esc FillE "Fill Color #Set.Text_Color#,50"][!UpdateMeter Esc][!Redraw]
-LeftMouseUpAction=[!UpdateMeasure CheckPreview][!ActivateConfig "#CURRENTCONFIG#" "Home.ini"]
+LeftMouseDownAction=[!UpdateMeasure CheckPreview][!ActivateConfig "#CURRENTCONFIG#" "Home.ini"]
 RightMOuseUpAction=[!commandMeasure Func "startDrop('Window', '#CURRENTSECTION#', 'JaxCore')"]
 
 [CheckPreview]
