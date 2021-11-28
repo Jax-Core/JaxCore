@@ -57,7 +57,7 @@ Text="One update ahead..."
 FontSize=(40*[Set.S])
 [Header:1]
 Text="#Skin.Name#"
-FontSize=(60*[Set.S])
+FontSize=(40*[Set.S])
 [Header:0]
 Text="Update available"
 FontSize=(40*[Set.S])

@@ -4,7 +4,7 @@ QuickNote | Quick access notepad
 MIUI-Shade | Animated control center
 Keystrokes | Overlay, Gaming, Hotkey
 ===
-ModularClocks  | Modern, clock, minimal
+ModularClocks | Modern, clock, minimal
 Plainext | System, Retro
 ModularPlayers | Modern, Music, Minimal
 Combilaunch | Launcher, Minimal

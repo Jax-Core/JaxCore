@@ -32,7 +32,7 @@ end
 function runUpdate()
     ParsedVerFull = SKIN:GetVariable('ParsedVer')
     SKIN:Bang('!WriteKeyValue', 'Variables', 'ParsedVer', '0', SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Notification\\Toast\\Main.ini')
-    SKIN:Bang('!SetVariable', 'DownloadLink', 'https://github.com/EnhancedJax/-JaxCore/releases/download/v'..ParsedVerFull..'/JaxCore_v'..ParsedVerFull..'.rmskin\n')
+    SKIN:Bang('!SetVariable', 'DownloadLink', 'https://github.com/EnhancedJax/JaxCore/releases/download/v'..ParsedVerFull..'/JaxCore_v'..ParsedVerFull..'.rmskin\n')
     SKIN:Bang('!SetVariable', 'DownloadName', 'JaxCore'..ParsedVerFull)
     SKIN:Bang('!CommandMeasure', 'Installer', 'Install')
 end

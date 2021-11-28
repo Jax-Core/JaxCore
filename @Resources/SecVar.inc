@@ -1,6 +1,6 @@
 [Variables]
-Skin.Name=ValliStart
+Skin.Name=MIUI-Shade
 ; Skin.Shorthand=
 
-Skin.Set_Page=General
+Skin.Set_Page=Appearance
 Skin.Ctx_Ctx=Refresh

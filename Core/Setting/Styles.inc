@@ -10,6 +10,14 @@ Measure=Plugin
 Plugin=Focus
 FocusOnRefresh=1
 
+[ColorPicker]
+Measure=Script
+ScriptFile=#ROOTCONFIGPATH#ColorPickerUI\ColorPickerUI.lua
+Theme=Core
+Animations=0
+FinishAction=[!Log "Successfully changed $section$'s $option$ to $color$!"][!UpdateMeasure Auto_Refresh:M]
+DismissAction=[!Log "$section$'s $option$ didn't change!"] 
+
 [DefaultStartActions]
 Measure=Plugin
 Plugin=ActionTimer
@@ -158,6 +166,8 @@ X=(#Set.W#-#Set.L#-#Set.P#*2-151*[Set.S])
 DynamicVariables=1
 Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 0 | Fill Color 0,0,0,1 | Scale [Set.S],[Set.S],0,0
 Shape2=Ellipse (135*[Set.S]),(15*[Set.S]),(10*[Set.S]) | StrokeWidth 2 | Stroke Color #Set.Ter_Color# | Fill Color [##CURRENTSECTION#]
+; LeftMouseUpAction=[!CommandMeasure ColorPicker "SetColor('#CURRENTSECTION#', 'Variables', 'rgb', [[#Sec.SaveLocation#]], '#CURRENTSECTION#')"]
+; ColorChangeAction=[!SetVariable #CURRENTSECTION# "$color$"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 Container=ContentContainer
 
@@ -189,6 +199,8 @@ MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,15"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#Color" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 RightMOuseUpAction=[!SetVariable Editing "#CURRENTSECTION#Opacity"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5)"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5)"][!CommandMeasure Input:M "ExecuteBatch 1"]
+; LeftMouseUpAction=[!CommandMeasure ColorPicker "SetColor('#CURRENTSECTION#', 'Variables', 'rgba', [[#Sec.SaveLocation#]], '#CURRENTSECTION#')"]
+; ColorChangeAction=[!SetVariable #CURRENTSECTION# "$color$"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 Container=ContentContainer
 Type=Num|0|255
 [Set.Pacity:S]
@@ -317,39 +329,6 @@ DynamicVariables=1
 LeftMouseUpAction=[&Func:GroupVar('#CURRENTSECTION#', '2Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
 StringAlign=CenterCenter
 Container=ContentContainer
-
-
-
-
-; --------------------------------- Dropdown --------------------------------- ;
-
-
-
-
-; [Set.DropDown:S]
-; X=(#Set.W#-#Set.L#-#Set.P#*2-151*[Set.S])
-; NumOfOption=2
-; Group=DropDown
-; Container=ContentContainer
-; DynamicVariables=1
-; Fill=Stroke Color #Set.Text_Color#,50
-; MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-; MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,50"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-; [Set.DD0]
-; Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 2 | Fill Color 0,0,0,1 | Extend Fill | Scale [Set.S],[Set.S],0,0
-; LeftMouseupaction=[!SetOption #CURRENTSECTION# MeterStyle "Set.DropDown:S | Set.DD1"][!ShowMeterGroup "DD[&Func:LocalVar('#CURRENTSECTION#', 'Index')]"][!HideMeterGroup "DDNo[&Func:LocalVar('#CURRENTSECTION#', 'Index')]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-; [Set.DD1]
-; Shape=Rectangle 0,0,150,(30*[&Func:LocalVar('#CURRENTSECTION#', 'NumOfOption')]),3,3 | StrokeWidth 2 | Fill Color 0,0,0,1 | Extend Fill | Scale [Set.S],[Set.S],0,0
-; LeftMouseupaction=[!SetOption #CURRENTSECTION# MeterStyle "Set.DropDown:S | Set.DD0"][!HideMeterGroup "DD[&Func:LocalVar('#CURRENTSECTION#', 'Index')]"][!ShowMEterGroup DD0][!UpdateMeter #CURRENTSECTION#][!Redraw]
-; [Set.DropText:S]
-; X=r
-; Y=(15*[Set.S])r
-; StringAlign=LeftCenter
-; Hidden=1
-; FontSize=(10*[Set.S])
-; DynamicVariables=1
-
-
 
 
 ; ------------------------------- Side buttons ------------------------------- ;

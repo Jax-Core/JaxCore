@@ -18,7 +18,7 @@ UpdateDivider=-1
 
 [NewsParser]
 Measure=WebParser
-URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/main/%40Resources/NewsID.inc
+URL=https://raw.githubusercontent.com/EnhancedJax/JaxCore/main/%40Resources/NewsID.inc
 RegExp==(.*)$
 Group=Updater
 FinishAction=[!CommandMeasure LogicalScript "checkNews()"]
@@ -31,7 +31,7 @@ StringIndex=1
 
 [ParseNews]
 Measure=WebParser
-URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/main/Accessories/Popup/Variants/News.inc
+URL=https://raw.githubusercontent.com/EnhancedJax/JaxCore/main/Accessories/Popup/Variants/News.inc
 RegExp=(?siU).*
 Debug=2
 Debug2File=#ROOTCONFIGPATH#Accessories\Popup\Variants\News.inc
@@ -43,7 +43,7 @@ FinishAction=[!commandMeasure Func "startPopup('News')"][!WriteKeyValue Variable
 
 [WebParser]
 Measure=WebParser
-URL=https://raw.githubusercontent.com/EnhancedJax/-JaxCore/main/%40Resources/Version.inc
+URL=https://raw.githubusercontent.com/EnhancedJax/JaxCore/main/%40Resources/Version.inc
 RegExp==(.*)$
 Group=Updater
 FinishAction=[!Delay 100][!CommandMeasure LogicalScript "check()"]
