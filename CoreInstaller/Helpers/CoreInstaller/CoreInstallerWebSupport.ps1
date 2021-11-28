@@ -1,7 +1,10 @@
 ﻿param(
     [Parameter(Mandatory)]
     [string]
-    $coreinstallerpath
+    $coreinstallerpath,
+    [Parameter(Mandatory)]
+    [string]
+    $togglePath
 )
 
 if (-not ((Test-Path $coreinstallerpath) -or ($coreinstallerpath -imatch "\.exe$"))) {
@@ -42,6 +45,8 @@ New-Item "HKCR:\rm-coreinstaller\shell\open\command" | Out-Null
 New-ItemProperty "HKCR:\rm-coreinstaller\shell\open\command" -Name "(default)" -Value "`"$coreinstallerpath`" `"%1`"" | Out-Null
 
 Write-Host Done -ForegroundColor Green
+
+'1' | Out-File -FilePath $togglePath -Force -Encoding ascii
 
 Start-Sleep -Seconds 1
 
