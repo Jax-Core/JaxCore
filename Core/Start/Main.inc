@@ -199,7 +199,7 @@ Group=Button
 
 [WebParser]
 Measure=WebParser
-URL=https://raw.githubusercontent.com/EnhancedJax/JaxCore/main/%40Resources/Version.inc
+URL=https://raw.githubusercontent.com/Jax-Core/JaxCore/main/%40Resources/Version.inc
 RegExp==(.*)$
 FinishAction=[!Delay 1000][!CommandMeasure LogicalScript "check()"]
 OnConnectionErrorAction=[!SetOption Dep1 MeterStyle "Dep.Shape:S | Dep.ShapeNo:S"][!SetOption DepText1 Text "//Failed to connect to JaxCore github, if this is an issue please report to me"][!UpdateMEter *][!Redraw]
@@ -237,4 +237,4 @@ OnUpdateAction=[!SetOption Dep1 MeterStyle "Dep.Shape:S | Dep.ShapeYes:S"][!SetO
 Measure=String
 Group=NUOL
 Disabled=1
-OnUpdateAction=[!SetOption Dep1 MeterStyle "Dep.Shape:S | Dep.ShapeNo:S"][!SetOption DepText1 Text "JaxCore3 // click here to install"][!SetOption Dep1 Leftmouseupaction """["#@#Actions\AHKv1.exe" "#@#Actions\Installer.ahk"][!SetOption DepText1 Text "JaxCore3 // download here if it doesn't automatically install"][!SetOption Dep1 Leftmouseupaction """["https://github.com/EnhancedJax/JaxCore/releases/latest"][!UpdateMEter *][!Redraw]"""][!UpdateMEter *][!Redraw]"""][!UpdateMEter *][!Redraw]
+OnUpdateAction=[!SetOption Dep1 MeterStyle "Dep.Shape:S | Dep.ShapeNo:S"][!SetOption DepText1 Text "JaxCore3 // click here to install"][!SetOption Dep1 Leftmouseupaction """["#@#Actions\AHKv1.exe" "#@#Actions\Installer.ahk"][!SetOption DepText1 Text "JaxCore3 // download here if it doesn't automatically install"][!SetOption Dep1 Leftmouseupaction """["https://github.com/Jax-Core/JaxCore/releases/latest"][!UpdateMEter *][!Redraw]"""][!UpdateMEter *][!Redraw]"""][!UpdateMEter *][!Redraw]

@@ -198,7 +198,7 @@ LeftMouseupaction=[!WriteKeyvalue Variables "#CURRENTSECTION#" "([##CURRENTSECTI
 [ActiveChecker]
 Measure=Plugin
 Plugin=ConfigActive
-ConfigName=#JaxCore\Accessories\Notification
+ConfigName=#JaxCore\Accessories\UpdatePrompt
 IfCondition=ActiveChecker = 1
 IfTrueAction=[!SetVariable Set.Background_Check 1][!UpdateMeter Set.Background_Check][!Redraw]
 
@@ -207,9 +207,9 @@ Meter=Shape
 MeterStyle=Set.Bool:S | Set.Background_Check#Set.Background_Check#
 Y=([Option02:Y]-[ContentContainer:Y]-(20/2-12/2)*[Set.S])
 [Set.Background_Check0]
-Leftmouseupaction=[!ActivateConfig "#JaxCore\Accessories\Notification"][!Refresh]
+Leftmouseupaction=[!ActivateConfig "#JaxCore\Accessories\UpdatePrompt"][!Refresh]
 [Set.Background_Check1]
-Leftmouseupaction=[!DeactivateConfig "#JaxCore\Accessories\Notification"][!Refresh]
+Leftmouseupaction=[!DeactivateConfig "#JaxCore\Accessories\UpdatePrompt"][!Refresh]
 
 [Set.BackgroundCheckTime]
 Meter=Shape

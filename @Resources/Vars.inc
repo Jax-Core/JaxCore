@@ -17,9 +17,10 @@ Set.SubText_Color=120,120,120
 Sec.SaveLocation=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 ; ------------------------ Background check variables ------------------------ ;
 Set.Auto_Refresh=1
-Set.BackgroundCheckTime=1
+Set.BackgroundCheckTime=10
 QoL=1
 QolPlugin=Plugin
+WebInstallation=0
 Ctx.Animated=0
 
 
