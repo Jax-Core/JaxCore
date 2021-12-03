@@ -1,0 +1,2 @@
+[Variables]
+WebInstallation = 1

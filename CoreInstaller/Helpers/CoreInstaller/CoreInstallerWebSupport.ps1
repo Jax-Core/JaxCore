@@ -1,13 +1,15 @@
 ﻿param(
     [Parameter(Mandatory)]
     [string]
-    $coreinstallerpath,
+    $coreInstallerPath,
     [Parameter(Mandatory)]
     [string]
-    $togglePath
+    $togglePath,
+    [string]
+    $postBang
 )
 
-if (-not ((Test-Path $coreinstallerpath) -or ($coreinstallerpath -imatch "\.exe$"))) {
+if (-not ((Test-Path $coreInstallerPath) -or ($coreInstallerPath -imatch "\.exe$"))) {
     Write-Error -Message "CoreInstaller path invalid"
     Start-Sleep -Seconds 5
     return
@@ -42,12 +44,18 @@ Write-Host ""
 New-Item "HKCR:\rm-coreinstaller\shell" | Out-Null
 New-Item "HKCR:\rm-coreinstaller\shell\open" | Out-Null
 New-Item "HKCR:\rm-coreinstaller\shell\open\command" | Out-Null
-New-ItemProperty "HKCR:\rm-coreinstaller\shell\open\command" -Name "(default)" -Value "`"$coreinstallerpath`" `"%1`"" | Out-Null
+New-ItemProperty "HKCR:\rm-coreinstaller\shell\open\command" -Name "(default)" -Value "`"$coreInstallerPath`" `"%1`"" | Out-Null
+
+
+@"
+[Variables]
+WebInstallation = 1
+"@ | Out-File -FilePath $togglePath -Force -Encoding ascii
+
+Start-Process (Get-Process Rainmeter).MainModule.FileName -ArgumentList $postBang
 
 Write-Host Done -ForegroundColor Green
 
-'1' | Out-File -FilePath $togglePath -Force -Encoding ascii
-
-Start-Sleep -Seconds 1
+Read-Host
 
 Exit-PSSession

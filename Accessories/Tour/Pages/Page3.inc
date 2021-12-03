@@ -221,7 +221,7 @@ Container=Card2.Container
 [Card2.Button1.Shape]
 Meter=Shape
 MeterStyle=CardButton:S | CardButton#WebInstallation#:S
-Leftmouseupaction=[!CommandMeasure ProtocolInstaller "Add-CoreProtocol"][!WriteKeyValue Variables WebInstallation 1 "#@#Vars.inc"][!SetVariable WebInstallation 1][!Updatemeter #CURRENTSECTION#][!Redraw]
+Leftmouseupaction=[!CommandMeasure ProtocolInstaller "Add-CoreProtocol"][!SetVariable WebInstallation 1][!Updatemeter #CURRENTSECTION#][!Redraw]
 DynamicVariables=1
 Container=Card2.Container
 [Card2.Button1.Text]
