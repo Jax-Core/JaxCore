@@ -3,16 +3,16 @@ $Startpath = $env:APPDATA
 
 function Check {
     If (Test-Path -Path "$Startpath\Microsoft\Windows\Start Menu\Programs\JaxCore.lnk") {
-        $RmAPI.Bang('[!SetOption WhatsNew: MeterStyle "BottomBox:S | TrueStyleProg"]')
-        $RmAPI.Bang('[!UpdateMeter WhatsNew:]')
+        $RmAPI.Bang('[!SetOption Section4.Button2.Shape MeterStyle "SectionButton:S | Section4.ButtonProg.True"]')
+        $RmAPI.Bang('[!UpdateMeter Section4.Button2.Shape]')
         $RmAPI.Bang('[!Redraw]')
         $RmAPI.Log("Found: CoreHome in programs")
     } else {
         $RmAPI.Log("Failed to find corehome in programs")
     }
     If (Test-Path -Path "$DesktopPath\JaxCore.lnk") {
-        $RmAPI.Bang('[!SetOption Jax: MeterStyle "BottomBox:S | TrueStyleDesk"]')
-        $RmAPI.Bang('[!UpdateMeter Jax:]')
+        $RmAPI.Bang('[!SetOption Section4.Button1.Shape MeterStyle "SectionButton:S | Section4.ButtonDesk.True"]')
+        $RmAPI.Bang('[!UpdateMeter Section4.Button1.Shape]')
         $RmAPI.Bang('[!Redraw]')
         $RmAPI.Log("Found: CoreHome on desktop")
     } else {

@@ -80,7 +80,7 @@ FontSize=(12*#Sec.S#)
 Inlinepattern=.*#CRLF#
 InlineSetting=Weight | 650
 Inlinepattern2=#CRLF#.*
-InlineSetting2=Size | 10
+InlineSetting2=Size | (8*#Sec.S#)
 StringAlign=CenterTop
 [Card.Info:S]
 X=r
@@ -110,9 +110,10 @@ Text=Welcome to JaxCore
 X=(#Sec.P2#)
 Y=(#Sec.P2#)
 FontSize=(36*#Sec.S#)
-FontFace=Poppins SemiBold
+FontFace=Poppins 
+FontWeight=(650)
 Container=GlobalContainer
-InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
+InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 0.0 | #Set.Accent_Color_2# ; 1.0
 InlineSetting2=Shadow | 0 | 0 | 5 | 0,0,0,100
 
 [Title.Shape]
@@ -128,11 +129,15 @@ Group=Tweenable
 [Des.Text]
 Meter=String
 MeterStyle=Set.String:S
-Text=Delighted to have you here, let's set this thing up!
+Text=Delighted to have you here, let's set this thing up!#CRLF#You can also configure these in the settings panel after completing the installation.
 X=#Sec.P2#
 Y=(40*#Sec.S#)r
 FontSize=(14*#Sec.S#)
 Container=GlobalContainer
+Inlinepattern=#CRLF#.*
+InlineSetting=Size | (8*#Sec.S#)
+Inlinepattern2=#CRLF#.*
+InlineSetting2=Color | #Set.Subtext_Color#
 
 ; ---------------------------------------------------------------------------- ;
 ;                                    Card 1                                    ;
@@ -221,7 +226,7 @@ Container=Card2.Container
 [Card2.Button1.Shape]
 Meter=Shape
 MeterStyle=CardButton:S | CardButton#WebInstallation#:S
-Leftmouseupaction=[!CommandMeasure ProtocolInstaller "Add-CoreProtocol"][!SetVariable WebInstallation 1][!Updatemeter #CURRENTSECTION#][!Redraw]
+Leftmouseupaction=[!CommandMeasure ProtocolInstaller "Add-CoreProtocol"][!WriteKeyValue Variables WebInstallation 1 "#@#Vars.inc"][!SetVariable WebInstallation 1][!Updatemeter #CURRENTSECTION#][!Redraw]
 DynamicVariables=1
 Container=Card2.Container
 [Card2.Button1.Text]
@@ -279,7 +284,7 @@ Container=Card3.Container
 Meter=Shape
 X=(#Sec.W#-(20)*#Sec.S#-#Sec.p2#)
 Y=(#Sec.H#-(40)*#Sec.S#-#Sec.p2#)
-Shape=Ellipse 0,0,(20*[ButtonNextTimer]/1000) | StrokeWidth 0 | Scale #Sec.S#,#Sec.S#,0,0 | Extend This
+Shape=Ellipse 0,0,(20*[ButtonNextTimer]/1000*#Sec.S#) | StrokeWidth 0 | Extend This
 This=Fill Color 0,255,0,(100*[ButtonNextTimer]/1000)
 MouseOverAction=[!SetOption #CURRENTSECTION# This "Fill Color 0,255,0,(200*[*ButtonNextTimer*]/1000)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# This "Fill Color 0,255,0,(100*[*ButtonNextTimer*]/1000)"][!UpdateMeter #CURRENTSECTION#][!Redraw]

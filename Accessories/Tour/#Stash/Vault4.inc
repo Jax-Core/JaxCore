@@ -29,12 +29,13 @@ X=(#Sec.W#/2)
 Y=(#Sec.H#*0.2)
 FontSize=(20)
 DynamicVariables=1
-FontFace=Poppins SemiBold
+FontFace=#Set.Font# 
+FontWeight=(650)
 StringAlign=Center
 FontColor=#Set.TextColor#
 MeterStyle=Set.String:S
 InlinePattern=shortcut
-InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
+InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 0.0 | #Set.Accent_Color_2# ; 1.0
 
 [Shape.1]
 Meter=Shape
@@ -44,7 +45,7 @@ Shape=Rectangle 0,0,(80+120*([MeasureLoop]/100)),(80+20*([MeasureLoop]/100)),5 |
 Shape2=Ellipse 0,0,5 | StrokeWidth 1 | Stroke Color 255,255,255 | Fill Color #Set.Accent_Color#
 Shape3=Ellipse (80+120*([MeasureLoop]/100)),(80+20*([MeasureLoop]/100)),5 | StrokeWidth 1 | Stroke Color 255,255,255 | Fill Color #Set.Accent_Color#
 Shape4=Rectangle 5,5,(70+120*([MeasureLoop]/100)),5,2.5 | StrokeWidth 0 | Fill LinearGradient This
-This=180 | CC1C15 ; 0.0 | FF700F ; 1.0
+This=180 | #Set.Accent_Color# ; 0.0 | #Set.Accent_Color_2# ; 1.0
 Shape5=Rectangle 5,15,(25+110*([MeasureLoop]/100)),5,2.5 | StrokeWidth 0 | Fill Color #Set.Text_Color#
 Shape6=Rectangle 5,25,(25+50*([MeasureLoop]/100)),5,2.5 | StrokeWidth 0 | Fill Color #Set.SubText_Color#
 DynamicVariables=1

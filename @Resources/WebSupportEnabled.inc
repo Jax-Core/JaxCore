@@ -1,2 +1,2 @@
 [Variables]
-WebInstallation = 1
+WebInstallation = 0

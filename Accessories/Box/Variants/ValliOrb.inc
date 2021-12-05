@@ -41,7 +41,7 @@ Measure=Plugin
 Plugin=InputText
 SolidColor=#Set.Sec_Color#
 FontColor=#Set.Text_Color#
-FontFace=Poppins
+FontFace=#Set.Font#
 FontSize=(10*#Sec.S#)
 StringAlign=LeftCenter
 W=((150-10)*#Sec.S#)
@@ -99,7 +99,7 @@ Y=(#Sec.P#)R
 Text=Included orbs
 FontSize=(15*#sec.S#)
 FontWeight=600
-InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 2.0
+InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 0.0 | #Set.Accent_Color_2# ; 2.0
 MeterStyle=Sec.String:S
 
 [Shape1]
@@ -207,7 +207,7 @@ Y=(#Sec.P#*2)R
 Text=Custom orb
 FontSize=(15*#sec.S#)
 FontWeight=600
-InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 2.0
+InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 0.0 | #Set.Accent_Color_2# ; 2.0
 MeterStyle=Sec.String:S
 [01]
 Meter=String

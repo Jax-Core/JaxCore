@@ -14,12 +14,13 @@ X=(#Sec.W#/2)
 Y=(#Sec.H#/2-([Header:H]+[Des:H])/2-#sec.P#)
 FontSize=(20)
 DynamicVariables=1
-FontFace=Poppins SemiBold
+FontFace=#Set.Font# 
+FontWeight=(650)
 StringAlign=Center
 FontColor=#Set.TextColor#
 MeterStyle=Set.String:S
 InlinePattern=shortcut
-InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
+InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 0.0 | #Set.Accent_Color_2# ; 1.0
 
 [Des]
 Meter=String
@@ -53,7 +54,8 @@ Meter=String
 Text=Sure!
 X=(120/2*#Sec.S#)r
 Y=(30/2*#Sec.S#)r
-FontFace=Poppins SemiBold
+FontFace=#Set.Font# 
+FontWeight=(650)
 StringAlign=CenterCEnter
 MeterStyle=Set.String:S
 

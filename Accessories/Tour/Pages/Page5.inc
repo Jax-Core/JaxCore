@@ -66,7 +66,7 @@ Group=Tweenable
 Container=GlobalContainer
 ImageAlpha=(50*#TweenNode3#)
 TransformationMatrix=(Cos(Rad(#TweenNode3#*360)));(-Sin(Rad(#TweenNode3#*360)));(Sin(Rad(#TweenNode3#*360)));(Cos(Rad(#TweenNode3#*360)));(([#CURRENTSECTION#:W]*0.5+[#CURRENTSECTION#:X])-([#CURRENTSECTION#:W]*0.5+[#CURRENTSECTION#:X])*Cos(Rad(#TweenNode3#*360))-([#CURRENTSECTION#:H]*0.5+[#CURRENTSECTION#:Y])*Sin(Rad(#TweenNode3#*360)));(([#CURRENTSECTION#:H]*0.5+[#CURRENTSECTION#:Y])+([#CURRENTSECTION#:W]*0.5+[#CURRENTSECTION#:X])*Sin(Rad(#TweenNode3#*360))-([#CURRENTSECTION#:H]*0.5+[#CURRENTSECTION#:Y])*Cos(Rad(#TweenNode3#*360)))
-ImageName=#@#Images\LogoBig.png
+ImageName=#@#Images\CoreAssets\#Set.IconStyle#Logo512.png
 
 [Title.Text1]
 Meter=String
@@ -75,11 +75,12 @@ Text=You're all set
 X=(#Sec.W#/2)
 Y=(#Sec.H#/2-([Title.Text1:H]+[Des.Text:H])/2)
 FontSize=(36*#Sec.S#)
-FontFace=Poppins SemiBold
+FontFace=Poppins 
+FontWeight=(650)
 Container=GlobalContainer
 StringAlign=Center
 DynamicVariables=1
-InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
+InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 0.0 | #Set.Accent_Color_2# ; 1.0
 InlineSetting2=Shadow | 0 | 0 | 5 | 0,0,0,100
 
 [Des.Text]

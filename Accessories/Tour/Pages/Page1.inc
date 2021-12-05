@@ -43,7 +43,7 @@ DynamicVariables=1
 Group=Tweenable
 ImageAlpha=(255-255*#TweenNode4#)
 TransformationMatrix=(Cos(Rad(#TweenNode2#*360)));(-Sin(Rad(#TweenNode2#*360)));(Sin(Rad(#TweenNode2#*360)));(Cos(Rad(#TweenNode2#*360)));(([#CURRENTSECTION#:W]*0.5+[#CURRENTSECTION#:X])-([#CURRENTSECTION#:W]*0.5+[#CURRENTSECTION#:X])*Cos(Rad(#TweenNode2#*360))-([#CURRENTSECTION#:H]*0.5+[#CURRENTSECTION#:Y])*Sin(Rad(#TweenNode2#*360)));(([#CURRENTSECTION#:H]*0.5+[#CURRENTSECTION#:Y])+([#CURRENTSECTION#:W]*0.5+[#CURRENTSECTION#:X])*Sin(Rad(#TweenNode2#*360))-([#CURRENTSECTION#:H]*0.5+[#CURRENTSECTION#:Y])*Cos(Rad(#TweenNode2#*360)))
-ImageName=#@#Images\Logo256.png
+ImageName=#@#Images\CoreAssets\#Set.IconStyle#Logo256.png
 
 [CheckForIdle]
 Measure=Calc

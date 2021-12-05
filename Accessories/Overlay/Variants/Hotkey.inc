@@ -5,6 +5,7 @@
 OnUnfocusAction=[!UpdateMeasure UnloadHandler2]
 
 [Variables]
+@includeVars=#@#Vars.inc
 Drop.Animation_Time=300
 Sec.Input=
 Sec.Input_Char=
@@ -79,13 +80,13 @@ StringAlign=CenterCenter
 
 [BC]
 Meter = Shape
-Shape=Rectangle (#Sec.W#*(1-#TweenNode1#)),0,(#Sec.W#*#TweenNode1#),(#Sec.H#) | StrokeWidth 0 | Fill Color 34,34,34
+Shape=Rectangle (#Sec.W#*(1-#TweenNode1#)),0,(#Sec.W#*#TweenNode1#),(#Sec.H#) | StrokeWidth 0 | Fill Color #Set.Ter_Color#
 Group=Tweenable
 DynamicVariables=1
 
 [B]
 Meter = Shape
-Shape=Rectangle 0,0,(#Sec.W#),(#Sec.H#),#Sec.R# | StrokeWidth 0 | Fill Color 34,34,34
+Shape=Rectangle 0,0,(#Sec.W#),(#Sec.H#),#Sec.R# | StrokeWidth 0 | Fill Color #Set.Ter_Color#
 Container=BC
 
 [KeyLabel]
@@ -93,7 +94,7 @@ Meter=String
 X=(#Sec.W#/2)
 Y=(#Sec.P#)
 FontSize=(10*#Sec.S#)
-FontColor=255,255,255,150
+FontColor=#Set.Text_Color#,150
 Text=Click the modifiers below or click any alphabetical keys on your keyboard...
 StringAlign=Center
 MeterStyle=Sec.String:S

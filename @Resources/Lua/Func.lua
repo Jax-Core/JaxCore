@@ -4,7 +4,7 @@ end
 function start(variant, title, description, iconpath, timeout)
 	local File = SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Accessories\\Toast\\Main.ini'
     if variant ~= nil then variant = 'Standard' end
-	if iconpath ~= nil then iconpath = '#SKINSPATH##JaxCore\\@Resources\\Images\\Logo.png' end
+	if iconpath ~= nil then iconpath = '#SKINSPATH##JaxCore\\@Resources\\Images\\CoreAssets\\'..SKIN:GetVariable('Set.IconStyle')..'Logo.png' end
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Title', title, File)
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Description', description, File)
@@ -28,7 +28,12 @@ function LocalVar(Section, Option)
 end
 
 function returnBool(Variable, Match, ReturnStringT, ReturnStringF)
+	local function startswith(text, prefix)
+		return text:find(prefix, 1, true) == 1
+	end
+
 	Var = SKIN:GetVariable(Variable)
+
 	ReturnStringT = ReturnStringT or '1'
 	ReturnStringF = ReturnStringF or '0'
 	if string.find(Var, Match) then
@@ -110,6 +115,7 @@ function startDrop(variant, handler, skin, arg1)
 	local MyMeter = SKIN:GetMeter(handler)
 	local PosX = SKIN:GetX() + MyMeter:GetX()
 	local PosY = SKIN:GetY() + MyMeter:GetY()
+	local DimW = MyMeter:GetW()
 	local scalemeasure = SKIN:GetMeasure('Set.S')
 	if scalemeasure ~= nil then scale = scalemeasure:GetValue() else scale = tonumber(SKIN:GetVariable('Sec.S')) end
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.name', skin, File)
@@ -119,6 +125,7 @@ function startDrop(variant, handler, skin, arg1)
 		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', 'Variants\\'..skin..variant..'.inc', File)
 	end
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.W', DimW, File)
 	if arg1 then SKIN:Bang('!WriteKeyvalue', 'Variables', 'arg1', arg1, File) end
 	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Dropdown')
 	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Dropdown')

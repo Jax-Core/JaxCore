@@ -8,7 +8,7 @@ function Update()
         return nil
     end
     local file = io.open(SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Accessories\\Gen\\Home\\List.txt','r')
-    local filewrite = io.open(SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Core\\Home\\Generated.inc','w')
+    local filewrite = io.open(SKIN:GetVariable('SKINSPATH')..'#JaxCore\\CoreShell\\Home\\Generated.inc','w')
     totalLines = 0
     row = {}
     for line in file:lines() do
@@ -60,7 +60,7 @@ function Update()
         end
     end
     filewrite:close()
-    local filewrite2 = io.open(SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Core\\Home\\Generated2.inc','w')
+    local filewrite2 = io.open(SKIN:GetVariable('SKINSPATH')..'#JaxCore\\CoreShell\\Home\\Generated2.inc','w')
     local count = 0
     print(count, numberModules, totalLines)
     for i = numberModules + 2, totalLines do

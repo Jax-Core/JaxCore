@@ -28,7 +28,7 @@ Deactivate=[!ShowMeter Logo "#JaxCore\Main"][!Redraw "#JaxCore\Main"][!Draggable
 
 [Image]
 MEter=Image
-ImageName=#@#Images\Logo256.png
+ImageName=#@#Images\CoreAssets\#Set.IconStyle#Logo256.png
 X=0
 Y=0
 W=(#SEc.H#)

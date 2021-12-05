@@ -22,7 +22,7 @@ X=(5*#Sec.S#)R
 Y=(32/2*#Sec.S#)r
 FontSize=(10*#Sec.S#)
 StringAlign=LeftCenter
-FontColor=255,255,255
+FontColor=#Set.Text_Color#
 Container=ContentCOntainer
 
 [MeasureUser]
@@ -42,7 +42,8 @@ X=(#Sec.W#/2)
 Y=(#Sec.H#*0.2)
 FontSize=(20)
 DynamicVariables=1
-FontFace=Poppins SemiBold
+FontFace=#Set.Font# 
+FontWeight=(650)
 StringAlign=Center
 FontColor=#Set.TextColor#
 MeterStyle=Set.String:S

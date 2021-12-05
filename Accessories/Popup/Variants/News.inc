@@ -10,7 +10,7 @@ Text="IdleStyle released!"
 FontSize=(20*#Sec.S#)
 Clipstring=0
 inlinePattern=.*
-InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 1.0
+InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 0.0 | #Set.Accent_Color_2# ; 1.0
 
 [Description]
 Text="Screensavers reimagined! Display various things including skins, animations and videos when you are idle! A must have if you want people to see the fancy side of your desktop!"

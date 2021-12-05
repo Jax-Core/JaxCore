@@ -25,7 +25,8 @@ Text=JaxCore
 X=(#Sec.P#)
 Y=(250*#Sec.S#)
 FontSize=(55*#Sec.S#)
-FontFace=Poppins SemiBold
+FontFace=Poppins 
+FontWeight=(650)
 StringAlign=LeftCenter
 InlineSetting=GradientColor | 180 | 204, 28, 21 ; 0.0 | 253, 194, 1 ; 1.0
 InlineSetting2=Shadow | 0 | 0 | 5 | 0,0,0,100
@@ -66,7 +67,7 @@ DynamicVariables=1
 
 [Logo]
 Meter=Image
-ImageName=#@#Images\Logo256.png
+ImageName=#@#Images\CoreAssets\#Set.IconStyle#Logo256.png
 X=(#Sec.W#-#Sec.P#-(235*#Sec.S#))
 Y=(#Sec.H#/2-(220*(#Sec.S#))/2)
 W=(220*#Sec.S#)

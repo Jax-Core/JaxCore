@@ -40,7 +40,8 @@ Meter=String
 X=(#Sec.W#/2)
 Y=(#Sec.P#)R
 FontSize=(22*#Sec.S#)
-FontFace=Poppins SemiBold
+FontFace=#Set.Font# 
+FontWeight=(650)
 StringAlign=Center
 MeterStyle=Sec.String:S
 
