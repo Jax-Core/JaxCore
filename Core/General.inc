@@ -14,13 +14,13 @@ URL=https://raw.githubusercontent.com/Jax-Core/JaxCore/main/%40Resources/Version
 RegExp==(.*)$
 FinishAction=[!EnableMeasure mC4U][!UpdateMeasure mC4U]
 Group=checkForBeta
-; [mVer]
-; Measure=WebParser
-; URL=[WebParser]
-; StringIndex=1
 [mVer]
-Measure=Calc
-Formula=5000
+Measure=WebParser
+URL=[WebParser]
+StringIndex=1
+; [mVer]
+; Measure=Calc
+; Formula=5000
 
 [mC4U]
 Measure=Calc
@@ -213,7 +213,7 @@ DynamicVariables=1
 [Section2.Text]
 Meter=String
 X=(128/2*[Set.S])r
-Y=(30*[Set.S])R
+Y=((30+128)*[Set.S])r
 Text=Check for Core updates in background#CRLF#Updates only downloaded when updating
 FontSize=(10*[Set.S])
 Container=ContentContainer
@@ -230,9 +230,9 @@ MeterStyle=Set.Bool:S | BackgroundCheckStatus:#BackgroundCheckStatus#
 Y=R
 X=(-50/2*[Set.S])r
 [BackgroundCheckStatus:0]
-Leftmouseupaction=[!ActivateConfig "#JaxCore\Accessories\GlobalUpdater"][!UpdateMeasure GlobalUpdaterActiveChecker]
+Leftmouseupaction=[!ActivateConfig "#JaxCore\Accessories\UpdatePrompt"][!UpdateMeasure UpdatePromptActiveChecker]
 [BackgroundCheckStatus:1]
-Leftmouseupaction=[!DeactivateConfig "#JaxCore\Accessories\GlobalUpdater"][!UpdateMeasure GlobalUpdaterActiveChecker]
+Leftmouseupaction=[!DeactivateConfig "#JaxCore\Accessories\UpdatePrompt"][!UpdateMeasure UpdatePromptActiveChecker]
 
 ; --------------------------------- Section3 --------------------------------- ;
 
@@ -258,7 +258,7 @@ DynamicVariables=1
 [Section3.Text]
 Meter=String
 X=(128/2*[Set.S])r
-Y=(30*[Set.S])R
+Y=((30+128)*[Set.S])r
 Text=Check for module updates on startup#CRLF#Core will not check for updates in the background 
 FontSize=(10*[Set.S])
 Container=ContentContainer
@@ -284,26 +284,26 @@ Leftmouseupaction=[!DeactivateConfig "#JaxCore\Accessories\GlobalUpdater"][!Upda
 [Section4]
 Meter=Shape
 X=(30*[Set.S])
-Y=(55*[Set.S])r
-Shape=Rectangle 0,0,(([ContentContainer:W]-#Set.P#)/2-5*[Set.S]),(280*[Set.S]),(#Set.R#/4) | StrokeWidth 0 | Fill Color #Set.Sec_Color#
+Y=([Section3:YH]-30*[Set.S])
+Shape=Rectangle 0,0,(([ContentContainer:W]-#Set.P#)/2-5*[Set.S]),(250*[Set.S]),(#Set.R#/4) | StrokeWidth 0 | Fill Color #Set.Sec_Color#,200
 Container=ContentContainer
 DynamicVariables=1
 
 [Section4.Icon]
 Meter=Image
 ImageName=#@#Images\CoreAssets\Shortcut.png
-X=((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])/2-128/2*[Set.S])r
+X=((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])/2-100/2*[Set.S])r
 Y=(40*[Set.S])r
-W=(128*[Set.S])
-H=(128*[Set.S])
+W=(100*[Set.S])
+H=(100*[Set.S])
 Container=ContentContainer
 ImageTint=#Set.Text_Color#
 DynamicVariables=1
 
 [Section4.Text]
 Meter=String
-X=(128/2*[Set.S])r
-Y=(30*[Set.S])R
+X=(100/2*[Set.S])r
+Y=((30+100)*[Set.S])r
 Text=Add shortcut to desktop#CRLF#For easy access to JaxCore
 FontSize=(10*[Set.S])
 Container=ContentContainer
@@ -318,7 +318,7 @@ MeterStyle=Set.String:S
 Meter=Shape
 MeterStyle=SectionButton:S | Section4.ButtonDesk.False
 X=(-(150*2+10)*[Set.S]/2)r
-Y=((50-30/2)*[Set.S])r
+Y=(25*[Set.S])r
 [Section4.Button1.Text]
 Meter=String
 MeterStyle=Set.String:S | SectionIcon:S
@@ -337,25 +337,25 @@ Text=Program list
 Meter=Shape
 X=(([ContentContainer:W]-#Set.P#*2)/2+55*[SEt.S])
 Y=([Section4:Y]-#Set.P#)
-Shape=Rectangle 0,0,(([ContentContainer:W]-#Set.P#)/2-5*[Set.S]),(280*[Set.S]),(#Set.R#/4) | StrokeWidth 0 | Fill Color #Set.Sec_Color#
+Shape=Rectangle 0,0,(([ContentContainer:W]-#Set.P#)/2-5*[Set.S]),(250*[Set.S]),(#Set.R#/4) | StrokeWidth 0 | Fill Color #Set.Sec_Color#,200
 Container=ContentContainer
 DynamicVariables=1
 
 [Section5.Icon]
 Meter=Image
 ImageName=#@#Images\CoreAssets\WebInstallation.png
-X=((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])/2-128/2*[Set.S])r
+X=((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])/2-100/2*[Set.S])r
 Y=(40*[Set.S])r
-W=(128*[Set.S])
-H=(128*[Set.S])
+W=(100*[Set.S])
+H=(100*[Set.S])
 Container=ContentContainer
 ImageTint=#Set.Text_Color#
 DynamicVariables=1
 
 [Section5.Text]
 Meter=String
-X=(128/2*[Set.S])r
-Y=(30*[Set.S])R
+X=(100/2*[Set.S])r
+Y=((30+100)*[Set.S])r
 Text=Web installation#CRLF#Allows you to install skins from the JaxCore website.
 FontSize=(10*[Set.S])
 Container=ContentContainer
@@ -364,7 +364,6 @@ InlinePattern=#CRLF#.*
 InlineSetting=Color | #Set.SubText_Color#
 InlinePattern2=#CRLF#.*
 InlineSetting2=Size | (9*[Set.S])
-LeftMouseUpAction=["https://github.com/Jax-Core/JaxCore/releases"]
 MeterStyle=Set.String:S
 
 [WebInstallation]
@@ -373,9 +372,9 @@ MeterStyle=Set.Bool:S | WebInstallation:#WebInstallation#
 Y=R
 X=(-50/2*[Set.S])r
 [WebInstallation:0]
-Leftmouseupaction=[!ActivateConfig "#JaxCore\Accessories\GlobalUpdater"][!UpdateMeasure GlobalUpdaterActiveChecker]
+Leftmouseupaction=[!CommandMeasure ProtocolInstaller "Add-CoreProtocol"]
 [WebInstallation:1]
-Leftmouseupaction=[!DeactivateConfig "#JaxCore\Accessories\GlobalUpdater"][!UpdateMeasure GlobalUpdaterActiveChecker]
+LeftMouseUpAction=
 
 [Div:1]
 Meter=Shape

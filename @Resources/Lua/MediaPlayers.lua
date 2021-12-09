@@ -18,7 +18,7 @@ function startInfo(playerShape)
     local scale = tonumber(SKIN:GetMeasure('Set.S'):GetValue())
 
     local DimW = MyMeter:GetW() * 2 + 20 * scale
-    local DimH = (150 * 3 + 20 * 2) * scale
+    local DimH = (150 * 4 + 20 * 3) * scale
 
 
     local player = playerShape:gsub('Shape', '')
@@ -35,7 +35,7 @@ function changeTo()
     local toPlayer = SKIN:GetVariable('Sec.Player')
     local File = SKIN:GetVariable('Sec.SaveLocation')
     local pluginType = 'NP'
-    if toPlayer == 'Spotify' then
+    if toPlayer == 'Spotify' or toPlayer == 'Web' then
         pluginType = 'WNP'
     end
     SKIN:Bang('!WriteKeyValue', 'Variables', 'Player', pluginType, File)

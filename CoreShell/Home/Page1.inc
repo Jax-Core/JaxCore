@@ -82,7 +82,7 @@ Meter=String
 MeterStyle=Set.String:S
 Text=Config hub
 X=(#Set.P#+10*[Set.S])
-Y=(#Set.H#*0.32)
+Y=(#Set.H#*0.35)
 Group=Scroll
 FontSize=(20*[Set.S])
 FontFace=#Set.Font#
@@ -105,25 +105,13 @@ Meter=String
 MeterStyle=Set.String:S
 X=r
 Y=(78*[Set.S])r
-Text=JaxCore is an on-going set of Rainmeter widgets that provide 
+Text=JaxCore is a set of modules designed to give you better desktop experience
 [Text.2]
 Meter=String
 MeterStyle=Set.String:S
 X=r
 Y=(10*[Set.S])R
-Text=numerous functionalities to users
-[Text.3]
-Meter=String
-MeterStyle=Set.String:S
-X=r
-Y=(10*[Set.S])R
-Text=This config hub provides easy access to configuration
-[Text.4]
-Meter=String
-MeterStyle=Set.String:S
-X=r
-Y=(10*[Set.S])R
-Text=updates and new releases
+Text=With this configuration hub, you can easily access settings, updates, and new releases
 
 
 ; ---------------------------------------------------------------------------- ;

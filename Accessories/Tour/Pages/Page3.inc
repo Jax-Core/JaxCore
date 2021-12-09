@@ -67,9 +67,9 @@ MouseLeaveAction=[!SetOption #CURRENTSECTION# This "Fill Color 0,255,0,100"][!Up
 LeftMouseUpAction=[!CommandMeasure PSRM "RemoveDeskop"][!SetOption Card1.Button1.Shape MeterStyle "CardSquareButton:S | Card1.ButtonDesk.False"][!UpdateMeter Card1.Button1.Shape][!Redraw]
 
 [Card.Container:S]
-Shape=Rectangle 0,0,(230*#sec.S#),(340*#sec.S#*#TweenNode2#),#Set.R# | StrokeWidth 0 | Fill Color #Set.Sec_Color#
+Shape=Rectangle 0,0,(230*#sec.S#),(340*#sec.S#*#TweenNode2#),#Sec.R# | StrokeWidth 0 | Fill Color #Set.Sec_Color#
 [Card.Shape:S]
-Shape=Rectangle 1,1,(230*#sec.S#-2),(340*#sec.S#-2),#Set.R# | StrokeWidth 2 | Stroke LinearGradient This | Fill Color #Set.Sec_Color#
+Shape=Rectangle 1,1,(230*#sec.S#-2),(340*#sec.S#-2),#Sec.R# | StrokeWidth 2 | Stroke LinearGradient This | Fill Color #Set.Sec_Color#
 [Card.Title:S]
 FontFace=Poppins
 X=(230/2*#sec.S#)r
@@ -129,7 +129,7 @@ Group=Tweenable
 [Des.Text]
 Meter=String
 MeterStyle=Set.String:S
-Text=Delighted to have you here, let's set this thing up!#CRLF#You can also configure these in the settings panel after completing the installation.
+Text=Delighted to have you here, let's set Core up!#CRLF#You can also configure these in the settings panel after completing the installation.
 X=#Sec.P2#
 Y=(40*#Sec.S#)r
 FontSize=(14*#Sec.S#)

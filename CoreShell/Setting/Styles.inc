@@ -10,13 +10,13 @@ Measure=Plugin
 Plugin=Focus
 FocusOnRefresh=1
 
-[ColorPicker]
-Measure=Script
-ScriptFile=#ROOTCONFIGPATH#ColorPickerUI\ColorPickerUI.lua
-Theme=Core
-Animations=0
-FinishAction=[!Log "Successfully changed $section$'s $option$ to $color$!"][!UpdateMeasure Auto_Refresh:M]
-DismissAction=[!Log "$section$'s $option$ didn't change!"] 
+; [ColorPicker]
+; Measure=Script
+; ScriptFile=#ROOTCONFIGPATH#ColorPickerUI\ColorPickerUI.lua
+; Theme=Core
+; Animations=0
+; FinishAction=[!Log "Successfully changed $section$'s $option$ to $color$!"][!UpdateMeasure Auto_Refresh:M]
+; DismissAction=[!Log "$section$'s $option$ didn't change!"] 
 
 [DefaultStartActions]
 Measure=Plugin
@@ -50,9 +50,7 @@ ScriptFile=#@#Lua\Func.lua
 
 [Auto_Refresh:M]
 Measure=String
-IFMatch=1
-Ifmatchaction=[!Refresh "#Skin.Name#\Main"]
-IfMatchMode=1
+OnUpdateAction=[!Refresh "#Skin.Name#\Main"]
 Group=NUOL
 Disabled=1
 
@@ -119,9 +117,9 @@ X=(#Set.W#-#Set.L#-#Set.P#*2-201*[Set.S])
 Container=ContentContainer
 DynamicVariables=1
 Shape=Rectangle 0,0,200,30,3,3 | StrokeWidth 2 | Stroke Color 0,0,0,1 | Fill LinearGradient This | Scale [Set.S],[Set.S],0,0
-This=180 | #Set.Text_Color#,1 ; 0 | #Set.Text_Color#,1 ; 0
-MouseOverAction=[!SetOption #CURRENTSECTION# This "180 | #Set.Text_Color#,1 ; 0.5 | #Set.Text_Color#,50 ; 1"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# This "180 | #Set.Text_Color#,1 ; 0 | #Set.Text_Color#,1 ; 0"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+This=180 | 0,0,0,1 ; 0 | 0,0,0,1 ; 0
+MouseOverAction=[!SetOption #CURRENTSECTION# This "180 | 0,0,0,1 ; 0.5 | #Set.Text_Color#,50 ; 1"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# This "180 | 0,0,0,1 ; 0 | 0,0,0,1 ; 0"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 Leftmouseupaction=[!SetVariable Editing "#CURRENTSECTION#"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5*[Set.S])"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5*[Set.S])"][!CommandMeasure Input:M "ExecuteBatch 1"]
 [Set.FontBox:S]
 X=(#Set.W#-#Set.L#-#Set.P#*2-201*[Set.S])
@@ -129,9 +127,9 @@ X=(#Set.W#-#Set.L#-#Set.P#*2-201*[Set.S])
 Container=ContentContainer
 DynamicVariables=1
 Shape=Rectangle 0,0,200,30,3,3 | StrokeWidth 2 | Stroke Color 0,0,0,1 | Extend Fill | Scale [Set.S],[Set.S],0,0
-Fill=Fill Color #Set.Text_Color#,1
+Fill=Fill Color 0,0,0,1
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Sec_Color#"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Text_Color#,1"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 0,0,0,1"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 LeftMouseUpAction=[!CommandMeasure Func "startSide('Font', '#CURRENTSECTION#')"]
 RightMouseUpAction=[!SetVariable Editing "#CURRENTSECTION#"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5*[Set.S])"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5*[Set.S])"][!CommandMeasure Input:M "ExecuteBatch 1"]
 [Set.Value:S]
@@ -150,7 +148,7 @@ Shape2=Path Stair | StrokeWidth 0 | Fill Color #Set.Text_Color# | Scale ([Set.S]
 Stair=0,0 | LineTo 10,0 | LineTo 25,20 | LineTo 0,20 | ClosePath 1
 ; Shape2=Ellipse ([##CURRENTSECTION#] = 1 ? (40*[Set.S]) : (10*[Set.S])),(10*[Set.S]),(6*[Set.S]) | StrokeWidth 0 | Fill Color #Set.Text_Color#
 DynamicVariables=1
-Fill=Fill Color ([##CURRENTSECTION#] = 1 ? 35 : 181),([##CURRENTSECTION#] = 1 ? 209 : 181),([##CURRENTSECTION#] = 1 ? 96 : 181)
+Fill=Fill Color [&Func:returnBool('#CURRENTSECTION#', '1', '#Set.Positive_Color#', '#Set.SubText_Color#')]
 Container=ContentContainer
 Leftmouseupaction=[!WriteKeyvalue Variables "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)" "#Sec.SaveLocation#"][!SetVariable "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)"][!UpdateMeasure Auto_Refresh:M][!UpdateMeter #CURRENTSECTION#][!Redraw]
 
@@ -196,9 +194,9 @@ X=(#Set.W#-#Set.L#-#Set.P#*2-151*[Set.S])
 DynamicVariables=1
 Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 2 | Fill Color 0,0,0,1 | Extend Fill | Scale [Set.S],[Set.S],0,0
 Shape2=Ellipse (135*[Set.S]),(15*[Set.S]),(10*[Set.S]) | StrokeWidth 2 | Stroke Color #Set.Ter_Color# | Fill Color [##CURRENTSECTION#Color]
-Fill=Stroke Color #Set.Text_Color#,10
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,15"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Fill=Stroke Color 0,0,0,10
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color 0,0,0,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color 0,0,0,15"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#Color" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 RightMOuseUpAction=[!SetVariable Editing "#CURRENTSECTION#Opacity"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5)"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5)"][!CommandMeasure Input:M "ExecuteBatch 1"]
 ; LeftMouseUpAction=[!CommandMeasure ColorPicker "SetColor('#CURRENTSECTION#', 'Variables', 'rgba', [[#Sec.SaveLocation#]], '#CURRENTSECTION#')"]
@@ -224,7 +222,7 @@ DynamicVariables=1
 X=(#Set.W#-#Set.L#-#Set.P#*2-201*[Set.S])
 ; Y=([&Option[&Func:LocalVar('#CURRENTSECTION#', 'Class')]:Y]-#Set.P#+(-30/2+8)*[Set.S])
 OverColor=#Set.Sec_Color#
-LeaveColor=#Set.Text_Color#,1
+LeaveColor=0,0,0,1
 DynamicVariables=1
 Shape=Rectangle 0,0,200,30,3,3 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
 Fill=Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'LeaveColor')]

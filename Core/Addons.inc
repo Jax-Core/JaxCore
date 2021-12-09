@@ -37,44 +37,37 @@ MeterStyle=Set.String:S | Set.OptionCat:S
 Meter=Shape
 X=r
 Y=(15*[Set.S])R
-Shape=Rectangle 0,0,(([ContentContainer:W]-#Set.P#)/2-5*[Set.S]),(280*[Set.S]),(#Set.R#/4) | StrokeWidth 0 | Fill Color #Set.Sec_Color#
+Shape=Rectangle 0,0,(([ContentContainer:W]-#Set.P#)/2-5*[Set.S]),(([ContentContainer:W]-#Set.P#)/2-5*[Set.S]),(#Set.R#/4) | StrokeWidth 2 | Stroke LinearGradient This | Extend Fill
+This=0 | EC8827 ; 0 | DA453C ; 1
+Fill=Fill Color #Set.Sec_Color#,150
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Sec_Color#,255"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Sec_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+LeftMouseUpAction=["https://github.com/Jax-Core/ModularPlayers#how-to-install-spicetify-cli"]
 Container=ContentContainer
 DynamicVariables=1
 
 [Section1.Icon]
 Meter=Image
-ImageName=#@#Images\CoreAssets\LogoIcon.png
-X=((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])/2-128/2*[Set.S])r
-Y=(40*[Set.S])r
-W=(128*[Set.S])
-H=(128*[Set.S])
+ImageName=#@#Images\Spicetify.png
+X=((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])/2-256/2*[Set.S])r
+Y=((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])/2-256/2*[Set.S])r
+W=(256*[Set.S])
+H=(256*[Set.S])
+PreserveAspectRatio=1
 Container=ContentContainer
 ImageTint=#Set.Text_Color#
 DynamicVariables=1
 
 [Section1.Text]
 Meter=String
-X=(128/2*[Set.S])r
-Y=(30*[Set.S])R
-Text=Check for Core updates in background#CRLF#Updates only downloaded when updating
+X=(256/2*[Set.S])r
+Y=(320*[Set.S])r
+Text=Required for retrieving Spotify now playing data
 FontSize=(10*[Set.S])
 Container=ContentContainer
-StringAlign=CenterCenter
-InlinePattern=#CRLF#.*
-InlineSetting=Color | #Set.SubText_Color#
-InlinePattern2=#CRLF#.*
-InlineSetting2=Size | (9*[Set.S])
+StringAlign=CenterBottom
+FontColor=#Set.SubText_Color#
 MeterStyle=Set.String:S
-
-[BackgroundCheckStatus]
-Meter=Shape
-MeterStyle=Set.Bool:S | BackgroundCheckStatus:#BackgroundCheckStatus#
-Y=R
-X=(-50/2*[Set.S])r
-[BackgroundCheckStatus:0]
-Leftmouseupaction=[!ActivateConfig "#JaxCore\Accessories\GlobalUpdater"][!UpdateMeasure GlobalUpdaterActiveChecker]
-[BackgroundCheckStatus:1]
-Leftmouseupaction=[!DeactivateConfig "#JaxCore\Accessories\GlobalUpdater"][!UpdateMeasure GlobalUpdaterActiveChecker]
 
 ; --------------------------------- Section2 --------------------------------- ;
 
@@ -82,44 +75,37 @@ Leftmouseupaction=[!DeactivateConfig "#JaxCore\Accessories\GlobalUpdater"][!Upda
 Meter=Shape
 X=(([ContentContainer:W]-#Set.P#*2)/2+55*[SEt.S])
 Y=([Section1:Y]-#Set.P#)
-Shape=Rectangle 0,0,(([ContentContainer:W]-#Set.P#)/2-5*[Set.S]),(280*[Set.S]),(#Set.R#/4) | StrokeWidth 0 | Fill Color #Set.Sec_Color#
+Shape=Rectangle 0,0,(([ContentContainer:W]-#Set.P#)/2-5*[Set.S]),(([ContentContainer:W]-#Set.P#)/2-5*[Set.S]),(#Set.R#/4) | StrokeWidth 2 | Stroke LinearGradient This | Extend Fill
+This=0 | 283893 ; 0 | EBE722 ; 1
+Fill=Fill Color #Set.Sec_Color#,150
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Sec_Color#,255"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Sec_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+LeftMouseUpAction=["https://github.com/khanhas/MagickMeter#how-to-install"]
 Container=ContentContainer
 DynamicVariables=1
 
 [Section2.Icon]
 Meter=Image
-ImageName=#@#Images\CoreAssets\CoreModules.png
-X=((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])/2-128/2*[Set.S])r
-Y=(40*[Set.S])r
-W=(128*[Set.S])
-H=(128*[Set.S])
+ImageName=#@#Images\ImageMagick.png
+X=((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])/2-256/2*[Set.S])r
+Y=((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])/2-256/2*[Set.S])r
+W=(256*[Set.S])
+H=(256*[Set.S])
+PreserveAspectRatio=1
 Container=ContentContainer
 ImageTint=#Set.Text_Color#
 DynamicVariables=1
 
 [Section2.Text]
 Meter=String
-X=(128/2*[Set.S])r
-Y=(30*[Set.S])R
-Text=Check for module updates on startup#CRLF#Core will not check for updates in the background 
+X=(256/2*[Set.S])r
+Y=(320*[Set.S])r
+Text=Required for shadows and blurring for widgets
 FontSize=(10*[Set.S])
 Container=ContentContainer
-StringAlign=CenterCenter
-InlinePattern=#CRLF#.*
-InlineSetting=Color | #Set.SubText_Color#
-InlinePattern2=#CRLF#.*
-InlineSetting2=Size | (9*[Set.S])
+StringAlign=CenterBottom
+FontColor=#Set.SubText_Color#
 MeterStyle=Set.String:S
-
-[GlobalCheckStatus]
-Meter=Shape
-MeterStyle=Set.Bool:S | GlobalCheckStatus:#GlobalCheckStatus#
-Y=R
-X=(-50/2*[Set.S])r
-[GlobalCheckStatus:0]
-Leftmouseupaction=[!ActivateConfig "#JaxCore\Accessories\GlobalUpdater"][!UpdateMeasure GlobalUpdaterActiveChecker]
-[GlobalCheckStatus:1]
-Leftmouseupaction=[!DeactivateConfig "#JaxCore\Accessories\GlobalUpdater"][!UpdateMeasure GlobalUpdaterActiveChecker]
 ; ---------------------------------------------------------------------------- ;
 ;                                     Input                                    ;
 ; ---------------------------------------------------------------------------- ;

@@ -226,6 +226,8 @@ Shape=Rectangle 0,0,175,30,3,3 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Se
 MeterStyle=Set.Button:S
 X=0
 Y=(5*[Set.S])R
+OverColor=#Set.Subtext_Color#
+LeaveColor=#Set.Sec_Color#
 Act=["#SKINSPATH##Skin.Name#\@Resources\Vars.inc"]
 [Value02]
 Meter=String

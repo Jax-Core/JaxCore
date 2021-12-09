@@ -664,3 +664,143 @@ DynamicVariables=1
 HotKey=F12
 KeyDownAction=[!Setvariable Sec.Input_Char "F12"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
 Group=Key
+
+;===========================================================================================================================================================
+
+[TabkeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Tab
+KeyDownAction=[!Setvariable Sec.Input_Char "Tab"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[CapslockkeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Capslock
+KeyDownAction=[!Setvariable Sec.Input_Char "Capslock"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[NumLockkeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=NumLock
+KeyDownAction=[!Setvariable Sec.Input_Char "NumLock"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[ScrollLockkeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=ScrollLock
+KeyDownAction=[!Setvariable Sec.Input_Char "ScrollLock"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[SpacekeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Space
+KeyDownAction=[!Setvariable Sec.Input_Char "Space"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[PluskeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Plus
+KeyDownAction=[!Setvariable Sec.Input_Char "+"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[MinuskeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Minus
+KeyDownAction=[!Setvariable Sec.Input_Char "-"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[CommakeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Comma
+KeyDownAction=[!Setvariable Sec.Input_Char ","][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[PeriodkeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Period
+KeyDownAction=[!Setvariable Sec.Input_Char "."][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[ForwardslashkeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Forwardslash
+KeyDownAction=[!Setvariable Sec.Input_Char "/"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[BackslashkeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Backslash
+KeyDownAction=[!Setvariable Sec.Input_Char "\"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[BacktickkeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Backtick
+KeyDownAction=[!Setvariable Sec.Input_Char "`"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[QuotekeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Quote
+KeyDownAction=[!Setvariable Sec.Input_Char "'"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+;===========================================================================================================================================================
+
+[LeftkeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Left
+KeyDownAction=[!Setvariable Sec.Input_Char "Left"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[RightkeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Right
+KeyDownAction=[!Setvariable Sec.Input_Char "Right"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[UpkeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Up
+KeyDownAction=[!Setvariable Sec.Input_Char "Up"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key
+
+[DownkeyMeasure]
+Measure=Plugin
+Plugin=Hotkey
+DynamicVariables=1
+HotKey=Down
+KeyDownAction=[!Setvariable Sec.Input_Char "Down"][!UpdateMeasureGroup Key][!UpdateMeter *][!Redraw]
+Group=Key

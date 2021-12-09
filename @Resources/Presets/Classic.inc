@@ -8,4 +8,5 @@ Set.Accent_Color=150,150,150
 Set.Accent_Color_2=50,50,50
 Set.Text_Color=255,255,255
 Set.SubText_Color=120,120,120
+Set.Positive_Color=35,209,96
 Set.Font=Roboto

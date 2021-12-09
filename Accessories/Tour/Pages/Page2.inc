@@ -5,7 +5,7 @@
 
 [ImageContainer]
 Meter=Shape
-Shape=Rectangle 0,(#Sec.H#*(1-#TweenNode1#)),(#Sec.W#),#Sec.H#,#Set.R# | StrokeWidth 0 | Fill LinearGradient This
+Shape=Rectangle 0,(#Sec.H#*(1-#TweenNode1#)),(#Sec.W#),#Sec.H#,#Sec.R# | StrokeWidth 0 | Fill LinearGradient This
 This=270 | 0,0,0,(255*#TweenNode2#) ; 0 | 0,0,0,255 ; 1
 DynamicVariables=1
 Group=Tweenable

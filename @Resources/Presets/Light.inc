@@ -8,4 +8,5 @@ Set.Accent_Color=242, 52, 0
 Set.Accent_Color_2=255, 183, 0
 Set.Text_Color=39,39,39
 Set.SubText_Color=167,167,167
+Set.Positive_Color=35,209,96
 Set.Font=Poppins

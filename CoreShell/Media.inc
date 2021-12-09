@@ -78,6 +78,40 @@ MEterStyle=Set.String:S | MEdiaText:S
 Meter=Image
 MeterStyle=MediaImage:S
 
+[WebShape]
+Meter=Shape
+MeterStyle=MediaBox:S
+Grad.0=0, 130, 119
+Grad.1=0, 154, 223
+Grad.2=0, 130, 170
+Grad.3=0, 154, 250
+Leftmouseupaction=[!CommandMeasure MediaLua "startInfo('#CURRENTSECTION#')"]
+[WebText]
+Meter=String
+Text=Web
+MEterStyle=Set.String:S | MEdiaText:S
+[Web]
+Meter=Image
+MeterStyle=MediaImage:S
+
+[MusicBeeShape]
+Meter=Shape
+X=(20*[Set.S])
+Y=([SpotifyShape:YH]-[ContentContainer:Y]+#set.P#/2)
+MeterStyle=MediaBox:S
+Grad.0=45,45,45
+Grad.1=255, 192, 0
+Grad.2=70,70,70
+Grad.3=255, 209, 0
+Leftmouseupaction=[!CommandMeasure MediaLua "startInfo('#CURRENTSECTION#')"]
+[MusicBeeText]
+Meter=String
+Text=MusicBee
+MEterStyle=Set.String:S | MEdiaText:S
+[MusicBee]
+Meter=Image
+MeterStyle=MediaImage:S
+
 [AIMPShape]
 Meter=Shape
 MeterStyle=MediaBox:S
@@ -97,7 +131,7 @@ MeterStyle=MediaImage:S
 [CADShape]
 Meter=Shape
 X=(20*[Set.S])
-Y=([SpotifyShape:YH]-[ContentContainer:Y]+#set.P#/2)
+Y=([MusicBeeShape:YH]-[ContentContainer:Y]+#set.P#/2)
 MeterStyle=MediaBox:S
 Grad.0=150,150,150
 Grad.1=55, 55, 55
