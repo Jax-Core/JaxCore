@@ -4,7 +4,7 @@
 # About
 JaxCore is a set of utility modules designed to give you better desktop experience and greater productivity. Core itself is a configuration hub for easy access to settings, updates, and new releases
 
-**Desktop utiltiies that you'll need**
+### Desktop utiltiies that you'll need
 Getting tired of opening a notepad to jot down notes? Want to get the most out of your computer? Are you tired of the clutter on your desktop? Do you wish to delete those ugly shortcuts? Core has got you covered.
 ### Easy configuration
 With a dedicated configuration menu for each skin, Core makes customizing easier for new users. You do not need to edit any code!
