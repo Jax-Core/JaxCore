@@ -29,6 +29,8 @@ You can install Rainmeter via the command line:
 ### Windows 10
 You can download Rainmeter with the executable from Rainmeter's [official website](https://www.rainmeter.net/)
 
+After that, download the `.rmskin` file from the [releases page](https://github.com/Jax-Core/JaxCore/releases) and run it.
+
 ## The wiki and help
 - If you're having trouble installing, you can follow the guide on [Core's wiki](https://github.com/Jax-Core/JaxCore/wiki).
 - For further assistance, join the [Core Community Disocrd server](https://discord.gg/JmgehPSDD6).
