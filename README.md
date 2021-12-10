@@ -11,7 +11,7 @@ With a dedicated configuration menu for each skin, Core makes customization easi
 ### Update checker
 Core's built-in update checker will make sure you never miss out on new features or bug fixes. Core can also notify you whenever there are new updates for the skins you have installed. You can install all the updates via a single button press and Core takes care of the rest for you.
 
-**Available utility modules:**
+## Available utility modules
 1. [Keylaunch](https://github.com/Jax-Core/Keylaunch)
 2. [IdleStyle](https://github.com/Jax-Core/IdleStyle)
 3. [ValliStart](https://github.com/Jax-Core/ValliStart)
