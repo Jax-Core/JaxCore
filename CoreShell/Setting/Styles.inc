@@ -194,9 +194,9 @@ X=(#Set.W#-#Set.L#-#Set.P#*2-151*[Set.S])
 DynamicVariables=1
 Shape=Rectangle 0,0,150,30,3,3 | StrokeWidth 2 | Fill Color 0,0,0,1 | Extend Fill | Scale [Set.S],[Set.S],0,0
 Shape2=Ellipse (135*[Set.S]),(15*[Set.S]),(10*[Set.S]) | StrokeWidth 2 | Stroke Color #Set.Ter_Color# | Fill Color [##CURRENTSECTION#Color]
-Fill=Stroke Color 0,0,0,10
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color 0,0,0,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color 0,0,0,15"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Fill=Stroke Color 0,0,0,1
+MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color 0,0,0,1"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#Color" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 RightMOuseUpAction=[!SetVariable Editing "#CURRENTSECTION#Opacity"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5)"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5)"][!CommandMeasure Input:M "ExecuteBatch 1"]
 ; LeftMouseUpAction=[!CommandMeasure ColorPicker "SetColor('#CURRENTSECTION#', 'Variables', 'rgba', [[#Sec.SaveLocation#]], '#CURRENTSECTION#')"]
@@ -427,7 +427,7 @@ FillE=Fill Color #Set.Text_Color#,50
 MouseOverAction=[!SetOption Esc FillE "Fill Color #Set.Text_Color#"][!UpdateMeter Esc][!Redraw]
 MouseLeaveAction=[!SetOption Esc FillE "Fill Color #Set.Text_Color#,50"][!UpdateMeter Esc][!Redraw]
 LeftMouseDownAction=[!UpdateMeasure CheckPreview][!ActivateConfig "#CURRENTCONFIG#" "Home.ini"]
-RightMOuseUpAction=[!commandMeasure Func "startDrop('Window', '#CURRENTSECTION#', 'JaxCore')"]
+RightMOuseUpAction=[!commandMeasure Func "startDrop('Rainmeter', '#CURRENTSECTION#', 'JaxCore')"]
 
 [CheckPreview]
 Measure=String

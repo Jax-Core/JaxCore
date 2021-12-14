@@ -110,12 +110,18 @@ function processInput(EditingVar, EditedVal)
 end
 
 function startDrop(variant, handler, skin, arg1)
+	local function clamp(v, minValue, maxValue)
+		if v < minValue then
+			return minValue
+		end
+		return v
+	end
 	local skin = skin or SKIN:GetVariable('Skin.Name')
 	local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Dropdown\\Main.ini'
 	local MyMeter = SKIN:GetMeter(handler)
 	local PosX = SKIN:GetX() + MyMeter:GetX()
 	local PosY = SKIN:GetY() + MyMeter:GetY()
-	local DimW = MyMeter:GetW()
+	local DimW = clamp(MyMeter:GetW(), 150, 1000)
 	local scalemeasure = SKIN:GetMeasure('Set.S')
 	if scalemeasure ~= nil then scale = scalemeasure:GetValue() else scale = tonumber(SKIN:GetVariable('Sec.S')) end
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.name', skin, File)
