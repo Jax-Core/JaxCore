@@ -1,6 +1,6 @@
 [Variables]
-Skin.Name=ValliStart
+Skin.Name=ModularClocks
 ; Skin.Shorthand=
 
-Skin.Set_Page=Info
+Skin.Set_Page=Render
 Skin.Ctx_Ctx=Refresh

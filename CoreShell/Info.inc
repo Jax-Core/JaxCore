@@ -125,6 +125,7 @@ Greyscale=1
 DynamicVariables=1
 Container=ContentContainer
 Group=Buttons
+ImageTint=#Set.Text_Color#
 ImageName=#@#Icons\DA.png
 [Button22]
 Meter=Shape
@@ -143,6 +144,7 @@ Greyscale=1
 DynamicVariables=1
 Container=ContentContainer
 Group=Buttons
+ImageTint=#Set.Text_Color#
 ImageName=#@#Icons\Github.png
 [Button23]
 Meter=Shape
@@ -166,6 +168,7 @@ Greyscale=1
 DynamicVariables=1
 Container=ContentContainer
 Group=DownloadButton
+ImageTint=#Set.Text_Color#
 ImageName=#@#Icons\Install.png
 Hidden=1
 [Button24]
@@ -226,8 +229,8 @@ Shape=Rectangle 0,0,175,30,3,3 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Se
 MeterStyle=Set.Button:S
 X=0
 Y=(5*[Set.S])R
-OverColor=#Set.Subtext_Color#
-LeaveColor=#Set.Sec_Color#
+OverColor=#Set.Ter_Color#
+LeaveColor=#Set.Ter_Color#,150
 Act=["#SKINSPATH##Skin.Name#\@Resources\Vars.inc"]
 [Value02]
 Meter=String
@@ -241,8 +244,8 @@ Shape=Rectangle 0,0,175,30,3,3 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Se
 MeterStyle=Set.Button:S
 X=0
 Y=(5*[Set.S])R
-OverColor=#Set.Subtext_Color#
-LeaveColor=#Set.Sec_Color#
+OverColor=#Set.Sec_Color#
+LeaveColor=#Set.Sec_Color#,150
 Act=[!CommandMeasure VersionScript "activateParse()"]
 [Value03]
 Meter=String
@@ -260,7 +263,7 @@ Measure=WebParser
 URL=https://raw.githubusercontent.com/Jax-Core/#Skin.Name#/main/%40Resources/Version.inc
 RegExp==(.*)$
 Disabled=1
-FinishAction=[!EnableMeasure mC4U][!UpdateMeasure mC4U]
+FinishAction=[!Delay 100][!EnableMeasure mC4U][!UpdateMeasure mC4U]
 Group=checkForBeta
 [mVer]
 Measure=WebParser

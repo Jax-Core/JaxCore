@@ -150,7 +150,7 @@ Stair=0,0 | LineTo 10,0 | LineTo 25,20 | LineTo 0,20 | ClosePath 1
 DynamicVariables=1
 Fill=Fill Color [&Func:returnBool('#CURRENTSECTION#', '1', '#Set.Positive_Color#', '#Set.SubText_Color#')]
 Container=ContentContainer
-Leftmouseupaction=[!WriteKeyvalue Variables "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)" "#Sec.SaveLocation#"][!SetVariable "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)"][!UpdateMeasure Auto_Refresh:M][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Leftmouseupaction=[!WriteKeyvalue Variables "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)" "#Sec.SaveLocation#"][!SetVariable "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)"][!UpdateMeasure Auto_Refresh:M][!UpdateMeter *][!Redraw]
 
 
 

@@ -64,16 +64,16 @@ Plugin=PowerShellRM
 ScriptFile=#ROOTCONFIGPATH#CoreInstaller\Helpers\ProtocolInstaller\ProtocolInstaller.ps1
 
 [SectionButton:S]
-X=((150/2+10)*[Set.S])r
+X=(((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])*0.2)+(10)*[Set.S])r
 Y=(-30/2*[Set.S])r
-Shape=Rectangle 0,0,150,30,5 | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend This
+Shape=Rectangle 0,0,((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])*0.4),(30*[Set.S]),(5*[Set.S]) | StrokeWidth 0 | Extend This
 This=Fill Color #Set.Text_Color#,100
 MouseOverAction=[!SetOption #CURRENTSECTION# This "Fill Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# This "Fill Color #Set.Text_Color#,75"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 Container=ContentContainer
 DynamicVariables=1
 [SectionIcon:S]
-X=(150/2*[Set.S])r
+X=(((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])*0.2))r
 Y=(30/2*[Set.S])r
 FontSize=(10*[Set.S])
 FontFace=#Set.Font#
@@ -317,7 +317,7 @@ MeterStyle=Set.String:S
 [Section4.Button1.Shape]
 Meter=Shape
 MeterStyle=SectionButton:S | Section4.ButtonDesk.False
-X=(-(150*2+10)*[Set.S]/2)r
+X=(-((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])*0.4)-5*[Set.S])r
 Y=(25*[Set.S])r
 [Section4.Button1.Text]
 Meter=String

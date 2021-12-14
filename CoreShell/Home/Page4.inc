@@ -93,7 +93,7 @@ InlineSetting=Size | (12*[Set.S])
 InlinePattern2=#CRLF#.*
 InlineSetting2=Weight | 300
 MeterStyle=Set.String:S
-Text=#Spotlight##CRLF#ModularClocks is a gallery of clocks which fits most wallpapers. Choose from 3 different types of render and 10 different variants of clocks.
+Text=#Spotlight##CRLF#Adaptive Visualizer. Coming soon~
 [SpotImage]
 Meter=Image
 X=(#Set.W#-#Set.P#-500*[Set.S])
@@ -103,7 +103,7 @@ DynamicVariables=1
 ImageName=#@#Images\Cards\#Spotlight#.png
 Container=BC
 MaskImageName=#@#Images\RoundedMask.png
-LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name #Spotlight# "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "#@#SecVar.inc"][!ActivateConfig "#CURRENTCONFIG#" "Settings.ini"]
+; LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name #Spotlight# "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "#@#SecVar.inc"][!ActivateConfig "#CURRENTCONFIG#" "Settings.ini"]
 ; ------------------------------- Bottom Start ------------------------------- ;
 
 [RecommendedSkins]

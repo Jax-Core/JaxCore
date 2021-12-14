@@ -7,4 +7,3 @@ Keystrokes | Overlay, Gaming, Hotkey
 ModularClocks | Modern, clock, minimal
 Plainext | System, Retro
 ModularPlayers | Modern, Music, Minimal
-Combilaunch | Launcher, Minimal

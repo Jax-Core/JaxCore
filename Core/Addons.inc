@@ -61,7 +61,7 @@ DynamicVariables=1
 [Section1.Text]
 Meter=String
 X=(256/2*[Set.S])r
-Y=(320*[Set.S])r
+Y=([Section1:YH])
 Text=Required for retrieving Spotify now playing data
 FontSize=(10*[Set.S])
 Container=ContentContainer
@@ -99,7 +99,7 @@ DynamicVariables=1
 [Section2.Text]
 Meter=String
 X=(256/2*[Set.S])r
-Y=(320*[Set.S])r
+Y=([Section2:YH])
 Text=Required for shadows and blurring for widgets
 FontSize=(10*[Set.S])
 Container=ContentContainer

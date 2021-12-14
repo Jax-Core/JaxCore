@@ -24,13 +24,3 @@ MeterStyle=SkinIcon:S
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
 Text=ModularPlayers#CRLF# Modern, Music, Minimal
-[Combilaunch]
-Meter=Image
-X=(#Set.P#)
-Y=(10*[Set.S])R
-ImageName=#@#Images\Cards\Combilaunch.png
-MeterStyle=SkinIcon:S
-[CombilaunchDes]
-Meter=String
-MeterStyle=Set.String:S | SkinText:S
-Text=Combilaunch#CRLF# Launcher, Minimal

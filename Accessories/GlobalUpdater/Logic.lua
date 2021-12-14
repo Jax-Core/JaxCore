@@ -1,11 +1,11 @@
 function Initialize()
     local ReadDump = tonumber(SKIN:GetVariable('ReadDump'))
-    if ReadDump == 1 then
-        SKIN:Bang('[!WriteKeyvalue Variables ReadDump 0][!Refresh]')
-    else
-        SKIN:Bang('[!WriteKeyvalue Variables ReadDump 1]')
-        check()
-    end
+    -- if ReadDump == 1 then
+    --     SKIN:Bang('[!WriteKeyvalue Variables ReadDump 0][!Refresh]')
+    -- else
+    --     SKIN:Bang('[!WriteKeyvalue Variables ReadDump 1]')
+    --     check()
+    -- end
 end
 
 function ReadIni()
