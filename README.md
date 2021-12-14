@@ -5,13 +5,13 @@
 JaxCore is a set of utility modules designed to give you better desktop experience and greater productivity. Core itself is a configuration hub for easy access to settings, updates, and new releases
 
 ### Desktop utiltiies that you'll need
-Getting tired of opening a notepad to jot down notes? Want to get the most out of your computer? Are you tired of the clutter on your desktop? Do you wish to delete those ugly shortcuts? Core has got you covered.
+Tired of using notepad to jot down notes? Don't like your cluttered desktop? Want to get rid of those unpleasant shortcuts? Core has got you covered.
 ### Easy configuration
-With a dedicated configuration menu for each skin, Core makes customizing easier for new users. You do not need to edit any code!
+With a dedicated configuration menu for each skin, Core makes customization easier for new users without the user having to modify the code or write some of their own.
 ### Update checker
-You will never miss out on any new features or bug fixes. Core can notify you when there are updates to skins that you've installed, you can update skins just by clicking your mouse; no manual download is necessary.
+Core's built-in update checker will make sure you never miss out on new features or bug fixes. Core can also notify you whenever there are new updates for the skins you have installed. You can install all the updates via a single button press and Core takes care of the rest for you.
 
-**Available utility modules:**
+## Available utility modules
 1. [Keylaunch](https://github.com/Jax-Core/Keylaunch)
 2. [IdleStyle](https://github.com/Jax-Core/IdleStyle)
 3. [ValliStart](https://github.com/Jax-Core/ValliStart)
