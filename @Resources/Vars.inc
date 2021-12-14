@@ -1,5 +1,5 @@
 [Variables]
-UserNameCheckVariable=Jax Tam
+UserNameCheckVariable=sahoo
 LastRollBackSkin=IdleStyle|1.4
 ; ----------------------------- Scaling variables ---------------------------- ;
 Set.P=(40*[Set.S])
@@ -25,6 +25,7 @@ QoL=1
 QolPlugin=Plugin
 Ctx.Animated=0
 Core.Ver.LastChecked=2
+WebInstallation=1
 
 
 ; Set.Pri_Color=245,245,245
