@@ -6,13 +6,18 @@
     [string]
     $togglePath,
     [string]
-    $postBang
+    $postBang,
+    [Parameter()]
+    [string]
+    $Uninstall = 'F'
 )
 
-if (-not ((Test-Path $coreInstallerPath) -or ($coreInstallerPath -imatch "\.exe$"))) {
-    Write-Error -Message "CoreInstaller path invalid"
-    Start-Sleep -Seconds 5
-    return
+if ($Uninstall -eq 'F') {
+    if (-not ((Test-Path $coreInstallerPath) -or ($coreInstallerPath -imatch "\.exe$"))) {
+        Write-Error -Message "CoreInstaller path invalid"
+        Start-Sleep -Seconds 5
+        return
+    }
 }
 
 # Add HKCR drive
@@ -31,6 +36,14 @@ try {
 catch {
     Write-Host "> No previous entries found ..."
     Write-Host ""
+}
+
+if ($Uninstall -eq 'T') {
+    @"
+[Variables]
+WebInstallation = 0
+"@ | Out-File -FilePath $togglePath -Force -Encoding ascii
+    Exit-PSSession
 }
 
 Write-Host "> Creating new CoreInstaller entry ..."
@@ -56,6 +69,6 @@ Start-Process (Get-Process Rainmeter).MainModule.FileName -ArgumentList $postBan
 
 Write-Host Done -ForegroundColor Green
 
-Read-Host
+Start-Sleep -Seconds 1
 
 Exit-PSSession
