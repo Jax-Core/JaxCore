@@ -173,9 +173,9 @@ Container=ContentContainer
 [Section1.Button:0]
 LeftMouseUpAction=[!Refresh]
 [Section1.Button:1]
-LeftMouseUpAction=[!Refresh]
-[Section1.Button:2]
 LeftMouseUpAction=[!CommandMeasure CoreBridge "install('#Skin.Name#')"]
+[Section1.Button:2]
+LeftMouseUpAction=[!Refresh]
 [Section1.Button.Value]
 Meter=String
 X=(150/2*[Set.S])r
