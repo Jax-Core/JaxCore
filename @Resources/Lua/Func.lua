@@ -154,9 +154,9 @@ function startPopup(variant, style)
 	if style == 'classic' then
 		DimW = 400
 		DimH = 500
-	elseif style == 'medium' then
-		DimW = tonumber(SKIN:GetW()) - 100
-		DimH = tonumber(SKIN:GetH()) - 100
+	elseif style == 'Left' then
+		DimW = 650
+		DimH = 800
 	elseif style == 'info' then
 		DimW = tonumber(SKIN:GetMeter('ContentCOntainer'):GetW())
 		DimH = tonumber(SKIN:GetMeter('ContentCOntainer'):GetH())

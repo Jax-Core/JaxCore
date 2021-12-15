@@ -18,8 +18,8 @@ UpdateDivider=-1
 
 [NewsParser]
 Measure=WebParser
-URL=https://raw.githubusercontent.com/Jax-Core/JaxCore/main/%40Resources/NewsID.inc
-RegExp==(.*)$
+URL=https://raw.githubusercontent.com/Jax-Core/JaxCore/main/CoreWebResources.inc
+RegExp=NewsID=(.*)$
 Group=Updater
 FinishAction=[!CommandMeasure LogicalScript "checkNews()"]
 
@@ -142,7 +142,7 @@ OverColor=#Set.Text_Color#,50
 LeaveColor=0,0,0,1
 Shape=Rectangle 0,0,40,40,(#Set.R#/2) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend This
 MeterStyle=Shape.Over:S
-Leftmouseupaction=[!commandMeasure Func "startPopup('Discord')"]
+Leftmouseupaction=["https://discord.gg/JmgehPSDD6"]
 Container=BC
 [DiscordIcon]
 Meter=Image
@@ -160,14 +160,14 @@ OverColor=#Set.Text_Color#,50
 LeaveColor=0,0,0,1
 Shape=Rectangle 0,0,40,40,(#Set.R#/2) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend This
 MeterStyle=Shape.Over:S
-Leftmouseupaction=[!commandMeasure Func "startPopup('DeviantArt')"]
+Leftmouseupaction=["https://www.deviantart.com/jaxoriginals"]
 Container=BC
 [DeviantArtIcon]
 Meter=Image
 MeterStyle=TopButton:S
 ImageName=#@#Icons\DA.png
 
-[ShortcutButton]
+[WebsiteButton]
 Meter=Shape
 X=(30*[Set.S]+#Set.P#/2)r
 Y=r
@@ -178,12 +178,12 @@ OverColor=#Set.Text_Color#,50
 LeaveColor=0,0,0,1
 Shape=Rectangle 0,0,40,40,(#Set.R#/2) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend This
 MeterStyle=Shape.Over:S
-Leftmouseupaction=[!commandMeasure Func "startPopup('Shortcut')"]
+Leftmouseupaction=["https://jax-core.github.io/"]
 Container=BC
-[ShortcutIcon]
+[WebsiteIcon]
 Meter=Image
 MeterStyle=TopButton:S
-ImageName=#@#Icons\Shortcut.png
+ImageName=#@#Icons\Website.png
 
 [NewsButton]
 Meter=Shape
@@ -196,7 +196,7 @@ OverColor=#Set.Text_Color#,50
 LeaveColor=0,0,0,1
 Shape=Rectangle 0,0,40,40,(#Set.R#/2) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend This
 MeterStyle=Shape.Over:S
-Leftmouseupaction=[!commandMeasure Func "startPopup('News')"]
+Leftmouseupaction=[!commandMeasure Func "startPopup('News', 'Left')"]
 Container=BC
 [NewsIcon]
 Meter=Image
