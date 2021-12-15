@@ -37,7 +37,7 @@ Debug=2
 Debug2File=#ROOTCONFIGPATH#Accessories\Popup\Variants\News.inc
 DynamicVariables=1
 Disabled=1
-FinishAction=[!commandMeasure Func "startPopup('News')"][!WriteKeyValue Variables News.ID [mNewsID] "#@#NewsID.inc"]
+FinishAction=[!commandMeasure Func "startPopup('News', 'Left')"][!WriteKeyValue Variables News.ID [mNewsID] "#@#NewsID.inc"]
 
 ; ------------------------------- Version check ------------------------------ ;
 
