@@ -63,6 +63,10 @@ Measure=Plugin
 Plugin=PowerShellRM
 ScriptFile=#ROOTCONFIGPATH#CoreInstaller\Helpers\ProtocolInstaller\ProtocolInstaller.ps1
 
+[CoreBridge]
+Measure=Script
+ScriptFile=#SKINSPATH##JaxCore\@Resources\Lua\CoreElements\Installer.lua
+
 [SectionButton:S]
 X=(((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])*0.2)+(10)*[Set.S])r
 Y=(-30/2*[Set.S])r
@@ -172,7 +176,7 @@ LeftMouseUpAction=[!Refresh]
 [Section1.Button:1]
 LeftMouseUpAction=[!Refresh]
 [Section1.Button:2]
-LeftMouseUpAction=
+LeftMouseUpAction=[!CommandMeasure CoreBridge "install('#Skin.Name#')"]
 [Section1.Button.Value]
 Meter=String
 X=(150/2*[Set.S])r

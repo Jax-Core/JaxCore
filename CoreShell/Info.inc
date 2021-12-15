@@ -52,7 +52,7 @@ FontWeight=(650)
 MeterStyle=Set.String:S | Header:1
 InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 0.0 | #Set.Accent_Color_2# ; 1.0
 ; InlineSetting2=Shadow | 0 | 0 | 2 | CC1C15
-Leftmouseupaction=[https://github.com/Jax-Core/#Skin.Name#/releases/latest]
+Leftmouseupaction=["https://github.com/Jax-Core/#Skin.Name#/releases/latest"]
 [Header:2]
 Text="One update ahead..."
 FontSize=(40*[Set.S])
