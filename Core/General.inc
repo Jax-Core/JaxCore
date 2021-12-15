@@ -159,7 +159,7 @@ Text=v#Core.Ver# - Beta#CRLF#View release details
 
 [Section1.Button]
 Meter=Shape
-MeterStyle=Set.Button:S
+MeterStyle=Set.Button:S | Section1.Button:#VersionStatus#
 Y=(-40/2*[Set.S])r
 X=([ContentContainer:W]-#Set.P#-150*[Set.S])
 OverColor=100,100,100,200
@@ -170,7 +170,6 @@ Fill=Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'LeaveColor')]
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'OverColor')]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'LeaveColor')]"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 Container=ContentContainer
-MeterStyle=Section1.Button:#VersionStatus#
 [Section1.Button:0]
 LeftMouseUpAction=[!Refresh]
 [Section1.Button:1]
