@@ -1,5 +1,5 @@
 [Variables]
-Skin.Name=IdleStyle
+Skin.Name=Keystrokes
 ; Skin.Shorthand=
 
 Skin.Set_Page=Info

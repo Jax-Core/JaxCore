@@ -1,5 +1,5 @@
 [Variables]
-UserNameCheckVariable=sahoo
+UserNameCheckVariable=Jax Tam
 LastRollBackSkin=IdleStyle|1.4
 ; ----------------------------- Scaling variables ---------------------------- ;
 Set.P=(40*[Set.S])
