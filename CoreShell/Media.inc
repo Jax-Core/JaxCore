@@ -128,7 +128,7 @@ MEterStyle=Set.String:S | MEdiaText:S
 Meter=Image
 MeterStyle=MediaImage:S
 
-[CADShape]
+[FoobarShape]
 Meter=Shape
 X=(20*[Set.S])
 Y=([MusicBeeShape:YH]-[ContentContainer:Y]+#set.P#/2)
@@ -138,11 +138,11 @@ Grad.1=55, 55, 55
 Grad.2=150,150,150
 Grad.3=77,77,77
 Leftmouseupaction=[!CommandMeasure MediaLua "startInfo('#CURRENTSECTION#')"]
-[CADText]
+[FoobarText]
 Meter=String
-Text=CAD
+Text=Foobar
 MEterStyle=Set.String:S | MEdiaText:S
-[CAD]
+[Foobar]
 Meter=Image
 MeterStyle=MediaImage:S
 
@@ -165,7 +165,7 @@ MeterStyle=MediaImage:S
 [WinAMPShape]
 Meter=Shape
 X=(20*[Set.S])
-Y=([CADShape:YH]-[ContentContainer:Y]+#set.P#/2)
+Y=([FoobarShape:YH]-[ContentContainer:Y]+#set.P#/2)
 MeterStyle=MediaBox:S
 Grad.0=255, 84, 0
 Grad.1=178, 16, 14

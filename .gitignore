@@ -1,4 +1,5 @@
 /JaxCoreworkspace.code-workspace
 /.DeveloperResources
-@Resources/CoreInstaller
-@Resources/NewsID.inc
+/@Resources/CoreInstaller
+/@Resources/NewsID.inc
+/@Resources/SecVar.inc

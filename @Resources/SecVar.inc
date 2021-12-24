@@ -1,6 +1,6 @@
 [Variables]
-Skin.Name=#JaxCore
+Skin.Name=YourFlyouts
 ; Skin.Shorthand=
 
-Skin.Set_Page=General
+Skin.Set_Page=Position
 Skin.Ctx_Ctx=Refresh

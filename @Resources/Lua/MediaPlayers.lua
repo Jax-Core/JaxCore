@@ -2,7 +2,12 @@ function Initialize()
     -- --------------------- makes sure this is in the core --------------------- --
     if SKIN:GetVariable('Skin.Name') ~= nil then
         MediaPlayerName = SKIN:GetVariable('NPName')
-        SKIN:Bang('!SetOption', MediaPlayerName..'Shape', 'MeterStyle', 'MediaBox:S | MediaBox1:S')
+        if MediaPlayerName == 'CAD' or toPlayer == 'Foobar' then
+            SKIN:Bang('!SetOption', 'FoobarShape', 'MeterStyle', 'MediaBox:S | MediaBox1:S')
+            SKIN:Bang('!SetOption', 'MusicBeeShape', 'MeterStyle', 'MediaBox:S | MediaBox1:S')
+        else
+            SKIN:Bang('!SetOption', MediaPlayerName..'Shape', 'MeterStyle', 'MediaBox:S | MediaBox1:S')
+        end
         SKIN:Bang('!UpdateMeter', '*')
         -- SKIN:Bang('!Redraw')
     end
@@ -33,6 +38,7 @@ end
 
 function changeTo()
     local toPlayer = SKIN:GetVariable('Sec.Player')
+    if toPlayer == 'MusicBee' or toPlayer == 'Foobar' then toPlayer = 'CAD' end
     local File = SKIN:GetVariable('Sec.SaveLocation')
     local pluginType = 'NP'
     if toPlayer == 'Spotify' or toPlayer == 'Web' then
