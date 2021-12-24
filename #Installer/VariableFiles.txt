@@ -1,2 +1,0 @@
-@Resources\Vars.inc
-@Resources\WebSupportEnabled.inc
