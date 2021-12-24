@@ -1,11 +1,11 @@
 function Initialize()
     local ReadDump = tonumber(SKIN:GetVariable('ReadDump'))
-    -- if ReadDump == 1 then
-    --     SKIN:Bang('[!WriteKeyvalue Variables ReadDump 0][!Refresh]')
-    -- else
-    --     SKIN:Bang('[!WriteKeyvalue Variables ReadDump 1]')
-    --     check()
-    -- end
+    if ReadDump == 1 then
+        SKIN:Bang('[!WriteKeyvalue Variables ReadDump 0][!Refresh]')
+    else
+        SKIN:Bang('[!WriteKeyvalue Variables ReadDump 1]')
+        check()
+    end
 end
 
 function ReadIni()
@@ -96,14 +96,15 @@ MeterStyle=Set.String:S | Skin.UpdateButton.Icon:S
 ]]
                 )
                 numOfUpdates = numOfUpdates + 1
+                SkinTable[_G["Skin"..i]]['Version'] = ini.INI['variables']['Version']
             end
         else
             -- ---------------------- returns false and exits file ---------------------- --
             SkinTable[_G["Skin"..i]]['Exist'] = 0
-            ini.INI['variables']['Version'] = '0.0'
+            SkinTable[_G["Skin"..i]]['Version'] = 0.0
         end
         -- ------------------------------ print result ------------------------------ --
-        print(_G["Skin"..i]..' | v'..SkinTable[_G["Skin"..i]]['Version']..' | Installed['..SkinTable[_G["Skin"..i]]['Exist']..'] | LocalVersion v'..ini.INI['variables']['Version'])
+        print(_G["Skin"..i]..' | v'..SkinTable[_G["Skin"..i]]['Version']..' | Installed['..SkinTable[_G["Skin"..i]]['Exist']..'] | LocalVersion v'..SkinTable[_G["Skin"..i]]['Version'])
     end
     if numOfUpdates ~= 0 then
         contentFile:write(

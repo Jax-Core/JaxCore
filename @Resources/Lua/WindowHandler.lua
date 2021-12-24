@@ -228,11 +228,11 @@ function LeftMouseUpCallback(mouseX, mouseY)
 	local windowWidth = tonumber(SKIN:GetVariable("Set.W"))
 	local windowHeight = tonumber(SKIN:GetVariable("Set.H"))
 	local currentScale = tonumber((SKIN:GetMeasure("Set.S")):GetValue())
-	bang = bang .. "[!WriteKeyValue Variables WindowPosX " .. skinPosX .. ' "#@#Includes\\Window.ini"]' 							   			-- Write X pos in case of refresh
-	bang = bang .. "[!WriteKeyValue Variables WindowPosY " .. skinPosY .. ' "#@#Includes\\Window.ini"]' 							   			-- Write Y pos in case of refresh
-	bang = bang .. "[!WriteKeyValue Variables Set.W " .. windowWidth .. ' "#@#Includes\\Window.ini"]' 					   			-- Write Width in case of refresh
-	bang = bang .. "[!WriteKeyValue Variables Set.H " .. windowHeight .. ' "#@#Includes\\Window.ini"]' 					   			-- Write Height in case of refresh
-	bang = bang .. "[!WriteKeyValue Set.S Formula " .. currentScale .. ' "#@#Includes\\Window.ini"]' 					   			-- Write Scale in case of refresh
+	bang = bang .. "[!WriteKeyValue Variables WindowPosX " .. skinPosX .. ' "#@#Includes\\Window.inc"]' 							   			-- Write X pos in case of refresh
+	bang = bang .. "[!WriteKeyValue Variables WindowPosY " .. skinPosY .. ' "#@#Includes\\Window.inc"]' 							   			-- Write Y pos in case of refresh
+	bang = bang .. "[!WriteKeyValue Variables Set.W " .. windowWidth .. ' "#@#Vars.inc"]' 					   			-- Write Width in case of refresh
+	bang = bang .. "[!WriteKeyValue Variables Set.H " .. windowHeight .. ' "#@#Vars.inc"]' 					   			-- Write Height in case of refresh
+	bang = bang .. "[!WriteKeyValue Set.S Formula " .. currentScale .. ' "#@#Vars.inc"]' 					   			-- Write Scale in case of refresh
 	bang = bang .. "[!UpdateMeter *][!Redraw]"
 
 	SKIN:Bang(bang)

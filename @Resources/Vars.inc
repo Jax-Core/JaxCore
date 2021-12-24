@@ -6,6 +6,8 @@ Set.P=(40*[Set.S])
 Set.Home.P=(100*[Set.S])
 Set.R=(10)
 Set.L=(200*([Set.S]+0.2))
+Set.W=745
+Set.H=595
 ; --------------------------- Appearance variables --------------------------- ;
 Set.Style=Frosted
 Set.IconStyle=Frosted
@@ -25,10 +27,6 @@ QoL=1
 QolPlugin=Plugin
 Ctx.Animated=0
 
-
-; Set.Pri_Color=245,245,245
-; Set.Sec_Color=235,235,235
-; Set.Ter_Color=225,225,225
-; Set.Accent_Color=0,25,255
-; Set.Text_Color=0,0,0
-; Set.SubText_Color=45,45,45
+[Set.S]
+Measure=Calc
+Formula=0.75
