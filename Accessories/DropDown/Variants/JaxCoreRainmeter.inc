@@ -1,5 +1,4 @@
 [Variables]
-SaveLocation="#@#Includes\Window.ini"
 ; SaveKey=Fill
 
 ; ---------------------------------------------------------------------------- ;

@@ -41,7 +41,7 @@ Sec.Container=
 ; ---------------------------------------------------------------------------- ;
 
 
-@IncludeWindow=#@#Includes/Window.ini
+@IncludeWindow=#@#Includes/Window.inc
 @IncludeMouse=#@#Includes/ScriptMouseHandler#QoL#.ini
 
 [Func]
