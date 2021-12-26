@@ -1,6 +1,20 @@
 [Variables]
-Skin.Name=IdleStyle
+Skin.Name=Keylaunch
 Sec.W=(175*#Sec.S#)
+[v1.5]
+Meter=String
+MeterStyle=String:S
+LeftMouseUpAction=[!SetVariable DownloadLink "https://github.com/Jax-Core/#Skin.Name#/releases/download/v1.5/#Skin.Name#_v1.5.rmskin"][!SetVariable DownloadName "#Skin.Name#1.5"][!CommandMeasure Installer "Install"]
+[Div:1.5]
+Meter=Shape
+MeterStyle=Div:S
+[v1.45]
+Meter=String
+MeterStyle=String:S
+LeftMouseUpAction=[!SetVariable DownloadLink "https://github.com/Jax-Core/#Skin.Name#/releases/download/v1.45/#Skin.Name#_v1.45.rmskin"][!SetVariable DownloadName "#Skin.Name#1.45"][!CommandMeasure Installer "Install"]
+[Div:1.45]
+Meter=Shape
+MeterStyle=Div:S
 [v1.4]
 Meter=String
 MeterStyle=String:S
@@ -13,6 +27,13 @@ Meter=String
 MeterStyle=String:S
 LeftMouseUpAction=[!SetVariable DownloadLink "https://github.com/Jax-Core/#Skin.Name#/releases/download/v1.3/#Skin.Name#_v1.3.rmskin"][!SetVariable DownloadName "#Skin.Name#1.3"][!CommandMeasure Installer "Install"]
 [Div:1.3]
+Meter=Shape
+MeterStyle=Div:S
+[v1.2]
+Meter=String
+MeterStyle=String:S
+LeftMouseUpAction=[!SetVariable DownloadLink "https://github.com/Jax-Core/#Skin.Name#/releases/download/v1.2/#Skin.Name#_v1.2.rmskin"][!SetVariable DownloadName "#Skin.Name#1.2"][!CommandMeasure Installer "Install"]
+[Div:1.2]
 Meter=Shape
 MeterStyle=Div:S
 [v1.1]

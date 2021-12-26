@@ -1,6 +1,6 @@
 [Variables]
 UserNameCheckVariable=Jax Tam
-LastRollBackSkin=IdleStyle|1.4
+LastRollBackSkin=Keylaunch|1.5
 ; ----------------------------- Scaling variables ---------------------------- ;
 Set.P=(40*[Set.S])
 Set.Home.P=(100*[Set.S])
@@ -25,7 +25,6 @@ Sec.SaveLocation=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 Set.BackgroundCheckTime=30
 QoL=1
 QolPlugin=Plugin
-Ctx.Animated=0
 
 [Set.S]
 Measure=Calc

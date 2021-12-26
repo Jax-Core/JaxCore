@@ -1,6 +1,6 @@
 [Variables]
-Skin.Name=ValliStart
+Skin.Name=YourFlyouts
 ; Skin.Shorthand=
 
-Skin.Set_Page=ColorScheme
+Skin.Set_Page=Info
 Skin.Ctx_Ctx=Refresh

@@ -5,14 +5,18 @@ function Update()
 	CtxH = (SKIN:GetMeasure('Ctx.H:eX')):GetValue()
 	ScrnH = tonumber(SKIN:GetVariable('SCREENAREAHEIGHT', -1))
 	if (PosX and (PosY + CtxH) < ScrnH) then
-		SKIN:MoveWindow(PosX,PosY)
+		moveX = PosX
+		moveY = PosY
 		-- quad 1, 2
 	elseif (PosX and (PosY + CtxH) > ScrnH) then
-		SKIN:MoveWindow(PosX,(PosY - CtxH))
+		moveX = PosX
+		moveY = PosY - CtxH
 		-- quad 3, 4
 	else
 		error("Invalid Operation")
 	end
+	SKIN:MoveWindow(moveX, moveY)
+	SKIN:Bang('[!CommandMeasure Func "importPosition('..moveX..', '..moveY..')"][!CommandMeasure ActionTimer "Execute 1"]')
 end
 
 function openSub(handler)
