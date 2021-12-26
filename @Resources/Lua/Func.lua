@@ -28,19 +28,20 @@ function LocalVar(Section, Option)
 end
 
 function returnBool(Variable, Match, ReturnStringT, ReturnStringF)
-	local function startswith(text, prefix)
-		return text:find(prefix, 1, true) == 1
-	end
 
 	Var = SKIN:GetVariable(Variable)
 
 	ReturnStringT = ReturnStringT or '1'
 	ReturnStringF = ReturnStringF or '0'
-	if string.find(Var, Match) then
+	if Var == Match then
 		return(ReturnStringT)
 	  else
 		return(ReturnStringF)
 	end
+end
+
+function trim(Text, Match, Replace)
+	return Text:gsub(Match, Replace)
 end
 
 function processInput(EditingVar, EditedVal)
@@ -206,4 +207,11 @@ function startSide(variant, num)
 	end
 	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Overlay')
 	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Overlay')
+end
+
+function interactionBox(variant, arg1)
+	local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\GenericInteractionBox\\Main.ini'
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Arg1', arg1, File)
+	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\GenericInteractionBox')
 end

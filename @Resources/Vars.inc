@@ -1,13 +1,17 @@
 [Variables]
+; ------------------------------ User variables ------------------------------ ;
 UserNameCheckVariable=Jax Tam
 LastRollBackSkin=Keylaunch|1.5
+; --------------------------------- Language --------------------------------- ;
+Set.Lang=English
 ; ----------------------------- Scaling variables ---------------------------- ;
 Set.P=(40*[Set.S])
 Set.Home.P=(100*[Set.S])
 Set.R=(10)
 Set.L=(200*([Set.S]+0.2))
-Set.W=745
-Set.H=595
+Set.W=1185
+Set.H=900
+Set.Resizable=1
 ; --------------------------- Appearance variables --------------------------- ;
 Set.Style=Frosted
 Set.IconStyle=Frosted
@@ -23,9 +27,7 @@ Set.Font=Poppins
 Sec.SaveLocation=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 ; ------------------------ Background check variables ------------------------ ;
 Set.BackgroundCheckTime=30
-QoL=1
-QolPlugin=Plugin
 
 [Set.S]
 Measure=Calc
-Formula=0.75
+Formula=1

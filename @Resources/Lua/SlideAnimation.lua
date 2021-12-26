@@ -8,16 +8,16 @@ function Initialize()
     subject = {
         TweenNode = 0
     }
+    FadeDur = 2 * tonumber(SKIN:GetVariable('Animation_Steps'))
     t = tween.new(AniSteps, subject, {TweenNode=100}, SKIN:GetVariable('Easetype'))
-    anchorX = 0
-    anchorY = 0
+    SKIN:Bang('[!FadeDuration '..FadeDur..']')
 end
 
 function importPosition(x, y, ax, ay)
     if ax == nil then ax = 0 end
     if ay == nil then ay = 0 end
-    moveX = x
-    moveY = y
+    moveX = tonumber(x)
+    moveY = tonumber(y)
     anchorX = ax
     anchorY = ay
 end
