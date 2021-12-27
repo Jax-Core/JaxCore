@@ -35,6 +35,7 @@ class TranslateString {
             $this.translatedString = $this.translatedString -replace "\{$i\}", $this.escapedStrings[$i]
         }
         $this.translatedString = $this.translatedString -replace '\{quot\}', '"'
+        $this.originalString = $this.originalString -replace '\{quot\}', '"'
     }
     [string]$file
     [string]$section
