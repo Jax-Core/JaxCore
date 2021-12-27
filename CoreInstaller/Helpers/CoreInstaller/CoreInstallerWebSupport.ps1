@@ -5,8 +5,6 @@
     [Parameter(Mandatory)]
     [string]
     $togglePath,
-    [string]
-    $postBang,
     [Parameter()]
     [string]
     $Uninstall = 'F'
@@ -65,10 +63,8 @@ New-ItemProperty "HKCR:\rm-coreinstaller\shell\open\command" -Name "(default)" -
 WebInstallation = 1
 "@ | Out-File -FilePath $togglePath -Force -Encoding ascii
 
-Start-Process (Get-Process Rainmeter).MainModule.FileName -ArgumentList $postBang
-
 Write-Host Done -ForegroundColor Green
 
-Start-Sleep -Seconds 1
+Start-Process (Get-Process Rainmeter).MainModule.FileName -ArgumentList "[!Refresh #JaxCore\Main]"
 
 Exit-PSSession
