@@ -15,32 +15,9 @@ IdleStyle.L=899004964
 
 BetaSkinList=MuzeFlyout
 
-; [Installer]
-; Measure=Plugin
-; Plugin=PowershellRM
-; DynamicVariables=1
-; ScriptFile=#@#Powershell\Installer.ps1
-
 [CoreBridge]
 Measure=Script
 ScriptFile=#SKINSPATH##JaxCore\@Resources\Lua\CoreElements\Installer.lua
-
-; [ImageContainer]
-; Meter=Shape
-; Container=ContentContainer
-; ; X=(#Set.L#+#Set.P#)
-; ; Y=#Set.P#
-; Shape=Rectangle (0),(0),(#Set.W#-#Set.L#-#Set.P#*2),(#Set.H#-#set.P#*2),(#Set.R#/2),(#Set.R#/2) | StrokeWidth 0 | Fill LinearGradient1 This
-; This=250 | #Set.Accent_Color#,0 ; 0.8 | #Set.Accent_Color# ; 1.0
-; DynamicVariables=1
-; [Image]
-; Meter=Image
-; X=(#Set.W#-#Set.L#-#Set.P#-[Image:W])
-; H=(#Set.H#-#Set.P#*2)
-; Container=ImageContainer
-; DynamicVariables=1
-; ImageAlpha=255
-; ImageName=#@#Images\Cards\#Skin.name#.png
 
 [Header]
 Meter=String

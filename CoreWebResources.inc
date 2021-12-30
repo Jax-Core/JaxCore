@@ -18,4 +18,4 @@ GestureLaunch=0.0
 BETASKINS=ModularVisualizer
 DOWNSKINS=Keystrokes
 
-NewsID=2
+NewsID=3

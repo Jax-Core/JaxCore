@@ -7,44 +7,44 @@
 
 [Title]
 Meter=String
-Text="Changes"
+Text="Change log"
 MeterStyle=Sec.String:S | Style.Title:S
 
 [Description.1]
 Meter=String
-Text="- NEW! JaxCore launched it's own website! Check it out!"
+Text="- NEW! ModularPlayers 2.0 is out now, check it out from the DA post button below!"
 MeterStyle=Sec.String:S | Style.Description:S
-[Link.1]
-Meter=String
-Text="https://jax-core.github.io/"
-LeftMouseUpAction=["https://jax-core.github.io/"]
-MeterStyle=Sec.String:S | Style.Link:S
+; [Link.1]
+; Meter=String
+; Text="https://jax-core.github.io/"
+; LeftMouseUpAction=["https://jax-core.github.io/"]
+; MeterStyle=Sec.String:S | Style.Link:S
 
 [Description.2]
 Meter=String
-Text="- NEW! Automated installer to make install and updates easier"
+Text="- Fixed alignment context menu not displaying"
 MeterStyle=Sec.String:S | Style.Description:S
 
 [Description.3]
 Meter=String
-Text="- NEW! All new core settinsg menu to easily access new features"
+Text="- Fixed close button triggered when mouse is pressed down"
 MeterStyle=Sec.String:S | Style.Description:S
 
 [Description.4]
 Meter=String
-Text="- NEW! Color schemes for Core, the one currently applied is FROSTED"
+Text="- Fixed core generator for ValliStart v2.96"
 MeterStyle=Sec.String:S | Style.Description:S
 
-[Description.5]
-Meter=String
-Text="- Added Scrollbar and a few bug fixes"
-MeterStyle=Sec.String:S | Style.Description:S
+; [Description.5]
+; Meter=String
+; Text="- Added Scrollbar and a few bug fixes"
+; MeterStyle=Sec.String:S | Style.Description:S
 
-[Description.6]
-Meter=String
-Y=(#Sec.P#*2)R
-Text="Happy Holidays everyone! This is the biggest update Core has ever received, if you liked it consider leaving a star on the DeviantArt post!"
-MeterStyle=Sec.String:S | Style.Description:S
+; [Description.6]
+; Meter=String
+; Y=(#Sec.P#*2)R
+; Text="Happy Holidays everyone! This is the biggest update Core has ever received, if you liked it consider leaving a star on the DeviantArt post!"
+; MeterStyle=Sec.String:S | Style.Description:S
 
 
 [DA:]
@@ -53,7 +53,7 @@ X=(#Sec.W#/2-(#Sec.BottomWidth#*3+#Sec.P#)/2)
 Y=(#Sec.H#-#Sec.P#-#SEc.BottomHeight#)
 Colorover=84, 235, 131
 Colorleave=399F59
-LeftMouseUpAction=[""]
+LeftMouseUpAction=["https://www.deviantart.com/jaxoriginals/art/ModularPlayers-2-0-Adaptive-music-widget-886577256"]
 meterStyle=BottomBox:S | FalseStyleDesk
 [DA:String]
 Meter=String
