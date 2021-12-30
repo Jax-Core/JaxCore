@@ -40,7 +40,7 @@ function parse()
             '[v'..match..']\n',
             'Meter=String\n',
             'MeterStyle=String:S\n',
-            'LeftMouseUpAction=[!SetVariable DownloadLink "https://github.com/EnhancedJax/#Skin.Name#/releases/download/v'..match..'/#Skin.Name#_v'..match..'.rmskin"][!SetVariable DownloadName "#Skin.Name#'..match..'"][!CommandMeasure Installer "Install"]\n',
+            'LeftMouseUpAction=[!SetVariable DownloadLink "https://github.com/Jax-Core/#Skin.Name#/releases/download/v'..match..'/#Skin.Name#_v'..match..'.rmskin"][!SetVariable DownloadName "#Skin.Name#'..match..'"][!CommandMeasure Installer "Install"]\n',
             '[Div:'..match..']\n',
             'Meter=Shape\n',
             'MeterStyle=Div:S\n'

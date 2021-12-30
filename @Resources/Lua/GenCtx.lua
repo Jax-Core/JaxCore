@@ -20,7 +20,7 @@ function Gen()
 		,'Meter=Shape\n'
 		,'MeterStyle=CtxBox:S\n'
 		,'Fill=Fill Color #Set.Pri_Color#,0\n'
-		,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,110"][!SetOption #CURRENTSECTION#Icon ImageTint "234,234,230"][!SetOption 2 FontColor "234,234,230"][!UpdateMeter *][!Redraw]\n'
+		,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Text_Color#"][!SetOption 2 FontColor "#Set.Text_Color#"][!UpdateMeter *][!Redraw]\n'
 		,'MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,0"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Pri_Color#"][!SetOption 2 FontColor "#Set.Pri_Color#"][!UpdateMeter *][!Redraw]\n'
 		,'LeftMouseUpAction=[!Hide][!CommandMeasure Ctx.Move:M "openSub(\'#CURRENTSECTION#\')"]\n'
 		,'DynamicVariables=1\n'
@@ -40,30 +40,12 @@ function Gen()
 		,'MeterStyle=Ctx.Div:S\n')
 	end
 		
-	-- if Blur == 1 then
-	-- 	File:write('[Blur]\n'
-	-- 	,'Meter=Shape\n'
-	-- 	,'MeterStyle=CtxBox:S\n'
-	-- 	,'Fill=Fill Color #Set.Pri_Color#,0\n'
-	-- 	,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,110"][!SetOption #CURRENTSECTION#Icon ImageTint "234,234,230"][!SetOption 11 FontColor "234,234,230"][!UpdateMeter *][!Redraw]\n'
-	-- 	,'MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,0"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Pri_Color#"][!SetOption 11 FontColor "#Set.Pri_Color#"][!UpdateMeter *][!Redraw]\n'
-	-- 	,'LeftMouseUpAction=[!UpdateMeasure RefreshBlur "#Sec.Skin#\\Main"][!DeactivateConfig]\n'
-	-- 	,'DynamicVariables=1\n'
-	-- 	,'[BlurIcon]\n'
-	-- 	,'Meter=Image\n'
-	-- 	,'MeterStyle=CtxIcon:S\n'
-	-- 	,'[11]\n'
-	-- 	,'Meter=String\n'
-	-- 	,'Text=Refresh blur\n'
-	-- 	,'MeterStyle=Ctx.String:S | CtxText:S\n')
-	-- 	end
-		
 	if Settings == 1 then
 		File:write('[Core]\n'
 		,'Meter=Shape\n'
 		,'MeterStyle=CtxBox:S\n'
 		,'Fill=Fill Color #Set.Pri_Color#,0\n'
-		,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,110"][!SetOption #CURRENTSECTION#Icon ImageTint "234,234,230"][!SetOption 21 FontColor "234,234,230"][!UpdateMeter *][!Redraw]\n'
+		,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Text_Color#"][!SetOption 21 FontColor "#Set.Text_Color#"][!UpdateMeter *][!Redraw]\n'
 		,'MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,0"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Pri_Color#"][!SetOption 21 FontColor "#Set.Pri_Color#"][!UpdateMeter *][!Redraw]\n'
 		,'LeftMouseUpAction=[!WriteKeyValue Variables Skin.Name #Sec.Skin# "#@#SecVar.inc"][!WriteKeyValue Variables Skin.Set_Page Info "#@#SecVar.inc"][!ActivateConfig "#JaxCore\\Main" "Settings.ini"][!DeactivateConfig]\n'
 		,'DynamicVariables=1\n'
@@ -81,7 +63,7 @@ function Gen()
 		,'Meter=Shape\n'
 		,'MeterStyle=CtxBox:S\n'
 		,'Fill=Fill Color #Set.Pri_Color#,0\n'
-		,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,110"][!SetOption #CURRENTSECTION#Icon ImageTint "234,234,230"][!SetOption 22 FontColor "234,234,230"][!UpdateMeter *][!Redraw]\n'
+		,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Text_Color#"][!SetOption 22 FontColor "#Set.Text_Color#"][!UpdateMeter *][!Redraw]\n'
 		,'MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,0"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Pri_Color#"][!SetOption 22 FontColor "#Set.Pri_Color#"][!UpdateMeter *][!Redraw]\n'
 		,'LeftMouseUpAction=[!UpdateMeasure Unload "#Sec.Skin#\\Main"][!DeactivateConfig]\n'
 		,'DynamicVariables=1\n'
@@ -115,7 +97,7 @@ function Gen()
 	-- 	,'Meter=Shape\n'
 	-- 	,'MeterStyle=CtxBox:S\n'
 	-- 	,'Fill=Fill Color #Set.Pri_Color#,0\n'
-	-- 	,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,110"][!SetOption #CURRENTSECTION#Icon ImageTint "234,234,230"][!SetOption <> FontColor "234,234,230"][!UpdateMeter *][!Redraw]\n'
+	-- 	,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Text_Color#"][!SetOption <> FontColor "#Set.Text_Color#"][!UpdateMeter *][!Redraw]\n'
 	-- 	,'MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,0"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Pri_Color#"][!SetOption <> FontColor "#Set.Pri_Color#"][!UpdateMeter *][!Redraw]\n'
 	-- 	,'LeftMouseUpAction=\n'
 	-- 	,'DynamicVariables=1\n'

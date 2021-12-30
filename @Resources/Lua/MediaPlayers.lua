@@ -2,7 +2,12 @@ function Initialize()
     -- --------------------- makes sure this is in the core --------------------- --
     if SKIN:GetVariable('Skin.Name') ~= nil then
         MediaPlayerName = SKIN:GetVariable('NPName')
-        SKIN:Bang('!SetOption', MediaPlayerName..'Shape', 'MeterStyle', 'MediaBox:S | MediaBox1:S')
+        if MediaPlayerName == 'CAD' or toPlayer == 'Foobar' then
+            SKIN:Bang('!SetOption', 'FoobarShape', 'MeterStyle', 'MediaBox:S | MediaBox1:S')
+            SKIN:Bang('!SetOption', 'MusicBeeShape', 'MeterStyle', 'MediaBox:S | MediaBox1:S')
+        else
+            SKIN:Bang('!SetOption', MediaPlayerName..'Shape', 'MeterStyle', 'MediaBox:S | MediaBox1:S')
+        end
         SKIN:Bang('!UpdateMeter', '*')
         -- SKIN:Bang('!Redraw')
     end
@@ -18,7 +23,7 @@ function startInfo(playerShape)
     local scale = tonumber(SKIN:GetMeasure('Set.S'):GetValue())
 
     local DimW = MyMeter:GetW() * 2 + 20 * scale
-    local DimH = (150 * 3 + 20 * 2) * scale
+    local DimH = (150 * 4 + 20 * 3) * scale
 
 
     local player = playerShape:gsub('Shape', '')
@@ -33,9 +38,10 @@ end
 
 function changeTo()
     local toPlayer = SKIN:GetVariable('Sec.Player')
+    if toPlayer == 'MusicBee' or toPlayer == 'Foobar' then toPlayer = 'CAD' end
     local File = SKIN:GetVariable('Sec.SaveLocation')
     local pluginType = 'NP'
-    if toPlayer == 'Spotify' then
+    if toPlayer == 'Spotify' or toPlayer == 'Web' then
         pluginType = 'WNP'
     end
     SKIN:Bang('!WriteKeyValue', 'Variables', 'Player', pluginType, File)

@@ -31,7 +31,7 @@ Measure=Plugin
 Plugin=InputText
 SolidColor=#Set.Ter_Color#
 FontColor=#Set.Text_Color#
-FontFace=Poppins
+FontFace=#Set.Font#
 FontSize=(10*#Sec.S#)
 StringAlign=LeftCenter
 W=((150-10)*#Sec.S#)
@@ -140,7 +140,7 @@ Y=(#Sec.P#)R
 Text=Value format
 FontSize=(15*#sec.S#)
 FontWeight=600
-InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 2.0
+InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 0.0 | #Set.Accent_Color_2# ; 2.0
 MeterStyle=Sec.String:S
 
 [1]
@@ -229,7 +229,7 @@ Y=(#Sec.P#)R
 Text=Appearance
 FontSize=(15*#sec.S#)
 FontWeight=600
-InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 2.0
+InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 0.0 | #Set.Accent_Color_2# ; 2.0
 MeterStyle=Sec.String:S
 [01]
 Meter=String
@@ -269,7 +269,7 @@ Y=(#Sec.P#)R
 Text=Filling
 FontSize=(15*#sec.S#)
 FontWeight=600
-InlineSetting=GradientColor | 180 | CC1C15 ; 0.0 | FF700F ; 2.0
+InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 0.0 | #Set.Accent_Color_2# ; 2.0
 MeterStyle=Sec.String:S
 [11]
 Meter=String

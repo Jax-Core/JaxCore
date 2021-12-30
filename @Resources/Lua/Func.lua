@@ -4,7 +4,7 @@ end
 function start(variant, title, description, iconpath, timeout)
 	local File = SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Accessories\\Toast\\Main.ini'
     if variant ~= nil then variant = 'Standard' end
-	if iconpath ~= nil then iconpath = '#SKINSPATH##JaxCore\\@Resources\\Images\\Logo.png' end
+	if iconpath ~= nil then iconpath = '#SKINSPATH##JaxCore\\@Resources\\Images\\CoreAssets\\'..SKIN:GetVariable('Set.IconStyle')..'Logo.png' end
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Title', title, File)
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Description', description, File)
@@ -28,14 +28,20 @@ function LocalVar(Section, Option)
 end
 
 function returnBool(Variable, Match, ReturnStringT, ReturnStringF)
+
 	Var = SKIN:GetVariable(Variable)
+
 	ReturnStringT = ReturnStringT or '1'
 	ReturnStringF = ReturnStringF or '0'
-	if string.find(Var, Match) then
+	if Var == Match then
 		return(ReturnStringT)
 	  else
 		return(ReturnStringF)
 	end
+end
+
+function trim(Text, Match, Replace)
+	return Text:gsub(Match, Replace)
 end
 
 function processInput(EditingVar, EditedVal)
@@ -105,11 +111,18 @@ function processInput(EditingVar, EditedVal)
 end
 
 function startDrop(variant, handler, skin, arg1)
+	local function clamp(v, minValue, maxValue)
+		if v < minValue then
+			return minValue
+		end
+		return v
+	end
 	local skin = skin or SKIN:GetVariable('Skin.Name')
 	local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\Dropdown\\Main.ini'
 	local MyMeter = SKIN:GetMeter(handler)
 	local PosX = SKIN:GetX() + MyMeter:GetX()
 	local PosY = SKIN:GetY() + MyMeter:GetY()
+	local DimW = clamp(MyMeter:GetW(), 150, 1000)
 	local scalemeasure = SKIN:GetMeasure('Set.S')
 	if scalemeasure ~= nil then scale = scalemeasure:GetValue() else scale = tonumber(SKIN:GetVariable('Sec.S')) end
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.name', skin, File)
@@ -119,6 +132,7 @@ function startDrop(variant, handler, skin, arg1)
 		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', 'Variants\\'..skin..variant..'.inc', File)
 	end
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.W', DimW, File)
 	if arg1 then SKIN:Bang('!WriteKeyvalue', 'Variables', 'arg1', arg1, File) end
 	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Dropdown')
 	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Dropdown')
@@ -141,9 +155,9 @@ function startPopup(variant, style)
 	if style == 'classic' then
 		DimW = 400
 		DimH = 500
-	elseif style == 'medium' then
-		DimW = tonumber(SKIN:GetW()) - 100
-		DimH = tonumber(SKIN:GetH()) - 100
+	elseif style == 'Left' then
+		DimW = 650
+		DimH = 650
 	elseif style == 'info' then
 		DimW = tonumber(SKIN:GetMeter('ContentCOntainer'):GetW())
 		DimH = tonumber(SKIN:GetMeter('ContentCOntainer'):GetH())
@@ -155,8 +169,8 @@ function startPopup(variant, style)
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Style', style, File)
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.S', scale, File)
-	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.W', DimW, File)
-	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.H', DimH, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.W', DimW * scale, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.H', DimH * scale, File)
 	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Popup')
 	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Popup')
 end
@@ -193,4 +207,11 @@ function startSide(variant, num)
 	end
 	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Overlay')
 	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Overlay')
+end
+
+function interactionBox(variant, arg1)
+	local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\GenericInteractionBox\\Main.ini'
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
+	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Arg1', arg1, File)
+	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\GenericInteractionBox')
 end

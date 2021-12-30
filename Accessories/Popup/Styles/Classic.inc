@@ -17,13 +17,13 @@ ActionList2=Rewind0 | Wait #Drop.Animation_Time# | Deactivate
 
 [B]
 Meter = Shape
-Shape=Rectangle 0,0,(#Sec.W#),(#Sec.H#*#TweenNode1#),#Sec.R# | StrokeWidth 0 | Fill Color 35,35,35
+Shape=Rectangle 0,0,(#Sec.W#),(#Sec.H#*#TweenNode1#),#Sec.R# | StrokeWidth 0 | Fill Color #Set.Sec_Color#
 Group=Tweenable
 DynamicVariables=1
 
 [BC]
 Meter = Shape
-Shape=Rectangle 0,0,(#Sec.W#),(#Sec.H#*#TweenNode1#),#Sec.R# | StrokeWidth 0 | Fill Color 35,35,35
+Shape=Rectangle 0,0,(#Sec.W#),(#Sec.H#*#TweenNode1#),#Sec.R# | StrokeWidth 0 | Fill Color #Set.Sec_Color#
 Group=Tweenable
 DynamicVariables=1
 
@@ -40,7 +40,8 @@ Meter=String
 X=(#Sec.W#/2)
 Y=(#Sec.P#)R
 FontSize=(22*#Sec.S#)
-FontFace=Poppins SemiBold
+FontFace=#Set.Font# 
+FontWeight=(650)
 StringAlign=Center
 MeterStyle=Sec.String:S
 
@@ -57,7 +58,7 @@ Meter=String
 X=r
 Y=(#Sec.H#-#Sec.P#*2-#SEc.BottomHeight#)
 FontSize=(8*#Sec.S#)
-FontColor=120,120,120
+FontColor=#Set.SubText_Color#
 StringAlign=CenterBottom
 MeterStyle=Sec.String:S
 

@@ -1,5 +1,4 @@
 [Variables]
-SaveLocation="#@#Includes\Window.ini"
 Sec.W=(256*#Sec.S#)
 ; SaveKey=Fill
 
@@ -24,5 +23,5 @@ Meter=Shape
 MeterStyle=Div:S
 [Show news popup]
 Meter=String
-LeftMouseUpAction=[!commandMeasure Func "startPopup('News')" "#JaxCore\Main"]
+LeftMouseUpAction=[!commandMeasure Func "startPopup('News', 'Left')" "#JaxCore\Main"]
 MeterStyle=String:S

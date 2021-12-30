@@ -47,6 +47,7 @@ function tablelength(T)
 function ChangeTo(theme)
     Skinpath = SKIN:GetVariable('SKINSPATH')
     SkinName = SKIN:GetVariable('Skin.Name')
+    if SkinName == nil then SkinName = '#JaxCore' end
     ini = ReadIni(Skinpath..SkinName..'\\@Resources\\Presets\\'..theme..'.inc')
     saveLocation = Skinpath..SkinName..'\\@Resources\\Vars.inc'
     for i = 1, tablelength(ini.INI['Values']['keys']) do

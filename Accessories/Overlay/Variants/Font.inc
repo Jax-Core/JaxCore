@@ -5,6 +5,7 @@
 OnUnfocusAction=[!UpdateMeasure UnloadHandler2]
 
 [Variables]
+@includeVars=#@#Vars.inc
 Drop.Animation_Time=300
 
 Sec.Input=
@@ -66,7 +67,7 @@ Text=12:34 JaxCore | #CURRENTSECTION#
 Inlinepattern=\| #CURRENTSECTION#
 InlineSetting=Size | (10*#Sec.S#)
 Inlinepattern2=\| #CURRENTSECTION#
-InlineSetting2=Face | Poppins
+InlineSetting2=Face | #Set.Font#
 LeftMouseUpAction=[!SetVariable Sec.Input "#CURRENTSECTION#"][!UpdateMeasure UnloadHandler1][!UpdateMeasure mActions]
 ; ---------------------------------------------------------------------------- ;
 ;                                    Content                                   ;
@@ -76,13 +77,13 @@ LeftMouseUpAction=[!SetVariable Sec.Input "#CURRENTSECTION#"][!UpdateMeasure Unl
 
 [BC]
 Meter = Shape
-Shape=Rectangle (#Sec.W#*(1-#TweenNode1#)),0,(#Sec.W#*#TweenNode1#),(#Sec.H#) | StrokeWidth 0 | Fill Color 34,34,34
+Shape=Rectangle (#Sec.W#*(1-#TweenNode1#)),0,(#Sec.W#*#TweenNode1#),(#Sec.H#) | StrokeWidth 0 | Fill Color #Set.Ter_Color#
 Group=Tweenable
 DynamicVariables=1
 
 [B]
 Meter = Shape
-Shape=Rectangle 0,0,(#Sec.W#),(#Sec.H#),#Sec.R# | StrokeWidth 0 | Fill Color 34,34,34
+Shape=Rectangle 0,0,(#Sec.W#),(#Sec.H#),#Sec.R# | StrokeWidth 0 | Fill Color #Set.Ter_Color#
 Container=BC
 
 [KeyLabel]
@@ -90,7 +91,7 @@ Meter=String
 X=(#Sec.W#/2)
 Y=(#Sec.P#)
 FontSize=(10*#Sec.S#)
-FontColor=255,255,255,150
+FontColor=#Set.Text_Color#,150
 Text=Font List
 StringAlign=Center
 MeterStyle=Sec.String:S
@@ -125,19 +126,19 @@ MeterStyle=Sec.String:S | Sec.Text:S
 Meter=Shape
 MeterStyle=Sec.Div
 
-[Poppins SemiBold]
+[Poppins]
 Meter=String
 MeterStyle=Sec.String:S | Sec.Text:S
 [Div:4]
 Meter=Shape
 MeterStyle=Sec.Div
 
-[Poppins Light]
-Meter=String
-MeterStyle=Sec.String:S | Sec.Text:S
-[Div:5]
-Meter=Shape
-MeterStyle=Sec.Div
+; [Poppins Light]
+; Meter=String
+; MeterStyle=Sec.String:S | Sec.Text:S
+; [Div:5]
+; Meter=Shape
+; MeterStyle=Sec.Div
 
 ; [Balsamiq Sans]
 ; Meter=String
@@ -176,7 +177,7 @@ Meter=String
 X=(#Sec.W#/2)
 Y=(#SEc.h#-#Sec.P#)
 FontSize=(10*#Sec.S#)
-FontColor=255,255,255,150
+FontColor=#Set.Text_Color#,150
 Text=Tip: right click the text field to specify a font
 StringAlign=CenterBottom
 MeterStyle=Sec.String:S

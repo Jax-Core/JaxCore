@@ -1,0 +1,12 @@
+[Values]
+Set.Style=Amoled
+Set.IconStyle=Normal
+Set.Pri_Color=0,0,0
+Set.Sec_Color=10,10,10
+Set.Ter_Color=30,30,30
+Set.Accent_Color=75,75,75
+Set.Accent_Color_2=150,150,150
+Set.Text_Color=242,240,255
+Set.SubText_Color=120,120,120
+Set.Positive_Color=75,75,75
+Set.Font=Poppins

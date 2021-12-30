@@ -1,6 +1,6 @@
 [Variables]
-Skin.Name=IdleStyle
+Skin.Name=#JaxCore
 ; Skin.Shorthand=
 
-Skin.Set_Page=Appearance
+Skin.Set_Page=General
 Skin.Ctx_Ctx=Refresh

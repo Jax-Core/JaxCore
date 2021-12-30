@@ -46,7 +46,7 @@ Meter=Shape
 MeterStyle=Div:S
 [Chameleon]
 Meter=String
-FontColor=255,255,255,150
+FontColor=#Set.Text_Color#,150
 MeterStyle=String:S
 [Div:5]
 Meter=Shape

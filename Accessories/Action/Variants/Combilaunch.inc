@@ -25,13 +25,13 @@ Measure=Script
 ScriptFile=#@#Lua\Func.lua
 
 [Sec.String:S]
-FontFace=Poppins
+FontFace=#Set.Font#
 AntiAlias=1
 FontSize=12
 ClipString=2
 DynamicVariables=1
 W=(#Sec.W#-#Sec.P#*2)
-FontColor=255,255,255
+FontColor=#Set.Text_Color#
 SolidColor=0,0,0,1
 
 [Button:S]
@@ -50,7 +50,8 @@ MouseLeaveAction=[!SetOption #CURRENTSECTION# This "Fill Color [&Func:LocalVar('
 X=(60)r
 y=(20)r
 FontSize=(10)
-FontFace=Poppins Semibold
+FontFace=#Set.Font# 
+FontWeight=(650)
 StringAlign=CenterCenter
 
 [Choose:M]
@@ -87,7 +88,7 @@ Meter=String
 X=(#Sec.W#/2)
 Y=(#Sec.P#)
 FontSize=(10)
-FontColor=255,255,255,150
+FontColor=#Set.Text_Color#,150
 Text=Customizing combination #Sec.Num#
 StringAlign=Center
 MeterStyle=Sec.String:S
@@ -168,7 +169,8 @@ X=r
 Y=(#Sec.P#*3)r
 stringAlign=CenterCenter
 FontSize=20
-FontFace=Poppins SemiBold
+FontFace=#Set.Font# 
+FontWeight=(650)
 MeterStyle=Sec.String:S
 
 [Action]
