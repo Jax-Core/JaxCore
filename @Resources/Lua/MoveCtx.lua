@@ -18,3 +18,9 @@ function Update()
 	SKIN:MoveWindow(moveX, moveY)
 	SKIN:Bang('[!CommandMeasure Func "importPosition('..moveX..', '..moveY..')"][!CommandMeasure ActionTimer "Execute 1"]')
 end
+
+function openSub()
+	SKIN:Bang('[!WriteKeyvalue Variables Sec.Skin '..SKIN:GetVariable('Ctx.Parent')..' "#ROOTCONFIGPATH#Ctx\\Submenu\\Pos.ini"][!WriteKeyvalue Variables Ctx.LastX '..moveX..' "#ROOTCONFIGPATH#Ctx\\Submenu\\Pos.ini"][!WriteKeyvalue Variables Ctx.LastY '..moveY..' "#ROOTCONFIGPATH#Ctx\\Submenu\\Pos.ini"][!ActivateConfig "#JaxCore\\Ctx\\Submenu"]')
+	SKIN:Bang('!SetVariable', 'CCW', SKIN:GetVariable('CCW'), '#JaxCore\\Ctx\\Submenu')
+	SKIN:Bang('!SetVariable', 'CCH', SKIN:GetVariable('CCH'), '#JaxCore\\Ctx\\Submenu')
+end
