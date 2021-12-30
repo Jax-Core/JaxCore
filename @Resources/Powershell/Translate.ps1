@@ -1,6 +1,4 @@
 $escapePatterns = @(
-    '\[[^\s]+?\]',
-    '#[^\s]+?#',
     'JaxOriginals',
     'JaxCore',
     'Core',
@@ -12,11 +10,12 @@ $escapePatterns = @(
     'WMP',
     'iTunes',
     'Foobar',
-    'WinAMP'
+    'WinAMP',
+    '\[.+?\]',
+    '#.+?#'
 )
 
 class TranslateString {
-    [string]$originalString
     [string]$string
     [string]$translatedString
     [array]$escapedStrings
@@ -32,10 +31,11 @@ class TranslateString {
     }
     [void]UnescapeString() {
         for ($i = 0; $i -lt $this.escapedStrings.Count; $i++) {
+            $this.string = $this.string -replace "\{$i\}", $this.escapedStrings[$i]
             $this.translatedString = $this.translatedString -replace "\{$i\}", $this.escapedStrings[$i]
         }
+        $this.string = $this.string -replace '\{quot\}', '"'
         $this.translatedString = $this.translatedString -replace '\{quot\}', '"'
-        $this.originalString = $this.originalString -replace '\{quot\}', '"'
     }
     [string]$file
     [string]$section
@@ -48,7 +48,6 @@ class TranslateString {
         [string]$file,
         [array]$escapeKeys
     ) {
-        $this.originalString = $str
         $this.string = $str
         $this.key = $key
         $this.section = $section
@@ -222,7 +221,7 @@ function Export-LangFile {
         $translateArray[$i].translatedString = $string
         $translateArray[$i].UnescapeString()
         $iniTable[$translateArray[$i].file] += @{
-            original = $translateArray[$i].originalString
+            original = $translateArray[$i].string
             translated = $translateArray[$i].translatedString
             write_info = @{
                 key = $translateArray[$i].key
