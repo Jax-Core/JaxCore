@@ -198,10 +198,11 @@ Group=Button
 ; ---------------------------------------------------------------------------- ;
 
 [WebParser]
-Measure=WebParser
-URL=https://raw.githubusercontent.com/Jax-Core/JaxCore/main/%40Resources/Version.inc
-RegExp==(.*)$
-FinishAction=[!Delay 1000][!CommandMeasure LogicalScript "check()"]
+Measure=Calc
+Formula=40000
+;URL=https://raw.githubusercontent.com/Jax-Core/JaxCore/main/%40Resources/Version.inc
+;RegExp==(.*)$
+OnUpdateAction=[!Delay 1000][!CommandMeasure LogicalScript "check()"]
 OnConnectionErrorAction=[!SetOption Dep1 MeterStyle "Dep.Shape:S | Dep.ShapeNo:S"][!SetOption DepText1 Text "//Failed to connect to JaxCore github, if this is an issue please report to me"][!UpdateMEter *][!Redraw]
 OnRegExpErrorAction=[!Log Developer:RegExpFalse]
 Disabled=1
@@ -219,9 +220,11 @@ IfCondition=InternetStatus = -1
 ifTrueaction=[!SetOption Dep1 MeterStyle "Dep.Shape:S | Dep.ShapeNo:S"][!SetOption DepText1 Text "JaxCore // connection error, please check internet connection"][!UpdateMEter *][!Redraw]
 
 [mVer]
-Measure=WebParser
-URL=[WebParser]
-StringIndex=1
+Measure=Calc
+Formula=40000
+;Measure=WebParser
+;URL=[WebParser]
+;StringIndex=1
 
 [LogicalScript]
 Measure=Script
