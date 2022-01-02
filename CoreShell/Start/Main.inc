@@ -199,7 +199,6 @@ Group=Button
 
 [WebParser]
 Measure=Calc
-
 Formula=40000
 ;URL=https://raw.githubusercontent.com/Jax-Core/JaxCore/main/%40Resources/Version.inc
 ;RegExp==(.*)$
@@ -221,9 +220,11 @@ IfCondition=InternetStatus = -1
 ifTrueaction=[!SetOption Dep1 MeterStyle "Dep.Shape:S | Dep.ShapeNo:S"][!SetOption DepText1 Text "JaxCore // connection error, please check internet connection"][!UpdateMEter *][!Redraw]
 
 [mVer]
-Measure=WebParser
-URL=[WebParser]
-StringIndex=1
+Measure=Calc
+Formula=40000
+;Measure=WebParser
+;URL=[WebParser]
+;StringIndex=1
 
 [LogicalScript]
 Measure=Script
