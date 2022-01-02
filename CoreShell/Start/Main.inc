@@ -90,7 +90,7 @@ This=0 | 0,0,0,150 ; 0.0 | 0,0,0,0 ; 1.0
 
 [Logo]
 Meter=Image
-ImageName=CoreAssets\#Set.IconStyle#Logo.png
+ImageName=Logo.png
 X=#Sec.P#
 Y=(#Sec.H#-#Sec.P#-40)
 W=40
