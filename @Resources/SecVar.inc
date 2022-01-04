@@ -1,5 +1,5 @@
 [Variables]
-Skin.Name=#JaxCore
+Skin.Name=ModularPlayers
 ; Skin.Shorthand=
 
 Skin.Set_Page=General

@@ -31,13 +31,13 @@ StringIndex=1
 
 [ParseNews]
 Measure=WebParser
-URL=https://raw.githubusercontent.com/Jax-Core/JaxCore/main/Accessories/Popup/Variants/News.inc
+URL=https://raw.githubusercontent.com/Jax-Core/JaxCore/main/Accessories/Popup/Variants/CoreNews.inc
 RegExp=(?siU).*
 Debug=2
-Debug2File=#ROOTCONFIGPATH#Accessories\Popup\Variants\News.inc
+Debug2File=#ROOTCONFIGPATH#Accessories\Popup\Variants\CoreNews.inc
 DynamicVariables=1
 Disabled=1
-FinishAction=[!commandMeasure Func "startPopup('News', 'Left')"][!WriteKeyValue Variables News.ID [mNewsID] "#@#NewsID.inc"]
+FinishAction=[!commandMeasure Func "startPopup('CoreNews', 'Left')"][!WriteKeyValue Variables Core.NewsID [mNewsID] "#@#NewsID.inc"]
 
 ; ------------------------------- Version check ------------------------------ ;
 
@@ -196,7 +196,7 @@ OverColor=#Set.Text_Color#,50
 LeaveColor=0,0,0,1
 Shape=Rectangle 0,0,40,40,(#Set.R#/2) | StrokeWidth 0 | Scale [Set.S],[Set.S],0,0 | Extend This
 MeterStyle=Shape.Over:S
-Leftmouseupaction=[!commandMeasure Func "startPopup('News', 'Left')"]
+Leftmouseupaction=[!commandMeasure Func "startPopup('CoreNews', 'Left')"]
 Container=BC
 [NewsIcon]
 Meter=Image

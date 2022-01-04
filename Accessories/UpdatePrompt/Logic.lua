@@ -17,7 +17,7 @@ end
 
 function checkNews()
     mNewsID = SKIN:GetMeasure('mNewsID')
-    CurrentNewsID = tonumber(SKIN:GetVariable('News.ID', '00000'))
+    CurrentNewsID = tonumber(SKIN:GetVariable('Core.NewsID', '00000'))
     LatestNewsID = tonumber(mNewsID:GetStringValue())
     if LatestNewsID == CurrentNewsID then
         print('News up to date')
