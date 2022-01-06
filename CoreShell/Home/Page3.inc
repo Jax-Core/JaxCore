@@ -1,5 +1,5 @@
 [Variables]
-Spotlight=IdleStyle
+Spotlight=YourFlyouts
 
 [BC]
 MouseScrollDownAction=[!SetVariable Scroll "(Clamp(#Scroll#+60,0,(#Set.PageH#-#Set.H#)))"][!UpdateMeterGroup Scroll][!Redraw]
@@ -106,7 +106,7 @@ InlineSetting=Size | (12*[Set.S])
 InlinePattern2=#CRLF#.*
 InlineSetting2=Weight | 300
 MeterStyle=Set.String:S
-Text=#Spotlight##CRLF#Screensavers reimagined! Display various things including skins, animations and videos when you are idle! A must have if you want people to see the fancy side of your desktop!
+Text=#Spotlight##CRLF#OSD Media flyouts to replace the default Windows flyout. Coming soon~
 [SpotImage]
 Meter=Image
 X=(#Set.W#-#Set.P#-500*[Set.S])
@@ -116,7 +116,7 @@ DynamicVariables=1
 ImageName=#@#Images\Cards\#Spotlight#.png
 Container=BC
 MaskImageName=#@#Images\RoundedMask.png
-LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name #Spotlight# "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "#@#SecVar.inc"][!ActivateConfig "#CURRENTCONFIG#" "Settings.ini"]
+; LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name #Spotlight# "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "#@#SecVar.inc"][!ActivateConfig "#CURRENTCONFIG#" "Settings.ini"]
 ; ------------------------------- Bottom Start ------------------------------- ;
 
 [RecommendedSkins]

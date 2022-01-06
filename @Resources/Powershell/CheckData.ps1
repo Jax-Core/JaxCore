@@ -92,9 +92,7 @@ function Create-Updater {
 # MeterStyle=IconStyle
 # [DoubleBox6]
 # Meter=Shape
-# X=(#scale#*25)
-# Y=(#BoxW#/2+(48/2+10)*#Scale#)r
-# MeterStyle=BoxStyle
+# MeterStyle=BoxStyle | BoxNewRowStyle
 # [DoubleBox6Icon]
 # Meter=Image
 # MeterStyle=IconStyle
@@ -181,9 +179,7 @@ function Create-Updater {
 # MeterStyle=RegularText | Win11TextStyle
 # [Win11Box7]
 # Meter=Shape
-# X=(#scale#*25)
-# Y=(#Win11BoxW#/2-10*#Scale#)r
-# MeterStyle=Win11BoxStyle
+# MeterStyle=Win11BoxStyle | Win11BoxNewRowStyle
 # [Win11Box7Icon]
 # Meter=Image
 # MeterStyle=Win11IconStyle

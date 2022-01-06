@@ -72,7 +72,7 @@ W=((200-10)*[Set.S])
 H=((30-10)*[Set.S])
 DynamicVariables=1
 DefaultValue="[##Editing#]"
-Command1=[!CommandMeasure Func "processInput('#Editing#', [[$UserInput$]])"]
+Command1=[!CommandMeasure Func "processInput('1', '', [[$UserInput$]], '')"]
 
 ; ---------------------------------------------------------------------------- ;
 ;                                 Meter styles                                 ;
@@ -120,7 +120,7 @@ Shape=Rectangle 0,0,200,30,3,3 | StrokeWidth 2 | Stroke Color 0,0,0,1 | Fill Lin
 This=180 | 0,0,0,1 ; 0 | 0,0,0,1 ; 0
 MouseOverAction=[!SetOption #CURRENTSECTION# This "180 | 0,0,0,1 ; 0.5 | #Set.Text_Color#,50 ; 1"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# This "180 | 0,0,0,1 ; 0 | 0,0,0,1 ; 0"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-Leftmouseupaction=[!SetVariable Editing "#CURRENTSECTION#"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5*[Set.S])"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5*[Set.S])"][!CommandMeasure Input:M "ExecuteBatch 1"]
+Leftmouseupaction=[!SetOption Input:M X "([#CURRENTSECTION#:X]+5*[Set.S])"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5*[Set.S])"][!CommandMeasure Func "processInput('0', '#CURRENTSECTION#', '', [[[&Func:LocalVar('#CURRENTSECTION#', 'SaveLocation', '#Sec.SaveLocation#')]]])"][!CommandMeasure Input:M "ExecuteBatch 1"]
 [Set.FontBox:S]
 X=(#Set.W#-#Set.L#-#Set.P#*2-201*[Set.S])
 ; Y=([Option[&Func:LocalVar('#CURRENTSECTION#', 'Class')]:Y]-#Set.P#+(-30/2+8)*[Set.S])
@@ -150,7 +150,7 @@ Stair=0,0 | LineTo 10,0 | LineTo 25,20 | LineTo 0,20 | ClosePath 1
 DynamicVariables=1
 Fill=Fill Color [&Func:returnBool('#CURRENTSECTION#', '1', '#Set.Positive_Color#', '#Set.SubText_Color#')]
 Container=ContentContainer
-Leftmouseupaction=[!WriteKeyvalue Variables "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)" "#Sec.SaveLocation#"][!SetVariable "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)"][!UpdateMeasure Auto_Refresh:M][!UpdateMeter *][!Redraw]
+Leftmouseupaction=[!WriteKeyvalue Variables "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)" "[&Func:LocalVar('#CURRENTSECTION#', 'SaveLocation', '#Sec.SaveLocation#')]"][!SetVariable "#CURRENTSECTION#" "([##CURRENTSECTION#] = 1 ? 0 : 1)"][!UpdateMeasure Auto_Refresh:M][!UpdateMeter *][!Redraw]
 
 
 
@@ -198,7 +198,7 @@ Fill=Stroke Color 0,0,0,1
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color #Set.Text_Color#,150"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Stroke Color 0,0,0,1"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#Color" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
-RightMOuseUpAction=[!SetVariable Editing "#CURRENTSECTION#Opacity"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5)"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5)"][!CommandMeasure Input:M "ExecuteBatch 1"]
+RightMouseUpAction=[!SetOption Input:M X "([#CURRENTSECTION#:X]-45*[Set.S])"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5*[Set.S])"][!CommandMeasure Func "processInput('0', '#CURRENTSECTION#Opacity', '', [[[&Func:LocalVar('#CURRENTSECTION#', 'SaveLocation', '#Sec.SaveLocation#')]]])"][!CommandMeasure Input:M "ExecuteBatch 1"]
 ; LeftMouseUpAction=[!CommandMeasure ColorPicker "SetColor('#CURRENTSECTION#', 'Variables', 'rgba', [[#Sec.SaveLocation#]], '#CURRENTSECTION#')"]
 ; ColorChangeAction=[!SetVariable #CURRENTSECTION# "$color$"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 Container=ContentContainer

@@ -14,16 +14,17 @@ function start(variant, title, description, iconpath, timeout)
 end
 
 function GroupVar(SectionExtract, Option)
-	Option = Option or 'SecVar'
-	config = SectionExtract:match("(.+:).*")
-	Meter = SKIN:GetMeter(config)
-	GetVar = Meter:GetOption(Option, 'Error')
+	local Option = Option or 'SecVar'
+	local config = SectionExtract:match("(.+:).*")
+	local Meter = SKIN:GetMeter(config)
+	local GetVar = Meter:GetOption(Option, 'Error')
 	return GetVar
 end
 
-function LocalVar(Section, Option)
-	Meter = SKIN:GetMeter(Section)
-	GetVar = Meter:GetOption(Option, 'Error')
+function LocalVar(Section, Option, DefaultValue)
+	local DefaultValue = DefaultValue or 'Error'
+	local Meter = SKIN:GetMeter(Section)
+	local GetVar = Meter:GetOption(Option, DefaultValue)
 	return GetVar
 end
 
@@ -44,68 +45,72 @@ function trim(Text, Match, Replace)
 	return Text:gsub(Match, Replace)
 end
 
-function processInput(EditingVar, EditedVal)
-	local Valuetype = SKIN:GetMeter(EditingVar:gsub('Opacity', '')):GetOption('Type', 'Any')
-	local Clamp1 = tonumber(Valuetype:match('.*|(.*)|.*'))
-	local Clamp2 = tonumber(Valuetype:match('.*|.*|(.*)'))
-	-- if Clamp1 == nil then Clamp1 = -100 end
-	-- if Clamp2 == nil then Clamp2 = 100 end
-	local SaveLocation = SKIN:GetVariable('Sec.SaveLocation')
+function processInput(Step, param2, EditedVal, param4)
+	Step = Step or 1
+	if param2 ~= '' then EditingVar = param2 end
+	if param4 ~= '' then SaveLocation = param4 end
+	if Step == '0' then
+		SKIN:Bang('[!SetVariable Editing "'..EditingVar..'"]')
+	else
+		local Valuetype = SKIN:GetMeter(EditingVar:gsub('Opacity', '')):GetOption('Type', 'Any')
+		local Clamp1 = tonumber(Valuetype:match('.*|(.*)|.*'))
+		local Clamp2 = tonumber(Valuetype:match('.*|.*|(.*)'))
 
-	local function saveAndProceed()
-		SKIN:Bang('!WriteKeyValue', 'Variables', EditingVar, EditedVal, SaveLocation)
-		SKIN:Bang('!SetVariable', EditingVar, EditedVal)
-		SKIN:Bang('!UpdateMeter', '*')
-		SKIN:Bang('!Redraw')
-		SKIN:Bang('!UpdateMeasure', 'Auto_Refresh:M')
-	end
-	
-	-- ------------------------------ any / no type ----------------------------- --
-	if Valuetype:match('Any') then 
-		saveAndProceed()
-	-- ------------------------------ integers type ----------------------------- --
-	elseif Valuetype:match('Int') then
-		if EditedVal:match("^%-?%d+$") ~= nil then
-			if Clamp1 ~= nil then
-				if tonumber(EditedVal) >= Clamp1 and tonumber(EditedVal) <= Clamp2 then 
-					saveAndProceed()
+		local function saveAndProceed()
+			SKIN:Bang('!WriteKeyValue', 'Variables', EditingVar, EditedVal, SaveLocation)
+			SKIN:Bang('!SetVariable', EditingVar, EditedVal)
+			SKIN:Bang('!UpdateMeter', '*')
+			SKIN:Bang('!Redraw')
+			SKIN:Bang('!UpdateMeasure', 'Auto_Refresh:M')
+		end
+		
+		-- ------------------------------ any / no type ----------------------------- --
+		if Valuetype:match('Any') then 
+			saveAndProceed()
+		-- ------------------------------ integers type ----------------------------- --
+		elseif Valuetype:match('Int') then
+			if EditedVal:match("^%-?%d+$") ~= nil then
+				if Clamp1 ~= nil then
+					if tonumber(EditedVal) >= Clamp1 and tonumber(EditedVal) <= Clamp2 then 
+						saveAndProceed()
+					else
+						start('', 'Format error', 'You can only input integers between '..Clamp1..' and '..Clamp2, '', '1000')
+					end
 				else
-					start('', 'Format error', 'You can only input integers between '..Clamp1..' and '..Clamp2, '', '1000')
+					saveAndProceed()
 				end
 			else
-				saveAndProceed()
+				start('', 'Format error', 'You can only input integers in this field', '', '1000')
 			end
-		else
-			start('', 'Format error', 'You can only input integers in this field', '', '1000')
-		end
-	-- ------------------------------ Num type ------------------------------ --
-	elseif Valuetype:match('Num') then
-		if EditedVal:match("^%-?%d+%.*%d*$") ~= nil then
-			if Clamp1 ~= nil then
-				if tonumber(EditedVal) >= Clamp1 and tonumber(EditedVal) <= Clamp2 then 
-					saveAndProceed()
+		-- ------------------------------ Num type ------------------------------ --
+		elseif Valuetype:match('Num') then
+			if EditedVal:match("^%-?%d+%.*%d*$") ~= nil then
+				if Clamp1 ~= nil then
+					if tonumber(EditedVal) >= Clamp1 and tonumber(EditedVal) <= Clamp2 then 
+						saveAndProceed()
+					else
+						start('', 'Format error', 'You can only input numbers between '..Clamp1..' and '..Clamp2, '', '1000')
+					end
 				else
-					start('', 'Format error', 'You can only input numbers between '..Clamp1..' and '..Clamp2, '', '1000')
+					saveAndProceed()
 				end
 			else
-				saveAndProceed()
+				start('', 'Format error', 'You can only input numbers in this field', '', '1000')
 			end
-		else
-			start('', 'Format error', 'You can only input numbers in this field', '', '1000')
-		end
-	-- -------------------------------- time type ------------------------------- --
-	elseif Valuetype:match('Time') then
-		if EditedVal:find('^%d+[hms]%d*[hms]?%d*[hms]?') then
-			saveAndProceed()
-		else
-			start('', 'Format error', 'You can only input time durations in this field, example: 1h20m30s', '', '1000')
-		end
-	-- -------------------------------- Text type ------------------------------- --
-	elseif Valuetype:match('Txt') then
-		if not EditedVal:find('[%d.]') then
-			saveAndProceed()
-		else
-			start('', 'Format error', 'You can only input text in this field', '', '1000')
+		-- -------------------------------- time type ------------------------------- --
+		elseif Valuetype:match('Time') then
+			if EditedVal:find('^%d+[hms]%d*[hms]?%d*[hms]?') then
+				saveAndProceed()
+			else
+				start('', 'Format error', 'You can only input time durations in this field, example: 1h20m30s', '', '1000')
+			end
+		-- -------------------------------- Text type ------------------------------- --
+		elseif Valuetype:match('Txt') then
+			if not EditedVal:find('[%d.]') then
+				saveAndProceed()
+			else
+				start('', 'Format error', 'You can only input text in this field', '', '1000')
+			end
 		end
 	end
 end

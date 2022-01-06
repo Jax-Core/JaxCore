@@ -1,3 +1,4 @@
+IdleStyle | Screensavers reimagined.
 ValliStart | Start menu replacement
 Keylaunch | Animated hotkey launcher
 QuickNote | Quick access notepad
