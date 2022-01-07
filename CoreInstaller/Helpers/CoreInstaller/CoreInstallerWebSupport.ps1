@@ -5,8 +5,6 @@
     [Parameter(Mandatory)]
     [string]
     $togglePath,
-    [string]
-    $postBang,
     [Parameter()]
     [string]
     $Uninstall = 'F'
@@ -64,8 +62,6 @@ New-ItemProperty "HKCR:\rm-coreinstaller\shell\open\command" -Name "(default)" -
 [Variables]
 WebInstallation = 1
 "@ | Out-File -FilePath $togglePath -Force -Encoding ascii
-
-Start-Process (Get-Process Rainmeter).MainModule.FileName -ArgumentList $postBang
 
 Write-Host Done -ForegroundColor Green
 
