@@ -15,6 +15,8 @@ IdleStyle.L=899004964
 
 BetaSkinList=MuzeFlyout
 
+@includepatchNoteChecker=#SKINSPATH##Skin.Name#\@Resources\PatchNoteVar.inc
+
 [CoreBridge]
 Measure=Script
 ScriptFile=#SKINSPATH##JaxCore\@Resources\Lua\CoreElements\Installer.lua
@@ -110,6 +112,8 @@ Shape=Rectangle 0,0,100,100,3,3 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[S
 MeterStyle=Set.Button:S
 X=((85)*[Set.S])r
 Y=(-(100-48)/2*[Set.S])r
+OverColor=#set.Text_Color#,50
+LeaveColor=#Set.Text_Color#,10
 Act=["https://github.com/Jax-Core/#Skin.Name#"]
 [Value22]
 Meter=Image
@@ -123,6 +127,28 @@ Container=ContentContainer
 Group=Buttons
 ImageTint=#Set.Text_Color#
 ImageName=#@#Icons\Github.png
+[ButtonPatchNote]
+Meter=Shape
+Shape=Rectangle 0,0,100,100,3,3 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
+MeterStyle=Set.Button:S
+X=((85)*[Set.S])r
+Y=(-(100-48)/2*[Set.S])r
+OverColor=#set.Accent_Color#
+LeaveColor=#Set.Accent_Color#,150
+Act=[!commandMeasure Func "startPopup('PatchNote', 'Left')"]
+Group=PatchNote
+[ValuepatchNote]
+Meter=Image
+Y=((100-48)/2*[Set.S])r
+X=((100-48)/2*[Set.S])r
+W=(48*[Set.S])
+H=(48*[Set.S])
+Greyscale=1
+DynamicVariables=1
+Container=ContentContainer
+Group=Buttons | PatchNote
+ImageTint=#Set.Text_Color#
+ImageName=#@#Icons\ChangeLog.png
 [Button23]
 Meter=Shape
 Shape=Rectangle 0,0,100,100,3,3 | StrokeWidth 0 | Extend Fill | Scale [Set.S],[Set.S],0,0
@@ -286,7 +312,14 @@ FinishAction=[!CommandMeasure VersionScript "parse()"]
 [VersionScript]
 Measure=Script
 ScriptFile=#@#Lua\VersionScript.lua
+DynamicVariables=1
 
-; [SkinConfig]
-; Measure=Script
-; ScriptFile=#@#Lua\SkinConfig.lua
+[MeasureUser]
+Measure=Plugin
+Plugin=SysInfo
+SysInfoType=USER_NAME
+ifMatch=^#UserNameCheckVariable#$
+; ifmatchaction=[!EnableMeasure Check4New:M][!UpdateMeasure "Check4New:M"]
+ifnotmatchaction=[!WriteKeyValue Variables Sec.Page 1 "#SKINSPATH#\#JaxCore\Accessories\Tour\Main.ini"][!ActivateConfig "#JaxCore\Accessories\Tour"][!ActivateConfig "#JaxCore\Accessories"][!DeactivateConfig]
+DynamicVariables=1
+OnUpdateAction=[!CommandMeasure VersionScript "patchNoteCheck('[MeasureUser]')"]

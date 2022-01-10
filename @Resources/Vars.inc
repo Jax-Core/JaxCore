@@ -9,7 +9,7 @@ Set.P=(40*[Set.S])
 Set.Home.P=(100*[Set.S])
 Set.R=(10)
 Set.L=(200*([Set.S]+0.2))
-Set.W=1179
+Set.W=1173
 Set.H=922
 Set.Resizable=1
 ; --------------------------- Appearance variables --------------------------- ;

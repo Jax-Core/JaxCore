@@ -59,3 +59,15 @@ function parse()
     SKIN:Bang('!SetVariable', 'LastRollBackSkin', Current)
     SKIN:Bang('!CommandMEasure', 'Func', "startDrop('RollBack', 'Button03', 'JaxCore')")
 end
+
+function patchNoteCheck(MeasureUser)
+    local pnCheckerVar = SKIN:GetVariable('Core.patchNoteCheckvariable')
+    if pnCheckerVar ~= nil then
+        -- local MeasureUser = SKIN:GetMeasure('MeasureUser'):GetValue()
+        if MeasureUser ~= pnCheckerVar then
+            SKIN:Bang('[!commandMeasure Func "startPopup(\'PatchNote\', \'Left\')"][!WriteKeyvalue Variables Core.patchNoteCheckvariable "'..MeasureUser..'" "'..SKIN:ReplaceVariables('#SKINSPATH##Skin.Name#\\@Resources\\PatchNoteVar.inc')..'"]')
+        end
+    else
+        SKIN:Bang('[!HideMeterGroup PatchNote]')
+    end
+end

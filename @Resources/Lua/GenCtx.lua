@@ -58,23 +58,23 @@ function Gen()
 		,'MeterStyle=Ctx.String:S | CtxText:S\n')
 		end
 	
-	if Unload == 1 then
-		File:write('[Unload]\n'
-		,'Meter=Shape\n'
-		,'MeterStyle=CtxBox:S\n'
-		,'Fill=Fill Color #Set.Pri_Color#,0\n'
-		,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Text_Color#"][!SetOption 22 FontColor "#Set.Text_Color#"][!UpdateMeter *][!Redraw]\n'
-		,'MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,0"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Pri_Color#"][!SetOption 22 FontColor "#Set.Pri_Color#"][!UpdateMeter *][!Redraw]\n'
-		,'LeftMouseUpAction=[!UpdateMeasure Unload "#Sec.Skin#\\Main"][!DeactivateConfig]\n'
-		,'DynamicVariables=1\n'
-		,'[UnloadIcon]\n'
-		,'Meter=Image\n'
-		,'MeterStyle=CtxIcon:S\n'
-		,'[22]\n'
-		,'Meter=String\n'
-		,'Text=Unload\n'
-		,'MeterStyle=Ctx.String:S | CtxText:S\n')
-		end
+	-- if Unload == 1 then
+	File:write('[Unload]\n'
+	,'Meter=Shape\n'
+	,'MeterStyle=CtxBox:S\n'
+	,'Fill=Fill Color #Set.Pri_Color#,0\n'
+	,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Text_Color#"][!SetOption 22 FontColor "#Set.Text_Color#"][!UpdateMeter *][!Redraw]\n'
+	,'MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,0"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Pri_Color#"][!SetOption 22 FontColor "#Set.Pri_Color#"][!UpdateMeter *][!Redraw]\n'
+	,'LeftMouseUpAction=[!DeactivateConfig "#Sec.Skin#\\Main"][!DeactivateConfig]\n'
+	,'DynamicVariables=1\n'
+	,'[UnloadIcon]\n'
+	,'Meter=Image\n'
+	,'MeterStyle=CtxIcon:S\n'
+	,'[22]\n'
+	,'Meter=String\n'
+	,'Text=Unload\n'
+	,'MeterStyle=Ctx.String:S | CtxText:S\n')
+		-- end
 	File:close()
 
 	if SKIN:GetMeasure('mToggle') then 

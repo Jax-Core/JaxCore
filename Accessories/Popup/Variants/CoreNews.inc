@@ -4,7 +4,8 @@
 ; ---------------------------------------------------------------------------- ;
 ;                                    Content                                   ;
 ; ---------------------------------------------------------------------------- ;
-
+[Image]
+ImageName=Variants\Splash\#Sec.Arg1#.png
 
 [Title]
 Meter=String
@@ -13,7 +14,7 @@ MeterStyle=Sec.String:S | Style.Title:S
 
 [Description.1]
 Meter=String
-Text="- NEW! ModularPlayers 2.2 is out now, check it out from the DA post button below!"
+Text="- NEW! ModularPlayers 2.3 is out now, check it out from the DA post button below!"
 MeterStyle=Sec.String:S | Style.Description:S
 ; [Link.1]
 ; Meter=String
@@ -23,18 +24,18 @@ MeterStyle=Sec.String:S | Style.Description:S
 
 [Description.2]
 Meter=String
-Text="- NEW! ModularPlayers is now experimenting with a new Core layout! Check it out in the settings."
+Text="- NEW! Patch notes will now be shown when module updates. This is slowly being rolled out to every one of them."
 MeterStyle=Sec.String:S | Style.Description:S
 
 [Description.3]
 Meter=String
-Text="- CoreInstaller have been patched. Should work now."
+Text="- Added unload option back to the context menu."
 MeterStyle=Sec.String:S | Style.Description:S
 
-[Description.4]
-Meter=String
-Text="- Fixed alignment context menu not displaying"
-MeterStyle=Sec.String:S | Style.Description:S
+; [Description.4]
+; Meter=String
+; Text="- Fixed alignment context menu not displaying"
+; MeterStyle=Sec.String:S | Style.Description:S
 
 ; [Description.5]
 ; Meter=String

@@ -39,7 +39,6 @@ DynamicVariables=1
 
 [Image]
 Meter=Image
-ImageName=Variants\Splash\#Sec.Arg1#.png
 W=(#Sec.W#-#Sec.BottomHeight#)
 H=(#Sec.H#*0.4)
 PreserveAspectRatio=2
