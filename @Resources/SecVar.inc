@@ -1,5 +1,5 @@
 [Variables]
-Skin.Name=ModularPlayers
+Skin.Name=ModularVisualizer
 ; Skin.Shorthand=
 
 Skin.Set_Page=Info

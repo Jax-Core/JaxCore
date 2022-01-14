@@ -9,12 +9,12 @@ ImageName=Variants\Splash\#Sec.Arg1#.png
 
 [Title]
 Meter=String
-Text="Change log"
+Text="ModularVisualizer - Released."
 MeterStyle=Sec.String:S | Style.Title:S
 
 [Description.1]
 Meter=String
-Text="- NEW! ModularPlayers 2.3 is out now, check it out from the DA post button below!"
+Text="- NEW! The most customizable visualizer, ModularVisualizer is now out. Star it on DeviantArt!"
 MeterStyle=Sec.String:S | Style.Description:S
 ; [Link.1]
 ; Meter=String
@@ -29,7 +29,7 @@ MeterStyle=Sec.String:S | Style.Description:S
 
 [Description.3]
 Meter=String
-Text="- Added unload option back to the context menu."
+Text="- NEW! Added more quick actions to the info page."
 MeterStyle=Sec.String:S | Style.Description:S
 
 ; [Description.4]
@@ -55,7 +55,7 @@ X=(#Sec.W#/2-(#Sec.BottomWidth#*3+#Sec.P#)/2)
 Y=(#Sec.H#-#Sec.P#-#SEc.BottomHeight#)
 Colorover=84, 235, 131
 Colorleave=399F59
-LeftMouseUpAction=["https://www.deviantart.com/jaxoriginals/art/ModularPlayers-2-0-Adaptive-music-widget-886577256"]
+LeftMouseUpAction=["https://www.deviantart.com/jaxoriginals/art/903806619"]
 meterStyle=BottomBox:S | FalseStyleDesk
 [DA:String]
 Meter=String
@@ -64,12 +64,12 @@ Text=DA post
 MeterStyle=Sec.String:S | BottomText:S
 [Core:]
 Meter=Shape
-LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name """ModularPlayers""" "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page General "#@#SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.ini"]
+LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name """ModularVisualizer""" "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page General "#@#SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.ini"]
 meterStyle=BottomBox:S | FalseStyleDesk
 [Core:String]
 Meter=String
 StringAlign=CenterCenter
-Text=mPlayer settings
+Text=mVis settings
 MeterStyle=Sec.String:S | BottomText:S
 [DiscordServer:]
 Meter=Shape
