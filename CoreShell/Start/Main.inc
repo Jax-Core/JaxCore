@@ -240,4 +240,4 @@ OnUpdateAction=[!SetOption Dep1 MeterStyle "Dep.Shape:S | Dep.ShapeYes:S"][!SetO
 Measure=String
 Group=NUOL
 Disabled=1
-OnUpdateAction=[!SetOption Dep1 MeterStyle "Dep.Shape:S | Dep.ShapeNo:S"][!SetOption DepText1 Text "JaxCore // click here to install"][!SetOption Dep1 Leftmouseupaction """["#@#Actions\AHKv1.exe" "#@#Actions\Installer.ahk"][!SetOption DepText1 Text "JaxCore // download here if it doesn't automatically install"][!SetOption Dep1 Leftmouseupaction """["https://github.com/Jax-Core/JaxCore/releases/latest"][!UpdateMEter *][!Redraw]"""][!UpdateMEter *][!Redraw]"""][!UpdateMEter *][!Redraw]
+OnUpdateAction=[!SetOption Dep1 MeterStyle "Dep.Shape:S | Dep.ShapeNo:S"][!SetOption DepText1 Text "JaxCore // click here to install"][!SetOption Dep1 Leftmouseupaction """["#@#Actions\AHKv1.exe" "#@#Actions\Installer.ahk"][!SetOption DepText1 Text "JaxCore // download here if it doesn't automatically install"][!SetOption Dep1 Leftmouseupaction """["https://github.com/Jax-Core/JaxCore/releases/download/v40000/JaxCore_v40000.rmskin"][!UpdateMEter *][!Redraw]"""][!UpdateMEter *][!Redraw]"""][!UpdateMEter *][!Redraw]
