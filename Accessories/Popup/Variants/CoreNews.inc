@@ -64,7 +64,7 @@ Text=DA post
 MeterStyle=Sec.String:S | BottomText:S
 [Core:]
 Meter=Shape
-LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name """ModularVisualizer""" "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page General "#@#SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.ini"]
+LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name """ModularVisualizer""" "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "#@#SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.ini"]
 meterStyle=BottomBox:S | FalseStyleDesk
 [Core:String]
 Meter=String
