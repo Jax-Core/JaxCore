@@ -53,7 +53,7 @@ A quick tutorial on how to install JaxCore. More detailed instructions can be fo
 
 ### Prerequisites
 
-* [Rainmeter v4.5](https://www.rainmeter.net/) or newer.  
+- [Rainmeter v4.5](https://www.rainmeter.net/) or newer.  
   - **Windows 11** users can install Rainmeter via the command line by running: `winget install rainmeter`
   - **Windows 10** users need to install Rainmeter using the executable that can be downloaded from [Rainmeter's Official Website](https://www.rainmeter.net/)
 
