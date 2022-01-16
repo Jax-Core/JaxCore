@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/EnhancedJax/-JaxCore">
-    <img src="https://imgur.com/a/ibXJxxY.png" alt="Logo" width="80" height="80">
+    <img src="https://imgur.com/AFjcn5M.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">JaxCore</h3>
