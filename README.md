@@ -61,7 +61,7 @@ A quick tutorial on how to install JaxCore. More detailed instructions can be fo
 
 Assuming you successfully downloaded and installed Rainmeter, you can now proceed to install JaxCore by following the steps below.
 
-1. Download and run the `.rmskin` file for **Core** from the [releases](https://github.com/Jax-Core/JaxCore/releases) page to install **JaxCore**.
+1. Download and run the `.rmskin` file for **Core** from the official [JaxCore site](https://jax-core.github.io/) to install **JaxCore**.
 2. Finally, proceed through the welcome screen to complete the installation.
 
 ## Wiki & Help
