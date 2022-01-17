@@ -1,17 +1,44 @@
-# JaxCore
-![f1b96fde-d93e-4d42-b2d4-4905bd5f7dc9](https://user-images.githubusercontent.com/80020581/144406208-38b04189-d291-4c8b-8a3f-4b43236b1ce5.png)
+
+<br />
+<div align="center">
+  <a href="https://github.com/EnhancedJax/-JaxCore">
+    <img src="https://imgur.com/AFjcn5M.png" alt="Logo" width="80" height="80">
+  </a>
+
+<h3 align="center">JaxCore</h3>
+
+  <p align="center">
+    The desktop utilities you'll need.
+    <br />
+    <a href="https://jax-core.github.io/"><strong>More Info »</strong></a>
+    <br />
+    <br />
+    <a href="https://discord.gg/JmgehPSDD6">Report Bugs & Request Features </a>
+  </p>
+</div>
+
+
 
 ## About
-JaxCore is a set of utility modules designed to give you better desktop experience and greater productivity. Core itself is a configuration hub for easy access to settings, updates, and new releases
 
-### Desktop utiltiies that you'll need
-Tired of using notepad to jot down notes? Don't like your cluttered desktop? Want to get rid of those unpleasant shortcuts? Core has got you covered.
+![JaxCore](https://user-images.githubusercontent.com/80020581/144406208-38b04189-d291-4c8b-8a3f-4b43236b1ce5.png)
+
+JaxCore is a collection of utility modules designed to improve your desktop experience and increase your productivity. Core is a configuration hub that allows for quick access to settings, updates, and new releases.
+Also, JaxCore is an absolute must-have, and here's why:
+
+### Interactive Modules
+
+Tired of scribbling notes on a notepad? Dislike the appearance of your cluttered desktop? Want to get rid of those annoying shortcuts? Core has got you covered. All of the aforementioned feats are easily accomplished with Core's elementary modules.
+
 ### Easy configuration
-With a dedicated configuration menu for each skin, Core makes customization easier for new users without the user having to modify the code or write some of their own.
-### Update checker
-Core's built-in update checker will make sure you never miss out on new features or bug fixes. Core can also notify you whenever there are new updates for the skins you have installed. You can install all the updates via a single button press and Core takes care of the rest for you.
 
-## Available utility modules
+Core makes customization easier for new users by providing a dedicated configuration menu for each skin, eliminating the need for the user to modify the code or write their own.
+
+### Update Checker
+
+The built-in update checker in Core will ensure that you never miss out on new features or bug fixes. Core can also notify you when new skin updates are available for the skins you have installed. You can install all of the updates with a single button press, and Core will handle the rest.
+
+## Currently Available Modules
 1. [Keylaunch](https://github.com/Jax-Core/Keylaunch)
 2. [IdleStyle](https://github.com/Jax-Core/IdleStyle)
 3. [ValliStart](https://github.com/Jax-Core/ValliStart)
@@ -20,17 +47,23 @@ Core's built-in update checker will make sure you never miss out on new features
 6. [ModularPlayers](https://github.com/Jax-Core/ModularPlayers)
 7. [Combilaunch](https://github.com/Jax-Core/Combilaunch)
 
-## Installation
-### Requirements
-- [Rainmeter v4.5](https://www.rainmeter.net/) or newer
-### Windows 11
-You can install Rainmeter via the command line:
-```winget install rainmeter```
-### Windows 10
-You can download Rainmeter with the executable from Rainmeter's [official website](https://www.rainmeter.net/)
+## Getting Started
 
-After that, download the `.rmskin` file from the [releases page](https://github.com/Jax-Core/JaxCore/releases) and run it.
+A quick tutorial on how to install JaxCore. More detailed instructions can be found on the wiki.
 
-## The wiki and help
-- If you're having trouble installing, you can follow the guide on [Core's wiki](https://github.com/Jax-Core/JaxCore/wiki).
-- For further assistance, join the [Core Community Disocrd server](https://discord.gg/JmgehPSDD6).
+### Prerequisites
+
+- [Rainmeter v4.5](https://www.rainmeter.net/) or newer.  
+  - **Windows 11** users can install Rainmeter via the command line by running: `winget install rainmeter`
+  - **Windows 10** users need to install Rainmeter using the executable that can be downloaded from [Rainmeter's Official Website](https://www.rainmeter.net/)
+
+### Installation
+
+Assuming you successfully downloaded and installed Rainmeter, you can now proceed to install JaxCore by following the steps below.
+
+1. Download and run the `.rmskin` file for **Core** from the official [JaxCore site](https://jax-core.github.io/) to install **JaxCore**.
+2. Finally, proceed through the welcome screen to complete the installation.
+
+## Wiki & Help
+- Check [Core's wiki](https://github.com/Jax-Core/JaxCore/wiki) if you're still having trouble installing or have a question.
+- Join the [Core Community Discord Server](https://discord.gg/JmgehPSDD6) for more help.
