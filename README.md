@@ -43,9 +43,10 @@ The built-in update checker in Core will ensure that you never miss out on new f
 2. [IdleStyle](https://github.com/Jax-Core/IdleStyle)
 3. [ValliStart](https://github.com/Jax-Core/ValliStart)
 4. [QuickNote](https://github.com/Jax-Core/QuickNote)
-5. [ModularClocks](https://github.com/Jax-Core/Modularclocks)
-6. [ModularPlayers](https://github.com/Jax-Core/ModularPlayers)
-7. [Combilaunch](https://github.com/Jax-Core/Combilaunch)
+5. [ModularVisualizer](https://github.com/Jax-Core/ModularVisualizer)
+6. [ModularClocks](https://github.com/Jax-Core/Modularclocks)
+7. [ModularPlayers](https://github.com/Jax-Core/ModularPlayers)
+8. [Combilaunch](https://github.com/Jax-Core/Combilaunch)
 
 ## Getting Started
 
@@ -53,9 +54,7 @@ A quick tutorial on how to install JaxCore. More detailed instructions can be fo
 
 ### Prerequisites
 
-- [Rainmeter v4.5](https://www.rainmeter.net/) or newer.  
-  - **Windows 11** users can install Rainmeter via the command line by running: `winget install rainmeter`
-  - **Windows 10** users need to install Rainmeter using the executable that can be downloaded from [Rainmeter's Official Website](https://www.rainmeter.net/)
+- [Rainmeter v4.5](https://www.rainmeter.net/) or newer. You can get Rainmeter using the executable that can be downloaded from [Rainmeter's Official Website](https://www.rainmeter.net/)
 
 ### Installation
 
