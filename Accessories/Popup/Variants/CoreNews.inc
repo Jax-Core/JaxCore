@@ -14,7 +14,7 @@ MeterStyle=Sec.String:S | Style.Title:S
 
 [Description.1]
 Meter=String
-Text="- NEW! Global variables to be applied to all modules. You can customize these from the Core's settings"
+Text="- NEW! Global variables to be applied to all modules. You can customize these from the Core's settings. These values will be slowly applied to the modules which is compatiable with them."
 MeterStyle=Sec.String:S | Style.Description:S
 
 [Description.2]
