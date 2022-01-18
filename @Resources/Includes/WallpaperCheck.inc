@@ -16,8 +16,8 @@ UpdateDivider=-1
 [WallpaperCheck:M]
 Measure=String
 String=#cache.wallpaper#
-ifMatch = ^[WallpaperRegex]$
-ifMatchAction = [!Log "WallpaperChecked:match"]
+ifMatch=^[WallpaperRegex]$
+ifMatchAction=[!Log "WallpaperChecked:match"]
 ifnotmatchaction=[!Delay 200][!Log "Wallpaper changed: [WallpaperPath]"][!Setvariable Cache.Wallpaper "[WallpaperPath]"][!WriteKeyValue Variables Cache.Wallpaper "[WallpaperPath]" "#@#Vars.inc"][!UpdateMeasure MM][!CommandMeasure MM "Reload Image"][!Delay 100][!CommandMeasure mWH "Dimensions"]
 DynamicVariables=1
 UpdateDivider=-1

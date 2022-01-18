@@ -23,4 +23,6 @@ function openSub()
 	SKIN:Bang('[!WriteKeyvalue Variables Sec.Skin '..SKIN:GetVariable('Ctx.Parent')..' "#ROOTCONFIGPATH#Ctx\\Submenu\\Pos.ini"][!WriteKeyvalue Variables Ctx.LastX '..moveX..' "#ROOTCONFIGPATH#Ctx\\Submenu\\Pos.ini"][!WriteKeyvalue Variables Ctx.LastY '..moveY..' "#ROOTCONFIGPATH#Ctx\\Submenu\\Pos.ini"][!ActivateConfig "#JaxCore\\Ctx\\Submenu"]')
 	SKIN:Bang('!SetVariable', 'CCW', SKIN:GetVariable('CCW'), '#JaxCore\\Ctx\\Submenu')
 	SKIN:Bang('!SetVariable', 'CCH', SKIN:GetVariable('CCH'), '#JaxCore\\Ctx\\Submenu')
+	SKIN:Bang('!SetVariable', 'SKINX', SKIN:GetVariable('SKINX'), '#JaxCore\\Ctx\\Submenu')
+	SKIN:Bang('!SetVariable', 'SKINY', SKIN:GetVariable('SKINY'), '#JaxCore\\Ctx\\Submenu')
 end

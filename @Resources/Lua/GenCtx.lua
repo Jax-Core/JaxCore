@@ -9,6 +9,8 @@ function Gen()
 	local CCW = tonumber(SKIN:GetVariable('CURRENTCONFIGWIDTH'))
 	local SAH = tonumber(SKIN:GetVariable('SCREENAREAHEIGHT'))
 	local CCH = tonumber(SKIN:GetVariable('CURRENTCONFIGHEIGHT'))
+	local SkinX = tonumber(SKIN:GetX())
+	local SkinY = tonumber(SKIN:GetY())
 	-- print(Blur, Settings)
 	-- /////////////////////////////////////////////////////////
 
@@ -16,24 +18,19 @@ function Gen()
 		File:write('[Variables]\n'
 		,'CCW='..CCW..'\n'
 		,'CCH='..CCH..'\n'
+		,'SkinX='..SkinX..'\n'
+		,'SkinY='..SkinY..'\n'
 		,'[Position]\n'
 		,'Meter=Shape\n'
-		,'MeterStyle=CtxBox:S\n'
-		,'Fill=Fill Color #Set.Pri_Color#,0\n'
-		,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Text_Color#"][!SetOption 2 FontColor "#Set.Text_Color#"][!UpdateMeter *][!Redraw]\n'
-		,'MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,0"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Pri_Color#"][!SetOption 2 FontColor "#Set.Pri_Color#"][!UpdateMeter *][!Redraw]\n'
-		,'LeftMouseUpAction=[!Hide][!CommandMeasure Ctx.Move:M "openSub(\'#CURRENTSECTION#\')"]\n'
-		,'DynamicVariables=1\n'
+		,'MeterStyle=CtxBox:S | Position:Act\n'
 		,'[PositionIcon]\n'
 		,'Meter=Image\n'
 		,'MeterStyle=CtxIcon:S\n'
-		,'[2]\n'
+		,'[PositionText]\n'
 		,'Meter=String\n'
-		,'Text=Align...\n'
-		,'MeterStyle=Ctx.String:S | CtxText:S\n')
+		,'MeterStyle=Ctx.String:S | CtxText:S | Position:Text\n')
 		end
 
-	-- if (Blur == 1 or Settings == 1 or Unload == 1) then
 	if (Settings == 1 or Unload == 1) then
 		File:write('[Divider1]\n'
 		,'Meter=Shape\n'
@@ -43,37 +40,25 @@ function Gen()
 	if Settings == 1 then
 		File:write('[Core]\n'
 		,'Meter=Shape\n'
-		,'MeterStyle=CtxBox:S\n'
-		,'Fill=Fill Color #Set.Pri_Color#,0\n'
-		,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Text_Color#"][!SetOption 21 FontColor "#Set.Text_Color#"][!UpdateMeter *][!Redraw]\n'
-		,'MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,0"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Pri_Color#"][!SetOption 21 FontColor "#Set.Pri_Color#"][!UpdateMeter *][!Redraw]\n'
-		,'LeftMouseUpAction=[!WriteKeyValue Variables Skin.Name #Sec.Skin# "#@#SecVar.inc"][!WriteKeyValue Variables Skin.Set_Page Info "#@#SecVar.inc"][!ActivateConfig "#JaxCore\\Main" "Settings.ini"][!DeactivateConfig]\n'
-		,'DynamicVariables=1\n'
+		,'MeterStyle=CtxBox:S | Core:Act\n'
 		,'[CoreIcon]\n'
 		,'Meter=Image\n'
 		,'MeterStyle=CtxIcon:S\n'
-		,'[21]\n'
+		,'[CoreText]\n'
 		,'Meter=String\n'
-		,'Text=Configure in Core\n'
-		,'MeterStyle=Ctx.String:S | CtxText:S\n')
+		,'MeterStyle=Ctx.String:S | CtxText:S | Core:Text\n')
 		end
 	
 	-- if Unload == 1 then
 	File:write('[Unload]\n'
 	,'Meter=Shape\n'
-	,'MeterStyle=CtxBox:S\n'
-	,'Fill=Fill Color #Set.Pri_Color#,0\n'
-	,'MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Text_Color#"][!SetOption 22 FontColor "#Set.Text_Color#"][!UpdateMeter *][!Redraw]\n'
-	,'MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,0"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Pri_Color#"][!SetOption 22 FontColor "#Set.Pri_Color#"][!UpdateMeter *][!Redraw]\n'
-	,'LeftMouseUpAction=[!DeactivateConfig "#Sec.Skin#\\Main"][!DeactivateConfig]\n'
-	,'DynamicVariables=1\n'
+	,'MeterStyle=CtxBox:S | Unload:Act\n'
 	,'[UnloadIcon]\n'
 	,'Meter=Image\n'
 	,'MeterStyle=CtxIcon:S\n'
-	,'[22]\n'
+	,'[UnloadText]\n'
 	,'Meter=String\n'
-	,'Text=Unload\n'
-	,'MeterStyle=Ctx.String:S | CtxText:S\n')
+	,'MeterStyle=Ctx.String:S | CtxText:S | Unload:Text\n')
 		-- end
 	File:close()
 

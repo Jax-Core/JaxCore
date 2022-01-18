@@ -1,33 +1,23 @@
 [Variables]
-CCW=798
-CCH=790
+CCW=1168
+CCH=909
+SkinX=2260
+SkinY=78
 [Position]
 Meter=Shape
-MeterStyle=CtxBox:S
-Fill=Fill Color #Set.Pri_Color#,0
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Text_Color#"][!SetOption 2 FontColor "#Set.Text_Color#"][!UpdateMeter *][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,0"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Pri_Color#"][!SetOption 2 FontColor "#Set.Pri_Color#"][!UpdateMeter *][!Redraw]
-LeftMouseUpAction=[!Hide][!CommandMeasure Ctx.Move:M "openSub('#CURRENTSECTION#')"]
-DynamicVariables=1
+MeterStyle=CtxBox:S | Position:Act
 [PositionIcon]
 Meter=Image
 MeterStyle=CtxIcon:S
-[2]
+[PositionText]
 Meter=String
-Text=Align...
-MeterStyle=Ctx.String:S | CtxText:S
+MeterStyle=Ctx.String:S | CtxText:S | Position:Text
 [Unload]
 Meter=Shape
-MeterStyle=CtxBox:S
-Fill=Fill Color #Set.Pri_Color#,0
-MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Text_Color#"][!SetOption 22 FontColor "#Set.Text_Color#"][!UpdateMeter *][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Pri_Color#,0"][!SetOption #CURRENTSECTION#Icon ImageTint "#Set.Pri_Color#"][!SetOption 22 FontColor "#Set.Pri_Color#"][!UpdateMeter *][!Redraw]
-LeftMouseUpAction=[!DeactivateConfig "#Sec.Skin#\Main"][!DeactivateConfig]
-DynamicVariables=1
+MeterStyle=CtxBox:S | Unload:Act
 [UnloadIcon]
 Meter=Image
 MeterStyle=CtxIcon:S
-[22]
+[UnloadText]
 Meter=String
-Text=Unload
-MeterStyle=Ctx.String:S | CtxText:S
+MeterStyle=Ctx.String:S | CtxText:S | Unload:Text

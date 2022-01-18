@@ -9,27 +9,32 @@ ImageName=Variants\Splash\#Sec.Arg1#.png
 
 [Title]
 Meter=String
-Text="ModularVisualizer - Released."
+Text="JaxCore v41000"
 MeterStyle=Sec.String:S | Style.Title:S
 
 [Description.1]
 Meter=String
-Text="- NEW! The most customizable visualizer, ModularVisualizer is now out. Star it on DeviantArt!"
+Text="- NEW! Global variables to be applied to all modules. You can customize these from the Core's settings"
 MeterStyle=Sec.String:S | Style.Description:S
-; [Link.1]
-; Meter=String
-; Text="https://jax-core.github.io/"
-; LeftMouseUpAction=["https://jax-core.github.io/"]
-; MeterStyle=Sec.String:S | Style.Link:S
 
 [Description.2]
 Meter=String
-Text="- NEW! Patch notes will now be shown when module updates. This is slowly being rolled out to every one of them."
+Text="- NEW! Release and update schedule is now available, read it here:"
 MeterStyle=Sec.String:S | Style.Description:S
+[Link.1]
+Meter=String
+Text="https://ibb.co/58S57fD"
+LeftMouseUpAction=["https://ibb.co/58S57fD"]
+MeterStyle=Sec.String:S | Style.Link:S
 
 [Description.3]
 Meter=String
-Text="- NEW! Added more quick actions to the info page."
+Text="- NEW! Center horizontally or vertically with the new context menu."
+MeterStyle=Sec.String:S | Style.Description:S
+
+[Description.4]
+Meter=String
+Text="- We'll be needing langauge translators soon. If you can help out, join the discord server to be notified when it's available! Thanks :D"
 MeterStyle=Sec.String:S | Style.Description:S
 
 ; [Description.4]
@@ -49,27 +54,29 @@ MeterStyle=Sec.String:S | Style.Description:S
 ; MeterStyle=Sec.String:S | Style.Description:S
 
 
-[DA:]
-Meter=Shape
-X=(#Sec.W#/2-(#Sec.BottomWidth#*3+#Sec.P#)/2)
-Y=(#Sec.H#-#Sec.P#-#SEc.BottomHeight#)
-Colorover=84, 235, 131
-Colorleave=399F59
-LeftMouseUpAction=["https://www.deviantart.com/jaxoriginals/art/903806619"]
-meterStyle=BottomBox:S | FalseStyleDesk
-[DA:String]
-Meter=String
-StringAlign=CenterCenter
-Text=DA post
-MeterStyle=Sec.String:S | BottomText:S
+; [DA:]
+; Meter=Shape
+; X=(#Sec.W#/2-(#Sec.BottomWidth#*3+#Sec.P#)/2)
+; Y=(#Sec.H#-#Sec.P#-#SEc.BottomHeight#)
+; Colorover=84, 235, 131
+; Colorleave=399F59
+; LeftMouseUpAction=["https://www.deviantart.com/jaxoriginals/art/903806619"]
+; meterStyle=BottomBox:S | FalseStyleDesk
+; [DA:String]
+; Meter=String
+; StringAlign=CenterCenter
+; Text=DA post
+; MeterStyle=Sec.String:S | BottomText:S
 [Core:]
 Meter=Shape
-LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name """ModularVisualizer""" "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "#@#SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.ini"]
+X=(#Sec.W#/2-(#Sec.BottomWidth#*2+#Sec.P#/2)/2)
+Y=(#Sec.H#-#Sec.P#-#SEc.BottomHeight#)
+LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name """#JaxCore""" "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page GlobalVars "#@#SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.ini"][!DeactivateConfig]
 meterStyle=BottomBox:S | FalseStyleDesk
 [Core:String]
 Meter=String
 StringAlign=CenterCenter
-Text=mVis settings
+Text=Global variables
 MeterStyle=Sec.String:S | BottomText:S
 [DiscordServer:]
 Meter=Shape
