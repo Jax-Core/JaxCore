@@ -17,21 +17,28 @@ MeterStyle=Set.String:S |  Set.OptionCat:S
 
 [Option01]
 Meter=String
-Text=Time format: 24(H) 12(I)
+Text=Time format
 MeterStyle=Set.String:S | Set.OptionName:S
 [Set.Div:2238]
 Meter=Shape
 MeterStyle=Set.Div:S
 [Option02]
 Meter=String
-Text=Weather location
+Text=Weather temperature unit
 MeterStyle=Set.String:S | Set.OptionName:S
 [Set.Div:24125158]
 Meter=Shape
 MeterStyle=Set.Div:S
 [Option03]
 Meter=String
-Text=Weather temperature unit
+Text=Weather location
+MeterStyle=Set.String:S | Set.OptionName:S
+[Set.Div:58]
+Meter=Shape
+MeterStyle=Set.Div:S
+[Option04]
+Meter=String
+Text=Weather language
 MeterStyle=Set.String:S | Set.OptionName:S
 
 [Advanced]
@@ -68,24 +75,13 @@ FontColor=[&Func:returnBool('gVar.2412', 'H', '#Set.Pri_color#', '#Set.Text_Colo
 LeftMouseUpAction=[&Func:GroupVar('#CURRENTSECTION#', '1Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
 MeterStyle=Set.String:S | Set.PickOption_1:S
 
-[gVar.WeatherLocation]
-Meter=Shape
-MeterStyle=Set.Textbox:S
-Type=Txt
-Y=([Option02:Y]-#Set.P#+(-30/2+8)*[Set.S])
-SaveLocation="#@#gVars\Weather.inc"
-[Value02]
-Meter=String
-Text=#gVar.WeatherLocation#
-MeterStyle=Set.String:S | Set.Value:S
-
 [gVar.WeatherUnits:]
 Meter=Shape
 Shape2=Rectangle ([&Func:returnBool('gVar.WeatherUnits', 'Metric')]=0 ? 0 : (150*[Set.S])),0,(150*[Set.S]),(30*[Set.S]),(7*[Set.S]) | Fill Color #Set.Text_Color# | StrokeWidth 0 |
 0Act=[!WriteKeyValue Variables gVar.WeatherUnits "I" "#@#gVars\Weather.inc"]
 1Act=[!WriteKeyValue Variables gVar.WeatherUnits "H" "#@#gVars\Weather.inc"]
 MeterStyle=Set.Pick:S
-Y=([Option03:Y]-#Set.P#+(-30/2+8)*[Set.S])
+Y=([Option02:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [gVar.WeatherUnits:0]
 Meter=String
 Text=Metric
@@ -98,6 +94,28 @@ Text=Imperial
 FontColor=[&Func:returnBool('gVar.WeatherUnits', 'Metric', '#Set.Pri_color#', '#Set.Text_Color#')]
 LeftMouseUpAction=[&Func:GroupVar('#CURRENTSECTION#', '1Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
 MeterStyle=Set.String:S | Set.PickOption_1:S
+
+[gVar.WeatherLocation]
+Meter=Shape
+MeterStyle=Set.Textbox:S
+Type=Txt
+Y=([Option03:Y]-#Set.P#+(-30/2+8)*[Set.S])
+SaveLocation="#@#gVars\Weather.inc"
+[Value03]
+Meter=String
+Text=#gVar.WeatherLocation#
+MeterStyle=Set.String:S | Set.Value:S
+
+[gVar.language]
+Meter=Shape
+MeterStyle=Set.Textbox:S
+Type=Txt
+Y=([Option04:Y]-#Set.P#+(-30/2+8)*[Set.S])
+SaveLocation="#@#gVars\Weather.inc"
+[Value04]
+Meter=String
+Text=#gVar.language#
+MeterStyle=Set.String:S | Set.Value:S
 
 [gVar.WeatherAPIKey]
 Meter=Shape

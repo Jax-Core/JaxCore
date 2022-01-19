@@ -1,7 +1,7 @@
 [Variables]
 ; ------------------------------ User variables ------------------------------ ;
 UserNameCheckVariable=Jax Tam
-LastRollBackSkin=ModularVisualizer|1.01
+LastRollBackSkin=ModularVisualizer|2
 ; --------------------------------- Language --------------------------------- ;
 Set.Lang=English
 ; ----------------------------- Scaling variables ---------------------------- ;
@@ -9,7 +9,7 @@ Set.P=(40*[Set.S])
 Set.Home.P=(100*[Set.S])
 Set.R=(10)
 Set.L=(200*([Set.S]+0.2))
-Set.W=1168
+Set.W=1134
 Set.H=909
 Set.Resizable=1
 ; --------------------------- Appearance variables --------------------------- ;

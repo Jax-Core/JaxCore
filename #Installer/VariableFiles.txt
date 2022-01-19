@@ -1,3 +1,4 @@
 @Resources\Vars.inc
-@Resources\NewsID.inc
 @Resources\WebSupportEnabled.inc
+@Resources\gVars\Time.inc
+@Resources\gVars\Weather.inc
