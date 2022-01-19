@@ -1,6 +1,6 @@
 [Variables]
-Skin.Name=ModularVisualizer
+Skin.Name=#JaxCore
 ; Skin.Shorthand=
 
-Skin.Set_Page=Info
+Skin.Set_Page=General
 Skin.Ctx_Ctx=Refresh

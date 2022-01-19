@@ -77,21 +77,21 @@ MeterStyle=Set.String:S | Set.PickOption_1:S
 
 [gVar.WeatherUnits:]
 Meter=Shape
-Shape2=Rectangle ([&Func:returnBool('gVar.WeatherUnits', 'Metric')]=0 ? 0 : (150*[Set.S])),0,(150*[Set.S]),(30*[Set.S]),(7*[Set.S]) | Fill Color #Set.Text_Color# | StrokeWidth 0 |
-0Act=[!WriteKeyValue Variables gVar.WeatherUnits "I" "#@#gVars\Weather.inc"]
-1Act=[!WriteKeyValue Variables gVar.WeatherUnits "H" "#@#gVars\Weather.inc"]
+Shape2=Rectangle ([&Func:returnBool('gVar.WeatherUnits', 'Imperial')]=0 ? 0 : (150*[Set.S])),0,(150*[Set.S]),(30*[Set.S]),(7*[Set.S]) | Fill Color #Set.Text_Color# | StrokeWidth 0 |
+0Act=[!WriteKeyValue Variables gVar.WeatherUnits "Metric" "#@#gVars\Weather.inc"]
+1Act=[!WriteKeyValue Variables gVar.WeatherUnits "Imperial" "#@#gVars\Weather.inc"]
 MeterStyle=Set.Pick:S
 Y=([Option02:Y]-#Set.P#+(-30/2+8)*[Set.S])
 [gVar.WeatherUnits:0]
 Meter=String
 Text=Metric
-FontColor=[&Func:returnBool('gVar.WeatherUnits', 'Metric', '#Set.Text_Color#', '#Set.Pri_color#')]
+FontColor=[&Func:returnBool('gVar.WeatherUnits', 'Imperial', '#Set.Text_Color#', '#Set.Pri_color#')]
 LeftMouseUpAction=[&Func:GroupVar('#CURRENTSECTION#', '0Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
 MeterStyle=Set.String:S | Set.PickOption_0:S
 [gVar.WeatherUnits:1]
 Meter=String
 Text=Imperial
-FontColor=[&Func:returnBool('gVar.WeatherUnits', 'Metric', '#Set.Pri_color#', '#Set.Text_Color#')]
+FontColor=[&Func:returnBool('gVar.WeatherUnits', 'Imperial', '#Set.Pri_color#', '#Set.Text_Color#')]
 LeftMouseUpAction=[&Func:GroupVar('#CURRENTSECTION#', '1Act')][!Refresh][!UpdateMeasure Auto_Refresh:M]
 MeterStyle=Set.String:S | Set.PickOption_1:S
 

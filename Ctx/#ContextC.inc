@@ -1,8 +1,8 @@
 [Variables]
-CCW=1155
+CCW=1134
 CCH=909
-SkinX=799
-SkinY=24
+SkinX=575
+SkinY=130
 [Position]
 Meter=Shape
 MeterStyle=CtxBox:S | Position:Act
