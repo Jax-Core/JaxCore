@@ -1,4 +1,4 @@
-function Initialize()
+function ReadDump()
     local ReadDump = tonumber(SKIN:GetVariable('ReadDump'))
     if ReadDump == 1 then
         SKIN:Bang('[!WriteKeyvalue Variables ReadDump 0][!Refresh]')
@@ -87,7 +87,7 @@ MeterStyle=Set.String:S | Skin.VerDiff:S
 
 []].._G["Skin"..i]..[[.UpdateButton]
 Meter=Shape
-LeftMouseUpAction=[!CommandMeasure CoreBridge "install(']].._G["Skin"..i]..[[')"][!CommandMeasure mActions "Execute 2"]
+LeftMouseUpAction=[!CommandMeasure LogicalScript "runUpdate(']].._G["Skin"..i]..[[', ']]..SkinTable[_G["Skin"..i]]['Version']..[[')" "#JaxCore\Accessories\GlobalUpdater"][!CommandMeasure mActions "Execute 2"]
 MeterStyle=Skin.UpdateButton.Shape:S
 
 []].._G["Skin"..i]..[[.UpdateIcon]
@@ -119,4 +119,14 @@ Sec.H=(100+40*]]..numOfUpdates..[[)
     else
         contentFile:close()
     end
+end
+
+
+function runUpdate(name, ver)
+    ParsedVerFull = SKIN:GetVariable('ParsedVer')
+    SKIN:Bang('!WriteKeyValue', 'Variables', 'ParsedVer', '0', SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\UpdatePrompt\\Toast\\Main.ini')
+    SKIN:Bang('!SetVariable', 'DownloadLink', 'https://github.com/Jax-Core/'..name..'/releases/download/v'..ver..'/'..name..'_v'..ver..'.rmskin\n')
+    SKIN:Bang('!SetVariable', 'DownloadName', name..ver)
+    print(SKIN:GetVariable('DownloadLink'))
+    -- SKIN:Bang('!CommandMeasure', 'CoreInstallHandler', 'Install')
 end
