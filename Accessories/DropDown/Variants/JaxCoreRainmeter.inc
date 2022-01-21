@@ -1,21 +1,39 @@
 [Variables]
 ; SaveKey=Fill
 
+[Func]
+Measure=Script
+ScriptFile=#@#Lua\Func.lua
+
 ; ---------------------------------------------------------------------------- ;
 ;                                    Content                                   ;
 ; ---------------------------------------------------------------------------- ;
 
-[Manage panel]
+[Run bang]
 Meter=String
 Y=(#Sec.P#)
-LeftMouseUpAction=[!Manage][!DeactivateConfig]
+LeftMouseUpAction=[!CommandMeasure Func "interactionBox('RunBang')"][!DeactivateConfig]
+MeterStyle=String:S
+[Div:0]
+Meter=Shape
+MeterStyle=Div:S
+; [Measure tester]
+; Meter=String
+; LeftMouseUpAction=[!CommandMeasure Func "interactionBox('MeasureTester')"][!DeactivateConfig]
+; MeterStyle=String:S
+; [Div:1]
+; Meter=Shape
+; MeterStyle=Div:S
+[Value Debug]
+Meter=String
+LeftMouseUpAction=[!CommandMeasure Func "interactionBox('ValueDebugger')"][!DeactivateConfig]
 MeterStyle=String:S
 [Div:1]
 Meter=Shape
 MeterStyle=Div:S
-[Settings panel]
+[Manage panel]
 Meter=String
-LeftMouseUpAction=[!Manage Settings][!DeactivateConfig]
+LeftMouseUpAction=[!Manage Manage][!DeactivateConfig]
 MeterStyle=String:S
 [Div:2]
 Meter=Shape

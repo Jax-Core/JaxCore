@@ -9,17 +9,22 @@ ImageName=Variants\Splash\#Sec.Arg1#.png
 
 [Title]
 Meter=String
-Text="JaxCore v41000"
+Text="JaxCore v41003"
 MeterStyle=Sec.String:S | Style.Title:S
 
 [Description.1]
 Meter=String
-Text="- NEW! Global variables to be applied to all modules. You can customize these from the Core's settings. These values will be slowly applied to the modules which is compatiable with them."
+Text="- NEW! CoreData now generates module independently"
+MeterStyle=Sec.String:S | Style.Description:S
+
+[Description.5]
+Meter=String
+Text="- NEW! The @Start panel will now be hidden when you install a widget from Core!"
 MeterStyle=Sec.String:S | Style.Description:S
 
 [Description.2]
 Meter=String
-Text="- NEW! Release and update schedule is now available, read it here:"
+Text="- Release and update schedule is now available, read it here:"
 MeterStyle=Sec.String:S | Style.Description:S
 [Link.1]
 Meter=String
@@ -29,13 +34,13 @@ MeterStyle=Sec.String:S | Style.Link:S
 
 [Description.3]
 Meter=String
-Text="- NEW! Center horizontally or vertically with the new context menu."
+Text="- Center horizontally or vertically with the new context menu."
 MeterStyle=Sec.String:S | Style.Description:S
 
-[Description.4]
-Meter=String
-Text="- We'll be needing langauge translators soon. If you can help out, join the discord server to be notified when it's available! Thanks :D"
-MeterStyle=Sec.String:S | Style.Description:S
+; [Description.4]
+; Meter=String
+; Text="- We'll be needing langauge translators soon. If you can help out, join the discord server to be notified when it's available! Thanks :D"
+; MeterStyle=Sec.String:S | Style.Description:S
 
 ; [Description.4]
 ; Meter=String

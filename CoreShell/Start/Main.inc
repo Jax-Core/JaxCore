@@ -177,7 +177,7 @@ X=(#Sec.P#+50)
 Y=(#Sec.H#-#Sec.P#-40)
 DynamicVariables=1
 Shape=Rectangle 0,0,120,40,(#Sec.R#/3) | StrokeWidth 0 | Fill COlor 0,255,50,200
-Leftmouseupaction=[!ActivateConfig "#JaxCore\Main" "Home.ini"][!DeactivateConfig]
+Leftmouseupaction=[!WriteKeyvalue Variables Skin.Name #ROOTCONFIG# "#SKINSPATH##JaxCore\@Resources\SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "#SKINSPATH##JaxCore\@Resources\SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.ini"][!DeactivateConfig]
 Hidden=1
 Group=Button
 [ContinueText]

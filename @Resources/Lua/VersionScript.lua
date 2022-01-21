@@ -1,4 +1,4 @@
-function Initialize()
+function Update()
     if SKIN:GetVariable('Skin.Name') == SKIN:GetVariable('BetaSkinList') then
         SKIN:Bang('!ShowMeterGroup', 'DiscordButton')
         SKIN:Bang('!SetOption', 'SubHeader', 'MEterStyle', 'Set.String:S | Subheader:4')
@@ -6,6 +6,7 @@ function Initialize()
         SKIN:Bang('!Redraw')
     else
         SKIN:Bang('!EnableMeasureGroup', 'checkForBeta')
+        SKIN:Bang('!UpdateMeasureGroup', 'checkForBeta')
     end
 end
 
@@ -68,6 +69,6 @@ function patchNoteCheck(MeasureUser)
             SKIN:Bang('[!commandMeasure Func "startPopup(\'PatchNote\', \'Left\')"][!WriteKeyvalue Variables Core.patchNoteCheckvariable "'..MeasureUser..'" "'..SKIN:ReplaceVariables('#SKINSPATH##Skin.Name#\\@Resources\\PatchNoteVar.inc')..'"]')
         end
     else
-        SKIN:Bang('[!HideMeterGroup PatchNote]')
+        SKIN:Bang('[!SetOption Button.Update MeterStyle "Set.Button:S | Button.Update:NoPN"][!HideMeterGroup PatchNote]')
     end
 end

@@ -63,12 +63,6 @@ StringIndex=1
 Measure=Script
 ScriptFile=#ROOTCONFIGPATH#Accessories\UpdatePrompt\Logic.lua
 
-[CheckForDataFolder]
-MEasure=Plugin
-Plugin=PowershellRM
-DynamicVariables=1
-ScriptFile=#@#Powershell\CheckData.ps1
-
 ; ---------------------------------------------------------------------------- ;
 ;                                    Content                                   ;
 ; ---------------------------------------------------------------------------- ;

@@ -1,4 +1,4 @@
 [Variables]
-gVar.WeatherUnits=Metric
+gVar.WeatherUnits=Imperial
 gVar.WeatherLocation=Hong Kong
 gVar.Language=en
