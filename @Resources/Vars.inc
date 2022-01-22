@@ -1,7 +1,7 @@
 [Variables]
 ; ------------------------------ User variables ------------------------------ ;
 UserNameCheckVariable=Jax Tam
-LastRollBackSkin=ModularVisualizer|2
+LastRollBackSkin=Keystrokes|1.5
 ; --------------------------------- Language --------------------------------- ;
 Set.Lang=English
 ; ----------------------------- Scaling variables ---------------------------- ;

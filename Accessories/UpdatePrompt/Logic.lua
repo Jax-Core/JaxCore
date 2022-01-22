@@ -34,5 +34,6 @@ function runUpdate()
     SKIN:Bang('!WriteKeyValue', 'Variables', 'ParsedVer', '0', SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\UpdatePrompt\\Toast\\Main.ini')
     SKIN:Bang('!SetVariable', 'DownloadLink', 'https://github.com/Jax-Core/JaxCore/releases/download/v'..ParsedVerFull..'/JaxCore_v'..ParsedVerFull..'.rmskin\n')
     SKIN:Bang('!SetVariable', 'DownloadName', 'JaxCore'..ParsedVerFull)
+    SKIN:Bang('!SetVariable', 'DownloadConfig', '#JaxCore')
     SKIN:Bang('!CommandMeasure', 'CoreInstallHandler', 'Install')
 end

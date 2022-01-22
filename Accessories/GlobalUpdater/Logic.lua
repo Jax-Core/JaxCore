@@ -87,7 +87,7 @@ MeterStyle=Set.String:S | Skin.VerDiff:S
 
 []].._G["Skin"..i]..[[.UpdateButton]
 Meter=Shape
-LeftMouseUpAction=[!CommandMeasure LogicalScript "runUpdate(']].._G["Skin"..i]..[[', ']]..SkinTable[_G["Skin"..i]]['Version']..[[')" "#JaxCore\Accessories\GlobalUpdater"][!CommandMeasure mActions "Execute 2"]
+LeftMouseUpAction=[!CommandMeasure mActions "Execute 2"][!Delay #Drop.Animation_Time#][!CommandMeasure LogicalScript "runUpdate(']].._G["Skin"..i]..[[', ']]..SkinTable[_G["Skin"..i]]['Version']..[[')" "#JaxCore\Accessories\GlobalUpdater"]
 MeterStyle=Skin.UpdateButton.Shape:S
 
 []].._G["Skin"..i]..[[.UpdateIcon]
@@ -96,15 +96,16 @@ MeterStyle=Set.String:S | Skin.UpdateButton.Icon:S
 ]]
                 )
                 numOfUpdates = numOfUpdates + 1
-                SkinTable[_G["Skin"..i]]['Version'] = ini.INI['variables']['Version']
             end
+            SkinTable[_G["Skin"..i]]['LocalVersion'] = ini.INI['variables']['Version']
         else
             -- ---------------------- returns false and exits file ---------------------- --
             SkinTable[_G["Skin"..i]]['Exist'] = 0
             SkinTable[_G["Skin"..i]]['Version'] = 0.0
+            SkinTable[_G["Skin"..i]]['LocalVersion'] = 0.0
         end
         -- ------------------------------ print result ------------------------------ --
-        print(_G["Skin"..i]..' | v'..SkinTable[_G["Skin"..i]]['Version']..' | Installed['..SkinTable[_G["Skin"..i]]['Exist']..'] | LocalVersion v'..SkinTable[_G["Skin"..i]]['Version'])
+        print(_G["Skin"..i]..' | v'..SkinTable[_G["Skin"..i]]['Version']..' | Installed['..SkinTable[_G["Skin"..i]]['Exist']..'] | LocalVersion v'..SkinTable[_G["Skin"..i]]['LocalVersion'])
     end
     if numOfUpdates ~= 0 then
         contentFile:write(
@@ -127,6 +128,7 @@ function runUpdate(name, ver)
     SKIN:Bang('!WriteKeyValue', 'Variables', 'ParsedVer', '0', SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\UpdatePrompt\\Toast\\Main.ini')
     SKIN:Bang('!SetVariable', 'DownloadLink', 'https://github.com/Jax-Core/'..name..'/releases/download/v'..ver..'/'..name..'_v'..ver..'.rmskin\n')
     SKIN:Bang('!SetVariable', 'DownloadName', name..ver)
-    print(SKIN:GetVariable('DownloadLink'))
-    -- SKIN:Bang('!CommandMeasure', 'CoreInstallHandler', 'Install')
+    SKIN:Bang('!SetVariable', 'DownloadConfig', name)
+    SKIN:Bang('[!SetOption ActiveChecker ConfigName "'..name..'\\Main"][!UpdateMeasure ActiveChecker]')
+    SKIN:Bang('!CommandMeasure', 'CoreInstallHandler', 'Install -saveDirectory "Accessories\\GlobalUpdater\\Main.ini"')
 end

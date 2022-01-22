@@ -18,11 +18,25 @@
 # }
 
 function Install { 
+    param (
+    [string]$saveDirectory = 'CoreShell\Info.inc'
+    )
     $url=$RmAPI.VariableStr('DownloadLink')
     $name=$RmAPI.VariableStr('DownloadName')
+    $configroot=$RmAPI.VariableStr('DownloadConfig')
+    $SaveLocation="$($RmAPI.VariableStr("ROOTCONFIGPATH"))$saveDirectory"
+
+    $config="$configroot\Main"
     $outPath="C:/Windows/Temp/$name.rmskin"
 
-    $RmAPI.Bang("[!WriteKeyValue DefaultStartActions Custom1 `"`"`"[!Delay 100][!DeactivateConfig `"#Skin.Name#\@Start`"][!WriteKeyValue DefaultStartActions Custom1 `"`" `"$($RmAPI.VariableStr("ROOTCONFIGPATH"))CoreShell\Info.inc`"]`"`"`" `"$($RmAPI.VariableStr("ROOTCONFIGPATH"))CoreShell\Info.inc`"]")
+    if ($config -NotMatch "#JaxCore") {
+        if ($RmAPI.Measure('ActiveChecker') -eq -1){
+            $RmAPI.Bang("[!WriteKeyValue DefaultStartActions Custom1 `"`"`"[!Delay 100][!DeactivateConfig `"$configroot\@Start`"][!WriteKeyValue DefaultStartActions Custom1 `"`" $SaveLocation]`"`"`" $SaveLocation]")
+        } else {
+            $RmAPI.Bang("[!WriteKeyValue DefaultStartActions Custom1 `"`"`"[!Delay 100][!DeactivateConfig `"$configroot\@Start`"][!ActivateConfig `"$configroot\Main`"][!WriteKeyValue DefaultStartActions Custom1 `"`" $SaveLocation]`"`"`" $SaveLocation]")
+            $RmAPI.Bang("[!DeactivateConfig $config]")
+        }
+    }
 
     Invoke-WebRequest -Uri $url -OutFile $outPath
     if (-not [System.IO.File]::Exists($outPath)) {
