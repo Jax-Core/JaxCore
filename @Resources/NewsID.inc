@@ -1,2 +1,2 @@
 [Variables]
-Core.NewsID=7
+Core.NewsID=8

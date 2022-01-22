@@ -1,5 +1,5 @@
 [Variables]
-Skin.Name=Plainext
+Skin.Name=MIUI-Shade
 ; Skin.Shorthand=
 
 Skin.Set_Page=Info

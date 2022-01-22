@@ -9,18 +9,29 @@ ImageName=Variants\Splash\#Sec.Arg1#.png
 
 [Title]
 Meter=String
-Text="JaxCore v41003"
+Text="JaxCore v41005 - MIUISHADE NOTICE"
 MeterStyle=Sec.String:S | Style.Title:S
+
+[Description.0]
+Meter=String
+Text=- IMPORTANT! MIUI-Shade is unable to be automatically updated right now. CLICK THIS MESSAGE to copy the patch code, then right click Core's close button, select "Bang", paste copied contents and press enter. Then you can update from Core.
+MeterStyle=Sec.String:S | Style.Description:S
+[Link.0]
+Meter=String
+Text="Click here to copy"
+Y=R
+LeftMouseUpAction=[!SetClip """"#SKINSPATH#MIUI-Shade\@Resources\Actions\AHKv1.exe" "#SKINSPATH#MIUI-Shade\@Resources\Actions\Source Code\close.ahk""""]
+MeterStyle=Sec.String:S | Style.Link:S
 
 [Description.1]
 Meter=String
 Text="- NEW! CoreData now generates module independently"
 MeterStyle=Sec.String:S | Style.Description:S
 
-[Description.5]
-Meter=String
-Text="- NEW! The @Start panel will now be hidden when you install a widget from Core!"
-MeterStyle=Sec.String:S | Style.Description:S
+; [Description.5]
+; Meter=String
+; Text="- NEW! The @Start panel will now be hidden when you install a widget from Core!"
+; MeterStyle=Sec.String:S | Style.Description:S
 
 [Description.2]
 Meter=String
@@ -31,11 +42,6 @@ Meter=String
 Text="https://ibb.co/58S57fD"
 LeftMouseUpAction=["https://ibb.co/58S57fD"]
 MeterStyle=Sec.String:S | Style.Link:S
-
-[Description.3]
-Meter=String
-Text="- Center horizontally or vertically with the new context menu."
-MeterStyle=Sec.String:S | Style.Description:S
 
 ; [Description.4]
 ; Meter=String

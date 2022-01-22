@@ -14,4 +14,4 @@ IdleStyle=1.42
 ModularVisualizer=1.02
 YourFlyouts=0.0
 
-NewsID=8
+NewsID=9

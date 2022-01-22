@@ -59,6 +59,8 @@ Y=(#Sec.P#)R
 FontSize=(12*#Sec.S#)
 inlinePattern=NEW!
 InlineSetting=Color | FFC83D
+inlinePattern2=IMPORTANT!
+InlineSetting2=Color | 255,0,0
 
 [Style.NextLineDescription:S]
 X=(#Sec.P#)

@@ -29,7 +29,10 @@ W=(#Sec.W#-#Sec.P#*2)
 H=(30*#sec.S#)
 DynamicVariables=1
 DefaultValue="Paste or type a bang to execute..."
-Command1=$UserInput$
+Command1=[!CommandMEasure StringToBang """parse([[$UserInput$]])"""]
+[StringToBang]
+Measure=Script
+ScriptFile=#@#Lua\StringToBang.lua
 
 ; ---------------------------------------------------------------------------- ;
 ;                                    Content                                   ;
