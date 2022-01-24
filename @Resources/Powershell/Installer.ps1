@@ -66,8 +66,8 @@ function GenCoreData {
                 $RmAPI.Log("Available CoreData structure for $SkinName")
                 If (-not (Test-Path -Path "$SkinsPath..\CoreData\$SkinName\$SkinVer.txt")) {
                     $RmAPI.Log("Generating: Can't find $SkinVer.txt file in CoreData of $SkinName")
-                    Robocopy "$SkinsPath$SkinName\@Resources\@Structure\" "$SkinsPath..\CoreData\$SkinName\" /E /XC /XN /XO
-                    New-Item -Path "$SkinsPath..\CoreData\$SkinName\" -Name "$SkinVer.txt" -ItemType "file"
+                    Robocopy "$SkinsPath$SkinName\@Resources\@Structure" "$SkinsPath..\CoreData\$SkinName" /E /XC /XN /XO
+                    New-Item -Path "$SkinsPath..\CoreData\$SkinName" -Name "$SkinVer.txt" -ItemType "file"
                 } else {
                     $RmAPI.Log("CoreData for $SkinName is already generated")
                 }

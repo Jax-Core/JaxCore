@@ -63,9 +63,12 @@ Measure=Plugin
 Plugin=PowerShellRM
 ScriptFile=#ROOTCONFIGPATH#CoreInstaller\Helpers\ProtocolInstaller\ProtocolInstaller.ps1
 
-[CoreBridge]
-Measure=Script
-ScriptFile=#SKINSPATH##JaxCore\@Resources\Lua\CoreElements\Installer.lua
+[CoreInstallHandler]
+Measure=Plugin
+Plugin=PowershellRM
+DynamicVariables=1
+ScriptFile=#@#Powershell\Installer.ps1
+ExecutionPolicy=Unrestricted
 
 [SectionButton:S]
 X=(((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])*0.2)+(10)*[Set.S])r
@@ -173,7 +176,7 @@ Container=ContentContainer
 [Section1.Button:0]
 LeftMouseUpAction=[!Refresh]
 [Section1.Button:1]
-LeftMouseUpAction=[!CommandMeasure CoreBridge "install('#Skin.Name#')"]
+LeftMouseUpAction=[!SetVariable DownloadLink "https://github.com/Jax-Core/JaxCore/releases/download/v[mVer]/JaxCore_v[mVer].rmskin"][!SetVariable DownloadName "JaxCore[mVer]"][!SetVariable DownloadConfig "#JaxCore"][!CommandMeasure CoreInstallHandler "Install"]
 [Section1.Button:2]
 LeftMouseUpAction=[!Refresh]
 [Section1.Button.Value]
