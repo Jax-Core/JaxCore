@@ -220,3 +220,18 @@ function interactionBox(variant, arg1)
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Arg1', arg1, File)
 	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\GenericInteractionBox')
 end
+
+function corepage(skinname, closeAfter)
+	SKIN:Bang('[!WriteKeyvalue Variables Skin.Name '..skinname..' "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "#@#SecVar.inc"]')
+	local isActiveMeasure = SKIN:GetMeasure('ActiveChecker')
+	if isActiveMeasure ~= nil then 
+		local isActive = isActiveMeasure:GetValue()
+	end
+	if isActive ~= nil and isActive == 1 then
+		SKIN:Bang('[!DeactivateConfig "#jaxCore\\Main"][!activateConfig "#jaxCore\\Main" "Settings.ini"]')
+	end
+	SKIN:Bang('[!activateConfig "#jaxCore\\Main" "Settings.ini"]')
+	if closeAfter == 1 then
+		SKIN:Bang('[!DeactivateConfig]')
+	end
+end

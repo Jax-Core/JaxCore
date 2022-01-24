@@ -48,7 +48,7 @@ MeterStyle=String:S
 [Div:5]
 Meter=Shape
 MeterStyle=Div:S
-[Runic]
+[RunicX]
 Meter=String
-FontFace=Runic
+FontFace=RunicX
 MeterStyle=String:S

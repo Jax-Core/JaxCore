@@ -9,8 +9,13 @@ ImageName=Variants\Splash\#Sec.Arg1#.png
 
 [Title]
 Meter=String
-Text="JaxCore v41005 - MIUISHADE NOTICE"
+Text="Skin clone and uninstaller"
 MeterStyle=Sec.String:S | Style.Title:S
+
+[Description.1]
+Meter=String
+Text="- NEW! You can now clone modules at their info page, or uninstall them if you wish to, all accessible within Core."
+MeterStyle=Sec.String:S | Style.Description:S
 
 [Description.0]
 Meter=String
@@ -22,11 +27,6 @@ Text="Click here to copy"
 Y=R
 LeftMouseUpAction=[!SetClip """"#SKINSPATH#MIUI-Shade\@Resources\Actions\AHKv1.exe" "#SKINSPATH#MIUI-Shade\@Resources\Actions\Source Code\close.ahk""""]
 MeterStyle=Sec.String:S | Style.Link:S
-
-[Description.1]
-Meter=String
-Text="- NEW! CoreData now generates module independently"
-MeterStyle=Sec.String:S | Style.Description:S
 
 ; [Description.5]
 ; Meter=String
@@ -82,12 +82,13 @@ MeterStyle=Sec.String:S | Style.Link:S
 Meter=Shape
 X=(#Sec.W#/2-(#Sec.BottomWidth#*2+#Sec.P#/2)/2)
 Y=(#Sec.H#-#Sec.P#-#SEc.BottomHeight#)
-LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name """#JaxCore""" "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page GlobalVars "#@#SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.ini"][!DeactivateConfig]
+; LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name """#JaxCore""" "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page GlobalVars "#@#SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.ini"][!DeactivateConfig]
+LeftMouseUpAction=[!DeactivateConfig]
 meterStyle=BottomBox:S | FalseStyleDesk
 [Core:String]
 Meter=String
 StringAlign=CenterCenter
-Text=Global variables
+Text=Okay!
 MeterStyle=Sec.String:S | BottomText:S
 [DiscordServer:]
 Meter=Shape

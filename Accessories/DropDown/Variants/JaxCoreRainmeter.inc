@@ -1,5 +1,5 @@
 [Variables]
-; SaveKey=Fill
+@includeSecvar=#@#Secvar.inc
 
 [Func]
 Measure=Script
@@ -17,13 +17,20 @@ MeterStyle=String:S
 [Div:0]
 Meter=Shape
 MeterStyle=Div:S
-; [Measure tester]
-; Meter=String
-; LeftMouseUpAction=[!CommandMeasure Func "interactionBox('MeasureTester')"][!DeactivateConfig]
-; MeterStyle=String:S
-; [Div:1]
-; Meter=Shape
-; MeterStyle=Div:S
+[Go to module]
+Meter=String
+LeftMouseUpAction=[!CommandMeasure Func "interactionBox('GoToPage', '#Skin.Name#')"][!DeactivateConfig]
+MeterStyle=String:S
+[Div:01]
+Meter=Shape
+MeterStyle=Div:S
+[Go to page]
+Meter=String
+LeftMouseUpAction=[!CommandMeasure Func "interactionBox('GoToModulePage', '#Skin.Name#')"][!DeactivateConfig]
+MeterStyle=String:S
+[Div:02]
+Meter=Shape
+MeterStyle=Div:S
 [Value Debug]
 Meter=String
 LeftMouseUpAction=[!CommandMeasure Func "interactionBox('ValueDebugger')"][!DeactivateConfig]

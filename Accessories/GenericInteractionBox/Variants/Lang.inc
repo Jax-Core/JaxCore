@@ -12,6 +12,7 @@ Measure=Plugin
 Plugin=PowershellRM
 DynamicVariables=1
 ScriptFile=#@#Powershell\Translate.ps1
+ExecutionPolicy=Unrestricted
 
 ; ---------------------------------------------------------------------------- ;
 ;                                    Content                                   ;

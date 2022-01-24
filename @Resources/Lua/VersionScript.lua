@@ -1,12 +1,18 @@
 function Update()
-    if SKIN:GetVariable('Skin.Name') == SKIN:GetVariable('BetaSkinList') then
-        SKIN:Bang('!ShowMeterGroup', 'DiscordButton')
-        SKIN:Bang('!SetOption', 'SubHeader', 'MEterStyle', 'Set.String:S | Subheader:4')
-        SKIN:Bang('!UpdateMeter', '*')
-        SKIN:Bang('!Redraw')
+    local function file_exists(name)
+        local f=io.open(name,"r")
+        if f~=nil then io.close(f) return true else return false end
+     end
+    SKIN:Bang('[!CommandMEasure CoreInstallHandler "GenCoreData"]')
+    local SkinsPath = SKIN:GetVariable('SKINSPATH')
+    local SkinName = SKIN:GetVariable('Skin.Name')
+    local BetaSkinList = SKIN:GetVariable('BetaSkinList')
+    if file_exists(SkinsPath..SkinName..'\\@Resources\\IsClone.txt') then
+        SKIN:Bang('[!HideMeterGroup Buttons][!HideMeterGroup HideIsClone][!SetOption SubHeader MeterStyle "Set.String:S | Subheader:5"][!SetOption Description MeterStyle "Set.String:S | Description:IsClone"][!UpdateMeter *][!Redraw]')
+    elseif SkinName == BetaSkinList then
+        SKIN:Bang('[!ShowMeterGroup DiscordButton][!SetOption SubHeader MeterStyle "Set.String:S | Subheader:4"][!UpdateMeter *][!Redraw]')
     else
-        SKIN:Bang('!EnableMeasureGroup', 'checkForBeta')
-        SKIN:Bang('!UpdateMeasureGroup', 'checkForBeta')
+        SKIN:Bang('[!EnableMeasureGroup CheckForbeta][!UpdateMeasureGroup CheckForBeta]')
     end
 end
 
@@ -16,7 +22,7 @@ function activateParse()
     -- local LastParsedVer = LastParsed:match('^.*|(.*)$')
     local Current = SKIN:GetVariable('Skin.Name')..'|'..SKIN:GetVariable('Version')
     if Current == LastParsed then
-        SKIN:Bang('!CommandMEasure', 'Func', "startDrop('RollBack', 'Button03', 'JaxCore')")
+        SKIN:Bang('!CommandMEasure', 'Func', "startDrop('RollBack', 'Rollback:Button', 'JaxCore')")
     else
         SKIN:Bang('!EnableMeasure', 'VersionList')
         SKIN:Bang('!UpdateMeasure', 'VersionList')
@@ -58,7 +64,7 @@ function parse()
     print('Written dropdown menu, showing...')
     SKIN:Bang('!WriteKeyValue', 'Variables', 'LastRollBackSkin', Current, saveLocation)
     SKIN:Bang('!SetVariable', 'LastRollBackSkin', Current)
-    SKIN:Bang('!CommandMEasure', 'Func', "startDrop('RollBack', 'Button03', 'JaxCore')")
+    SKIN:Bang('!CommandMEasure', 'Func', "startDrop('RollBack', 'Rollback:Button', 'JaxCore')")
 end
 
 function patchNoteCheck(MeasureUser)

@@ -16,7 +16,7 @@ function Update()
 		error("Invalid Operation")
 	end
 	SKIN:MoveWindow(moveX, moveY)
-	SKIN:Bang('[!CommandMeasure Func "importPosition('..moveX..', '..moveY..')"][!CommandMeasure ActionTimer "Execute 1"]')
+	SKIN:Bang('[!CommandMeasure SlideAnimation "importPosition('..moveX..', '..moveY..')"][!CommandMeasure ActionTimer "Execute 1"]')
 end
 
 function openSub()

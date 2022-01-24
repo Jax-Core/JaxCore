@@ -131,7 +131,7 @@ Fill=Fill Color 0,0,0,1
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Sec_Color#"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color 0,0,0,1"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 LeftMouseUpAction=[!CommandMeasure Func "startSide('Font', '#CURRENTSECTION#')"]
-RightMouseUpAction=[!SetVariable Editing "#CURRENTSECTION#"][!SetOption Input:M X "([#CURRENTSECTION#:X]+5*[Set.S])"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5*[Set.S])"][!CommandMeasure Input:M "ExecuteBatch 1"]
+RightMouseUpAction=[!SetOption Input:M X "([#CURRENTSECTION#:X]+5*[Set.S])"][!SetOption Input:M Y "([#CURRENTSECTION#:Y]+5*[Set.S])"][!CommandMeasure Func "processInput('0', '#CURRENTSECTION#', '', [[[&Func:LocalVar('#CURRENTSECTION#', 'SaveLocation', '#Sec.SaveLocation#')]]])"][!CommandMeasure Input:M "ExecuteBatch 1"]
 [Set.Value:S]
 X=((200-7.5)*[Set.S])r
 Y=(15*[Set.S])r
@@ -352,7 +352,8 @@ X=(#Set.P#-5*[Set.S])
 Y=((24/2*[Set.S])+#Set.P#/1.5)r
 Shape=Rectangle 0,0,(#Set.L#-#Set.P#*2),(40*[Set.S]),(#Set.R#/2) | StrokeWidth 0 | Extend This
 Shape2=Rectangle (5*[Set.S]),(5*[Set.S]),(30*[Set.S]),(30*[Set.S]),(#Set.R#) | StrokeWidth 0 | Extend Fill 
-Leftmouseupaction=[!WriteKeyvalue Variables "Skin.Set_Page" "#CURRENTSECTION#" "#@#SecVar.inc"][!UpdateMeasure CheckPreview][!Refresh]
+; Leftmouseupaction=[!WriteKeyvalue Variables "Skin.Set_Page" "#CURRENTSECTION#" "#@#SecVar.inc"][!UpdateMeasure CheckPreview][!Refresh]
+Leftmouseupaction=[!WriteKeyvalue Variables "Skin.Set_Page" "#CURRENTSECTION#" "#@#SecVar.inc"][!Refresh]
 This=Fill Color 0,0,0,1
 MouseOverAction=[!SetOption #CURRENTSECTION# This "Fill Color #Set.Sec_Color#"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# This "Fill Color 0,0,0,1"][!UpdateMeter #CURRENTSECTION#][!Redraw]
@@ -416,24 +417,38 @@ MouseLeaveAction=[!SetOption #CURRENTSECTION# 1232412414 "45 | [&Func:LocalVar('
 ;                                 Close button                                 ;
 ; ---------------------------------------------------------------------------- ;
 
+[EscReturn]
+Meter=Shape
+X=(#Set.W#-45*[Set.S])
+Y=(16*[Set.S])
+DynamicVariables=1
+Shape=Ellipse 0,0,(5*[Set.S]),(5*[Set.S]) | StrokeWidth 20 | StrokeColor 0,0,0,1 | Fill Color 0,0,0,1
+Shape2=Path Triangle | StrokeWidth 0 | Extend FillE | Scale [Set.S],[Set.S]
+Triangle=-5,0 | LineTo 5,5 | LineTo 5,-5 | ClosePath 1
+FillE=Fill Color #Set.Text_Color#,50
+MouseOverAction=[!SetOption EscReturn FillE "Fill Color #Set.Text_Color#"][!UpdateMeter EscReturn][!Redraw]
+MouseLeaveAction=[!SetOption EscReturn FillE "Fill Color #Set.Text_Color#,50"][!UpdateMeter EscReturn][!Redraw]
+LeftMouseUpAction=[!ActivateConfig "#CURRENTCONFIG#" "Home.ini"]
+; LeftMouseUpAction=[!UpdateMeasure CheckPreview][!ActivateConfig "#CURRENTCONFIG#" "Home.ini"]
 
 [Esc]
 Meter=Shape
-X=(#Set.W#-15*[Set.S])
-Y=(15*[Set.S])
+X=(#Set.W#-16*[Set.S])
+Y=(16*[Set.S])
 DynamicVariables=1
 Shape=Ellipse 0,0,(5*[Set.S]),(5*[Set.S]) | StrokeWidth 20 | StrokeColor 0,0,0,1 | Extend FillE
 FillE=Fill Color #Set.Text_Color#,50
 MouseOverAction=[!SetOption Esc FillE "Fill Color #Set.Text_Color#"][!UpdateMeter Esc][!Redraw]
 MouseLeaveAction=[!SetOption Esc FillE "Fill Color #Set.Text_Color#,50"][!UpdateMeter Esc][!Redraw]
-LeftMouseUpAction=[!UpdateMeasure CheckPreview][!ActivateConfig "#CURRENTCONFIG#" "Home.ini"]
+LeftMouseUpAction=[!DeactivateConfig]
+; LeftMouseUpAction=[!UpdateMeasure CheckPreview][!ActivateConfig "#CURRENTCONFIG#" "Home.ini"]
 RightMOuseUpAction=[!commandMeasure Func "startDrop('Rainmeter', '#CURRENTSECTION#', 'JaxCore')"]
 
-[CheckPreview]
-Measure=String
-String=#SKIn.Name# #Skin.Set_Page#
-Ifmatch=^ModularClocks Appearance$
-Ifmatchaction=[!CommandMeasure Script:M "Restore()"]
-ifmatchmode=1
-disabled=1
-group=nuol
+; [CheckPreview]
+; Measure=String
+; String=#SKIn.Name# #Skin.Set_Page#
+; Ifmatch=^ModularClocks Appearance$
+; Ifmatchaction=[!CommandMeasure Script:M "Restore()"]
+; ifmatchmode=1
+; disabled=1
+; group=nuol

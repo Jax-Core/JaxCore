@@ -77,5 +77,52 @@ function GenCoreData {
         } else {
             $RmAPI.Log("Failed to find coredata in programs, generating")
             New-Item -Path "$SkinsPath..\" -Name "CoreData" -ItemType "directory"
+            $RmAPI.Bang('[!Refresh]')
         }
+}
+
+# function CheckIfClone {
+#     $SkinsPath = $RmAPI.VariableStr('SKINSPATH')
+#     $SkinName = $RmAPI.VariableStr('Skin.Name')
+#     $BetaSkinList = $RmAPI.VariableStr('BetaSkinList')
+#     If (Test-Path -Path "$SkinsPath$SkinName\@Resources\IsClone.txt") {
+#         $RmAPI.Log('IsClone')
+#         $RmAPI.Bang('[!HideMeterGroup Buttons][!HideMeterGroup HideIsClone][!SetOption SubHeader MeterStyle "Set.String:S | Subheader:5"][!SetOption Description MeterStyle "Set.String:S | Description:IsClone"][!UpdateMeter *][!Redraw]')
+#     } elseif ("$SkinName" -Match "$BetaSkinList") {
+#         $RmAPI.Bang('[!ShowMeterGroup DiscordButton][!SetOption SubHeader MeterStyle "Set.String:S | Subheader:4"][!UpdateMeter *][!Redraw]')
+#     } else {
+#         $RmAPI.Bang('[!EnableMeasureGroup CheckForbeta][!UpdateMeasureGroup CheckForBeta]')
+#     }
+# }
+
+function DuplicateSkin {
+    param (
+    [string]$DuplicateName = 'CloneSkinName'
+    )
+    $SkinsPath = $RmAPI.VariableStr('SKINSPATH')
+    $Resources = $RmAPI.VariableStr('@')
+    $SkinName = $RmAPI.VariableStr('Sec.arg1')
+
+    If (Test-Path -Path "$SkinsPath$DuplicateName") {
+        $RmAPI.Log("Folder already exits")
+    } else{
+        $RmAPI.Log("Duplicating to $DuplicateName")
+        Copy-Item -Path "$SkinsPath$SkinName\" -Destination "$SkinsPath$DuplicateName\" -Recurse
+        New-Item -Path "$SkinsPath$DuplicateName\@Resources\" -Name "IsClone.txt" -ItemType "file"
+    }
+    $RmAPI.Bang("[!WriteKeyValue Rainmeter OnRefreshAction `"`"`"[!WriteKeyValue Rainmeter OnRefreshAction `"#*Sec.DefaultStartActions*#`"][!DeactivateConfig]`"`"`"][!WriteKeyValue Variables Skin.Name $DuplicateName `"$($Resources)SecVar.inc`"][!WriteKeyValue Variables Skin.Set_Page Info `"$($Resources)SecVar.inc`"][`"$($Resources)Addons\RestartRainmeter.exe`"]")
+
+}
+
+function Uninstall {
+    $SkinsPath = $RmAPI.VariableStr('SKINSPATH')
+    $Resources = $RmAPI.VariableStr('@')
+    $SkinName = $RmAPI.VariableStr('Sec.arg1')
+    if ($RmAPI.Measure('ActiveChecker') -eq 1) {
+        $RmAPI.Bang("[!DeactivateConfig `"$SkinName\Main`"]")
+    }
+    Start-Sleep -s 1
+    Remove-Item -LiteralPath "$SkinsPath$SkinName" -Force -Recurse
+    Start-Sleep -s 1
+    $RmAPI.Bang("[!WriteKeyvalue Variables Sec.variant `"Uninstalled`"][!WriteKeyValue Variables Skin.Name $SkinName `"$($Resources)SecVar.inc`"][!WriteKeyValue Variables Skin.Set_Page Info `"$($Resources)SecVar.inc`"][`"$($Resources)Addons\RestartRainmeter.exe`"]")
 }
