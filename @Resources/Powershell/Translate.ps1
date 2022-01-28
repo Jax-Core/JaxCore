@@ -11,8 +11,20 @@ $escapePatterns = @(
     'iTunes',
     'Foobar',
     'WinAMP',
+    'Spicetify',
+    'WebNowPlaying',
+    '\".+?\"',
     '\[.+?\]',
     '#.+?#'
+)
+$escapeFiles = @(
+    "$($RmAPI.VariableStr('SKINSPATH'))#JaxCore\Accessories\Popup\Variants\News.inc",
+    "$($RmAPI.VariableStr('SKINSPATH'))#JaxCore\Accessories\Popup\Variants\CoreNews.inc",
+    "$($RmAPI.VariableStr('SKINSPATH'))#JaxCore\Accessories\Tour\Pages\Page1.inc",
+    "$($RmAPI.VariableStr('SKINSPATH'))#JaxCore\Accessories\Tour\Pages\Page2.inc",
+    "$($RmAPI.VariableStr('SKINSPATH'))#JaxCore\Accessories\Tour\Pages\Page3.inc",
+    "$($RmAPI.VariableStr('SKINSPATH'))#JaxCore\Accessories\Tour\Pages\Page4.inc",
+    "$($RmAPI.VariableStr('SKINSPATH'))#JaxCore\Accessories\Tour\Pages\Page5.inc"
 )
 
 class TranslateString {
@@ -162,7 +174,7 @@ function Export-LangFile {
     }
 
     if (![System.IO.Directory]::Exists("$($RmAPI.VariableStr('SKINSPATH'))$skin")) {
-        $RmAPI.Log("Skin $skin not found!")
+        $RmAPI.Log("Skin folder $($RmAPI.VariableStr('SKINSPATH'))$skin not found!")
         return
     }
 
@@ -173,7 +185,7 @@ function Export-LangFile {
     $translateArray = @()
     $translateStringArr = @()
 
-    foreach ($file in (Get-ChildItem $skindir -Include '*.ini', '*.inc' -Recurse).FullName) {
+    foreach ($file in (Get-ChildItem $skindir -Include '*.ini', '*.inc' -Recurse | ?{$escapeFiles -notcontains $_.FullName} ).FullName) {
         $ini = Get-IniContent $file
         
         $hasTranslation = $false
@@ -182,7 +194,7 @@ function Export-LangFile {
             if ($section.Value.Keys -contains 'Text') {
                 $hasTranslation = $true
                 $translateArray += [TranslateString]::new(
-                    ($section.Value.Text -replace '\"', '{quot}'),
+                    $section.Value.Text,
                     'Text',
                     $section.Key,
                     ($file -replace [regex]::Escape($RmAPI.VariableStr('SKINSPATH')), ''),

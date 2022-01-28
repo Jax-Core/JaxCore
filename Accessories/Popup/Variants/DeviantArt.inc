@@ -9,10 +9,10 @@
 Text="DeviantArt"
 
 [Description]
-Text="This is the place where I release new skins. Watch me on DA to keep yourself up to date!"
+Text=This is the place where I release new skins. Watch me on DA to keep yourself up to date!
 
 [INfo]
-Text="Click here to be redirected to the DA page."
+Text=Click here to be redirected to the DA page.
 
 
 [WhatsNew:]

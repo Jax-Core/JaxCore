@@ -9,24 +9,24 @@ ImageName=Variants\Splash\#Sec.Arg1#.png
 
 [Title]
 Meter=String
-Text="Skin clone and uninstaller"
+Text=Golden Insiders \ Translators recruiting now!
 MeterStyle=Sec.String:S | Style.Title:S
 
 [Description.1]
 Meter=String
-Text="- NEW! You can now clone modules at their info page, or uninstall them if you wish to, all accessible within Core."
+Text=- NEW! To appreciate my supporters, both one-time donations and monthly donators now have early access to upcoming modules! Check it out on my kofi page.
 MeterStyle=Sec.String:S | Style.Description:S
 
 [Description.0]
 Meter=String
-Text=- IMPORTANT! MIUI-Shade is unable to be automatically updated right now. CLICK THIS MESSAGE to copy the patch code, then right click Core's close button, select "Bang", paste copied contents and press enter. Then you can update from Core.
+Text=- NEW! 3 upcoming releases: YourMixer (VolumeMixer), ValliStart 3.0, YourFlyouts (MediaFlyouts)
 MeterStyle=Sec.String:S | Style.Description:S
-[Link.0]
-Meter=String
-Text="Click here to copy"
-Y=R
-LeftMouseUpAction=[!SetClip """"#SKINSPATH#MIUI-Shade\@Resources\Actions\AHKv1.exe" "#SKINSPATH#MIUI-Shade\@Resources\Actions\Source Code\close.ahk""""]
-MeterStyle=Sec.String:S | Style.Link:S
+; [Link.0]
+; Meter=String
+; Text=Click here to copy
+; Y=R
+; LeftMouseUpAction=[!SetClip """"#SKINSPATH#MIUI-Shade\@Resources\Actions\AHKv1.exe" "#SKINSPATH#MIUI-Shade\@Resources\Actions\Source Code\close.ahk""""]
+; MeterStyle=Sec.String:S | Style.Link:S
 
 ; [Description.5]
 ; Meter=String
@@ -35,34 +35,13 @@ MeterStyle=Sec.String:S | Style.Link:S
 
 [Description.2]
 Meter=String
-Text="- Release and update schedule is now available, read it here:"
+Text=- I am now finding translation helpers to adjust Core language files! You can apply now on the Discord server.
 MeterStyle=Sec.String:S | Style.Description:S
-[Link.1]
+
+[Description.3]
 Meter=String
-Text="https://ibb.co/58S57fD"
-LeftMouseUpAction=["https://ibb.co/58S57fD"]
-MeterStyle=Sec.String:S | Style.Link:S
-
-; [Description.4]
-; Meter=String
-; Text="- We'll be needing langauge translators soon. If you can help out, join the discord server to be notified when it's available! Thanks :D"
-; MeterStyle=Sec.String:S | Style.Description:S
-
-; [Description.4]
-; Meter=String
-; Text="- Fixed alignment context menu not displaying"
-; MeterStyle=Sec.String:S | Style.Description:S
-
-; [Description.5]
-; Meter=String
-; Text="- Added Scrollbar and a few bug fixes"
-; MeterStyle=Sec.String:S | Style.Description:S
-
-; [Description.6]
-; Meter=String
-; Y=(#Sec.P#*2)R
-; Text="Happy Holidays everyone! This is the biggest update Core has ever received, if you liked it consider leaving a star on the DeviantArt post!"
-; MeterStyle=Sec.String:S | Style.Description:S
+Text=- Our Discord server had just reached 4000 members! Join us today!
+MeterStyle=Sec.String:S | Style.Description:S
 
 
 ; [DA:]
@@ -78,10 +57,23 @@ MeterStyle=Sec.String:S | Style.Link:S
 ; StringAlign=CenterCenter
 ; Text=DA post
 ; MeterStyle=Sec.String:S | BottomText:S
+[KF:]
+Meter=Shape
+X=(#Sec.W#/2-(#Sec.BottomWidth#*3+#Sec.P#)/2)
+Y=(#Sec.H#-#Sec.P#-#SEc.BottomHeight#)
+Colorover=FF5E5A
+Colorleave=FF5E5A
+LeftMouseUpAction=["https://ko-fi.com/jaxoriginals"]
+meterStyle=BottomBox:S | FalseStyleDesk
+[DA:String]
+Meter=String
+StringAlign=CenterCenter
+Text=Ko-fi page
+MeterStyle=Sec.String:S | BottomText:S
 [Core:]
 Meter=Shape
-X=(#Sec.W#/2-(#Sec.BottomWidth#*2+#Sec.P#/2)/2)
-Y=(#Sec.H#-#Sec.P#-#SEc.BottomHeight#)
+; X=(#Sec.W#/2-(#Sec.BottomWidth#*2+#Sec.P#/2)/2)
+; Y=(#Sec.H#-#Sec.P#-#SEc.BottomHeight#)
 ; LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name """#JaxCore""" "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page GlobalVars "#@#SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.ini"][!DeactivateConfig]
 LeftMouseUpAction=[!DeactivateConfig]
 meterStyle=BottomBox:S | FalseStyleDesk

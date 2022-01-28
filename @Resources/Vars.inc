@@ -3,14 +3,14 @@
 UserNameCheckVariable=Jax Tam
 LastRollBackSkin=ModularVisualizer|1.02
 ; --------------------------------- Language --------------------------------- ;
-Set.Lang=Chinese Simplified
+Set.Lang=Japanese
 ; ----------------------------- Scaling variables ---------------------------- ;
 Set.P=(40*[Set.S])
 Set.Home.P=(100*[Set.S])
 Set.R=(10)
 Set.L=(200*([Set.S]+0.2))
-Set.W=1085
-Set.H=778
+Set.W=1065
+Set.H=860
 Set.Resizable=1
 ; --------------------------- Appearance variables --------------------------- ;
 Set.Style=Normal

@@ -9,9 +9,8 @@ function check()
         print('Beta - '..ParsedVer..'<='..CoreVer)
     else
         print('Update required - '..ParsedVer..'>='..CoreVer)
-        SKIN:Bang('!CommandMeasure', 'CheckForDataFolder' ,'Check-Data')
-        SKIN:Bang('!WriteKeyValue', 'Variables', 'ParsedVer', ParsedVerFull, SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\UpdatePrompt\\Toast\\Main.ini')
-        SKIN:Bang('!ActivateConfig', '#JaxCore\\Accessories\\UpdatePrompt\\Toast')
+        -- SKIN:Bang('!WriteKeyValue', 'Variables', 'ParsedVer', ParsedVerFull, SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\UpdatePrompt\\Toast\\Main.ini')
+        SKIN:Bang('!CommandMeasure', 'Func', 'interactionBox(\'CoreUpdateAvailable\', \''..ParsedVerFull..'\')')
     end
 end
 
@@ -29,11 +28,11 @@ function checkNews()
     end
 end
 
-function runUpdate()
-    ParsedVerFull = SKIN:GetVariable('ParsedVer')
-    SKIN:Bang('!WriteKeyValue', 'Variables', 'ParsedVer', '0', SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\UpdatePrompt\\Toast\\Main.ini')
-    SKIN:Bang('!SetVariable', 'DownloadLink', 'https://github.com/Jax-Core/JaxCore/releases/download/v'..ParsedVerFull..'/JaxCore_v'..ParsedVerFull..'.rmskin\n')
-    SKIN:Bang('!SetVariable', 'DownloadName', 'JaxCore'..ParsedVerFull)
-    SKIN:Bang('!SetVariable', 'DownloadConfig', '#JaxCore')
-    SKIN:Bang('!CommandMeasure', 'CoreInstallHandler', 'Install')
-end
+-- function runUpdate()
+--     ParsedVerFull = SKIN:GetVariable('ParsedVer')
+--     SKIN:Bang('!WriteKeyValue', 'Variables', 'ParsedVer', '0', SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\UpdatePrompt\\Toast\\Main.ini')
+--     SKIN:Bang('!SetVariable', 'DownloadLink', 'https://github.com/Jax-Core/JaxCore/releases/download/v'..ParsedVerFull..'/JaxCore_v'..ParsedVerFull..'.rmskin\n')
+--     SKIN:Bang('!SetVariable', 'DownloadName', 'JaxCore'..ParsedVerFull)
+--     SKIN:Bang('!SetVariable', 'DownloadConfig', '#JaxCore')
+--     SKIN:Bang('!CommandMeasure', 'CoreInstallHandler', 'Install')
+-- end

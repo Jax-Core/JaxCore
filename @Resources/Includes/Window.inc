@@ -9,8 +9,8 @@ ScaleWindowW=1000
 ; ---------------------------------------------------------------------------- ;
 ;                             CacheWindowVariables                             ;
 ; ---------------------------------------------------------------------------- ;
-WindowPosX=556
-WindowPosY=298
+WindowPosX=561
+WindowPosY=113
 ; ---------------------------- Important variables --------------------------- ;
 WindowMaximized=0
 WindowDragMarginSize=6

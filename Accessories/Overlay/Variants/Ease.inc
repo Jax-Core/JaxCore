@@ -153,7 +153,7 @@ Class="In"
 MeterStyle=Sec.Button:S
 [Text1]
 Meter=String
-Text=In
+Text="In"
 MEterStyle=Sec.String:S | Sec.Text:S
 [Shape2]
 Meter=Shape
@@ -161,7 +161,7 @@ Class="Out"
 MeterStyle=Sec.Button:S
 [Text2]
 Meter=String
-Text=Out
+Text="Out"
 MEterStyle=Sec.String:S | Sec.Text:S
 
 
@@ -172,77 +172,77 @@ Y=(#Sec.H#*0.4)
 MeterStyle=Sec.Button2:S
 [LinearText]
 Meter=String
-Text=Linear
+Text="Linear"
 MEterStyle=Sec.String:S | Sec.Text2:S
 [Sine]
 Meter=Shape
 MeterStyle=Sec.Button2:S
 [SineText]
 Meter=String
-Text=Sine
+Text="Sine"
 MEterStyle=Sec.String:S | Sec.Text2:S
 [Quad]
 Meter=Shape
 MeterStyle=Sec.Button2:S
 [QuadText]
 Meter=String
-Text=Quad
+Text="Quad"
 MEterStyle=Sec.String:S | Sec.Text2:S
 [Cubic]
 Meter=Shape
 MeterStyle=Sec.Button2:S
 [CubicText]
 Meter=String
-Text=Cubic
+Text="Cubic"
 MEterStyle=Sec.String:S | Sec.Text2:S
 [Quart]
 Meter=Shape
 MeterStyle=Sec.Button2:S
 [QuartText]
 Meter=String
-Text=Quart
+Text="Quart"
 MEterStyle=Sec.String:S | Sec.Text2:S
 [Quint]
 Meter=Shape
 MeterStyle=Sec.Button2:S
 [QuintText]
 Meter=String
-Text=Quint
+Text="Quint"
 MEterStyle=Sec.String:S | Sec.Text2:S
 [Expo]
 Meter=Shape
 MeterStyle=Sec.Button2:S
 [ExpoText]
 Meter=String
-Text=Expo
+Text="Expo"
 MEterStyle=Sec.String:S | Sec.Text2:S
 [Circ]
 Meter=Shape
 MeterStyle=Sec.Button2:S
 [CircText]
 Meter=String
-Text=Circ
+Text="Circ"
 MEterStyle=Sec.String:S | Sec.Text2:S
 [Back]
 Meter=Shape
 MeterStyle=Sec.Button2:S
 [BackText]
 Meter=String
-Text=Back
+Text="Back"
 MEterStyle=Sec.String:S | Sec.Text2:S
 [Elastic]
 Meter=Shape
 MeterStyle=Sec.Button2:S
 [ElasticText]
 Meter=String
-Text=Elastic
+Text="Elastic"
 MEterStyle=Sec.String:S | Sec.Text2:S
 [Bounce]
 Meter=Shape
 MeterStyle=Sec.Button2:S
 [BounceText]
 Meter=String
-Text=Bounce
+Text="Bounce"
 MEterStyle=Sec.String:S | Sec.Text2:S
 
 

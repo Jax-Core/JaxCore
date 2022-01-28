@@ -4,7 +4,7 @@ SKINLIST=Combilaunch | Plainext | MIUI-Shade | ModularClocks | ModularPlayers | 
 Combilaunch=1.3
 Plainext=1.81
 MIUI-Shade=2.03
-ModularClocks=2.13
+ModularClocks=2.14
 ModularPlayers=2.4
 Keystrokes=1.5
 Keylaunch=1.51
@@ -14,4 +14,4 @@ IdleStyle=1.42
 ModularVisualizer=1.02
 YourFlyouts=0.0
 
-NewsID=9
+NewsID=10

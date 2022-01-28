@@ -323,7 +323,7 @@ Y=(#Sec.P#)R
 MeterStyle=Row:S
 [Name.0]
 Meter=String
-Text=AIMP.CAD.WMP.iTunes.WinAMP.WNP
+Text="AIMP.CAD.WMP.iTunes.WinAMP.WNP"
 MeterStyle=Sec.String:S | Name:S
 [Value.0]
 Meter=String
@@ -360,7 +360,7 @@ Y=(#Sec.P#/2)R
 MeterStyle=Row:S
 [Name.1]
 Meter=String
-Text=Player
+Text="Player"
 MeterStyle=Sec.String:S | Name:S
 [Value.1]
 Meter=String
@@ -372,7 +372,7 @@ Meter=Shape
 MeterStyle=Row:S
 [Name.2]
 Meter=String
-Text=Artist
+Text="Artist"
 MeterStyle=Sec.String:S | Name:S
 [Value.2]
 Meter=String
@@ -384,7 +384,7 @@ Meter=Shape
 MeterStyle=Row:S
 [Name.3]
 Meter=String
-Text=Track
+Text="Track"
 MeterStyle=Sec.String:S | Name:S
 [Value.3]
 Meter=String
@@ -396,7 +396,7 @@ Meter=Shape
 MeterStyle=Row:S
 [Name.4]
 Meter=String
-Text=Progress
+Text="Progress"
 MeterStyle=Sec.String:S | Name:S
 [Value.4]
 Meter=String
@@ -408,7 +408,7 @@ Meter=Shape
 MeterStyle=Row:S
 [Name.5]
 Meter=String
-Text=CurrentPosition
+Text="CurrentPosition"
 MeterStyle=Sec.String:S | Name:S
 [Value.5]
 Meter=String
@@ -420,7 +420,7 @@ Meter=Shape
 MeterStyle=Row:S
 [Name.6]
 Meter=String
-Text=Length
+Text="Length"
 MeterStyle=Sec.String:S | Name:S
 [Value.6]
 Meter=String
@@ -432,7 +432,7 @@ Meter=Shape
 MeterStyle=Row:S
 [Name.7]
 Meter=String
-Text=Shuffle
+Text="Shuffle"
 MeterStyle=Sec.String:S | Name:S
 [Value.7]
 Meter=String
@@ -444,7 +444,7 @@ Meter=Shape
 MeterStyle=Row:S
 [Name.8]
 Meter=String
-Text=Heart
+Text="Heart"
 MeterStyle=Sec.String:S | Name:S
 [Value.8]
 Meter=String
@@ -456,7 +456,7 @@ Meter=Shape
 MeterStyle=Row:S
 [Name.9]
 Meter=String
-Text=Repeat
+Text="Repeat"
 MeterStyle=Sec.String:S | Name:S
 [Value.9]
 Meter=String
@@ -468,7 +468,7 @@ Meter=Shape
 MeterStyle=Row:S
 [Name.10]
 Meter=String
-Text=IDLE_TIME
+Text="IDLE_TIME"
 MeterStyle=Sec.String:S | Name:S
 [Value.10]
 Meter=String

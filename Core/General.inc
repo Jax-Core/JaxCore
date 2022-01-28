@@ -58,10 +58,10 @@ Plugin=PowershellRM
 DynamicVariables=1
 ScriptFile=#@#Powershell\AddShortcut.ps1
 
-[ProtocolInstaller]
-Measure=Plugin
-Plugin=PowerShellRM
-ScriptFile=#ROOTCONFIGPATH#CoreInstaller\Helpers\ProtocolInstaller\ProtocolInstaller.ps1
+; [ProtocolInstaller]
+; Measure=Plugin
+; Plugin=PowerShellRM
+; ScriptFile=#ROOTCONFIGPATH#CoreInstaller\Helpers\ProtocolInstaller\ProtocolInstaller.ps1
 
 [CoreInstallHandler]
 Measure=Plugin
@@ -339,48 +339,48 @@ Text=Program list
 
 ; --------------------------------- Section5 --------------------------------- ;
 
-[Section5]
-Meter=Shape
-X=(([ContentContainer:W]-#Set.P#*2)/2+55*[SEt.S])
-Y=([Section4:Y]-#Set.P#)
-Shape=Rectangle 0,0,(([ContentContainer:W]-#Set.P#)/2-5*[Set.S]),(250*[Set.S]),(#Set.R#/4) | StrokeWidth 0 | Fill Color #Set.Sec_Color#,200
-Container=ContentContainer
-DynamicVariables=1
+; [Section5]
+; Meter=Shape
+; X=(([ContentContainer:W]-#Set.P#*2)/2+55*[SEt.S])
+; Y=([Section4:Y]-#Set.P#)
+; Shape=Rectangle 0,0,(([ContentContainer:W]-#Set.P#)/2-5*[Set.S]),(250*[Set.S]),(#Set.R#/4) | StrokeWidth 0 | Fill Color #Set.Sec_Color#,200
+; Container=ContentContainer
+; DynamicVariables=1
 
-[Section5.Icon]
-Meter=Image
-ImageName=#@#Images\CoreAssets\WebInstallation.png
-X=((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])/2-100/2*[Set.S])r
-Y=(40*[Set.S])r
-W=(100*[Set.S])
-H=(100*[Set.S])
-Container=ContentContainer
-ImageTint=#Set.Text_Color#
-DynamicVariables=1
+; [Section5.Icon]
+; Meter=Image
+; ImageName=#@#Images\CoreAssets\WebInstallation.png
+; X=((([ContentContainer:W]-#Set.P#)/2-5*[Set.S])/2-100/2*[Set.S])r
+; Y=(40*[Set.S])r
+; W=(100*[Set.S])
+; H=(100*[Set.S])
+; Container=ContentContainer
+; ImageTint=#Set.Text_Color#
+; DynamicVariables=1
 
-[Section5.Text]
-Meter=String
-X=(100/2*[Set.S])r
-Y=((30+100)*[Set.S])r
-Text=Web installation#CRLF#Allows you to install skins from the JaxCore website.
-FontSize=(10*[Set.S])
-Container=ContentContainer
-StringAlign=CenterCenter
-InlinePattern=#CRLF#.*
-InlineSetting=Color | #Set.SubText_Color#
-InlinePattern2=#CRLF#.*
-InlineSetting2=Size | (9*[Set.S])
-MeterStyle=Set.String:S
+; [Section5.Text]
+; Meter=String
+; X=(100/2*[Set.S])r
+; Y=((30+100)*[Set.S])r
+; Text=Web installation#CRLF#Allows you to install skins from the JaxCore website.
+; FontSize=(10*[Set.S])
+; Container=ContentContainer
+; StringAlign=CenterCenter
+; InlinePattern=#CRLF#.*
+; InlineSetting=Color | #Set.SubText_Color#
+; InlinePattern2=#CRLF#.*
+; InlineSetting2=Size | (9*[Set.S])
+; MeterStyle=Set.String:S
 
-[WebInstallation]
-Meter=Shape
-MeterStyle=Set.Bool:S | WebInstallation:#WebInstallation#
-Y=R
-X=(-50/2*[Set.S])r
-[WebInstallation:0]
-Leftmouseupaction=[!CommandMeasure ProtocolInstaller "Add-CoreProtocol"]
-[WebInstallation:1]
-LeftMouseUpAction=
+; [WebInstallation]
+; Meter=Shape
+; MeterStyle=Set.Bool:S | WebInstallation:#WebInstallation#
+; Y=R
+; X=(-50/2*[Set.S])r
+; [WebInstallation:0]
+; Leftmouseupaction=[!CommandMeasure ProtocolInstaller "Add-CoreProtocol"]
+; [WebInstallation:1]
+; LeftMouseUpAction=
 
 [Div:1]
 Meter=Shape
@@ -417,8 +417,6 @@ Y=(#Set.H#-100*[Set.S])
 
 [DivCat:1293s18]
 Meter=
-[ActiveChecker]
-Measure=
 [BottomButton]
 Meter=
 [BottomText]

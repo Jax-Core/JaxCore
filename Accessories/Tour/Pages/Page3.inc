@@ -2,11 +2,6 @@
 [LoadActions]
 ActionList1=Start0 | Wait 500 | Start1 | Wait 1000 | start2 | PSRM
 
-[ProtocolInstaller]
-Measure=Plugin
-Plugin=PowerShellRM
-ScriptFile=#ROOTCONFIGPATH#CoreInstaller\Helpers\ProtocolInstaller\ProtocolInstaller.ps1
-
 [PSRM]
 Measure=Plugin
 Plugin=PowershellRM
@@ -193,50 +188,6 @@ Container=Card1.Container
 
 
 ; ---------------------------------------------------------------------------- ;
-;                                    Card 2                                    ;
-; ---------------------------------------------------------------------------- ;
-
-[Card2.Container]
-Meter=Shape
-X=(#Sec.P2#)R
-y=r
-MeterStyle=Card.Container:S
-DynamicVariables=1
-Group=Tweenable
-[Card2.Shape]
-Meter=Shape
-MeterStyle=Card.Shape:S
-This=180 | BAFFCA ; 0.0 | 00FF37 ; 1.0
-Container=Card2.Container
-[Card2.Image]
-Meter=Image
-MeterStyle=Card.Image:S
-Container=Card2.Container
-ImageName=#ROOTCONFIGPATH#Accessories\Tour\Images\WebInstallation.png
-[Card2.Title]
-Meter=String
-MeterStyle=Set.String:S | Card.Title:S
-Text=Web Installation#CRLF#Enables you to install modules from JaxCore's website, pretty handy if you ask me!
-Container=Card2.Container
-[Card2.Info]
-Meter=String
-Text=You'll be prompted for administrator permission
-MeterStyle=Set.String:S | Card.Info:S
-Container=Card2.Container
-[Card2.Button1.Shape]
-Meter=Shape
-MeterStyle=CardButton:S | CardButton#WebInstallation#:S
-Leftmouseupaction=[!CommandMeasure ProtocolInstaller "Add-CoreProtocol"][!SetVariable WebInstallation 1][!Updatemeter #CURRENTSECTION#][!Redraw]
-DynamicVariables=1
-Container=Card2.Container
-[Card2.Button1.Text]
-Meter=String
-MeterStyle=Set.String:S | CardIcon:S
-Text=Integrate
-Container=Card2.Container
-
-
-; ---------------------------------------------------------------------------- ;
 ;                                    Card 3                                    ;
 ; ---------------------------------------------------------------------------- ;
 
@@ -285,10 +236,10 @@ Container=Card3.Container
 Meter=Shape
 X=(#Sec.W#-(20)*#Sec.S#-#Sec.p2#)
 Y=(#Sec.H#-(40)*#Sec.S#-#Sec.p2#)
-Shape=Ellipse 0,0,(20*[ButtonNextTimer]/1000*#Sec.S#) | StrokeWidth 0 | Extend This
-This=Fill Color 0,255,0,(100*[ButtonNextTimer]/1000)
-MouseOverAction=[!SetOption #CURRENTSECTION# This "Fill Color 0,255,0,(200*[*ButtonNextTimer*]/1000)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# This "Fill Color 0,255,0,(100*[*ButtonNextTimer*]/1000)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+Shape=Ellipse 0,0,(20*[ButtonNextTimer]/500*#Sec.S#) | StrokeWidth 0 | Extend This
+This=Fill Color 0,255,0,(100*[ButtonNextTimer]/500)
+MouseOverAction=[!SetOption #CURRENTSECTION# This "Fill Color 0,255,0,(200*[*ButtonNextTimer*]/500)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# This "Fill Color 0,255,0,(100*[*ButtonNextTimer*]/500)"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 LeftMouseUpAction=[!CommandMeasure LoadActions "Execute 2"]
 Container=GlobalContainer
 DynamicVariables=1
@@ -307,7 +258,7 @@ Hidden=1
 [ButtonNextTimer]
 Measure=Calc
 Formula=ButtonNextTimer + 1
-IfCondition=ButtonNextTimer >= 1000
+IfCondition=ButtonNextTimer >= 500
 IfTrueAction=[!ShowMeter Page.ButtonNext.Icon][!SetOption Pagee.ButtonNext.Shape UpdateDivider -1][!UpdateMeter *][!Redraw][!PauseMeasure #CURRENTSECTION#]
 DynamicVariables=1
 UpdateDivider=1

@@ -2,6 +2,10 @@
 Sec.W=(256*#Sec.S#)
 ; SaveKey=Fill
 
+[Func]
+MEasure=Script
+ScriptFile=#@#Lua\Func.lua
+
 ; ---------------------------------------------------------------------------- ;
 ;                                    Content                                   ;
 ; ---------------------------------------------------------------------------- ;
@@ -16,7 +20,8 @@ Meter=Shape
 MeterStyle=Div:S
 [Show Welcome Screen]
 Meter=String
-LeftMouseUpAction=[!WriteKeyValue Variables Sec.Page 1 "#SKINSPATH#\#JaxCore\Accessories\Tour\Main.ini"][!ActivateConfig "#JaxCore\Accessories\Tour"]
+; LeftMouseUpAction=[!WriteKeyValue Variables Sec.Page 1 "#SKINSPATH#\#JaxCore\Accessories\Tour\Main.ini"][!ActivateConfig "#JaxCore\Accessories\Tour"]
+LeftMouseUpAction=[!CommandMeasure Func "interactionBox('tour1')"]
 MeterStyle=String:S
 [Div:2]
 Meter=Shape

@@ -37,6 +37,8 @@ function Install {
             $RmAPI.Bang("[!DeactivateConfig $config]")
         }
     }
+    
+    $RmAPI.Bang("[!CommandMeasure Func `"interactionBox('UpdatePrompt', '$name')`"]")
 
     Invoke-WebRequest -Uri $url -OutFile $outPath
     if (-not [System.IO.File]::Exists($outPath)) {
@@ -50,9 +52,6 @@ function Install {
         Start-Sleep -s 1
         $wshell.SendKeys('~')
     }
-
-    # script inspired by ModkaVart.
-    # v2 script by death
 }
 
 function GenCoreData {

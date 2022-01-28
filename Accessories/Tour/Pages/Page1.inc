@@ -1,4 +1,3 @@
-
 [LoadActions]
 ActionList1=Start0 | Wait 100 | Start1 | Wait 1000 | Start2 | Wait 1000 | Start3 | Wait 600 | NextPage
 Custom1=[!CommandMeasure CheckForDataFolder "Check-Data"]
@@ -31,6 +30,7 @@ ScriptFile=#@#Powershell\CheckData.ps1
 Modifier=Scale #TweenNode1#,#TweenNode1#
 Shape2=Rectangle (#Sec.W#/2-(210+100*#TweenNode4#)/2*#Sec.S#),(#Sec.H#/2-(210+100*#TweenNode4#)/2*#Sec.S#),((210+100*#TweenNode4#)*#Sec.S#),((210+100*#TweenNode4#)*#Sec.S#) | Fill Color 0,0,0,0 | StrokeWidth 4 | Stroke Color #Set.Accent_Color#,(#TweenNode3#*255-255*#TweenNode4#) | Rotate 45
 DynamicVariables=1
+MiddleMouseUpAction=[!CommandMEasure CoreBridge "start('', 'An error had occured', [[Welcoming page failed to display properly.]], '', '5000')"][!WriteKeyValue Variables UserNameCheckVariable "[MeasureUser]" "#@#Vars.inc"][!WriteKeyValue Variables Sec.Page 1 "#ROOTCONFIGPATH#Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.ini"][!DeactivateConfig]
 Group=Tweenable
 
 [SpinLogo]
@@ -48,7 +48,7 @@ ImageName=#@#Images\CoreAssets\#Set.IconStyle#Logo256.png
 [CheckForIdle]
 Measure=Calc
 Formula=CheckForIdle + 1
-IfCondition=CheckForIdle >= 20
+IfCondition=CheckForIdle >= 10
 IfTrueAction=[!CommandMEasure CoreBridge "start('', 'An error had occured', [[Welcoming page failed to display properly.]], '', '5000')"][!WriteKeyValue Variables UserNameCheckVariable "[MeasureUser]" "#@#Vars.inc"][!WriteKeyValue Variables Sec.Page 1 "#ROOTCONFIGPATH#Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.ini"][!DeactivateConfig]
 DynamicVariables=1
 UpdateDivider=20

@@ -9,10 +9,10 @@
 Text="Join the CoreCommunity!"
 
 [Description]
-Text="Get assistance, suggest features, participate in beta tests and more! Join the 1000+ other members today!"
+Text=Get assistance, suggest features, participate in beta tests and more! Join the 1000+ other members today!
 
 [INfo]
-Text="Click here to be redirected to the server invite link."
+Text=Click here to be redirected to the server invite link.
 
 
 [WhatsNew:]

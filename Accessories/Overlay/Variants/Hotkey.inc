@@ -130,7 +130,7 @@ Class2="LWin"
 MeterStyle=Sec.Button:S
 [Text1]
 Meter=String
-Text=LWin
+Text="LWin"
 MEterStyle=Sec.String:S | Sec.Text:S
 [Shape2]
 Meter=Shape
@@ -139,7 +139,7 @@ Class2="Ctrl"
 MeterStyle=Sec.Button:S
 [Text2]
 Meter=String
-Text=Ctrl
+Text="Ctrl"
 MEterStyle=Sec.String:S | Sec.Text:S
 [Shape3]
 Meter=Shape
@@ -148,7 +148,7 @@ Class2="Alt"
 MeterStyle=Sec.Button:S
 [Text3]
 Meter=String
-Text=Alt
+Text="Alt"
 MEterStyle=Sec.String:S | Sec.Text:S
 [Shape4]
 Meter=Shape
@@ -157,7 +157,7 @@ Class2="Shift"
 MeterStyle=Sec.Button:S
 [Text4]
 Meter=String
-Text=Shift
+Text="Shift"
 MEterStyle=Sec.String:S | Sec.Text:S
 [Shape5]
 Meter=Shape

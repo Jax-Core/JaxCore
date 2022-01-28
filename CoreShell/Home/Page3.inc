@@ -1,5 +1,5 @@
 [Variables]
-Spotlight=YourFlyouts
+Spotlight=YourMixer
 
 [BC]
 MouseScrollDownAction=[!SetVariable Scroll "(Clamp(#Scroll#+60,0,(#Set.PageH#-#Set.H#)))"][!UpdateMeterGroup Scroll][!Redraw]
@@ -106,7 +106,7 @@ InlineSetting=Size | (12*[Set.S])
 InlinePattern2=#CRLF#.*
 InlineSetting2=Weight | 300
 MeterStyle=Set.String:S
-Text=#Spotlight##CRLF#OSD Media flyouts to replace the default Windows flyout. Coming soon~
+Text=#Spotlight##CRLF#OSD Volume mixer to replace the default Windows volume mixer. Coming soon~
 [SpotImage]
 Meter=Image
 X=(#Set.W#-#Set.P#-500*[Set.S])

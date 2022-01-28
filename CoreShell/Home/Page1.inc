@@ -9,8 +9,9 @@ Measure=Plugin
 Plugin=SysInfo
 SysInfoType=USER_NAME
 ifMatch=^#UserNameCheckVariable#$
-; ifmatchaction=[!EnableMeasure Check4New:M][!UpdateMeasure "Check4New:M"]
-ifnotmatchaction=[!WriteKeyValue Variables Sec.Page 1 "#SKINSPATH#\#JaxCore\Accessories\Tour\Main.ini"][!ActivateConfig "#JaxCore\Accessories\Tour"][!ActivateConfig "#JaxCore\Accessories"][!DeactivateConfig]
+; ifnotmatchaction=[!WriteKeyValue Variables Sec.Page 1 "#SKINSPATH#\#JaxCore\Accessories\Tour\Main.ini"][!ActivateConfig "#JaxCore\Accessories\Tour"][!ActivateConfig "#JaxCore\Accessories"][!DeactivateConfig]
+ifnotmatchaction=[!CommandMeasure Func "interactionBox('tour1')"][!DeactivateConfig]
+ifmatchaction=
 DynamicVariables=1
 UpdateDivider=-1
 
@@ -46,7 +47,7 @@ Measure=WebParser
 URL=https://raw.githubusercontent.com/Jax-Core/JaxCore/main/%40Resources/Version.inc
 RegExp==(.*)$
 Group=Updater
-FinishAction=[!Delay 100][!CommandMeasure LogicalScript "check()"]
+FinishAction=[!CommandMeasure LogicalScript "check()"]
 
 [mVer]
 Measure=WebParser

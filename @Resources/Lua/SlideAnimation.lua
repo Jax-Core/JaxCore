@@ -8,9 +8,7 @@ function Initialize()
     subject = {
         TweenNode = 0
     }
-    FadeDur = 2 * tonumber(SKIN:GetVariable('Animation_Steps'))
     t = tween.new(AniSteps, subject, {TweenNode=100}, SKIN:GetVariable('Easetype'))
-    SKIN:Bang('[!FadeDuration '..FadeDur..']')
 end
 
 function importPosition(x, y, ax, ay)
@@ -31,7 +29,7 @@ function tweenAnimation(dir)
     end
     resultantTN = subject.TweenNode
     if resultantTN > 100 then resultantTN = 100 elseif resultantTN < 0 then resultantTN = 0 end
-    local bang = ''
+    local bang = '[!SetTransparency '..(resultantTN / 100 * 255)..']'
     if AniDir == 'Left' then
         bang = bang..'[!SetWindowPosition '..moveX + (resultantTN / 100 - 1) * Offset..' '..moveY..' '..anchorX..' '..anchorY..']'
     elseif AniDir == 'Right' then

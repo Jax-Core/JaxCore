@@ -1,5 +1,3 @@
-function Initialize()
-end
 
 function start(variant, title, description, iconpath, timeout)
 	local File = SKIN:GetVariable('SKINSPATH')..'#JaxCore\\Accessories\\Toast\\Main.ini'
@@ -209,14 +207,18 @@ function startSide(variant, num)
 		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Num', num, File) 
 	else
 		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Num', '', File) 
-	end
+end
 	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\Overlay')
 	SKIN:Bang('!Move', PosX, PosY, '#JaxCore\\Accessories\\Overlay')
 end
 
 function interactionBox(variant, arg1)
 	local File = SKIN:GetVariable('ROOTCONFIGPATH')..'Accessories\\GenericInteractionBox\\Main.ini'
-	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
+	if variant:match('\\') then
+		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', variant, File)
+	else
+		SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Variant', 'Variants\\'..variant..'.inc', File)
+	end
 	SKIN:Bang('!WriteKeyvalue', 'Variables', 'Sec.Arg1', arg1, File)
 	SKIN:Bang('!Activateconfig', '#JaxCore\\Accessories\\GenericInteractionBox')
 end
