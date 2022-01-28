@@ -1,7 +1,6 @@
 [Variables]
 Sec.W=(500*#Sec.S#)
 Sec.H=(700*#Sec.S#)
-Sec.R=(5*#Sec.S#)
 AniDir=Bottom
 BackgroundCheckStatus=0
 GlobalCheckStatus=0
@@ -52,7 +51,7 @@ Custom2=[!CommandMeasure PSRM "Check"]
 FontFace=Segoe MDL2 Assets
 X=(26/2*#Sec.S#)r
 Y=(26/2*#Sec.S#)r
-StringAlign=CenterCenter
+StringAlign=LeftCenter
 FontSize=(10*#Sec.S#)
 Text=[\xEA1F]
 DynamicVariables=1
@@ -101,7 +100,7 @@ LeftMouseUpAction=[!CommandMeasure PSRM "RemoveDeskop"][!SetOption Section4.Butt
 
 [ImageContainer]
 Meter=Shape
-Shape=Rectangle 0,0,(#Sec.W#),[Image:H],#Set.R# | StrokeWidth 0 | Fill LinearGradient This
+Shape=Rectangle 0,0,(#Sec.W#),[Image:H],#Sec.R# | StrokeWidth 0 | Fill LinearGradient This
 This=90 | 0,0,0,0 ; 0 | 0,0,0,255 ; 1
 DynamicVariables=1
 
@@ -127,17 +126,17 @@ ImageName=#@#Images\CoreAssets\#Set.IconStyle#Logo256.png
 Meter=String
 Text=Welcome to JaxCore#CRLF#Let's set up Core here!
 X=(#Sec.W#/2)
-Y=(30*#Sec.s#)R
+Y=(15*#Sec.s#)R
 FontSize=(20*#Sec.S#)
 InlinePattern=.*#CRLF#
 InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 1.0 | #Set.Accent_Color_2# ; 0.0
 INlinePattern2=#CRLF#.*
-InlineSetting2=Size | 10
+InlineSetting2=Size | (10*#Sec.S#)
 INlinePattern3=#CRLF#.*
 InlineSetting3=Color | 160,155,145
 INlinePattern4=#CRLF#.*
 InlineSetting4=Weight | 400
-StringAlign=CenterCenter
+StringAlign=Center
 MeterStyle=Sec.String:S
 FontWeight=650
 
@@ -149,7 +148,7 @@ FontWeight=650
 Meter=Shape
 X=#Sec.P#
 Y=(15*#Sec.S#)R
-Shape=Rectangle 0,0,(#Sec.W#-#Sec.P#*2),(100*#Sec.S#),(#Set.R#/2) | StrokeWidth 0 | Extend Fill
+Shape=Rectangle 0,0,(#Sec.W#-#Sec.P#*2),(100*#Sec.S#),(#Sec.R#/2) | StrokeWidth 0 | Extend Fill
 Fill=Fill Color #Set.Sec_Color#
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Sec_Color#"][!UpdateMeter #CURRENTSECTION#][!Redraw]
@@ -163,7 +162,7 @@ Leftmouseupaction=[!DeactivateConfig "#JaxCore\Accessories\UpdatePrompt"][!Updat
 [Section1.Icon]
 Meter=String
 Text=[\xecc5]
-X=(#Set.P#)r
+X=(#Sec.P#)r
 Y=(100/2*#Sec.S#)r
 FontSize=(20*#Sec.S#)
 MeterStyle=Sec.String:S | Sec.Icon:S | Section1.Icon:#BackgroundCheckStatus#
@@ -176,7 +175,7 @@ InlineSetting=Shadow | 0 | 0 | 2 | #Set.Positive_Color#
 
 [Section1.Text]
 Meter=String
-X=(40*#Sec.S#)r
+X=(60*#Sec.S#)r
 Y=r
 FontSize=(10*#Sec.S#)
 Text=Check for Core updates in background#CRLF#Updates only downloaded when updating
@@ -191,7 +190,7 @@ MeterStyle=Sec.String:S
 Meter=Shape
 X=#Sec.P#
 Y=(15*#Sec.S#)R
-Shape=Rectangle 0,0,(#Sec.W#-#Sec.P#*2),(100*#Sec.S#),(#Set.R#/2) | StrokeWidth 0 | Extend Fill
+Shape=Rectangle 0,0,(#Sec.W#-#Sec.P#*2),(100*#Sec.S#),(#Sec.R#/2) | StrokeWidth 0 | Extend Fill
 Fill=Fill Color #Set.Sec_Color#
 MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Sec_Color#"][!UpdateMeter #CURRENTSECTION#][!Redraw]
@@ -205,7 +204,7 @@ Leftmouseupaction=[!DeactivateConfig "#JaxCore\Accessories\GlobalUpdater"][!Upda
 [Section2.Icon]
 Meter=String
 Text=[\xecc5]
-X=(#Set.P#)r
+X=(#Sec.P#)r
 Y=(100/2*#Sec.S#)r
 FontSize=(20*#Sec.S#)
 MeterStyle=Sec.String:S | Sec.Icon:S | Section2.Icon:#GlobalCheckStatus#
@@ -218,7 +217,7 @@ InlineSetting=Shadow | 0 | 0 | 2 | #Set.Positive_Color#
 
 [Section2.Text]
 Meter=String
-X=(40*#Sec.S#)r
+X=(60*#Sec.S#)r
 Y=r
 FontSize=(10*#Sec.S#)
 Text=Check for module updates on startup#CRLF#Core will not check for updates in the background 
@@ -233,7 +232,7 @@ MeterStyle=Sec.String:S
 Meter=Shape
 X=#Sec.P#
 Y=(15*#Sec.S#)R
-Shape=Rectangle 0,0,(#Sec.W#-#Sec.P#*2),(100*#Sec.S#),(#Set.R#/2) | StrokeWidth 0 | Extend Fill
+Shape=Rectangle 0,0,(#Sec.W#-#Sec.P#*2),(100*#Sec.S#),(#Sec.R#/2) | StrokeWidth 0 | Extend Fill
 Fill=Fill Color #Set.Sec_Color#
 ; MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 ; MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Sec_Color#"][!UpdateMeter #CURRENTSECTION#][!Redraw]
@@ -242,14 +241,14 @@ DynamicVariables=1
 [Section4.Icon]
 Meter=String
 Text=[\xF168]
-X=(#Set.P#)r
+X=(#Sec.P#)r
 Y=(100/2*#Sec.S#)r
 FontSize=(20*#Sec.S#)
 MeterStyle=Sec.String:S | Sec.Icon:S
 
 [Section4.Text]
 Meter=String
-X=(40*#Sec.S#)r
+X=(60*#Sec.S#)r
 Y=r
 FontSize=(10*#Sec.S#)
 Text=Add shortcut to desktop#CRLF#For easy access to JaxCore

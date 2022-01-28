@@ -1,7 +1,6 @@
 [Variables]
 Sec.W=(500*#Sec.S#)
 Sec.H=(700*#Sec.S#)
-Sec.R=(5*#Sec.S#)
 AniDir=Bottom
 BackgroundCheckStatus=0
 GlobalCheckStatus=0
@@ -39,10 +38,10 @@ Custom0=[!WriteKeyValue Variables UserNameCheckVariable "[MeasureUser]" "#@#Vars
 [Support:S]
 DynamicVariables=1
 [SupportImage:S]
-X=((#width#/2-#imgwidth#/2)*#Sec.S#)r
-Y=((#width#/2-#imgwidth#/2)*#Sec.S#)r
-W=(#imgwidth#*#Sec.S#)
-H=(#imgwidth#*#Sec.S#)
+X=((#width#/2-#imgwidth#/2))r
+Y=((#width#/2-#imgwidth#/2))r
+W=(#imgwidth#)
+H=(#imgwidth#)
 DynamicVariables=1
 [SupportText:S]
 FontSize=(10*#Sec.S#)
@@ -79,7 +78,7 @@ Meter=Image
 X=(#Sec.W#/2-[Img:W]/2)
 Y=#Sec.P#
 W=(100*#Sec.S#)
-H=([Img:W])
+H=(100*#Sec.S#)
 DynamicVariables=1
 ImageName=#@#Images\CoreAssets\#Set.IconStyle#Logo256.png
 
@@ -87,17 +86,17 @@ ImageName=#@#Images\CoreAssets\#Set.IconStyle#Logo256.png
 Meter=String
 Text=Consider supporting JaxCore!#CRLF#This application is completely free.
 X=(#Sec.W#/2)
-Y=(30*#Sec.s#)R
+Y=(15*#Sec.s#)R
 FontSize=(20*#Sec.S#)
 InlinePattern=.*#CRLF#
 InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 1.0 | #Set.Accent_Color_2# ; 0.0
 INlinePattern2=#CRLF#.*
-InlineSetting2=Size | 10
+InlineSetting2=Size | (10*#Sec.S#)
 INlinePattern3=#CRLF#.*
 InlineSetting3=Color | 160,155,145
 INlinePattern4=#CRLF#.*
 InlineSetting4=Weight | 400
-StringAlign=CenterCenter
+StringAlign=center
 MeterStyle=Sec.String:S
 FontWeight=650
 
@@ -107,7 +106,7 @@ X=#Sec.P#
 Y=(30*#Sec.S#)R
 This=0,0 | 4,255,83,(100*#TweenNode3#) ; 0.0 | 0,0,0,0 ; 1.0
 That=180 | 04ff58 ; 0.0 | 04cc47 ; 1.0
-Shape=Rectangle 0,0,#width#,#width#,5 | StrokeWidth ((2+4*#TweenNode3#)*#Sec.S#) | Fill RadialGradient This | SCale #Sec.S#,#Sec.S#,0,0 | Stroke LinearGradient That
+Shape=Rectangle 0,0,#width#,#width#,5 | StrokeWidth ((2+4*#TweenNode3#)*#Sec.S#) | Fill RadialGradient This | Stroke LinearGradient That
 MeterStyle=Support:S
 MouseOverAction=[!SEtVariable tweennode3 1][!Updatemeter *][!Redraw]
 MouseLeaveAction=[!SEtVariable tweennode3 0][!Updatemeter *][!Redraw]
@@ -130,7 +129,7 @@ X=(#Sec.W#/2+#Sec.P#/2)
 Y=[Support.1:Y]
 This=0,0 | 255,255,255,(100*#TweenNode4#) ; 0.0 | 0,0,0,0 ; 1.0
 That=180 | 29ABE0 ; 0.0 | FF5E5B ; 1.0
-Shape=Rectangle 0,0,#width#,#width#,5 | StrokeWidth ((2+4*#TweenNode4#)*#Sec.S#) | Fill RadialGradient This | SCale #Sec.S#,#Sec.S#,0,0 | Stroke LinearGradient That
+Shape=Rectangle 0,0,#width#,#width#,5 | StrokeWidth ((2+4*#TweenNode4#)*#Sec.S#) | Fill RadialGradient This | Stroke LinearGradient That
 MouseOverAction=[!SEtVariable tweennode4 1][!Updatemeter *][!Redraw]
 MouseLeaveAction=[!SEtVariable tweennode4 0][!Updatemeter *][!Redraw]
 MeterStyle=Support:S
