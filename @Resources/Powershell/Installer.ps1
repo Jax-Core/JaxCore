@@ -1,22 +1,3 @@
-# function Install { 
-#     $url=$RmAPI.VariableStr('DownloadLink')
-#     $name=$RmAPI.VariableStr('DownloadName')
-#     $outPath="C:/Windows/Temp/$name.rmskin"
-
-#     $wc=New-Object System.Net.WebClient
-#     $wc.DownloadFile($url, $outPath)
-#     Start-Process -Filepath $outPath
-
-#     If($Null -NotMatch (get-process "SkinInstaller" -ea SilentlyContinue)) {
-#         $wshell=New-Object -ComObject wscript.shell
-#         $wshell.AppActivate('Rainmeter Skin Installer')
-#         Start-Sleep -s 1
-#         $wshell.SendKeys('~')
-#     }
-
-#     # script inspired by ModkaVart.
-# }
-
 function Install { 
     param (
     [string]$saveDirectory = 'CoreShell\Info.inc'
@@ -37,6 +18,11 @@ function Install {
             $RmAPI.Bang("[!DeactivateConfig $config]")
         }
     }
+
+    # if ($config -NotMatch "#JaxCore") {
+    #     $RmAPI.Bang("[!WriteKeyValue DefaultStartActions Custom1 `"`"`"[!Delay 1000][!DeactivateConfig `"$configroot\@Start`"][!ActivateConfig `"$configroot\Main`"][!WriteKeyValue DefaultStartActions Custom1 `"`" $SaveLocation]`"`"`" $SaveLocation]")
+    #     $RmAPI.Bang("[!DeactivateConfig $config]")
+    # }
     
     $RmAPI.Bang("[!CommandMeasure Func `"interactionBox('UpdatePrompt', '$name')`"]")
 

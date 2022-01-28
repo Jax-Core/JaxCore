@@ -1,7 +1,7 @@
-function ReadDump()
+function Update()
     local ReadDump = tonumber(SKIN:GetVariable('ReadDump'))
     if ReadDump == 1 then
-        SKIN:Bang('[!WriteKeyvalue Variables ReadDump 0][!Refresh]')
+        SKIN:Bang('[!Delay 50][!WriteKeyvalue Variables ReadDump 0][!Refresh]')
     else
         SKIN:Bang('[!WriteKeyvalue Variables ReadDump 1]')
         check()
