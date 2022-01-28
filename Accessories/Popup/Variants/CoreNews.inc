@@ -14,7 +14,7 @@ MeterStyle=Sec.String:S | Style.Title:S
 
 [Description.1]
 Meter=String
-Text=- NEW! To appreciate my supporters, both one-time donations and monthly donators now have early access to upcoming modules! Check it out on my kofi page.
+Text=- NEW! To show my appreciation for my supporters, both one-time donors and monthly donors now have early access to upcoming modules! Check it out on my kofi page.
 MeterStyle=Sec.String:S | Style.Description:S
 
 [Description.0]
