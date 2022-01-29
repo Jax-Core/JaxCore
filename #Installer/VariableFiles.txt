@@ -1,4 +1,0 @@
-@Resources\Vars.inc
-@Resources\WebSupportEnabled.inc
-@Resources\gVars\Time.inc
-@Resources\gVars\Weather.inc

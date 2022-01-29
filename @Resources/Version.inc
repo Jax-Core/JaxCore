@@ -1,2 +1,2 @@
 [Variables]
-Core.Ver=42069
+Core.Ver=43000
