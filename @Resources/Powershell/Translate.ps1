@@ -1,4 +1,7 @@
 $escapePatterns = @(
+    '\".+?\"',
+    '\[.+?\]',
+    '#.+?#',
     'JaxOriginals',
     'JaxCore',
     'Core',
@@ -12,11 +15,7 @@ $escapePatterns = @(
     'Foobar',
     'WinAMP',
     'Spicetify',
-    'WebNowPlaying',
-    'Golden\sInsiders',
-    '\".+?\"',
-    '\[.+?\]',
-    '#.+?#'
+    'WebNowPlaying'
 )
 $escapeFiles = @(
     "$($RmAPI.VariableStr('SKINSPATH'))#JaxCore\Accessories\Popup\Variants\News.inc",
