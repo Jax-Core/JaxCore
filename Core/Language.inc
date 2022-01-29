@@ -2,6 +2,9 @@
 ;                                   Functions                                  ;
 ; ---------------------------------------------------------------------------- ;
 
+[Header]
+Text=Language [Beta]
+
 ; [DefaultStartActions]
 ; Custom2=[!UpdateMeterGroup PReload][!SHowMeterGroup V#VersionPage#][!UpdateMeter *][!Redraw]
 

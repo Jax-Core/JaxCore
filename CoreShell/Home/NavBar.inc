@@ -22,11 +22,20 @@ Y=(#Set.P#)
 Container=
 FontSize=(16*[Set.S])
 
+[Class.SideButton1]
+Meter=String
+MeterStyle=Set.String:S | Top.String:S
+FontFace=Material Icons Round
+Text=[\xe894]
+FontSize=(24*[Set.S])
+X=(#Set.W#-#Set.P#)
+LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name """#JaxCore""" "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Language "#@#SecVar.inc"][!ActivateConfig "#CURRENTCONFIG#" "Settings.ini"]
+
 [Class.Side5]
 Meter=String
 MeterStyle=Set.String:S | Top.String:S
 Text=Settings
-X=(#Set.W#-#Set.P#)
+X=(-31*[Set.S]-[Class.SideButton1:W])r
 LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name """#JaxCore""" "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page General "#@#SecVar.inc"][!ActivateConfig "#CURRENTCONFIG#" "Settings.ini"]
 
 [Class.Side4]
@@ -42,13 +51,6 @@ MeterStyle=Set.String:S | Top.String:S
 X=(-31*[Set.S]-[Class.Side4:W])r
 Text=Modules
 LeftMouseUpAction=[!WriteKeyValue "Variables" "Sec.Page" "3"][!Refresh]
-
-; [Class.Side2]
-; Meter=String
-; MeterStyle=Set.String:S | Top.String:S
-; X=(-31*[Set.S]-[Class.Side3:W])r
-; Text=News
-; LeftMouseUpAction=[!WriteKeyValue "Variables" "Sec.Page" "2"][!Refresh]
 
 [Class.Side1]
 Meter=String

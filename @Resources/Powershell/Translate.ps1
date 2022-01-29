@@ -254,7 +254,7 @@ function Export-LangFile {
 
     # Write-Host "Exporting JSON..."
     $RmAPI.Bang('[!SetVariable Log "Exporting to .JSON file...'+$RmAPI.VariableStr('CRLF')+$RmAPI.VariableStr('Log')+'"][!UpdateMeter Log][!Redraw]')
-    ($iniTable | ConvertTo-Json -Depth 5) | Out-File "$($RmAPI.VariableStr('SKINSPATH'))$Skin\@Resources\LangExports\$skin-$targetLanguageCode.json"
+    ($iniTable | ConvertTo-Json -Depth 5) | Out-File (New-Item -Path "$($RmAPI.VariableStr('SKINSPATH'))$Skin\@Resources\LangExports\$skin-$targetLanguageCode.json" -Force)
 
     # Write-Host Done
     $RmAPI.Bang('[!SetVariable Log "Successfully translated to '+$RmAPI.VariableStr('Sec.arg1')+'!'+$RmAPI.VariableStr('CRLF')+$RmAPI.VariableStr('Log')+'"][!UpdateMeter Log][!Redraw]')
