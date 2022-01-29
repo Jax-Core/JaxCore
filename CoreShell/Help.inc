@@ -58,6 +58,6 @@ y=(45/2*[Set.S])r
 FontSize=(15*[Set.S])
 FontFace=#Set.Font# 
 StringAlign=CenterCenter
-Text="Let's go!"
+Text=Let's go!
 Container=ContentContainer
 MeterStyle=SEt.String:S | ButtonT:S

@@ -13,6 +13,7 @@ $escapePatterns = @(
     'WinAMP',
     'Spicetify',
     'WebNowPlaying',
+    'Golden\sInsiders',
     '\".+?\"',
     '\[.+?\]',
     '#.+?#'
@@ -24,7 +25,8 @@ $escapeFiles = @(
     "$($RmAPI.VariableStr('SKINSPATH'))#JaxCore\Accessories\Tour\Pages\Page2.inc",
     "$($RmAPI.VariableStr('SKINSPATH'))#JaxCore\Accessories\Tour\Pages\Page3.inc",
     "$($RmAPI.VariableStr('SKINSPATH'))#JaxCore\Accessories\Tour\Pages\Page4.inc",
-    "$($RmAPI.VariableStr('SKINSPATH'))#JaxCore\Accessories\Tour\Pages\Page5.inc"
+    "$($RmAPI.VariableStr('SKINSPATH'))#JaxCore\Accessories\Tour\Pages\Page5.inc",
+    "$($RmAPI.VariableStr('SKINSPATH'))#JaxCore\Accessories\Popup\Variants\News.inc"
 )
 
 class TranslateString {

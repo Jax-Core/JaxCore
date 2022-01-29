@@ -1,6 +1,6 @@
 [Values]
 Set.Style=Amoled
-Set.IconStyle=Normal
+Set.IconStyle=Amoled
 Set.Pri_Color=0,0,0
 Set.Sec_Color=10,10,10
 Set.Ter_Color=30,30,30

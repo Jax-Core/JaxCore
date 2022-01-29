@@ -77,18 +77,6 @@ InlinePattern3=\/\/.*
 InlineSetting3=Weight | 300
 TransformationMatrix=[Set.S];0;0;[Set.S];((1-[Set.S])*[#CURRENTSECTION#:X]);((1-[Set.S])*[#CURRENTSECTION#:Y])
 
-; [SpotLight]
-; Meter=String
-; Text=Spotlight
-; MeterStyle=Set.String:S
-; X=(#Set.P#)
-; Y=([title.Text1:H]*([Set.S]-1)+20*[Set.S])R
-; Group=Scroll
-; FontSize=10
-; StringAlign=LeftTop
-; FontFace=#Set.Font# Light
-; TransformationMatrix=[Set.S];0;0;[Set.S];((1-[Set.S])*[#CURRENTSECTION#:X]);((1-[Set.S])*[#CURRENTSECTION#:Y])
-
 ; --------------------------------- Spotlight -------------------------------- ;
 
 [SpotDes]
@@ -106,16 +94,30 @@ InlineSetting=Size | (12*[Set.S])
 InlinePattern2=#CRLF#.*
 InlineSetting2=Weight | 300
 MeterStyle=Set.String:S
-Text=#Spotlight##CRLF#OSD Volume mixer to replace the default Windows volume mixer. Coming soon~
+Text=#Spotlight##CRLF#OSD Volume mixer to replace the default Windows volume mixer. Coming soon~#CRLF##CRLF#Donors can gain early access to upcoming modules! Become a Golden Insider today!
+[SkinsButton]
+Meter=Shape
+X=(#Set.P#)
+Y=(100*[Set.S])R
+MeterStyle=Shape.Over:S | Button:S
+OverColor=#Set.Accent_Color#
+LeaveColor=#Set.Accent_Color#
+Leftmouseupaction=["https://ko-fi.com/jaxoriginals"]
+[SkinsText]
+Meter=String
+Text=Support me
+MeterStyle=Set.String:S | ButtonText:S
+
 [SpotImage]
 Meter=Image
 X=(#Set.W#-#Set.P#-500*[Set.S])
-Y=r
+Y=((220*[Set.S])-#Scroll#)
 W=(500*[Set.S])
 DynamicVariables=1
 ImageName=#@#Images\Cards\#Spotlight#.png
 Container=BC
 MaskImageName=#@#Images\RoundedMask.png
+Group=Scroll
 ; LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name #Spotlight# "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "#@#SecVar.inc"][!ActivateConfig "#CURRENTCONFIG#" "Settings.ini"]
 ; ------------------------------- Bottom Start ------------------------------- ;
 
@@ -124,7 +126,7 @@ Meter=String
 Text=All skins
 MeterStyle=Set.String:S
 X=(#Set.P#)
-Y=(65*[Set.S])R
+Y=(35*[Set.S])R
 Group=Scroll
 FontSize=15
 StringAlign=LeftTop

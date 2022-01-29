@@ -154,7 +154,7 @@ InlinePattern=#CRLF#.*
 InlineSetting=Color | #Set.SubText_Color#
 MeterStyle=Set.String:S | Section1.Text:#VersionStatus#
 [Section1.Text:0]
-Text=v#Core.Ver##CRLF#View release details
+Text=v#Core.Ver##CRLF#You're up to date
 [Section1.Text:1]
 Text=v#Core.Ver# < v[mVer] #CRLF#See new version patch notes
 [Section1.Text:2]

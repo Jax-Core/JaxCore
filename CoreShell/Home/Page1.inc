@@ -120,7 +120,7 @@ Y=(100*[Set.S])r
 MeterStyle=Shape.Over:S | Button:S
 OverColor=#Set.Accent_Color#
 LeaveColor=#Set.Accent_Color#
-Leftmouseupaction=[!commandMeasure Func "startPopup('Donate')"]
+Leftmouseupaction=["https://ko-fi.com/jaxoriginals"]
 [SkinsText]
 Meter=String
 Text=Support me

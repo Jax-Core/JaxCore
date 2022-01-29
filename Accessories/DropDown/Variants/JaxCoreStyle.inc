@@ -21,6 +21,12 @@ LeftMouseUpAction=[!CommandMeasure Preset:M "ChangeTo('#CURRENTSECTION#')"][!Ref
 Meter=String
 Y=(#Sec.P#)
 MeterStyle=String:S
+[Div:0]
+Meter=Shape
+MeterStyle=Div:S
+[GoldenInsider]
+Meter=String
+MeterStyle=String:S
 [Div:1]
 Meter=Shape
 MeterStyle=Div:S
