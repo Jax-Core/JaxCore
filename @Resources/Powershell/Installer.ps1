@@ -18,11 +18,6 @@ function Install {
             $RmAPI.Bang("[!DeactivateConfig $config]")
         }
     }
-
-    # if ($config -NotMatch "#JaxCore") {
-    #     $RmAPI.Bang("[!WriteKeyValue DefaultStartActions Custom1 `"`"`"[!Delay 1000][!DeactivateConfig `"$configroot\@Start`"][!ActivateConfig `"$configroot\Main`"][!WriteKeyValue DefaultStartActions Custom1 `"`" $SaveLocation]`"`"`" $SaveLocation]")
-    #     $RmAPI.Bang("[!DeactivateConfig $config]")
-    # }
     
     $RmAPI.Bang("[!CommandMeasure Func `"interactionBox('UpdatePrompt', '$name')`"]")
 

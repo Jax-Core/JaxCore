@@ -1,6 +1,8 @@
 $SkinsPath = $RmAPI.VariableStr('SKINSPATH')
 
-function Update {}
+function Update {
+    Check-Data
+}
 
 function Create-IdleStyle {
     New-Item -Path "$SkinsPath..\CoreData" -Name "IdleStyle" -ItemType "directory"

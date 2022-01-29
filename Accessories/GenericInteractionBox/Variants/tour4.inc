@@ -21,6 +21,16 @@ Formula=50
 ; ---------------------------------------------------------------------------- ;
 ;                                   Function                                   ;
 ; ---------------------------------------------------------------------------- ;
+
+[MeasureUser]
+Measure=Plugin
+Plugin=SysInfo
+SysInfoType=USER_NAME
+UpdateDivider=-1
+
+[ActionTimer]
+Custom0=[!WriteKeyValue Variables UserNameCheckVariable "[MeasureUser]" "#@#Vars.inc"][!WriteKeyValue Variables Sec.Page 1 "#ROOTCONFIGPATH#Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.ini"][!DeactivateConfig]
+
 ; ---------------------------------------------------------------------------- ;
 ;                                  MeterStyleS                                 ;
 ; ---------------------------------------------------------------------------- ;
@@ -74,67 +84,44 @@ ImageName=#@#Images\CoreAssets\#Set.IconStyle#Logo256.png
 
 [Text]
 Meter=String
-Text=Join our growing community!#CRLF#JaxCore is in active development!
+Text=Support JaxCore's development!
 X=(#Sec.W#/2)
 Y=(15*#Sec.s#)R
 FontSize=(20*#Sec.S#)
-InlinePattern=.*#CRLF#
 InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 1.0 | #Set.Accent_Color_2# ; 0.0
-INlinePattern2=#CRLF#.*
-InlineSetting2=Size | (10*#Sec.S#)
-INlinePattern3=#CRLF#.*
-InlineSetting3=Color | 160,155,145
-INlinePattern4=#CRLF#.*
-InlineSetting4=Weight | 400
 StringAlign=center
 MeterStyle=Sec.String:S
 FontWeight=650
 
-[Support.1]
-Meter=Shape
-X=#Sec.P#
-Y=(30*#Sec.S#)R
-This=0,0 | 4,255,83,(100*#TweenNode3#) ; 0.0 | 0,0,0,0 ; 1.0
-That=180 | 04ff58 ; 0.0 | 04cc47 ; 1.0
-Shape=Rectangle 0,0,#width#,#width#,5 | StrokeWidth ((2+4*#TweenNode3#)*#Sec.S#) | Fill RadialGradient This | Stroke LinearGradient That
-MeterStyle=Support:S
-MouseOverAction=[!SEtVariable tweennode3 1][!Updatemeter *][!Redraw]
-MouseLeaveAction=[!SEtVariable tweennode3 0][!Updatemeter *][!Redraw]
-LeftMouseUpAction=["https://www.deviantart.com/jaxoriginals"]
-[SupportImage.1]
-Meter=Image
-ImageName=#ROOTCONFIGPATH#Accessories\Tour\Images\DA.png
-MeterStyle=SupportImage:S
-[SupportText.1]
-MEter=String
-Text=Watch me on#CRLF#DeviantArt
-InlineSetting3=GradientColor | 180 | 04ff58 ; 0.0 | 04cc47 ; 1.0
-MeterStyle=Sec.String:S | SupportText:S
-X=([Support.1:X]+(#width#/2))
-Y=([Support.1:Y]+#Width#+#Sec.P#*2)
-W=(#width#)
+[Text2]
+Meter=String
+X=(#Sec.W#/2)
+Y=R
+FontColor=#Set.Text_Color#
+StringAlign=Center
+Fontsize=(12*#sec.s#)
+Text=Get exclusive early access to upcoming modules!#CRLF#Receive a special role on the Discord server!
+MeterStyle=Sec.String:S
 
 [Support.3]
 Meter=Shape
-X=(#Sec.W#/2+#Sec.P#/2)
-Y=[Support.1:Y]
-This=0,0 | 88, 101, 242,(100*#TweenNode4#) ; 0.0 | 0,0,0,0 ; 1.0
-That=180 | 5865f2 ; 0.0 | 112, 125, 255 ; 1.0
+X=(#Sec.w#/2-#width#/2)
+Y=(30*#Sec.S#)R
+This=0,0 | 255,255,255,(100*#TweenNode4#) ; 0.0 | 0,0,0,0 ; 1.0
+That=180 | 29ABE0 ; 0.0 | FF5E5B ; 1.0
 Shape=Rectangle 0,0,#width#,#width#,5 | StrokeWidth ((2+4*#TweenNode4#)*#Sec.S#) | Fill RadialGradient This | Stroke LinearGradient That
 MouseOverAction=[!SEtVariable tweennode4 1][!Updatemeter *][!Redraw]
 MouseLeaveAction=[!SEtVariable tweennode4 0][!Updatemeter *][!Redraw]
 MeterStyle=Support:S
-LeftMouseUpAction=["https://discord.gg/JmgehPSDD6"]
+LeftMouseUpAction=["https://ko-fi.com/jaxoriginals"]
 [SupportImage.3]
 Meter=Image
-ImageName=#@#Icons\Discord.png
+ImageName=#ROOTCONFIGPATH#Accessories\Tour\Images\KF.png
 MeterStyle=SupportImage:S
-ImageTint=5865f2
-Greyscale=1
 [SupportText.3]
 MEter=String
-Text=Join our#CRLF#Discord server
-InlineSetting3=GradientColor | 180 | 5865f2 ; 0.0 | 112, 125, 255 ; 1.0
+Text=Buy me a cup of coffee on#CRLF#Ko-fi
+InlineSetting3=GradientColor | 180 | 29ABE0 ; 0.0 | FF5E5B ; 1.0
 MeterStyle=Sec.String:S | SupportText:S
 X=([Support.3:X]+(#width#/2))
 Y=([Support.3:Y]+#Width#+#Sec.P#*2)
@@ -147,10 +134,10 @@ X=(#Sec.W#/2)
 Y=(#Sec.H#-#Sec.P#)
 FontColor=#Set.Subtext_Color#
 StringAlign=CenterBottom
-Text=Continue
+Text=Finish installation
 MouseOverAction=[!SetOption #CURRENTSECTION# InlineSetting "Underline"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 MouseLeaveAction=[!SetOption #CURRENTSECTION# InlineSetting ""][!UpdateMeter #CURRENTSECTION#][!Redraw]
-LeftMouseUpAction=[!CommandMEasure fUnc "interactionBox('tour4')"][!Refresh]
+LeftMouseUpAction=[!CommandMeasure ActionTimer "Execute 2"]
 MeterStyle=Sec.String:S
 
 [Esc]

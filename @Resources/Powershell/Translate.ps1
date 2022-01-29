@@ -138,13 +138,21 @@ $LanguageHashTable = @{
     Yiddish               = 'yi' 
 }
 
+# $skinsList = $RmAPI.VariableStr('SKINLIST') -split '\s*\|\s*'
+
 function Start-Translation {
-    $targetLanguageCode = $LanguageHashTable[$RmAPI.VariableStr('Sec.arg1')]
+    param(
+        [Parameter()]
+        $Skin,
+        [Parameter()]
+        $TargetLanguage
+    )
+    $targetLanguageCode = $LanguageHashTable[$TargetLanguage]
     $skin = $RmAPI.VariableStr('ROOTCONFIG')
-    If (Test-Path -Path "$($RmAPI.VariableStr('@'))LangExports\#JaxCore-$targetLanguageCode.json") {
+    If (Test-Path -Path "$($RmAPI.VariableStr('SKINSPATH'))$Skin\@Resources\LangExports\#JaxCore-$targetLanguageCode.json") {
         $RmAPI.Bang('[!SetVariable Log "Exported translation file found!'+$RmAPI.VariableStr('CRLF')+$RmAPI.VariableStr('Log')+'"][!UpdateMeter Log][!Redraw]')
         $RmAPI.Bang('[!SetVariable Log "Applying json...'+$RmAPI.VariableStr('CRLF')+$RmAPI.VariableStr('Log')+'"][!UpdateMeter Log][!Redraw]')
-        SetLangFile -LangFile "$($RmAPI.VariableStr('@'))LangExports\$skin-$targetLanguageCode.json"
+        SetLangFile -Skin $skin -LangFile "$($RmAPI.VariableStr('SKINSPATH'))$Skin\@Resources\LangExports\$skin-$targetLanguageCode.json"
     }
     else {
         $RmAPI.Bang('[!SetVariable Log "Exporting translation...'+$RmAPI.VariableStr('CRLF')+$RmAPI.VariableStr('Log')+'"][!UpdateMeter Log][!Redraw]')
@@ -247,7 +255,7 @@ function Export-LangFile {
 
     # Write-Host "Exporting JSON..."
     $RmAPI.Bang('[!SetVariable Log "Exporting to .JSON file...'+$RmAPI.VariableStr('CRLF')+$RmAPI.VariableStr('Log')+'"][!UpdateMeter Log][!Redraw]')
-    ($iniTable | ConvertTo-Json -Depth 5) | Out-File "$($RmAPI.VariableStr('@'))LangExports\$skin-$targetLanguageCode.json"
+    ($iniTable | ConvertTo-Json -Depth 5) | Out-File "$($RmAPI.VariableStr('SKINSPATH'))$Skin\@Resources\LangExports\$skin-$targetLanguageCode.json"
 
     # Write-Host Done
     $RmAPI.Bang('[!SetVariable Log "Successfully translated to '+$RmAPI.VariableStr('Sec.arg1')+'!'+$RmAPI.VariableStr('CRLF')+$RmAPI.VariableStr('Log')+'"][!UpdateMeter Log][!Redraw]')
@@ -256,11 +264,13 @@ function Export-LangFile {
 
     if ($directChange) {
         Write-Host Directly applying...
-        SetLangFile -LangFile "$($RmAPI.VariableStr('@'))LangExports\$skin-$targetLanguageCode.json"
+        SetLangFile -Skin $skin -LangFile "$($RmAPI.VariableStr('SKINSPATH'))$Skin\@Resources\LangExports\$skin-$targetLanguageCode.json"
     }
 }
 function SetLangFile {
     param(
+        [Parameter()]
+        $Skin,
         [Parameter()]
         $LangFile,
         [Parameter()]
@@ -317,7 +327,7 @@ function SetLangFile {
     $LangFilename = Split-Path $LangFile -leaf
     $RmAPI.Bang('[!SetVariable Log "Finished applying '+$LangFilename+'!'+$RmAPI.VariableStr('CRLF')+$RmAPI.VariableStr('Log')+'"][!UpdateMeter Log][!Redraw]')
 
-    $RmAPI.Bang('[!Refresh "#JaxCore\Main"]')
+    $RmAPI.Bang("[!Refresh `"$Skin\Main`"]")
 }
 # helper to turn PSCustomObject into a list of key/value pairs
 function Get-ObjectMember {

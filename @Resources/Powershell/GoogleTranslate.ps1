@@ -93,7 +93,7 @@ if (Test-Path $Text -PathType Leaf) {
 
 $Uri = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=$($TargetLanguageCode)&dt=t&q=$([System.Uri]::EscapeDataString($Text))"
 # Get the response from the web request, then throw a bunch of regex at it to clean it up.
-$response = (Invoke-WebRequest -Uri $Uri -Method Get).Content | ConvertFrom-Json
+$response = (Invoke-WebRequest -Uri $Uri -Method Get -UseBasicParsing).Content | ConvertFrom-Json
 
 if ($null -eq $response[0]) {
     return

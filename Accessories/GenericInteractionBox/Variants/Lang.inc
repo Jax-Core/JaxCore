@@ -2,6 +2,7 @@
 Sec.W=(400*#Sec.S#)
 Sec.H=(800*#Sec.S#)
 Log=
+@includeCoreWebResources=#ROOTCONFIGPATH#CoreWebResources.inc
 
 ; ---------------------------------------------------------------------------- ;
 ;                                   Function                                   ;
@@ -42,8 +43,7 @@ X=((#Sec.W#)/2-(150*2*#Sec.S#+#sec.P#)/2)
 Y=#Sec.P#R
 ColorLeave=0,100,0,150
 ColorOver=0,100,0,250
-LeftMouseUpAction=[!WriteKeyValue Variables Set.Lang "#sec.arg1#" "#@#Vars.inc"][!CommandMeasure PSRM "Start-Translation"]
-; [!CommandMeasure PSRM """"""]
+LeftMouseUpAction=[!WriteKeyValue Variables Set.Lang "#sec.arg1#" "#@#Vars.inc"][!CommandMeasure PSRM """Start-Translation -skin '#JaxCore' -TargetLanguage "#Sec.arg1#" """]
 MeterStyle=Sec.Button:S
 [TextStart]
 Meter=String

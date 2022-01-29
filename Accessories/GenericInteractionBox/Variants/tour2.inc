@@ -94,9 +94,9 @@ MouseLeaveAction=[!SetOption #CURRENTSECTION# This "Fill Color 0,255,0,100"][!Up
 LeftMouseUpAction=[!CommandMeasure PSRM "RemoveDeskop"][!SetOption Section4.Button1.Shape MeterStyle "SectionButton:S | Section4.ButtonDesk.False"][!UpdateMeter Section4.Button1.Shape][!Redraw]
 
 
-; ---------------------------------------------------------------------------- ;
-;                                    Content                                   ;
-; ---------------------------------------------------------------------------- ;
+---------------------------------------------------------------------------- ;
+                                   Content                                   ;
+---------------------------------------------------------------------------- ;
 
 [ImageContainer]
 Meter=Shape
@@ -177,6 +177,7 @@ InlineSetting=Shadow | 0 | 0 | 2 | #Set.Positive_Color#
 Meter=String
 X=(60*#Sec.S#)r
 Y=r
+W=(#Sec.W#-120*#sec.S#)
 FontSize=(10*#Sec.S#)
 Text=Check for Core updates in background#CRLF#Updates only downloaded when updating
 StringAlign=LeftCenter
@@ -219,6 +220,7 @@ InlineSetting=Shadow | 0 | 0 | 2 | #Set.Positive_Color#
 Meter=String
 X=(60*#Sec.S#)r
 Y=r
+W=(#Sec.W#-120*#sec.S#)
 FontSize=(10*#Sec.S#)
 Text=Check for module updates on startup#CRLF#Core will not check for updates in the background 
 StringAlign=LeftCenter
@@ -250,6 +252,7 @@ MeterStyle=Sec.String:S | Sec.Icon:S
 Meter=String
 X=(60*#Sec.S#)r
 Y=r
+W=(#Sec.W#-120*#sec.S#)
 FontSize=(10*#Sec.S#)
 Text=Add shortcut to desktop#CRLF#For easy access to JaxCore
 StringAlign=LeftCenter

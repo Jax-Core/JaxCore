@@ -1,6 +1,6 @@
 [Variables]
-Skin.Name=#JaxCore
+Skin.Name=Plainext
 ; Skin.Shorthand=
 
-Skin.Set_Page=Language
+Skin.Set_Page=Info
 Skin.Ctx_Ctx=Refresh
