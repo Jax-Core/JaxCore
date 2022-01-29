@@ -382,6 +382,9 @@ function Set-IniContent($ini, $filePath) {
     $str = @()
 
     foreach ($section in $ini.GetEnumerator()) {
+        if ($section.Key -match ";InitNotSection") {
+            continue
+        }
         $str += "[" + $section.Key + "]"
         foreach ($keyvaluepair in $section.Value.GetEnumerator()) {
             if ($keyvaluepair.Key -match "^;NotSection\d+$") {
