@@ -149,7 +149,7 @@ function Start-Translation {
     )
     $targetLanguageCode = $LanguageHashTable[$TargetLanguage]
     $skin = $RmAPI.VariableStr('ROOTCONFIG')
-    If (Test-Path -Path "$($RmAPI.VariableStr('SKINSPATH'))$Skin\@Resources\LangExports\#JaxCore-$targetLanguageCode.json") {
+    If (Test-Path -Path "$($RmAPI.VariableStr('SKINSPATH'))$Skin\@Resources\LangExports\$Skin-$targetLanguageCode.json") {
         $RmAPI.Bang('[!SetVariable Log "Exported translation file found!'+$RmAPI.VariableStr('CRLF')+$RmAPI.VariableStr('Log')+'"][!UpdateMeter Log][!Redraw]')
         $RmAPI.Bang('[!SetVariable Log "Applying json...'+$RmAPI.VariableStr('CRLF')+$RmAPI.VariableStr('Log')+'"][!UpdateMeter Log][!Redraw]')
         SetLangFile -Skin $skin -LangFile "$($RmAPI.VariableStr('SKINSPATH'))$Skin\@Resources\LangExports\$skin-$targetLanguageCode.json"
