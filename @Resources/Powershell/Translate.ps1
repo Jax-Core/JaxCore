@@ -148,6 +148,7 @@ function Start-Translation {
     )
     $targetLanguageCode = $LanguageHashTable[$TargetLanguage]
     If ($RmAPI.VariableStr('Set.Lang') -NotMatch 'English') {
+        Export-LangFile -skin $skin -TargetLanguage $targetLanguageCode -directChange 0
         SetLangFile -Skin $skin -LangFile "$($RmAPI.VariableStr('SKINSPATH'))$Skin\@Resources\$Skin-$targetLanguageCode.json" -Revert 1
     }
     elseif (Test-Path -Path "$($RmAPI.VariableStr('SKINSPATH'))$Skin\@Resources\LangExports\$Skin-$targetLanguageCode.json") {
