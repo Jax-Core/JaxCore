@@ -15,6 +15,9 @@ Formula=100
 ;                                   Functions                                  ;
 ; ---------------------------------------------------------------------------- ;
 
+[ActionTimer]
+Custom2=[!CommandMeasure Input:M "ExecuteBatch 1"]
+
 [Input:M]
 Measure=Plugin
 Plugin=InputText
