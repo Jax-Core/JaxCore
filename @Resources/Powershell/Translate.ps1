@@ -390,7 +390,7 @@ function Set-IniContent($ini, $filePath) {
                 $str += $keyvaluepair.Value
             }
             else {
-                $str += $keyvaluepair.Key + " = " + $keyvaluepair.Value
+                $str += $keyvaluepair.Key + "=" + $keyvaluepair.Value
             }
         }
     }
