@@ -9,7 +9,7 @@ ImageName=Variants\Splash\#Sec.Arg1#.png
 
 [Title]
 Meter=String
-Text=Golden Insiders \ Translators recruiting now!
+Text=Golden Insiders \ Translation beta is now available!
 MeterStyle=Sec.String:S | Style.Title:S
 
 [Description.1]
@@ -35,12 +35,7 @@ MeterStyle=Sec.String:S | Style.Description:S
 
 [Description.2]
 Meter=String
-Text=- I am now finding translation helpers to adjust Core language files! You can apply now on the Discord server.
-MeterStyle=Sec.String:S | Style.Description:S
-
-[Description.3]
-Meter=String
-Text=- Our Discord server had just reached 4000 members! Join us today!
+Text=- NEW! You can now translate most of Core to your language! Note: Module setting pages translation is not supported yet.
 MeterStyle=Sec.String:S | Style.Description:S
 
 
