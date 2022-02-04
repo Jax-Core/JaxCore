@@ -98,6 +98,10 @@ A quick guide to installing and configuring JaxCore.
 ### Prerequisites
 
 - [Rainmeter v4.5](https://www.rainmeter.net/) or newer. Rainmeter can be installed by downloading the `.exe` file from [Rainmeter's official website](https://www.rainmeter.net/).
+- Powershell v5.1 or newer. Windows 10 and 11 users should have this installed already. But the Windows 7 folks might have the outdated version of Powershell. To resolve that:
+    1. Open a PowerShell CLI and run `$PSVersionTable.PSVersion.Major`
+    2. If it returns `5`, you can skip this step and proceed to the installation of JaxCore. However, if it returns `2`, download and install the most recent PowerShell version. The installer can be found at https://www.microsoft.com/en-us/download/details.aspx?id=54616.
+- .NET Framework 4.5 or later.
 
 ### Installation 
 
