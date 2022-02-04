@@ -119,7 +119,7 @@ Global variables are shared settings that are used by the majority of Core modul
 
 #### Addons:
 
-Addons are third-party tools\programs\extensions that are required by certain modules and widgets to retrieve song information or to provide additional appearance features such as shadows and widget-blur. JaxCore modules and widgets currently require two addons to function properly: **[Spicetify](https://spicetify.app/)** and **[Image Magick](https://imagemagick.org/index.php)**. Refer to the installation guides linked below to install the aforementioned addons.
+Addons are third-party tools/programs/extensions that are required by certain modules and widgets to retrieve song information or to provide additional appearance features such as shadows and widget-blur. JaxCore modules and widgets currently require two addons to function properly: **[Spicetify](https://spicetify.app/)** and **[Image Magick](https://imagemagick.org/index.php)**. Refer to the installation guides linked below to install the aforementioned addons.
 
 * [Spicetify Installation Guide](https://github.com/Jax-Core/ModularPlayers#installing-spicetify)
 * [Image Magick Installation Guide](https://github.com/Jax-Core/ModularPlayers#installing-imagemagick)
