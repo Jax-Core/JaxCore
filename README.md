@@ -91,15 +91,15 @@ Assuming you successfully downloaded and installed Rainmeter, you can now procee
 1. Download and run the `.rmskin` file for **Core** from the official [JaxCore site](https://jax-core.github.io/) to install **JaxCore**.
 2. Finally, proceed through the welcome screen to complete the installation.
 
-> Note: Refer to  [JaxCore's Documentation](https://jaxcore.gitbook.io/core/) for the **Uninstallation** guide.
+> Note: Refer to [JaxCore's Documentation](https://jaxcore.gitbook.io/core/) for the **Uninstallation** guide.
 
 ### Customization
 
-Follow the steps outlined below to choose a custom color preset:
+JaxCore comes with 7 different appearance presets, **Normal, GoldenInsider, Frosted, Light(just why), Amoled, Classic and Enchantment**. Follow the steps outlined below to choose a custom appearance preset:
 
 1. Open Core and navigate to the **Settings** page, then to the **Appearance** tab.
 2. Under **Presets and style** change the appearance preset to the one you like.
-    > **Note:** **The option is named as "Core appearance preset".** For reference, see the image below. 
+    > **The option is named as "Core appearance preset".** For reference, see the image below. 
     >  <img src ="https://imgur.com/mBz9C8t.png" alt = "ref" width="737" height ="70">
 
 And that's it! The color scheme will be changed instantly after you select a new preset.
