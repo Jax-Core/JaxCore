@@ -95,7 +95,7 @@ Assuming you successfully downloaded and installed Rainmeter, you can now procee
 
 ### Customization
 
-JaxCore comes with 7 different appearance presets, **Normal, GoldenInsider, Frosted, Light(just why), Amoled, Classic and Enchantment**. Follow the steps outlined below to choose a custom appearance preset:
+JaxCore comes with 7 different appearance presets, **Normal, GoldenInsider, Frosted, Light, Amoled, Classic and Enchantment**. Follow the steps outlined below to choose a custom appearance preset:
 
 1. Open Core and navigate to the **Settings** page, then to the **Appearance** tab.
 2. Under **Presets and style** change the appearance preset to the one you like.
@@ -115,18 +115,18 @@ Global variables are shared settings that are used by the majority of Core modul
 1. Open Core and navigate to the **Settings** page, then to the **Global** tab.
 2. Under **Time & Weather** configure the **Time Format**, **Weather Temperature Unit**, **Weather Location**, and **Weather Language** options according to you personal preference.
 
-> Note: The **Weather** and the **Time** will be displayed by the modules/widgets based on your configuration, so make sure you configure the global variables correctly.**
+> Note: The **Weather** and the **Time** will be displayed by the modules/widgets based on your configuration, so make sure you configure the global variables correctly.
 
 #### Addons:
 
-Addons are third-party toolsprogramsextensions that are required by certain modules and widgets to retrieve song information or to provide additional appearance features such as shadows and widget-blur. JaxCore modules and widgets currently require two addons to function properly: **[Spicetify](https://spicetify.app/)** and **[Image Magick](https://imagemagick.org/index.php)**. Refer to the installation guides linked below to install the aforementioned addons.
+Addons are third-party tools\programs\extensions that are required by certain modules and widgets to retrieve song information or to provide additional appearance features such as shadows and widget-blur. JaxCore modules and widgets currently require two addons to function properly: **[Spicetify](https://spicetify.app/)** and **[Image Magick](https://imagemagick.org/index.php)**. Refer to the installation guides linked below to install the aforementioned addons.
 
 * [Spicetify Installation Guide](https://github.com/Jax-Core/ModularPlayers#installing-spicetify)
 * [Image Magick Installation Guide](https://github.com/Jax-Core/ModularPlayers#installing-imagemagick)
 
 #### Language:
 
-Core still has the functionality to switch to a desired language. To do so, follow the steps outlined below.
+Core has the functionality to switch the display language. To do so, follow the steps outlined below.
 
 1. Open Core and navigate to the **Settings** page, then to the **Language** tab.
 2. Under **Other Languages** choose a language you would like Core to be displayed in.
