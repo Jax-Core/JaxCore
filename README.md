@@ -101,7 +101,7 @@ A quick guide to installing and configuring JaxCore.
 - **Powershell v5.1 or newer.** Windows 10 and 11 users should already have this installed. However, Windows 7 users may be using an out-of-date version of Powershell. To resolve that:
     1. Open a PowerShell CLI and run `$PSVersionTable.PSVersion.Major`
     2. If it returns `5`, you can skip this step and proceed to the installation of JaxCore. However, if it returns `2`, download and install the most recent PowerShell version. The installer can be found at: **[Click me!](https://www.microsoft.com/en-us/download/details.aspx?id=54616.)**
-- **.NET Framework 4.5 or later.** If you're unsure as to what **.NET Framework** version you have installed, you can refer to **[this article](https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed)** for checking. Perchance you have an older version, download and install the most recent version. The installer can be found at: **[Click me!](https://dotnet.microsoft.com/en-us/download/dotnet-framework)**
+- **.NET Framework 4.5 or later.** If you're unsure about which **.NET Framework** version you have installed, you can refer to **[this article](https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed)** for checking. Perchance you have an older version, download and install the most recent version. The installer can be found at: **[Click me!](https://dotnet.microsoft.com/en-us/download/dotnet-framework)**
 
 
 ### Installation 
