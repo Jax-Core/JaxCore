@@ -1,8 +1,8 @@
 [Variables]
-CCW=500
-CCH=250
-SkinX=382
-SkinY=214
+CCW=902
+CCH=826
+SkinX=1963
+SkinY=100
 [Position]
 Meter=Shape
 MeterStyle=CtxBox:S | Position:Act
@@ -12,18 +12,6 @@ MeterStyle=CtxIcon:S
 [PositionText]
 Meter=String
 MeterStyle=Ctx.String:S | CtxText:S | Position:Text
-[Divider1]
-Meter=Shape
-MeterStyle=Ctx.Div:S
-[Core]
-Meter=Shape
-MeterStyle=CtxBox:S | Core:Act
-[CoreIcon]
-Meter=Image
-MeterStyle=CtxIcon:S
-[CoreText]
-Meter=String
-MeterStyle=Ctx.String:S | CtxText:S | Core:Text
 [Unload]
 Meter=Shape
 MeterStyle=CtxBox:S | Unload:Act
