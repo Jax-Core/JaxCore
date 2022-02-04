@@ -25,6 +25,9 @@
       <a href="#about">About</a>
     </li>
     <li>
+      <a href="#core-widgets-and-modules">Core Widgets and Modules</a>
+    </li>
+    <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
@@ -62,15 +65,27 @@ Core makes customization easier for new users by providing a dedicated configura
 
 The built-in update checker in Core will ensure that you never miss out on new features or bug fixes. Core can also notify you when new skin updates are available for the skins you have installed. You can install all of the updates with a single button press, and Core will handle the rest.
 
-## Currently Available Modules
+<p align="right">
+    <b><a href="#top">↥ back to top</a></b>
+</p>
+
+## Core Widgets and Modules
+
+### Currently Avaiable Modules
 1. [Keylaunch](https://github.com/Jax-Core/Keylaunch)
 2. [IdleStyle](https://github.com/Jax-Core/IdleStyle)
 3. [ValliStart](https://github.com/Jax-Core/ValliStart)
 4. [QuickNote](https://github.com/Jax-Core/QuickNote)
-5. [ModularVisualizer](https://github.com/Jax-Core/ModularVisualizer)
-6. [ModularClocks](https://github.com/Jax-Core/Modularclocks)
-7. [ModularPlayers](https://github.com/Jax-Core/ModularPlayers)
-8. [Combilaunch](https://github.com/Jax-Core/Combilaunch)
+5. [MIUI-Shade](https://github.com/Jax-Core/MIUI-Shade)
+6. [Keystrokes](https://github.com/Jax-Core/Keystrokes)
+7. [YourMixer](https://github.com/Jax-Core/YourMixer)
+
+### Currently Available Widgets
+1. [ModularVisualizer](https://github.com/Jax-Core/ModularVisualizer)
+2. [ModularClocks](https://github.com/Jax-Core/Modularclocks)
+3. [ModularPlayers](https://github.com/Jax-Core/ModularPlayers)
+5. [Plainext](https://github.com/Jax-Core/Plainext)
+4. [Combilaunch](https://github.com/Jax-Core/Combilaunch) (This widget does not require you to have JaxCore installed.)
 
 <p align="right">
     <b><a href="#top">↥ back to top</a></b>
