@@ -1,4 +1,4 @@
-[Values]
+[@Resources\Vars.inc]
 Set.Style=RunicX
 Set.IconStyle=Normal
 Set.Pri_Color=12,12,12
