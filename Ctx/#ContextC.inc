@@ -1,7 +1,7 @@
 [Variables]
 CCW=1020
 CCH=826
-SkinX=2075
+SkinX=2107
 SkinY=71
 [Position]
 Meter=Shape
