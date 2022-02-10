@@ -1,15 +1,17 @@
-[Divider1]
+[Variables]
+CCW=1339
+CCH=883
+SkinX=482
+SkinY=98
+[Position]
 Meter=Shape
-MeterStyle=Ctx.Div:S
-[Core]
-Meter=Shape
-MeterStyle=CtxBox:S | Core:Act
-[CoreIcon]
+MeterStyle=CtxBox:S | Position:Act
+[PositionIcon]
 Meter=Image
 MeterStyle=CtxIcon:S
-[CoreText]
+[PositionText]
 Meter=String
-MeterStyle=Ctx.String:S | CtxText:S | Core:Text
+MeterStyle=Ctx.String:S | CtxText:S | Position:Text
 [Unload]
 Meter=Shape
 MeterStyle=CtxBox:S | Unload:Act
