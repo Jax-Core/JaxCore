@@ -13,6 +13,6 @@ QuickNote=1.4
 IdleStyle=1.42
 ModularVisualizer=1.04
 YourFlyouts=0.0
-YourMixer=1.21
+YourMixer=1.31
 
 NewsID=15
