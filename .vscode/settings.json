@@ -1,0 +1,9 @@
+{
+    "Lua.diagnostics.globals": [
+        "SKIN",
+        "SELF"
+    ],
+    "Lua.diagnostics.disable": [
+        "lowercase-global"
+    ]
+}
