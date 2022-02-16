@@ -1,13 +1,13 @@
-[IdleStyle]
+[Keylaunch]
 Meter=Image
 X=r
 Y=([RecommendedSkins:H]*([Set.S]-1)+10*[Set.S])R
-ImageName=#@#Images\Cards\IdleStyle.png
+ImageName=#@#Images\Cards\Keylaunch.png
 MeterStyle=SkinIcon:S
-[IdleStyleDes]
+[KeylaunchDes]
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
-Text=IdleStyle#CRLF# Screensavers reimagined.
+Text=Keylaunch#CRLF# Animated hotkey launcher
 [ValliStart]
 Meter=Image
 ImageName=#@#Images\Cards\ValliStart.png
@@ -16,14 +16,14 @@ MeterStyle=SkinIcon:S
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
 Text=ValliStart#CRLF# Start menu replacement
-[Keylaunch]
+[IdleStyle]
 Meter=Image
-ImageName=#@#Images\Cards\Keylaunch.png
+ImageName=#@#Images\Cards\IdleStyle.png
 MeterStyle=SkinIcon:S
-[KeylaunchDes]
+[IdleStyleDes]
 Meter=String
 MeterStyle=Set.String:S | SkinText:S
-Text=Keylaunch#CRLF# Animated hotkey launcher
+Text=IdleStyle#CRLF# Screensavers reimagined
 [QuickNote]
 Meter=Image
 X=(#Set.P#)
