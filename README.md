@@ -17,12 +17,16 @@
   </p>
 </div>
 
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/Jax-Core/JaxCore?label=Version&style=for-the-badge)
-![GitHub all releases](https://img.shields.io/github/downloads/EnhancedJax/-JaxCore/total?style=for-the-badge)
-![GitHub Release Date](https://img.shields.io/github/release-date/Jax-Core/JaxCore?label=Last%20Core%20Update&style=for-the-badge)
-![Discord](https://img.shields.io/discord/880445067754610688?label=Discord%20server&style=for-the-badge)
-![GitHub](https://img.shields.io/github/license/Jax-Core/JaxCore?style=for-the-badge)
 
+<p align="center">
+  <img alt="Latest by date" src="https://img.shields.io/github/v/tag/Jax-Core/JaxCore?label=Version&style=for-the-badge" />
+  <img alt="Releases" src="https://img.shields.io/github/downloads/EnhancedJax/-JaxCore/total?style=for-the-badge" />
+  <img alt="Release date" src="https://img.shields.io/github/release-date/Jax-Core/JaxCore?label=Last%20Core%20Update&style=for-the-badge" />
+  <img alt="Discord" src="https://img.shields.io/discord/880445067754610688?label=Discord%20server&style=for-the-badge" />
+  <img alt="Github" src="https://img.shields.io/github/license/Jax-Core/JaxCore?style=for-the-badge" />
+  
+  
+</p>
 
 <!-- TABLE OF CONTENTS -->
 <details>
