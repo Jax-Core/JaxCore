@@ -1,3 +1,4 @@
+YourMixer | Windows volume control
 Keylaunch | Animated hotkey launcher
 ValliStart | Start menu replacement
 IdleStyle | Screensavers reimagined

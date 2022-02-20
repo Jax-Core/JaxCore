@@ -1,7 +1,15 @@
-[Keylaunch]
+[YourMixer]
 Meter=Image
 X=r
 Y=([RecommendedSkins:H]*([Set.S]-1)+10*[Set.S])R
+ImageName=#@#Images\Cards\YourMixer.png
+MeterStyle=SkinIcon:S
+[YourMixerDes]
+Meter=String
+MeterStyle=Set.String:S | SkinText:S
+Text=YourMixer#CRLF# Windows volume control
+[Keylaunch]
+Meter=Image
 ImageName=#@#Images\Cards\Keylaunch.png
 MeterStyle=SkinIcon:S
 [KeylaunchDes]
@@ -18,6 +26,8 @@ MeterStyle=Set.String:S | SkinText:S
 Text=ValliStart#CRLF# Start menu replacement
 [IdleStyle]
 Meter=Image
+X=(#Set.P#)
+Y=(10*[Set.S])R
 ImageName=#@#Images\Cards\IdleStyle.png
 MeterStyle=SkinIcon:S
 [IdleStyleDes]
@@ -26,8 +36,6 @@ MeterStyle=Set.String:S | SkinText:S
 Text=IdleStyle#CRLF# Screensavers reimagined
 [QuickNote]
 Meter=Image
-X=(#Set.P#)
-Y=(10*[Set.S])R
 ImageName=#@#Images\Cards\QuickNote.png
 MeterStyle=SkinIcon:S
 [QuickNoteDes]
@@ -44,6 +52,8 @@ MeterStyle=Set.String:S | SkinText:S
 Text=MIUI-Shade#CRLF# Animated control center
 [Keystrokes]
 Meter=Image
+X=(#Set.P#)
+Y=(10*[Set.S])R
 ImageName=#@#Images\Cards\Keystrokes.png
 MeterStyle=SkinIcon:S
 [KeystrokesDes]
