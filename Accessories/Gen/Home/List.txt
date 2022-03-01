@@ -1,6 +1,5 @@
 YourMixer | Windows volume control
 Keylaunch | Animated hotkey launcher
-ValliStart | Start menu replacement
 IdleStyle | Screensavers reimagined
 QuickNote | Quick access notepad
 MIUI-Shade | Animated control center
