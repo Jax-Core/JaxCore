@@ -1,6 +1,13 @@
 [Variables]
 Skin.Name=YourMixer
 Sec.W=(175*#Sec.S#)
+[v1.32]
+Meter=String
+MeterStyle=String:S
+LeftMouseUpAction=[!SetVariable DownloadLink "https://github.com/Jax-Core/#Skin.Name#/releases/download/v1.32/#Skin.Name#_v1.32.rmskin"][!SetVariable DownloadName "#Skin.Name#1.32"][!SetVariable DownloadConfig "#Skin.Name#"][!CommandMeasure CoreInstallHandler "InitInstall"]
+[Div:1.32]
+Meter=Shape
+MeterStyle=Div:S
 [v1.31]
 Meter=String
 MeterStyle=String:S
@@ -36,7 +43,7 @@ LeftMouseUpAction=[!SetVariable DownloadLink "https://github.com/Jax-Core/#Skin.
 [Div:1.0]
 Meter=Shape
 MeterStyle=Div:S
-[Installer]
+[CoreInstallHandler]
 Measure=Plugin
 Plugin=PowershellRM
 DynamicVariables=1

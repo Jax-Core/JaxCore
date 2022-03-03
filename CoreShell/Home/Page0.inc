@@ -52,7 +52,8 @@ Debug=2
 Debug2File=#ROOTCONFIGPATH#Accessories\Popup\Variants\CoreNews.inc
 DynamicVariables=1
 Disabled=1
-FinishAction=[!commandMeasure Func "startPopup('CoreNews', 'Left')"]
+Group=ParseNews
+FinishAction=[!Delay 1000][!commandMeasure Func "startPopup('CoreNews', 'Left')"]
 
 [ParsePage2]
 Measure=WebParser
