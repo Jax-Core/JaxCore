@@ -22,12 +22,16 @@ FontSize=(18*#Sec.S#)
 FontFace=#Set.Font# 
 FontWeight=(650)
 DynamicVariables=1
+ClipString=2
+W=(#Sec.W#-#Sec.P#*2)
 InlineSetting=GradientColor | 180 | #Set.Accent_Color# ; 0.0 | #Set.Accent_Color_2# ; 1.0
 
 [Style.Description:S]
 X=(#Sec.P#)
 Y=(#Sec.P#)R
 FontSize=(12*#Sec.S#)
+ClipString=2
+W=(#Sec.W#-#Sec.P#*2)
 inlinePattern=NEW!
 InlineSetting=Color | FFC83D
 inlinePattern2=IMPORTANT!

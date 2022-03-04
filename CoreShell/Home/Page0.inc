@@ -17,7 +17,7 @@ TweenNode1=0
 [NewsParser]
 Measure=WebParser
 URL=https://raw.githubusercontent.com/Jax-Core/JaxCore/main/CoreWebResources.inc
-RegExp=(?s).*NewsID=(\d*).*Page2ID=(\d*).*Page3ID=(\d*)$
+RegExp=(?siU).*NewsID=(.+)Page2ID=(.+)Page3ID=(.+)$
 Group=BackgroundMeasures
 Disabled=(0)
 FinishAction=[!CommandMeasure LogicalScript "checkNews()"]
