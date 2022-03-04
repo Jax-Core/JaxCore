@@ -1,4 +1,4 @@
-﻿[Variables]
+[Variables]
 SKINLIST=Combilaunch | Plainext | MIUI-Shade | ModularClocks | ModularPlayers | Keystrokes | Keylaunch | ValliStart | QuickNote | IdleStyle | ModularVisualizer
 
 Combilaunch=1.3
