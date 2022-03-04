@@ -1,5 +1,5 @@
 ﻿[Variables]
-Spotlight=ValliStart3.0
+Spotlight=ValliStart
 
 [BC]
 MouseScrollDownAction=[!SetVariable Scroll "(Clamp(#Scroll#+60,0,(#Set.PageH#-#Set.H#)))"][!UpdateMeterGroup Scroll][!Redraw]
@@ -94,19 +94,19 @@ InlineSetting=Size | (12*[Set.S])
 InlinePattern2=#CRLF#.*
 InlineSetting2=Weight | 300
 MeterStyle=Set.String:S
-Text=ValliStart 3.0#CRLf#Better animations, more shortcuts, calendar, applist, new UI, hotapps, ImageUnderlay, new music module.#CRLF#These are some of the new features for ValliStart's future 3.0 update! #CRLF##CRLF#Donators can obtain early access to future modules! Support me today!
-[SkinsButton]
-Meter=Shape
-X=(#Set.P#)
-Y=(300*[Set.S])r
-MeterStyle=Shape.Over:S | Button:S
-OverColor=#Set.Accent_Color#
-LeaveColor=#Set.Accent_Color#
-Leftmouseupaction=["https://ko-fi.com/jaxoriginals"]
-[SkinsText]
-Meter=String
-Text=Support me
-MeterStyle=Set.String:S | ButtonText:S
+Text=ValliStart 3.0#CRLf#Start menu replacement for Windows, with full customizability, interchangeable modules and more.#CRLF##CRLF#Get your enhanced start menu today!
+; [SkinsButton]
+; Meter=Shape
+; X=(#Set.P#)
+; Y=(300*[Set.S])r
+; MeterStyle=Shape.Over:S | Button:S
+; OverColor=#Set.Accent_Color#
+; LeaveColor=#Set.Accent_Color#
+; Leftmouseupaction=["https://ko-fi.com/jaxoriginals"]
+; [SkinsText]
+; Meter=String
+; Text=Support me
+; MeterStyle=Set.String:S | ButtonText:S
 
 [SpotImage]
 Meter=Image
@@ -123,7 +123,7 @@ LeftMouseUpAction=[!WriteKeyvalue Variables Skin.Name #Spotlight# "#@#SecVar.inc
 
 [RecommendedSkins]
 Meter=String
-Text=All skins
+Text=All modules
 MeterStyle=Set.String:S
 X=(#Set.P#)
 Y=(35*[Set.S])R
