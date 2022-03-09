@@ -8,12 +8,12 @@ ModularClocks=2.2
 ModularPlayers=2.41
 Keystrokes=1.5
 Keylaunch=2.01
-ValliStart=3.0
+ValliStart=3.1
 QuickNote=1.4
 IdleStyle=1.42
 ModularVisualizer=1.04
 YourFlyouts=0.0
-YourMixer=1.4
+YourMixer=1.5
 
 NewsID=30
 Page2ID=2
