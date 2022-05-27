@@ -7,7 +7,7 @@
 ]]--
 
 -- Value is passed from Main's DoFileParams()
-local SKIN = ...
+-- local SKIN = ...
 
 -- The type of loops supported
 local loops = { "none", "restart", "yoyo" }

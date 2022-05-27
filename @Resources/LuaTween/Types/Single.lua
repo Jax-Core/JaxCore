@@ -1,7 +1,7 @@
 -- Single-type tween
 
 -- Values are passed from Main's DoFileParams()
-local SKIN, Shared, tween = ...
+-- local SKIN, Shared, tween = ...
 
 -- Standard varaibles that all type tween script's should have
 local tweensTable = {}
