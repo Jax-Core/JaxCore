@@ -112,6 +112,10 @@ DynamicVariables=1
 ;                                    Content                                   ;
 ; ---------------------------------------------------------------------------- ;
 
+[B]
+Shape2=Rectangle 0,0, #Set.W#, #Set.H#, #Set.WinR# | StrokeWidth 0 | Fill RadialGradient This
+This=0,(#set.H#/2),0,0,(#Set.H#/2),(#Set.H#/2) | #Set.Pri_Color#,50 ; 1 | #Set.Accent_Color#,50 ; 0
+
 [Loading.Image]
 Meter=Image
 X=([BC:W]/2-128/2*[SEt.S])
