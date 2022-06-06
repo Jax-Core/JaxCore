@@ -15,6 +15,6 @@ ModularVisualizer=1.04
 YourFlyouts=0.0
 YourMixer=1.5
 
-NewsID=37
-Page2ID=2
+NewsID=38
+Page2ID=3
 Page3ID=0
