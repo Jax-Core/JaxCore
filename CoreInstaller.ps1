@@ -93,6 +93,7 @@ function Install-Skin() {
       Write-Emphasized "$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window."
     } else {
       Write-Error "Failed to install $skinName! "; Write-Part "Please contact support or try again."
+      Break
     }
 }
 
@@ -129,6 +130,14 @@ if (Check_Program_Installed("Rainmeter")) {
   Write-Part "Running installer   "; Write-Emphasized $outpath
   Start-Process -FilePath $outpath -ArgumentList "/S /AUTOSTARTUP=1 /RESTART=0" -Wait
   Write-Done
+  # ---------------------------- Check if installed ---------------------------- #
+  Write-Part "Checking "; Write-Emphasized "$Env:Programfiles\Rainmeter\Rainmeter.exe"; Write-Part " for Rainmeter.exe"
+  If (Test-Path -Path "$Env:Programfiles\Rainmeter\Rainmeter.exe") {
+    Write-Done
+  } else {
+    Write-Error "Failed to install Rainmeter! "; Write-Part "Please contact support or try again."
+    Break
+  }
   # --------------------------------- Generate --------------------------------- #
   Write-Part "Generating "; Write-Emphasized "Rainmeter.ini "; Write-Part "for the first time..."
   New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
