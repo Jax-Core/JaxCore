@@ -41,7 +41,7 @@ $x64_check = ((Get-ChildItem "HKLM:Software\Wow6432Node\Microsoft\Windows\Curren
 Where-Object { $_."Name" -like "*$programName*" } ).Length -gt 0;
 }
 return $x86_check -or $x64_check;
-}
+}   
 
 # ---------------------------------- Install --------------------------------- #
 
@@ -59,7 +59,7 @@ function Install_Skin() {
         Start-Sleep -s 1.5
         $wshell.SendKeys('{ENTER}')
     }
-    Exit
+    # Exit
 }
 
 # ----------------------------------- Logic ---------------------------------- #
