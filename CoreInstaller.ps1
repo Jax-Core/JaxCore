@@ -72,9 +72,17 @@ if (Check_Program_Installed("Rainmeter")) {
     Write-Done
     Install_Skin
 } else {
-    Write-Info "Rainmeter is not installed, installing Rainmeter via winget"
-    winget install Rainmeter
-    Start-Sleep 1s
+    Write-Info "Rainmeter is not installed, installing Rainmeter"
+    $api_url = 'https://api.github.com/repos/rainmeter/rainmeter/releases'
+    $api_object = Invoke-WebRequest -Uri $api_url -UseBasicParsing | ConvertFrom-Json
+    $dl_url = $api_object.assets.browser_download_url[0]
+    $outpath = "$env:temp\RainmeterInstaller.exe"
+    Write-Part "DOWNLOADING    "; Write-Emphasized $dl_url; Write-Part " -> "; Write-Emphasized $outpath
+    Invoke-WebRequest $dl_url -OutFile $outpath
     Write-Done
-    Install_Skin
+    Write-Part "Running installer   "; Write-Emphasized $outpath
+    Start-Process -FilePath $outpath -ArgumentList "/S /AUTOSTARTUP=1"
+    
+    Write-Done
+    # Install_Skin
 }
