@@ -6,11 +6,11 @@
 if ($installSkin) {
     $skinName = $installSkin
 } else {
-    $skinName = "JaxCore"
+    $skinName = "ModularPlayers"
 }
 
 # ----------------------------- Terminal outputs ----------------------------- #
-
+# Helper functions edited from spicetify cli ps1 installer (https://github.com/spicetify/spicetify-cli/blob/master/install.ps1)
 function Write-Part ([string] $Text) {
   Write-Host $Text -NoNewline
 }
@@ -19,9 +19,9 @@ function Write-Emphasized ([string] $Text) {
   Write-Host $Text -NoNewLine -ForegroundColor "Cyan"
 }
 
-function Write-Success ([string] $Text) {
+function Write-Done {
   Write-Host " > " -NoNewline
-  Write-Host $Text -ForegroundColor "Green"
+  Write-Host "OK" -ForegroundColor "Green"
 }
 
 function Write-Info ([string] $Text) {
@@ -50,8 +50,10 @@ function Install_Skin() {
     $api_object = Invoke-WebRequest -Uri $api_url -UseBasicParsing | ConvertFrom-Json
     $dl_url = $api_object.assets.browser_download_url[0]
     $outpath = "$env:temp\$($skinName)_$($api_object.tag_name[0]).rmskin"
+    Write-Part "DOWNLOADING    "; Write-Emphasized $dl_url; Write-Part " -> "; Write-Emphasized $outpath
     Invoke-WebRequest $dl_url -OutFile $outpath
-    Write-Part "DOWNLOADING    "; Write-Emphasized $dl_url; Write-path "    to    "; Write-Emphasized $outpath
+    Write-Done
+    Write-Part "Running installer   "; Write-Emphasized $outpath
     Start-Process -FilePath $outpath
     If ($Null -NotMatch (get-process "SkinInstaller" -ea SilentlyContinue)) {
         $wshell = New-Object -ComObject wscript.shell
@@ -59,18 +61,20 @@ function Install_Skin() {
         Start-Sleep -s 1.5
         $wshell.SendKeys('{ENTER}')
     }
-    # Exit
+    Write-Done
+    Write-Emphasized "$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window."
 }
 
 # ----------------------------------- Logic ---------------------------------- #
 
+Write-Part "Checking if Rainmeter is installed"
 if (Check_Program_Installed("Rainmeter")) {
-    Write-Success Rainmeter is installed, installing $skinName
+    Write-Done
     Install_Skin
 } else {
-    Write-Info Rainmeter is not installed, installing Rainmeter via winget
+    Write-Info "Rainmeter is not installed, installing Rainmeter via winget"
     winget install Rainmeter
     Start-Sleep 1s
-    Write-Success Installed Rainmeter. Installing $skinName
+    Write-Done
     Install_Skin
 }
