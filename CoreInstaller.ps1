@@ -1,8 +1,4 @@
-﻿param (
-  [string] $skinName
-)
-
-# --------------- if $installSkin variable is defined, use that -------------- #
+﻿# --------------- if $installSkin variable is defined, use that -------------- #
 if ($installSkin) {
     $skinName = $installSkin
 } else {
@@ -81,7 +77,7 @@ if (Check_Program_Installed("Rainmeter")) {
     Invoke-WebRequest $dl_url -OutFile $outpath
     Write-Done
     Write-Part "Running installer   "; Write-Emphasized $outpath
-    Start-Process -FilePath $outpath -ArgumentList "/S /AUTOSTARTUP=1"
+    Start-Process -FilePath $outpath -ArgumentList "/S /AUTOSTARTUP=1 /RESTART=1"
     
     Write-Done
     # Install_Skin
