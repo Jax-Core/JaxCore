@@ -1,8 +1,7 @@
-﻿# --------------- if $installSkin variable is defined, use that -------------- #
-if ($installSkin) {
+﻿if ($installSkin) {
     $skinName = $installSkin
 } else {
-    $skinName = "ModularPlayers"
+    $skinName = "JaxCore"
 }
 
 # ----------------------------- Terminal outputs ----------------------------- #
@@ -13,6 +12,10 @@ function Write-Part ([string] $Text) {
 
 function Write-Emphasized ([string] $Text) {
   Write-Host $Text -NoNewLine -ForegroundColor "Cyan"
+}
+
+function Write-Error ([string] $Text) {
+  Write-Host $Text -NoNewLine -ForegroundColor "Red"
 }
 
 function Write-Done {
@@ -41,7 +44,7 @@ return $x86_check -or $x64_check;
 
 # ---------------------------------- Install --------------------------------- #
 
-function Install_Skin() {
+function Install-Skin() {
     $api_url = 'https://api.github.com/repos/Jax-Core/' + $skinName + '/releases'
     $api_object = Invoke-WebRequest -Uri $api_url -UseBasicParsing | ConvertFrom-Json
     $dl_url = $api_object.assets.browser_download_url[0]
@@ -58,7 +61,11 @@ function Install_Skin() {
         $wshell.SendKeys('{ENTER}')
     }
     Write-Done
-    Write-Emphasized "$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window."
+    If (Test-Path -Path "$Startpath\Microsoft\Windows\Start Menu\Programs\JaxCore.lnk") {
+      Write-Emphasized "$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window."
+    } else {
+      Write-Error "Failed to install $skinName"; Write-Part "Please contact support or try again."
+    }
 }
 
 # ----------------------------------- Logic ---------------------------------- #
@@ -66,7 +73,7 @@ function Install_Skin() {
 Write-Part "Checking if Rainmeter is installed"
 if (Check_Program_Installed("Rainmeter")) {
     Write-Done
-    Install_Skin
+    Install-Skin
 } else {
     Write-Info "Rainmeter is not installed, installing Rainmeter"
     $api_url = 'https://api.github.com/repos/rainmeter/rainmeter/releases'
@@ -78,13 +85,13 @@ if (Check_Program_Installed("Rainmeter")) {
     Write-Done
     Write-Part "Running installer   "; Write-Emphasized $outpath
     Start-Process -FilePath $outpath -ArgumentList "/S /AUTOSTARTUP=1 /RESTART=0"
-    Wait-Process -Name Rainmeter Setup
+    Wait-Process -Name "Rainmeter Setup"
     Write-Done
-    New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemStyle "file" -Value @"
+    New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemType "file" -Value @"
 [Rainmeter]
 Logging=0
 SkinPath=$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\
-HardwareAcceleration=1
+HardwareAcceleration=0
 
 [illustro\Clock]
 Active=0
@@ -94,5 +101,5 @@ Active=0
 Active=0
 
 "@
-    Install_Skin
+    # Install-Skin
 }
