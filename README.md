@@ -87,7 +87,7 @@ Run the following command in Powershell (`win + r` -> `powershell.exe` / search)
 Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/Jax-Core/JaxCore/master/CoreInstaller.ps1" | Invoke-Expression
 ```
 **By legacy [Rainmeter](https://www.rainmeter.net/) .rmskin installer:**
-Download and run the `.rmskin` file for * *Core** from the official [JaxCore site](https://jax-core.github.io/) to install **JaxCore**.
+Download and run the `.rmskin` file from the official [JaxCore site](https://jax-core.github.io/).
 <br />
 <br />
 
