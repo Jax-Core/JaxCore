@@ -8,10 +8,6 @@ function Write-Emphasized ([string] $Text) {
   Write-Host $Text -NoNewLine -ForegroundColor "Cyan"
 }
 
-function Write-Red ([string] $Text) {
-  Write-Host $Text -ForegroundColor "Red"
-}
-
 function Write-Done {
   Write-Host " > " -NoNewline
   Write-Host "OK" -ForegroundColor "Green"
@@ -19,6 +15,10 @@ function Write-Done {
 
 function Write-Info ([string] $Text) {
   Write-Host $Text -ForegroundColor "Yellow"
+}
+
+function Write-Red ([string] $Text) {
+  Write-Host $Text -ForegroundColor "Red"
 }
 
 # -------------------------- Check program installed ------------------------- #
@@ -89,9 +89,9 @@ function Install-Skin() {
       $skinFolder = $skinName
     }
     If (Test-Path -Path "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\$skinFolder") {
-      Write-Emphasized "$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window."
+      Write-Emphasized "`n$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window."
     } else {
-      Write-Red "Failed to install $skinName! "; Write-Part "Please contact support or try again."
+      Write-Red "`nFailed to install $skinName! "; Write-Part "Please contact support or try again."
       Return
     }
 }
@@ -111,7 +111,7 @@ if (Check_Program_Installed("Rainmeter")) {
   Install-Skin
 } else {
   # ----------------------------------- Fetch ---------------------------------- #
-  Write-Info "Rainmeter is not installed, installing Rainmeter"
+  Write-Info "`nRainmeter is not installed, installing Rainmeter"
   $api_url = 'https://api.github.com/repos/rainmeter/rainmeter/releases'
   $api_object = Invoke-WebRequest -Uri $api_url -UseBasicParsing | ConvertFrom-Json
   $dl_url = $api_object.assets.browser_download_url[0]
@@ -130,7 +130,7 @@ if (Check_Program_Installed("Rainmeter")) {
   If (Test-Path -Path "$Env:Programfiles\Rainmeter\Rainmeter.exe") {
     Write-Done
   } else {
-    Write-Red "Failed to install Rainmeter! "; Write-Part "Make sure you have selected `"Yes`" when installation dialog pops up"
+    Write-Red "`nFailed to install Rainmeter! "; Write-Part "Make sure you have selected `"Yes`" when installation dialog pops up"
     Return
   }
   # --------------------------------- Generate --------------------------------- #
