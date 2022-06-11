@@ -9,7 +9,7 @@ function Write-Emphasized ([string] $Text) {
 }
 
 function Write-Error ([string] $Text) {
-  Write-Host $Text -NoNewLine -ForegroundColor "Red"
+  Write-Host $Text -ForegroundColor "Red"
 }
 
 function Write-Done {
@@ -18,7 +18,6 @@ function Write-Done {
 }
 
 function Write-Info ([string] $Text) {
-  Write-Host " > " -NoNewline
   Write-Host $Text -ForegroundColor "Yellow"
 }
 
@@ -71,7 +70,7 @@ function Install-Skin() {
     $api_object = Invoke-WebRequest -Uri $api_url -UseBasicParsing | ConvertFrom-Json
     $dl_url = $api_object.assets.browser_download_url[0]
     $outpath = "$env:temp\$($skinName)_$($api_object.tag_name[0]).rmskin"
-    Write-Part "DOWNLOADING    "; Write-Emphasized $dl_url; Write-Part " -> "; Write-Emphasized $outpath
+    Write-Part "Downloading    "; Write-Emphasized $dl_url; Write-Part " -> "; Write-Emphasized $outpath
     downloadFile "$dl_url" "$outpath"
     Write-Done
     Write-Part "Running installer   "; Write-Emphasized $outpath
@@ -122,7 +121,7 @@ if (Check_Program_Installed("Rainmeter")) {
   $dl_url = $api_object.assets.browser_download_url[0]
   $outpath = "$env:temp\RainmeterInstaller.exe"
   # --------------------------------- Download --------------------------------- #
-  Write-Part "DOWNLOADING    "; Write-Emphasized $dl_url; Write-Part " -> "; Write-Emphasized $outpath
+  Write-Part "Downloading    "; Write-Emphasized $dl_url; Write-Part " -> "; Write-Emphasized $outpath
   # Invoke-WebRequest $dl_url -OutFile $outpath
   downloadFile "$dl_url" "$outpath"
   Write-Done
@@ -135,7 +134,7 @@ if (Check_Program_Installed("Rainmeter")) {
   If (Test-Path -Path "$Env:Programfiles\Rainmeter\Rainmeter.exe") {
     Write-Done
   } else {
-    Write-Error "Failed to install Rainmeter! "; Write-Part "Please contact support or try again."
+    Write-Error "Failed to install Rainmeter! "; Write-Part "Make sure you have selected `"Yes`" when installation dialog pops up"
     Break
   }
   # --------------------------------- Generate --------------------------------- #
