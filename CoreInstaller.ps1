@@ -83,10 +83,16 @@ function Install-Skin() {
         $wshell.SendKeys('{ENTER}')
     }
     Write-Done
-    If (Test-Path -Path "$Startpath\Microsoft\Windows\Start Menu\Programs\JaxCore.lnk") {
+    Wait-Process "Rainmeter Skin Installer"
+    If ($skinName -contains "JaxCore") {
+      $skinFolder = "#JaxCore"
+    } else {
+      $skinFolder = $skinName
+    }
+    If (Test-Path -Path "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\$skinFolder") {
       Write-Emphasized "$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window."
     } else {
-      Write-Error "Failed to install $skinName"; Write-Part "Please contact support or try again."
+      Write-Error "Failed to install $skinName! "; Write-Part "Please contact support or try again."
     }
 }
 
@@ -141,5 +147,5 @@ Active=0
 "@
     Write-Done
     # ---------------------------------- Install --------------------------------- #
-    # Install-Skin
+    Install-Skin
 }
