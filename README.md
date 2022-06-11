@@ -53,7 +53,22 @@ The built-in update checker in Core will ensure that you never miss out on new f
     <b><a href="#top">↥ back to top</a></b>
 </p>
 
-## Core Widgets and Modules
+## Prerequisites 🖥️
+- **Windows 10** or above
+- For older systems, **Powershell v5.1 or newer** is required. Upgrade powershell **[here](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-7.2#upgrading-existing-windows-powershell)**!
+
+## Installation ✅
+**By Powershell CLI:**
+Run the following command in Powershell (`win + r` -> `powershell.exe` / search)
+```
+Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/Jax-Core/JaxCore/master/CoreInstaller.ps1" | Invoke-Expression
+```
+**By legacy [Rainmeter](https://www.rainmeter.net/) .rmskin installer:**
+Download and run the `.rmskin` file from the official [JaxCore site](https://jax-core.github.io/).
+<br />
+<br />
+
+## Core Widgets and Modules ☑️
 
 ### Currently Avaiable Modules 💠
 1. [YourMixer](https://github.com/Jax-Core/YourMixer)
@@ -76,22 +91,7 @@ The built-in update checker in Core will ensure that you never miss out on new f
     <b><a href="#top">↥ back to top</a></b>
 </p>
 
-## Prerequisites
-- **Windows 10** or above
-- For older systems, **Powershell v5.1 or newer** is required. Upgrade powershell **[here](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-7.2#upgrading-existing-windows-powershell)**!
-
-## Installation 
-**By Powershell CLI:**
-Run the following command in Powershell (`win + r` -> `powershell.exe` / search)
-```
-Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/Jax-Core/JaxCore/master/CoreInstaller.ps1" | Invoke-Expression
-```
-**By legacy [Rainmeter](https://www.rainmeter.net/) .rmskin installer:**
-Download and run the `.rmskin` file from the official [JaxCore site](https://jax-core.github.io/).
-<br />
-<br />
-
-## Help and Documentation
+## Help and Documentation ❔
 - If you are interested in learning more about JaxCore, its structure, or how to develop modules/widgets, please see [JaxCore's Documentation](https://jaxcore.gitbook.io/core/).
 - Join the [Core Community Discord Server](https://discord.gg/JmgehPSDD6) for more help.
 
