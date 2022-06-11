@@ -47,7 +47,7 @@ function DownloadFile($url, $targetFile)
    $totalLength = [System.Math]::Floor($response.get_ContentLength()/1024)
    $responseStream = $response.GetResponseStream()
    $targetStream = New-Object -TypeName System.IO.FileStream -ArgumentList $targetFile, Create
-   $buffer = new-object byte[] 10KB
+   $buffer = new-object byte[] 1000KB
    $count = $responseStream.Read($buffer,0,$buffer.length)
    $downloadedBytes = $count
    while ($count -gt 0)
@@ -72,7 +72,7 @@ function Install-Skin() {
     $dl_url = $api_object.assets.browser_download_url[0]
     $outpath = "$env:temp\$($skinName)_$($api_object.tag_name[0]).rmskin"
     Write-Part "DOWNLOADING    "; Write-Emphasized $dl_url; Write-Part " -> "; Write-Emphasized $outpath
-    Invoke-WebRequest $dl_url -OutFile $outpath
+    downloadFile "$dl_url" "$outpath"
     Write-Done
     Write-Part "Running installer   "; Write-Emphasized $outpath
     Start-Process -FilePath $outpath
@@ -83,7 +83,7 @@ function Install-Skin() {
         $wshell.SendKeys('{ENTER}')
     }
     Write-Done
-    Wait-Process "Rainmeter Skin Installer"
+    Wait-Process "SkinInstaller"
     If ($skinName -contains "JaxCore") {
       $skinFolder = "#JaxCore"
     } else {
