@@ -28,35 +28,6 @@
   
 </p>
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about">About</a>
-    </li>
-    <li>
-      <a href="#core-widgets-and-modules">Core Widgets and Modules</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#customization">Customization</a></li>
-        <li><a href="#miscellaneous-setup">Miscellaneous Setup</a>
-          <ul>
-            <li><a href="#global-variables">Global Variables</a></li>
-            <li><a href="#addons">Addons</a></li>
-            <li><a href="#language">Language</a></li>
-          </ul>
-      </li>
-      </ul>
-    </li>
-    <li> <a href="#help-and-documentation">Help and Documentation</a></li>
-  </ol>
-</details>
-
 ## About 👀
 
 ![GithubBanner](https://user-images.githubusercontent.com/80020581/173184125-dc277f1a-ed59-4055-8631-870eb803e3a8.png)
@@ -106,25 +77,19 @@ The built-in update checker in Core will ensure that you never miss out on new f
 </p>
 
 ## Prerequisites
-
-JaxCore works for systems with **Windows 10** or above
-
-### Older systems
-**Powershell v5.1 or newer** is required. To check which version of **Powershell** you have installed, follow the steps outlined below.
-    1. Open a PowerShell CLI and run `$PSVersionTable.PSVersion.Major`
-    2. If it returns `5`, you've got the up-to-date version of Powershell. However, if it returns `2`, download and install the most recent PowerShell version. The installer can be found at: **[Click me!](https://www.microsoft.com/en-us/download/details.aspx?id=54616.)**
-
+- **Windows 10** or above
+- For older systems, **Powershell v5.1 or newer** is required. Upgrade powershell **[here](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-7.2#upgrading-existing-windows-powershell)**!
 
 ## Installation 
 **By Powershell CLI:**
-1. Open Powershell (pre-installed on any Windows system)
-2. Run `Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/Jax-Core/JaxCore/master/CoreInstaller.ps1" | Invoke-Expression`
-
-**Rainmeter .rmskin installer:**
-1. Download and run the `.rmskin` file for **Core** from the official [JaxCore site](https://jax-core.github.io/) to install **JaxCore**.
-2. Finally, proceed through the welcome screen to complete the installation.
-
-> Note: Refer to [JaxCore's Documentation](https://jaxcore.gitbook.io/core/) for the **Uninstallation** guide.
+Run the following command in Powershell (`win + r` -> `powershell.exe` / search)
+```
+Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/Jax-Core/JaxCore/master/CoreInstaller.ps1" | Invoke-Expression
+```
+**By legacy [Rainmeter](https://www.rainmeter.net/) .rmskin installer:**
+Download and run the `.rmskin` file for * *Core** from the official [JaxCore site](https://jax-core.github.io/) to install **JaxCore**.
+<br />
+<br />
 
 ## Help and Documentation
 - If you are interested in learning more about JaxCore, its structure, or how to develop modules/widgets, please see [JaxCore's Documentation](https://jaxcore.gitbook.io/core/).
