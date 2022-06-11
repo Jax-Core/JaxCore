@@ -96,7 +96,7 @@ if (Check_Program_Installed("Rainmeter")) {
   Write-Done
   # --------------------------------- Generate --------------------------------- #
   Write-Part "Generating "; Write-Emphasized "Rainmeter.ini "; Write-Part "for the first time..."
-  New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemType "file" -Value @" -Force
+  New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
 [Rainmeter]
 Logging=0
 SkinPath=$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\
