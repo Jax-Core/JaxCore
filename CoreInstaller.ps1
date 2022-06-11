@@ -77,8 +77,22 @@ if (Check_Program_Installed("Rainmeter")) {
     Invoke-WebRequest $dl_url -OutFile $outpath
     Write-Done
     Write-Part "Running installer   "; Write-Emphasized $outpath
-    Start-Process -FilePath $outpath -ArgumentList "/S /AUTOSTARTUP=1 /RESTART=1"
-    
+    Start-Process -FilePath $outpath -ArgumentList "/S /AUTOSTARTUP=1 /RESTART=0"
+    Wait-Process -Name Rainmeter Setup
     Write-Done
-    # Install_Skin
+    New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemStyle "file" -Value @"
+[Rainmeter]
+Logging=0
+SkinPath=$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\
+HardwareAcceleration=1
+
+[illustro\Clock]
+Active=0
+[illustro\Disk]
+Active=0
+[illustro\System]
+Active=0
+
+"@
+    Install_Skin
 }
