@@ -1,10 +1,4 @@
-﻿if ($installSkin) {
-    $skinName = $installSkin
-} else {
-    $skinName = "JaxCore"
-}
-
-# ----------------------------- Terminal outputs ----------------------------- #
+﻿# ----------------------------- Terminal outputs ----------------------------- #
 # Helper functions edited from spicetify cli ps1 installer (https://github.com/spicetify/spicetify-cli/blob/master/install.ps1)
 function Write-Part ([string] $Text) {
   Write-Host $Text -NoNewline
@@ -70,24 +64,39 @@ function Install-Skin() {
 
 # ----------------------------------- Logic ---------------------------------- #
 
-Write-Part "Checking if Rainmeter is installed"
-if (Check_Program_Installed("Rainmeter")) {
-    Write-Done
-    Install-Skin
+param (
+  [string] $skinName
+)
+
+if ($installSkin) {
+    $skinName = $installSkin
 } else {
-    Write-Info "Rainmeter is not installed, installing Rainmeter"
-    $api_url = 'https://api.github.com/repos/rainmeter/rainmeter/releases'
-    $api_object = Invoke-WebRequest -Uri $api_url -UseBasicParsing | ConvertFrom-Json
-    $dl_url = $api_object.assets.browser_download_url[0]
-    $outpath = "$env:temp\RainmeterInstaller.exe"
-    Write-Part "DOWNLOADING    "; Write-Emphasized $dl_url; Write-Part " -> "; Write-Emphasized $outpath
-    Invoke-WebRequest $dl_url -OutFile $outpath
-    Write-Done
-    Write-Part "Running installer   "; Write-Emphasized $outpath
-    Start-Process -FilePath $outpath -ArgumentList "/S /AUTOSTARTUP=1 /RESTART=0"
-    Wait-Process -Name "Rainmeter Setup"
-    Write-Done
-    New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemType "file" -Value @"
+    $skinName = "JaxCore"
+}
+
+Write-Part "Checking if Rainmeter is installed"
+
+if (Check_Program_Installed("Rainmeter")) {
+  Write-Done
+  Install-Skin
+} else {
+  # ----------------------------------- Fetch ---------------------------------- #
+  Write-Info "Rainmeter is not installed, installing Rainmeter"
+  $api_url = 'https://api.github.com/repos/rainmeter/rainmeter/releases'
+  $api_object = Invoke-WebRequest -Uri $api_url -UseBasicParsing | ConvertFrom-Json
+  $dl_url = $api_object.assets.browser_download_url[0]
+  $outpath = "$env:temp\RainmeterInstaller.exe"
+  # --------------------------------- Download --------------------------------- #
+  Write-Part "DOWNLOADING    "; Write-Emphasized $dl_url; Write-Part " -> "; Write-Emphasized $outpath
+  Invoke-WebRequest $dl_url -OutFile $outpath
+  Write-Done
+  # ------------------------------------ Run ----------------------------------- #
+  Write-Part "Running installer   "; Write-Emphasized $outpath
+  Start-Process -FilePath $outpath -ArgumentList "/S /AUTOSTARTUP=1 /RESTART=0" -Wait
+  Write-Done
+  # --------------------------------- Generate --------------------------------- #
+  Write-Part "Generating "; Write-Emphasized "Rainmeter.ini "; Write-Part "for the first time..."
+  New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemType "file" -Value @" -Force
 [Rainmeter]
 Logging=0
 SkinPath=$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\
@@ -101,5 +110,7 @@ Active=0
 Active=0
 
 "@
+    Write-Done
+    # ---------------------------------- Install --------------------------------- #
     # Install-Skin
 }
