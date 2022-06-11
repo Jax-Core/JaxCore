@@ -8,7 +8,7 @@ function Write-Emphasized ([string] $Text) {
   Write-Host $Text -NoNewLine -ForegroundColor "Cyan"
 }
 
-function Write-Error ([string] $Text) {
+function Write-Red ([string] $Text) {
   Write-Host $Text -ForegroundColor "Red"
 }
 
@@ -91,16 +91,12 @@ function Install-Skin() {
     If (Test-Path -Path "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\$skinFolder") {
       Write-Emphasized "$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window."
     } else {
-      Write-Error "Failed to install $skinName! "; Write-Part "Please contact support or try again."
-      Break
+      Write-Red "Failed to install $skinName! "; Write-Part "Please contact support or try again."
+      Return
     }
 }
 
 # ----------------------------------- Logic ---------------------------------- #
-
-param (
-  [string] $skinName
-)
 
 if ($installSkin) {
     $skinName = $installSkin
@@ -134,8 +130,8 @@ if (Check_Program_Installed("Rainmeter")) {
   If (Test-Path -Path "$Env:Programfiles\Rainmeter\Rainmeter.exe") {
     Write-Done
   } else {
-    Write-Error "Failed to install Rainmeter! "; Write-Part "Make sure you have selected `"Yes`" when installation dialog pops up"
-    Break
+    Write-Red "Failed to install Rainmeter! "; Write-Part "Make sure you have selected `"Yes`" when installation dialog pops up"
+    Return
   }
   # --------------------------------- Generate --------------------------------- #
   Write-Part "Generating "; Write-Emphasized "Rainmeter.ini "; Write-Part "for the first time..."
