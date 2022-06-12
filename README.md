@@ -30,7 +30,7 @@
 
 ## About 👀
 
-![GithubBanner](https://user-images.githubusercontent.com/80020581/173184125-dc277f1a-ed59-4055-8631-870eb803e3a8.png)
+![GithubBanner](https://user-images.githubusercontent.com/80020581/173227081-761ae822-6c83-4a10-9093-a3117c2cffd7.png)
 
 JaxCore is a collection of utility modules designed to improve your desktop experience and increase your productivity. Core is a configuration hub that allows for quick access to settings, updates, and new releases.
 
