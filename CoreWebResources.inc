@@ -1,5 +1,5 @@
 [Variables]
-SKINLIST=Combilaunch | Plainext | MIUI-Shade | ModularClocks | ModularPlayers | Keystrokes | Keylaunch | ValliStart | QuickNote | IdleStyle | ModularVisualizer
+SkinList=YourFlyouts | YourMixer | ValliStart | IdleStyle | Keylaunch | QuickNote | Keystrokes | MIUI-Shade | ModularClocks | ModularPlayers | ModularVisualizer | Plainext
 
 NewsID=38
 Page2ID=3
