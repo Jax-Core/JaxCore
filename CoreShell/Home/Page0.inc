@@ -4,6 +4,7 @@
 
 [Variables]
 TweenNode1=0
+Sec.LatestCoreVer=N/A
 
 ; [MeasureOnLoad]
 ; Measure=Calc
@@ -93,6 +94,13 @@ Group=BackgroundMeasures
 Disabled=(0)
 StringIndex=1
 CodePage=1200
+
+[Toaster]
+Measure=Plugin
+Plugin=RunCommand
+Program="#@#Addons\Toast\RainToaster.exe"
+Parameter=--programpath "#PROGRAMPATH#Rainmeter.exe" --text "Available JaxCore update!" --text "JaxCore v#Sec.LatestCoreVer# is now available." --logo "JaxCore.png" --button "Install" "[!WriteKeyvalue Variables Skin.name #JaxCore \"#@#SecVar.inc\"][!WriteKeyvalue Variables Skin.Set_Page General \"#@#SecVar.inc\"][!ActivateConfig \"#JaxCore\Main\" \"Settings.ini\"]" --button "Dismiss"
+DynamicVariables=1
 
 [LogicalScript]
 Measure=Script
