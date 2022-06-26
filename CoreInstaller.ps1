@@ -139,7 +139,7 @@ if (Check_Program_Installed("Rainmeter")) {
 [Rainmeter]
 Logging=0
 SkinPath=$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\
-HardwareAcceleration=0
+HardwareAcceleration=1
 
 [illustro\Clock]
 Active=0
