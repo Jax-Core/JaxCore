@@ -70,7 +70,7 @@ ReturnValue=WholePath
 FileInitialDirectory=
 ImageInitialDirectory=#CurrentPath#IconCache\
 DynamicVariables=1
-Command1=[!CommandMEasure Lua "WriteKeyValue('Variables', 'Name#Sec.Num#', '$Name$', [[#RAINMETERPATH#\CoreData\Combilaunch\Actions.inc]])"][!CommandMEasure Lua "WriteKeyValue('Variables', 'Action#Sec.Num#', [[$Path$]], [[#RAINMETERPATH#\CoreData\Combilaunch\Actions.inc]])"][!Refresh]
+Command1=[!CommandMeasure Lua "WriteKeyValue('Variables', 'Name#Sec.Num#', '$Name$', [[#RAINMETERPATH#\CoreData\Combilaunch\Actions.inc]])"][!CommandMeasure Lua "WriteKeyValue('Variables', 'Action#Sec.Num#', [[$Path$]], [[#RAINMETERPATH#\CoreData\Combilaunch\Actions.inc]])"][!Refresh]
 ; Command1=[!WriteKeyValue Variables "Name#Index#" "$Name$" "#@#Variables\Names.inc"][!WriteKeyValue Variables "MatchAction#Index#" """["$Path$"]""" "#@#Variables\MatchActions.inc"][!Refresh "Combilaunch\@Settings" "Actions.ini"]
 
 
@@ -222,4 +222,4 @@ FontColor=50,255,100
 FontSize=10
 MeterStyle=Sec.String:S | ButtonText:S
 DynamicVariables=1
-leftmouseupaction=[!CommandMEasure Lua "WriteKeyValue('Variables', 'Chain#Sec.Num#', '#CURRENT#', [[#RAINMETERPATH#\CoreData\Combilaunch\Actions.inc]])"][!DeactivateConfig][!UpdateMeasure Auto_Refresh:M "#JaxCore\Main"][!Refresh "#JaxCore\Main"]
+leftmouseupaction=[!CommandMeasure Lua "WriteKeyValue('Variables', 'Chain#Sec.Num#', '#CURRENT#', [[#RAINMETERPATH#\CoreData\Combilaunch\Actions.inc]])"][!DeactivateConfig][!UpdateMeasure Auto_Refresh:M "#JaxCore\Main"][!Refresh "#JaxCore\Main"]
