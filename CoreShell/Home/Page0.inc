@@ -111,9 +111,6 @@ ScriptFile=#ROOTCONFIGPATH#Accessories\UpdatePrompt\Logic.lua
 ; ---------------------------------------------------------------------------- ;
 
 [DefaultStartActions]
-ActionList2=Repeat Anim,2,80
-Custom1=[!CommandMeasure DefaultStartActions "Execute 2"]
-Anim=[!SetVariable TweenNode1 "(#TweenNode1#+0.0125)"][!UpdateMeterGroup Anim][!UpdateMeasure #CURRENTSECTION#][!Redraw]
 DynamicVariables=1
 
 ; ---------------------------------------------------------------------------- ;
@@ -133,5 +130,4 @@ H=(128*[Set.S])
 DynamicVariables=1
 Container=BC
 Group=Anim
-TransformationMatrix=(Cos(Rad(#TweenNode1#*360)));(-Sin(Rad(#TweenNode1#*360)));(Sin(Rad(#TweenNode1#*360)));(Cos(Rad(#TweenNode1#*360)));(([#CURRENTSECTION#:W]*0.5+[#CURRENTSECTION#:X])-([#CURRENTSECTION#:W]*0.5+[#CURRENTSECTION#:X])*Cos(Rad(#TweenNode1#*360))-([#CURRENTSECTION#:H]*0.5+[#CURRENTSECTION#:Y])*Sin(Rad(#TweenNode1#*360)));(([#CURRENTSECTION#:H]*0.5+[#CURRENTSECTION#:Y])+([#CURRENTSECTION#:W]*0.5+[#CURRENTSECTION#:X])*Sin(Rad(#TweenNode1#*360))-([#CURRENTSECTION#:H]*0.5+[#CURRENTSECTION#:Y])*Cos(Rad(#TweenNode1#*360)))
 ImageName=#@#Images\CoreAssets\LogoIcon.png
