@@ -34,20 +34,7 @@
 
 JaxCore is a collection of utility modules designed to improve your desktop experience and increase your productivity. Core is a configuration hub that allows for quick access to settings, updates, and new releases.
 
-## Features ✨
-JaxCore is an absolute must-have, and here's why:
-
-### Interactive Modules
-
-Tired of scribbling notes on a notepad? Dislike the appearance of your cluttered desktop? Want to get rid of those annoying shortcuts? Core has got you covered. All of the aforementioned feats are easily accomplished with Core's elementary modules.
-
-### Easy configuration
-
-Core makes customization easier for new users by providing a dedicated configuration menu for each skin, eliminating the need for the user to modify the code or write their own.
-
-### Update Checker
-
-The built-in update checker in Core will ensure that you never miss out on new features or bug fixes. Core can also notify you when new skin updates are available for the skins you have installed. You can install all of the updates with a single button press, and Core will handle the rest.
+JaxCore (configuration hub) acts as a settings menu for all JaxCore modules, while providing continuous support for patch / feature updates. It also allows you to access other modules more quickly!
 
 <p align="right">
     <b><a href="#top">↥ back to top</a></b>
@@ -55,6 +42,7 @@ The built-in update checker in Core will ensure that you never miss out on new f
 
 ## Prerequisites 🖥️
 - **Windows 10** or above
+- > 6GB RAM, > 4 Core CPU
 - For older systems, **Powershell v5.1 or newer** is required. Upgrade powershell **[here](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-7.2#upgrading-existing-windows-powershell)**!
 
 ## Installation ✅
@@ -71,8 +59,8 @@ Download and run the `.rmskin` file from the official [JaxCore site](https://jax
 ## Core Widgets and Modules ☑️
 
 ### Currently Avaiable Modules 💠
-1. [YourMixer](https://github.com/Jax-Core/YourMixer)
 1. [YourFlyouts](https://github.com/Jax-Core/YourFlyouts)
+1. [YourMixer](https://github.com/Jax-Core/YourMixer)
 1. [Keylaunch](https://github.com/Jax-Core/Keylaunch)
 1. [IdleStyle](https://github.com/Jax-Core/IdleStyle)
 1. [ValliStart](https://github.com/Jax-Core/ValliStart)
@@ -98,3 +86,33 @@ Download and run the `.rmskin` file from the official [JaxCore site](https://jax
 <p align="right">
     <b><a href="#top">↥ back to top</a></b>
 </p>
+
+## Credits
+The following table lists out the external plugins used to make JaxCore and all of it's modules and widgets.
+| Plugin | Creator |
+| ------------- | ------------- |
+| [AudioAnalyzer](https://forum.rainmeter.net/viewtopic.php?t=31091) | rxtd |
+| [FrostedGlass](https://forum.rainmeter.net/viewtopic.php?t=23106) | theAzack9 | 
+| [FileChoose](https://forum.rainmeter.net/viewtopic.php?t=33767) | SetSukka | 
+| [magickmeter](https://github.com/khanhas/MagickMeter) | [@khanhas](https://github.com/khanhas) | 
+| [ConfigActive](https://forum.rainmeter.net/viewtopic.php?t=28720) | jsMorley | 
+| [Focus](https://forum.rainmeter.net/viewtopic.php?t=37989) | [@deathcrafter](https://github.com/deathcrafter) | 
+| [Mouse](https://github.com/NighthawkSLO/Mouse.dll/) | [@NighthawkSLO](https://github.com/NighthawkSLO) | 
+| [MouseXY](https://forum.rainmeter.net/viewtopic.php?t=22900) | Fawxy | 
+| [PowershellRM](https://github.com/khanhas/PowershellRM) | [@khanhas](https://github.com/khanhas) | 
+| [ShowInToolbar](https://forum.rainmeter.net/viewtopic.php?t=25334) | theAzack9 | 
+| [HotKey](https://github.com/brianferguson/HotKey.dll) | [@brianferguson](https://github.com/brianferguson) | 
+| [Chameleon](https://github.com/socks-the-fox/Chameleon) | socks-the-fox | 
+| [IsFullScreen](https://forum.rainmeter.net/viewtopic.php?t=28305) | jsMorley | 
+| [WebNowPlaying](https://github.com/tjhrulz/WebNowPlaying) | Rainmeter team | 
+| [Drag&Drop](https://forum.rainmeter.net/viewtopic.php?t=23107) | theAzack9 | 
+| [MediaPlayer](https://github.com/i2002/RainmeterMediaPlayer) | [@i2002](https://github.com/i2002) | 
+| [AppVolume](https://github.com/khanhas/AppVolumePlugin) | Original [@khanhas](https://github.com/khanhas) Remastered [@deathcrafter](https://github.com/deathcrafter) |
+| [TrayIcon](https://github.com/deathcrafter/PluginTrayIcon) | [@deathcrafter](https://github.com/deathcrafter) | 
+| [SysColor](https://github.com/brianferguson/SysColor.dll) | [@brianferguson](https://github.com/brianferguson) | 
+
+The following table lists the external technologies used for JaxCore.
+| Technology | Creator | 
+| ------------- | ------------- |
+| [AutoHotkey](https://www.autohotkey.com/) | AHK Team | 
+| [RainRGB](https://forum.rainmeter.net/viewtopic.php?t=6215) | jsMorley | 
