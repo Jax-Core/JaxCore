@@ -1,0 +1,2 @@
+Right click ps1 -> Open in terminal
+ps2exe JaxCoreSetup.ps1 -iconFile Logo.ico -title "JaxCore Installer (Powershell)" -description "Runs JaxCore's express installation command" -company "Jax"
