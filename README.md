@@ -47,12 +47,11 @@ JaxCore (configuration hub) acts as a settings menu for all JaxCore modules, whi
 
 ## Installation ✅
 **By Powershell CLI:**
-Run the following command in Powershell (`win + r` -> `powershell.exe` / search)
+Run the following command in Powershell to get the latest version of JaxCore (`win + r` -> `powershell.exe` / search)
 ```
 Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/Jax-Core/JaxCore/master/CoreInstaller.ps1" | Invoke-Expression
 ```
-**By legacy [Rainmeter](https://www.rainmeter.net/) .rmskin installer:**
-Download and run the `.rmskin` file from the official [JaxCore site](https://jax-core.github.io/).
+Alternatively you can get it on the [website](https://jax-core.github.io/)
 <br />
 <br />
 
