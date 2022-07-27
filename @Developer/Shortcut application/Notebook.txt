@@ -1,3 +1,0 @@
-Right click ps1 -> Open in terminal
-.\JaxCore.ps1
-powershell.exe -File "C:\Users\enhan\Documents\Rainmeter\Skins\#JaxCore\@Developer\Shortcut application\JaxCore.ps1" -ExecutionPolicy Bypass
