@@ -36,9 +36,6 @@ JaxCore is a collection of utility modules designed to improve your desktop expe
 
 JaxCore (configuration hub) acts as a settings menu for all JaxCore modules, while providing continuous support for patch / feature updates. It also allows you to access other modules more quickly!
 
-<p align="right">
-    <b><a href="#top">↥ back to top</a></b>
-</p>
 
 ## Prerequisites 🖥️
 - **Windows 10** or above
@@ -78,17 +75,11 @@ Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/Jax-Core/J
 5. [Plainext](https://github.com/Jax-Core/Plainext)
 4. [Combilaunch](https://github.com/Jax-Core/Combilaunch) (This widget does not require you to have JaxCore installed.)
 
-<p align="right">
-    <b><a href="#top">↥ back to top</a></b>
-</p>
 
 ## Help and Documentation ❔
 - If you are interested in learning more about JaxCore, its structure, or how to develop modules/widgets, please see [JaxCore's Documentation](https://jaxcore.gitbook.io/core/).
 - Join the [Core Community Discord Server](https://discord.gg/JmgehPSDD6) for more help.
 
-<p align="right">
-    <b><a href="#top">↥ back to top</a></b>
-</p>
 
 ## Credits
 The following table lists out the external plugins used to make JaxCore and all of it's modules and widgets.
