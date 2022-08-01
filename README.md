@@ -8,7 +8,7 @@
 <h3 align="center">JaxCore</h3>
 
   <p align="center">
-    The desktop utilities you'll need.
+    A beautiful set of tools and widgets to spice up your desktop. 
     <br />
     <a href="https://jax-core.github.io/"><strong>More Info »</strong></a>
     <br />
