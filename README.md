@@ -1,7 +1,26 @@
 <!-- START HeaderSmall.mustache -->
+<br />
+<div align="center">
+  <a href="https://github.com/Jax-Core/JaxCore">
+    <img src="https://raw.githubusercontent.com/Jax-Core/ReadME-Template/main/Resources/Icons/JaxCore.png" alt="Logo" width="80" height="80">
+  </a>
+
+<h3 align="center">JaxCore</h3>
+  <p align="center">
+    JaxCore is a beautiful set of tools and widgets to spice up your desktop.
+    <br />
+    <a href="https://discord.gg/JmgehPSDD6">Help, Report Bugs & Request Features »</a>
+  </p>
+</div>
 <!-- END HeaderSmall.mustache -->
 <!-- START ShieldsFull.mustache -->
-<!-- END ShieldsFull.mustache -->
+<p align="center">
+  <img alt="Latest by date" src="https://img.shields.io/github/v/tag/Jax-Core/JaxCore?label=Version&style=for-the-badge" />
+  <img alt="Releases" src="https://img.shields.io/github/downloads/Jax-Core/JaxCore/total?style=for-the-badge" />
+  <img alt="Release date" src="https://img.shields.io/github/release-date/Jax-Core/JaxCore?label=Last%20Update&style=for-the-badge" />
+  <img alt="Discord" src="https://img.shields.io/discord/880445067754610688?label=Discord%20server&style=for-the-badge" />
+  <img alt="Github" src="https://img.shields.io/github/license/Jax-Core/JaxCore?style=for-the-badge" />
+</p><!-- END ShieldsFull.mustache -->
 
 ## About 👀
 
@@ -86,4 +105,20 @@ The following table lists the external technologies used for JaxCore.
 | [RainRGB](https://forum.rainmeter.net/viewtopic.php?t=6215) | jsMorley | 
 
 <!-- START Footer.mustache -->
-<!-- END Footer.mustache -->
+
+## Need assistance?
+* Join the [CoreCommunity Discord Server](https://discord.gg/JmgehPSDD6) for help
+* or [Create an issue](https://github.com/Jax-Core/JaxCore)
+
+## Say Hi!
+* Follow me on 👨‍💻 [Github](https://github.com/EnhancedJax) and stay updated on new things that I make
+* You can also watch me on 🐦 [DeviantArt](https://www.deviantart.com/jaxoriginals) instead
+* Message me on 🗨️ [Discord](https://discord.gg/JmgehPSDD6)
+
+---
+
+<p align="center">
+<i>Made with ❤️ by Jax</i>
+   <br/><br/>
+   <img src="https://raw.githubusercontent.com/Jax-Core/ReadME-Template/main/Resources/Assets/Logo.png"  width="32" height="32"/>
+</p><!-- END Footer.mustache -->
