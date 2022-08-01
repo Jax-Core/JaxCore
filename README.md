@@ -1,32 +1,7 @@
-
-<br />
-<div align="center">
-  <a href="https://github.com/EnhancedJax/-JaxCore">
-    <img src="https://imgur.com/AFjcn5M.png" alt="Logo" width="80" height="80">
-  </a>
-
-<h3 align="center">JaxCore</h3>
-
-  <p align="center">
-    A beautiful set of tools and widgets to spice up your desktop. 
-    <br />
-    <a href="https://jax-core.github.io/"><strong>More Info »</strong></a>
-    <br />
-    <br />
-    <a href="https://discord.gg/JmgehPSDD6">Report Bugs & Request Features </a>
-  </p>
-</div>
-
-
-<p align="center">
-  <img alt="Latest by date" src="https://img.shields.io/github/v/tag/Jax-Core/JaxCore?label=Version&style=for-the-badge" />
-  <img alt="Releases" src="https://img.shields.io/github/downloads/Jax-Core/JaxCore/total?style=for-the-badge" />
-  <img alt="Release date" src="https://img.shields.io/github/release-date/Jax-Core/JaxCore?label=Last%20Core%20Update&style=for-the-badge" />
-  <img alt="Discord" src="https://img.shields.io/discord/880445067754610688?label=Discord%20server&style=for-the-badge" />
-  <img alt="Github" src="https://img.shields.io/github/license/Jax-Core/JaxCore?style=for-the-badge" />
-  
-  
-</p>
+<!-- START HeaderSmall.mustache -->
+<!-- END HeaderSmall.mustache -->
+<!-- START ShieldsFull.mustache -->
+<!-- END ShieldsFull.mustache -->
 
 ## About 👀
 
@@ -35,7 +10,6 @@
 JaxCore is a collection of utility modules designed to improve your desktop experience and increase your productivity. Core is a configuration hub that allows for quick access to settings, updates, and new releases.
 
 JaxCore (configuration hub) acts as a settings menu for all JaxCore modules, while providing continuous support for patch / feature updates. It also allows you to access other modules more quickly!
-
 
 ## Prerequisites 🖥️
 - **Windows 10** or above
@@ -110,3 +84,6 @@ The following table lists the external technologies used for JaxCore.
 | ------------- | ------------- |
 | [AutoHotkey](https://www.autohotkey.com/) | AHK Team | 
 | [RainRGB](https://forum.rainmeter.net/viewtopic.php?t=6215) | jsMorley | 
+
+<!-- START Footer.mustache -->
+<!-- END Footer.mustache -->
