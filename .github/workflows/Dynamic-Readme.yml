@@ -1,0 +1,35 @@
+name: "📄  Dynamic ReadME"
+
+env:
+  VS_WORKFLOW_TYPE: "dynamic-readme"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - README.md
+
+jobs:
+  update_readme:
+    name: "Render & Update ReadME"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "📥  Fetching Repository Contents"
+        uses: actions/checkout@main
+
+      - name: "💾  Github Repository Metadata"
+        uses: varunsridharan/action-repository-meta@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "💫  Update README.md"
+        uses: "varunsridharan/action-dynamic-readme@main"
+        with:
+          GLOBAL_TEMPLATE_REPOSITORY: Jax-Core/ReadME-Template/Templates
+          commit_message: ⏩ File Rebuilt by Github Actions - Dynamic ReadME
+          files: |
+            README.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
