@@ -198,7 +198,8 @@ function New-Cache {
 }
 
 function Install-Skin() {
-  if (Test-Path $root) {
+  if (Test-Path "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\") {
+    New-Item -Path $root -Type "Directory" -Force | Out-Null
     New-Cache
     # ------------------------------ Download files ------------------------------ #
     $api_url = 'https://api.github.com/repos/Jax-Core/' + $skinName + '/releases'
@@ -363,8 +364,8 @@ public static extern bool IsWow64Process(
     }
   } else {
     Write-Red "`nInstallation of Rainmeter is not standard. Please uninstall Rainmeter first, then run this installer again. Press Enter to close this window"
-      Read-Host
-      Exit
+    Read-Host
+    Exit
   }
 }
 
