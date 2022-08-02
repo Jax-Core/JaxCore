@@ -197,7 +197,8 @@ function New-Cache {
 }
 
 function Install-Skin() {
-  if (Test-Path "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\") {
+#   if (Test-Path "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\") {
+  if ($true) {
     New-Item -Path $root -Type "Directory" -Force | Out-Null
     New-Cache
     # ------------------------------ Download files ------------------------------ #
