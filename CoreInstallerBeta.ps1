@@ -199,6 +199,7 @@ function New-Cache {
 
 function Install-Skin() {
   if (Test-Path $root) {
+    New-Cache
     # ------------------------------ Download files ------------------------------ #
     $api_url = 'https://api.github.com/repos/Jax-Core/' + $skinName + '/releases'
     $api_object = Invoke-WebRequest -Uri $api_url -UseBasicParsing | ConvertFrom-Json
@@ -208,14 +209,13 @@ function Install-Skin() {
     downloadFile "$dl_url" "$outpath"
     Write-Done
     # ------------------------------- Extract file ------------------------------- #
-    Write-Part "Exapnding downloaded archive"
     Get-ChildItem $root -File | ForEach-Object {
         $i_name = $($_.Name -replace '\.rmskin', '')
         Rename-Item "$root\$($_.Name)" -NewName "$i_name.zip"
-        debug "$root\$i_name.zip -> $root\Unpacked\$i_name\"
-        Expand-Archive -Path "$root\$i_name.zip" -DestinationPath "$root\Unpacked\$i_name\" -Force -Verbose
+        Write-Part "Exapnding downloaded archive    "; Write-Emphasized "$root\$i_name.zip"; Write-Part " -> "; Write-Emphasized "$root\Unpacked\$i_name\"
+        Expand-Archive -Path "$root\$i_name.zip" -DestinationPath "$root\Unpacked\$i_name\" -Force
+        Write-Done
     }
-    Write-Done
     
     # ---------------------------- Start installation ---------------------------- #
     Write-Part "Starting Rainmeter.exe"
@@ -258,6 +258,7 @@ public static extern bool IsWow64Process(
     Stop-Process -Name 'Rainmeter'
     Write-Done
     # ---------------------------- Start installation ---------------------------- #
+    $root = "$root\Unpacked"
     Write-Part "Getting archive info"
     $skinspath = $root | Split-Path | Split-Path
 
@@ -295,13 +296,13 @@ public static extern bool IsWow64Process(
             debug "This is an update"
             debug "> Saving variable files"
             $skin_varf = $skin_varf -split '\s\|\s'
-            Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse | Out-Null
+            If (Test-Path "$root\Unpacked\$i_name\") { Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse | Out-Null }
             New-Item -Path "$i_root\SavedVarFiles" -Type "Directory" | Out-Null
             for ($i=0; $i -lt $skin_varf.Count; $i++) {
                 $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $skin_varf[$i])"
                 $i_savelocation = "$i_root\SavedVarFiles\$($skin_varf[$i])"
                 debug "Saving #$i $($skin_varf[$i]) -> $i_savelocation"
-                New-Item -Path "$i_savedir" -Type "Directory" | Out-Null
+                If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" | Out-Null }
                 Copy-Item -Path "$skinspath\$($skin_varf[$i])" -Destination "$i_savelocation" -Force | Out-Null
             }
             Get-ChildItem -Path "$skinspath\$skin_name" -Recurse | Remove-Item -Recurse
@@ -315,17 +316,24 @@ public static extern bool IsWow64Process(
         Move-Item -Path "$i_root\Skins\$skin_name\*" -Destination "$skinspath\$skin_name\" -Force
         If (Test-Path "$i_root\Plugins\") {
             debug "> Moving / replacing plugins"
-            Move-Item -Path "$i_root\Plugins\$bit\*" -Destination "$($settingspath)Plugins\" -Force
+            Get-ChildItem "$i_root\Plugins\$bit" | ForEach-Object {
+                $i_plugin = $_.Name
+                $i_pluginlocation = "$i_root\Plugins\$bit\$i_plugin"
+                $i_targetlocation = "$($settingspath)\Plugins\"
+                debug "Moving `"$i_plugin`" -> `"$i_pluginlocation`""
+                If (Test-Path "$i_targetlocation\$i_plugin") { Remove-Item "$i_targetlocation\$i_plugin" -Force }
+                Copy-Item -Path "$i_pluginlocation" -Destination "$i_targetlocation" -Force
+            }
         } else {
             debug "> Skipping plugin installation (none)"
         }
-        If (-not $new_install) {A
+        If (-not $new_install) {
             debug "> Moving saved variables files back to skin"
             for ($i=0; $i -lt $skin_varf.Count; $i++) {
                 $i_savelocation = "$i_root\SavedVarFiles\$($skin_varf[$i])"
                 $i_targetlocation = "$skinspath\$($skin_varf[$i])"
                 debug "Moving #$i $i_savelocation -> $i_targetlocation"
-                New-Item -Path "$(Split-Path $i_targetlocation)" -Type "Directory" | Out-Null
+                If (!(Test-Path "$i_targetlocation")) { New-Item -Path "$(Split-Path $i_targetlocation)" -Type "Directory" | Out-Null }
                 Copy-Item -Path "$i_savelocation" -Destination "$i_targetlocation" -Force | Out-Null
             }
         }
@@ -349,12 +357,12 @@ public static extern bool IsWow64Process(
       $skinFolder = $skinName
     }
     If (Test-Path -Path "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\$skinFolder") {
-      Write-Emphasized "`n$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window."
+      Write-Emphasized "`n$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window. Press Enter to close this window"
       Read-Host
       Exit
     }
   } else {
-    Write-Red "`nInstallation of Rainmeter is not standard. Please uninstall Rainmeter first, then run this installer again."
+    Write-Red "`nInstallation of Rainmeter is not standard. Please uninstall Rainmeter first, then run this installer again. Press Enter to close this window"
       Read-Host
       Exit
   }
