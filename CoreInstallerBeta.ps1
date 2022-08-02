@@ -197,7 +197,6 @@ function New-Cache {
 }
 
 function Install-Skin() {
-  if (Test-Path "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\") {
     New-Item -Path $root -Type "Directory" -Force | Out-Null
     New-Cache
     # ------------------------------ Download files ------------------------------ #
@@ -362,16 +361,9 @@ public static extern bool IsWow64Process(
       Read-Host
       Exit
     }
-  } else {
-    Write-Red "`nInstallation of Rainmeter is not standard. Please uninstall Rainmeter first, then run this installer again. Press Enter to close this window"
-    Read-Host
-    Exit
-  }
 }
 
 # ----------------------------------- Logic ---------------------------------- #
-
-$root = "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\#CoreInstallerCache"
 
 if ($installSkin) {
   $skinName = $installSkin
@@ -382,35 +374,37 @@ if ($installSkin) {
 Write-Part "Checking if Rainmeter is installed"
 
 if (Check_Program_Installed("Rainmeter")) {
-  Write-Done
-  Install-Skin
-} else {
-  # ----------------------------------- Fetch ---------------------------------- #
-  Write-Info "`nRainmeter is not installed, installing Rainmeter"
-  $api_url = 'https://api.github.com/repos/rainmeter/rainmeter/releases'
-  $api_object = Invoke-WebRequest -Uri $api_url -UseBasicParsing | ConvertFrom-Json
-  $dl_url = $api_object.assets.browser_download_url[0]
-  $outpath = "$env:temp\RainmeterInstaller.exe"
-  # --------------------------------- Download --------------------------------- #
-  Write-Part "Downloading    "; Write-Emphasized $dl_url; Write-Part " -> "; Write-Emphasized $outpath
-  # Invoke-WebRequest $dl_url -OutFile $outpath
-  downloadFile "$dl_url" "$outpath"
-  Write-Done
-  # ------------------------------------ Run ----------------------------------- #
-  Write-Part "Running installer   "; Write-Emphasized $outpath
-  Start-Process -FilePath $outpath -ArgumentList "/S /AUTOSTARTUP=1 /RESTART=0" -Wait
-  Write-Done
-  # ---------------------------- Check if installed ---------------------------- #
-  Write-Part "Checking "; Write-Emphasized "$Env:Programfiles\Rainmeter\Rainmeter.exe"; Write-Part " for Rainmeter.exe"
-  If (Test-Path -Path "$Env:Programfiles\Rainmeter\Rainmeter.exe") {
     Write-Done
-  } else {
-    Write-Red "`nFailed to install Rainmeter! "; Write-Part "Make sure you have selected `"Yes`" when installation dialog pops up"
-    Return
-  }
-  # --------------------------------- Generate --------------------------------- #
-  Write-Part "Generating "; Write-Emphasized "Rainmeter.ini "; Write-Part "for the first time..."
-  New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
+    $Ini = Get-IniContent "$env:APPDATA\Rainmeter\Rainmeter.ini"
+    $root = "$($Ini["Rainmeter"]["SkinPath"])#CoreInstallerCache"
+    Install-Skin
+} else {
+    # ----------------------------------- Fetch ---------------------------------- #
+    Write-Info "`nRainmeter is not installed, installing Rainmeter"
+    $api_url = 'https://api.github.com/repos/rainmeter/rainmeter/releases'
+    $api_object = Invoke-WebRequest -Uri $api_url -UseBasicParsing | ConvertFrom-Json
+    $dl_url = $api_object.assets.browser_download_url[0]
+    $outpath = "$env:temp\RainmeterInstaller.exe"
+    # --------------------------------- Download --------------------------------- #
+    Write-Part "Downloading    "; Write-Emphasized $dl_url; Write-Part " -> "; Write-Emphasized $outpath
+    # Invoke-WebRequest $dl_url -OutFile $outpath
+    downloadFile "$dl_url" "$outpath"
+    Write-Done
+    # ------------------------------------ Run ----------------------------------- #
+    Write-Part "Running installer   "; Write-Emphasized $outpath
+    Start-Process -FilePath $outpath -ArgumentList "/S /AUTOSTARTUP=1 /RESTART=0" -Wait
+    Write-Done
+    # ---------------------------- Check if installed ---------------------------- #
+    Write-Part "Checking "; Write-Emphasized "$Env:Programfiles\Rainmeter\Rainmeter.exe"; Write-Part " for Rainmeter.exe"
+    If (Test-Path -Path "$Env:Programfiles\Rainmeter\Rainmeter.exe") {
+        Write-Done
+    } else {
+        Write-Red "`nFailed to install Rainmeter! "; Write-Part "Make sure you have selected `"Yes`" when installation dialog pops up"
+        Return
+    }
+    # --------------------------------- Generate --------------------------------- #
+    Write-Part "Generating "; Write-Emphasized "Rainmeter.ini "; Write-Part "for the first time..."
+    New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
 [Rainmeter]
 Logging=0
 SkinPath=$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\
@@ -426,5 +420,6 @@ Active=0
 "@
     Write-Done
     # ---------------------------------- Install --------------------------------- #
+    $root = "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\#CoreInstallerCache"
     Install-Skin
 }
