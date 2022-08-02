@@ -187,7 +187,6 @@ function DownloadFile($url, $targetFile)
 }
 
 # ---------------------------------- Install --------------------------------- #
-$root = "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\#CoreInstallerCache"
 
 function New-Cache {
 
@@ -370,6 +369,8 @@ public static extern bool IsWow64Process(
 }
 
 # ----------------------------------- Logic ---------------------------------- #
+
+$root = "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\#CoreInstallerCache"
 
 if ($installSkin) {
   $skinName = $installSkin
