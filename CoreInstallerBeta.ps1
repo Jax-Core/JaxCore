@@ -197,7 +197,7 @@ function New-Cache {
 }
 
 function Install-Skin() {
-  if (Test-Path "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\") {
+  if (Test-Path "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\") {
     New-Item -Path $root -Type "Directory" -Force | Out-Null
     New-Cache
     # ------------------------------ Download files ------------------------------ #
@@ -316,10 +316,11 @@ public static extern bool IsWow64Process(
         Move-Item -Path "$i_root\Skins\$skin_name\*" -Destination "$skinspath\$skin_name\" -Force
         If (Test-Path "$i_root\Plugins\") {
             debug "> Moving / replacing plugins"
+            $i_targetlocation = "$($settingspath)\Plugins\"
+            If (!(Test-Path "$i_targetlocation\")) { New-Item -Path "$i_targetlocation" -Type "Directory" -Force }
             Get-ChildItem "$i_root\Plugins\$bit" | ForEach-Object {
                 $i_plugin = $_.Name
                 $i_pluginlocation = "$i_root\Plugins\$bit\$i_plugin"
-                $i_targetlocation = "$($settingspath)\Plugins\"
                 debug "Moving `"$i_plugin`" -> `"$i_pluginlocation`""
                 If (Test-Path "$i_targetlocation\$i_plugin") { Remove-Item "$i_targetlocation\$i_plugin" -Force }
                 Copy-Item -Path "$i_pluginlocation" -Destination "$i_targetlocation" -Force
