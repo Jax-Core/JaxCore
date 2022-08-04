@@ -7,11 +7,12 @@
 
 <h3 align="center">JaxCore</h3>
   <p align="center">
-    JaxCore is a beautiful set of tools and widgets to spice up your desktop.
+    A beautiful set of tools and widgets to spice up your desktop.
     <br />
     <a href="https://discord.gg/JmgehPSDD6">Help, Report Bugs & Request Features »</a>
   </p>
 </div>
+
 <!-- END HeaderSmall.mustache -->
 <!-- START ShieldsFull.mustache -->
 <p align="center">
