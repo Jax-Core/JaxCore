@@ -236,13 +236,14 @@ public static extern bool IsWow64Process(
 
     $bit = '32bit'
     Get-Process -Id $rmprocess_id | Foreach {
-        $is32Bit=[int]0 
-        if ($_.Handle -ne $null) {
-            if ([Kernel32.NativeMethods]::IsWow64Process($_.Handle, [ref]$is32Bit)) { 
-                $bit = "$(if ($is32Bit) {'32bit'} else {'64bit'})"
-            } else {
+        $modules = $_.modules
+        foreach($module in $modules) {
+            $file = [System.IO.Path]::GetFileName($module.FileName).ToLower()
+            if($file -eq "wow64.dll") {
                 $bit = "32bit"
-            }    
+            } else {
+                $bit = "64bit"
+            }
         }
     }
 
@@ -258,8 +259,9 @@ public static extern bool IsWow64Process(
     Write-Done
     # ---------------------------- Start installation ---------------------------- #
     $root = "$root\Unpacked"
-    Write-Part "Getting archive info"
+    Write-Part "Starting installation process for package"
     $skinspath = $root | Split-Path | Split-Path
+    Write-Done
 
     debug "RainmeterPluginsBit: $bit"
     debug "RainmeterPath: $settingspath"
