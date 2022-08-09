@@ -1,5 +1,5 @@
 [Rainmeter]
-; OnUnfocusAction=[!CommandMeasure mActions "Execute 2"]
+OnUnfocusAction=[!UpdateMeasure UnloadHandler]
 Update=-1
 
 [Variables]
@@ -22,6 +22,13 @@ Rewind0=[!CommandMeasure mTween "Rewind(0)"]
 Deactivate=[!DeactivateConfig]
 DynamicVariables=1
 
+[UnloadHandler]
+Measure=Calc
+Formula=0
+IfCondition=UnloadHandler = 1
+IfTrueAction=[!CommandMeasure mActions "Execute 2"]
+IfConditionMode=1
+
 [p.FrostedGlass]
 Measure=Plugin
 Plugin=FrostedGlass
@@ -41,9 +48,10 @@ X=(#Set.W#/2-(#Set.W#*0.4)/2+10)
 y=(#Set.WinB#/2+#Set.Tb#/2-(#Set.TB#-10)/2+5)
 W=((#Set.W#*0.4)-20)
 H=((#Set.TB#-10)-7)
+OnDismissAction=[!SetOption UnloadHandler Formula 1]
 DynamicVariables=1
 DefaultValue="Search for setting..."
-Command1=[!CommandMeasure p.PowershellRM """SearchForString "$userinput$""""]
+Command1=[!SetOption UnloadHandler Formula 1][!CommandMeasure p.PowershellRM """SearchForString "$userinput$""""]
 
 [p.PowershellRM]
 Measure=Plugin
@@ -108,7 +116,7 @@ Clipstring=1
 FontSize=(8*#Sec.S#)
 FontColor=#Set.SubText_Color#
 Text=Search for a setting...
-Leftmouseupaction=[!CommandMeasure p.InputText "ExecuteBatch 1"][!HideMeterGroup Results][!Redraw]
+Leftmouseupaction=[!SetOption UnloadHandler Formula 0][!CommandMeasure p.InputText "ExecuteBatch 1"][!HideMeterGroup Results][!Redraw]
 MeterStyle=Sec.String:S
 
 ; ---------------------------------- Results --------------------------------- ;
