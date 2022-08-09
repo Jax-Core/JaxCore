@@ -42,12 +42,12 @@ Measure=Plugin
 Plugin=InputText
 SolidColor=#Set.Ter_Color#
 FontColor=#Set.Text_Color#
-FontSize=(10*[Set.S])
+FontSize=(10)
 StringAlign=LeftBottom
 X=(#Set.W#/2-(#Set.W#*0.4)/2+10)
-y=(#Set.WinB#/2+#Set.Tb#/2-(#Set.TB#-10)/2+5)
+y=(#Set.WinB#/2+#Set.TitleBarH#/2-(#Set.TitleBarH#-10)/2+5)
 W=((#Set.W#*0.4)-20)
-H=((#Set.TB#-10)-7)
+H=((#Set.TitleBarH#-10)-7)
 OnDismissAction=[!SetOption UnloadHandler Formula 1]
 DynamicVariables=1
 DefaultValue="Search for setting..."
@@ -99,8 +99,8 @@ MouseActionCursor=0
 [B]
 Meter=Shape
 X=(#Set.W#/2-(#Set.W#*0.4)/2)
-y=(#Set.WinB#/2+#Set.Tb#/2-(#Set.TB#-10)/2)
-Shape=Rectangle 0,0,(#Set.W#*0.4),((#Set.TB#-10)+#Sec.ResultSize#*#Process.Result_Count#+20*(Clamp(#Process.Result_Count#,0,1))),(10) | StrokeWidth 1 | Fill Color #Set.Ter_Color# | Stroke Color #Set.Text_Color#,50
+y=(#Set.WinB#/2+#Set.TitleBarH#/2-(#Set.TitleBarH#-10)/2)
+Shape=Rectangle 0,0,(#Set.W#*0.4),((#Set.TitleBarH#-10)+#Sec.ResultSize#*#Process.Result_Count#+20*(Clamp(#Process.Result_Count#,0,1))),(10) | StrokeWidth 1 | Fill Color #Set.Ter_Color# | Stroke Color #Set.Text_Color#,50
 Group=Tweenable
 Leftmouseupaction=[""]
 DynamicVariables=1
@@ -109,9 +109,9 @@ MouseActionCursor=0
 [InputLabel]
 Meter=String
 X=(#Set.W#/2-(#Set.W#*0.4)/2+10)
-y=(#Set.WinB#/2+#Set.Tb#/2-(#Set.TB#-10)/2+5)
+y=(#Set.WinB#/2+#Set.TitleBarH#/2-(#Set.TitleBarH#-10)/2+5)
 W=((#Set.W#*0.4)-20)
-H=((#Set.TB#-10)-10)
+H=((#Set.TitleBarH#-10)-10)
 Clipstring=1
 FontSize=(8*#Sec.S#)
 FontColor=#Set.SubText_Color#
@@ -124,7 +124,7 @@ MeterStyle=Sec.String:S
 [Result1]
 Meter=String
 X=(-10)r
-Y=((#Set.TB#-10)-5+#Sec.ResultSize#/2+10)r
+Y=((#Set.TitleBarH#-10)-5+#Sec.ResultSize#/2+10)r
 MeterStyle=Sec.String:S | Result.String:S
 [Result2]
 Meter=String
