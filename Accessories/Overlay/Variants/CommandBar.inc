@@ -73,6 +73,7 @@ MouseLeaveAction=[!SetOption #CURRENTSECTION# SolidColor "0,0,0,1"][!UpdateMeter
 InlineSetting=GradientColor | 45 | #SEt.Accent_Color_2# ; 1 | #Set.Accent_color# ;0
 InlineSetting2=Color | #Set.Subtext_Color#
 InlineSetting3=Size | (8)
+Group=Results
 Hidden=1
 
 ; ---------------------------------------------------------------------------- ;
@@ -107,7 +108,7 @@ Clipstring=1
 FontSize=(8*#Sec.S#)
 FontColor=#Set.SubText_Color#
 Text=Search for a setting...
-Leftmouseupaction=[!CommandMeasure p.InputText "ExecuteBatch 1"]
+Leftmouseupaction=[!CommandMeasure p.InputText "ExecuteBatch 1"][!HideMeterGroup Results][!Redraw]
 MeterStyle=Sec.String:S
 
 ; ---------------------------------- Results --------------------------------- ;
