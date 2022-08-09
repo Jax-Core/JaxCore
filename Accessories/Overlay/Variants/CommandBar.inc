@@ -1,100 +1,174 @@
 [Rainmeter]
-OnUnfocusAction=[!CommandMeasure mActions "Execute 2"]
+; OnUnfocusAction=[!CommandMeasure mActions "Execute 2"]
+Update=-1
 
 [Variables]
 @includeVars=#@#Vars.inc
+@includeSkinVars=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 Drop.Animation_Time=300
-Sec.In=
-Sec.Out=
-Sec.Ease=
 Sec.P=20
-
-[mTween]
-Measure=Script
-ScriptFile=#@#LuaTween/Main.lua
-TweenGroup=Tweenable
-Tween0=Single | Variable | TweenNode1 | 0 | 1 | #Drop.Animation_Time#
-Optional0=Easing InOutCirc
-UpdateDivider=1
+Sec.ResultSize=30
+Process.Result_Count=0
 
 [mActions]
 Measure=Plugin
 Plugin=ActionTimer
-ActionList1=Wait 100 | NUOLOn | Start0 | Wait #Drop.Animation_Time#
-ActionList2=Rewind0 | Wait #Drop.Animation_Time# | Deactivate
-NUOLOn=[!EnableMeasureGroup NUOL]
+ActionList1=Wait 200 | StartInput
+ActionList2=Deactivate
+ActionList3=Deactivate
+StartInput=[!CommandMeasure p.InputText "ExecuteBatch 1"]
 Start0=[!CommandMeasure mTween "Start(0)"]
 Rewind0=[!CommandMeasure mTween "Rewind(0)"]
 Deactivate=[!DeactivateConfig]
 DynamicVariables=1
 
+[p.FrostedGlass]
+Measure=Plugin
+Plugin=FrostedGlass
+Type=Blur
+Corner=#Set.BlurCorner#
+DynamicVariables=1
+Border=All
 
-[Sec.Button:S]
-X=((50/2+5)*#Sec.S#)r
-Y=(-50/2*#Sec.S#)r
-Shape=Rectangle 0,0,50,50,(#Sec.R#/2) | StrokeWidth 0 | Extend This | Scale #Sec.S#,#Sec.S#,0,0
-This=fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorLeave')]
+[p.InputText]
+Measure=Plugin
+Plugin=InputText
+SolidColor=#Set.Ter_Color#
+FontColor=#Set.Text_Color#
+FontSize=(10*[Set.S])
+StringAlign=LeftBottom
+X=(#Set.W#/2-(#Set.W#*0.4)/2+10)
+y=(#Set.WinB#/2+#Set.Tb#/2-(#Set.TB#-10)/2+5)
+W=((#Set.W#*0.4)-20)
+H=((#Set.TB#-10)-7)
 DynamicVariables=1
-ColorLeave=100,100,100,100
-ColorOver=100,100,100,200
-Container=BC
-MouseOverAction=[!SetOption #CURRENTSECTION# this "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorOver')]"][!SetOption #Sec.#CURRENTSECTION## FontColor "255,255,255"][!UpdateMeter *][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# this "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorLeave')]"][!SetOption #Sec.#CURRENTSECTION## FontColor "255,255,255,150"][!UpdateMeter *][!Redraw]
-Leftmouseupaction=[!Setvariable "Sec.[&Func:LocalVar('#CURRENTSECTION#', 'Class')]" "[&Func:returnBool('Sec.[&Func:LocalVar('#CURRENTSECTION#', 'Class')]', '[&Func:LocalVar('#CURRENTSECTION#', 'Class')]', '', '[&Func:LocalVar('#CURRENTSECTION#', 'Class')]')]"][!UpdateMeasure EasingValidationCheck2]
-[Sec.Button2:S]
-X=((-200/2)*#Sec.S#)r
-Y=(30/2*#Sec.S#+#Sec.P#/2)r
-Shape=Rectangle 0,0,200,30,(#Sec.R#/2) | StrokeWidth 0 | Extend This | Scale #Sec.S#,#Sec.S#,0,0
-This=fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorLeave')]
-DynamicVariables=1
-ColorLeave=100,100,100,100
-ColorOver=100,100,100,200
-Container=BC
-MouseOverAction=[!SetOption #CURRENTSECTION# this "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorOver')]"][!SetOption #Sec.#CURRENTSECTION## FontColor "255,255,255"][!UpdateMeter *][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# this "Fill Color [&Func:LocalVar('#CURRENTSECTION#', 'ColorLeave')]"][!SetOption #Sec.#CURRENTSECTION## FontColor "255,255,255,150"][!UpdateMeter *][!Redraw]
-Leftmouseupaction=[!Setvariable "Sec.Ease" "#CURRENTSECTION#"][!UpdateMeasure EasingValidationCheck2]
+DefaultValue="Search for setting..."
+Command1=[!CommandMeasure p.PowershellRM """SearchForString "$userinput$""""]
 
-[Sec.Text:S]
-X=(50/2*#Sec.S#)r
-Y=(50/2*#Sec.S#)r
+[p.PowershellRM]
+Measure=Plugin
+Plugin=PowershellRM
 DynamicVariables=1
-StringAlign=CenterCenter
-[Sec.Text2:S]
-X=(200/2*#Sec.S#)r
-Y=(30/2*#Sec.S#)r
-DynamicVariables=1
-StringAlign=CenterCenter
+ScriptFile=#@#Powershell\Searcher.ps1
+ExecutionPolicy=Unrestricted
+
+; ---------------------------------------------------------------------------- ;
+;                                  mEterStyle                                  ;
+; ---------------------------------------------------------------------------- ;
+
+[Sec.String:S]
+Container=
+
+[Result.String:S]
+X=r
+Y=R
+W=(#Set.W#*0.4-20)
+H=#Sec.ResultSize#
+Padding=10,0,10,0
+ClipString=2
+StringAlign=LeftCenter
+SolidColor=0,0,0,1
+MouseOverAction=[!SetOption #CURRENTSECTION# SolidColor "#Set.Text_Color#,50"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+MouseLeaveAction=[!SetOption #CURRENTSECTION# SolidColor "0,0,0,1"][!UpdateMeter #CURRENTSECTION#][!Redraw]
+InlineSetting=GradientColor | 45 | #SEt.Accent_Color_2# ; 1 | #Set.Accent_color# ;0
+InlineSetting2=Color | #Set.Subtext_Color#
+InlineSetting3=Size | (8)
+Hidden=1
+
 ; ---------------------------------------------------------------------------- ;
 ;                                    Content                                   ;
 ; ---------------------------------------------------------------------------- ;
 
-
+[Overlay]
+Meter=String
+W=(#Set.W#+#Set.WinB#)
+H=(#Set.H#+#Set.WinB#)
+SolidColor=0,0,0,150
+Leftmouseupaction=[!CommandMeasure mActions "Execute 2"]
+MouseActionCursor=0
 
 [B]
 Meter=Shape
 X=(#Set.W#/2-(#Set.W#*0.4)/2)
 y=(#Set.WinB#/2+#Set.Tb#/2-(#Set.TB#-10)/2)
-Shape=Rectangle 0,0,(#Set.W#*0.4),((#Set.TB#-10)+(200-(#Set.TB#-10))*#TweenNode1#),(10) | StrokeWidth 1 | Fill Color #Set.Ter_Color# | Stroke Color #Set.Text_Color#,50
+Shape=Rectangle 0,0,(#Set.W#*0.4),((#Set.TB#-10)+#Sec.ResultSize#*#Process.Result_Count#+20*(Clamp(#Process.Result_Count#,0,1))),(10) | StrokeWidth 1 | Fill Color #Set.Ter_Color# | Stroke Color #Set.Text_Color#,50
 Group=Tweenable
+Leftmouseupaction=[""]
 DynamicVariables=1
+MouseActionCursor=0
 
-[BC]
-Meter=Shape
-X=(#Set.W#/2-(#Set.W#*0.4)/2)
-y=(#Set.WinB#/2+#Set.Tb#/2-(#Set.TB#-10)/2)
-Shape=Rectangle 0,0,(#Set.W#*0.4),(200*#TweenNode1#),(10) | StrokeWidth 1 | Fill Color 255,255,255
-Group=Tweenable
-DynamicVariables=1
-
-[KeyLabel]
+[InputLabel]
 Meter=String
-X=(#Set.W#*0.4/2)
-Y=((#Set.TB#-10)/2)
-W=(#Set.W#*0.4-#Sec.P#*2)
+X=(#Set.W#/2-(#Set.W#*0.4)/2+10)
+y=(#Set.WinB#/2+#Set.Tb#/2-(#Set.TB#-10)/2+5)
+W=((#Set.W#*0.4)-20)
+H=((#Set.TB#-10)-10)
 Clipstring=1
 FontSize=(8*#Sec.S#)
 FontColor=#Set.SubText_Color#
-Text=CommandBar for JaxCore coming soon
-StringAlign=CenterCenter
+Text=Search for a setting...
+Leftmouseupaction=[!CommandMeasure p.InputText "ExecuteBatch 1"]
 MeterStyle=Sec.String:S
+
+; ---------------------------------- Results --------------------------------- ;
+
+[Result1]
+Meter=String
+X=(-10)r
+Y=((#Set.TB#-10)-5+#Sec.ResultSize#/2+10)r
+MeterStyle=Sec.String:S | Result.String:S
+[Result2]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result3]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result4]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result5]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result6]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result7]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result8]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result9]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result10]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result11]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result12]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result13]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result14]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result15]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result16]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result17]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result18]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
+[Result19]
+Meter=String
+MeterStyle=Sec.String:S | Result.String:S
 
