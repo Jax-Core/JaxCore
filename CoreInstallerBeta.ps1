@@ -372,9 +372,9 @@ if ($installSkin) {
 
 $designatedskinspath = "$env:APPDATA\Rainmeter\Skins\"
 
-Write-Part "BETA INSTALLER REF: 1"
+Write-Part "COREINSTALLER REF: 1"
 Write-Done
-Write-Part "Checking if Rainmeter is installed"
+Write-Part "Checking if Rainmeter is installed $designatedskinspath"
 
 if (Check_Program_Installed("Rainmeter")) {
     Write-Done
