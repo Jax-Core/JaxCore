@@ -347,6 +347,15 @@ public static extern bool IsWow64Process(
     If ($skin_need_load) {
         Wait-ForProcess 'Rainmeter'
         Start-Sleep -Milliseconds 500
+        If (-not $rminstalled) {
+          Stop-Process -Name 'Rainmeter'
+          Start-Sleep -Milliseconds 500
+          $Ini = Get-IniContent "$env:APPDATA\Rainmeter\Rainmeter.ini"
+          $Ini["Rainmeter"]["SkinPath"] = "$designatedskinspath"
+          Set-IniContent $Ini "$env:APPDATA\Rainmeter\Rainmeter.ini"
+          Start-Process "$($programpath)Rainmeter.exe"
+          Wait-ForProcess 'Rainmeter'
+        }
         & "$($programpath)Rainmeter.exe" [!ActivateConfig $skin_load_path]
     }
 
@@ -376,7 +385,9 @@ Write-Part "COREINSTALLER REF: 1"
 Write-Done
 Write-Part "Checking if Rainmeter is installed $designatedskinspath"
 
-if (Check_Program_Installed("Rainmeter")) {
+$rminstalled = Check_Program_Installed("Rainmeter")
+
+if ($rminstalled) {
     Write-Done
     $Ini = Get-IniContent "$env:APPDATA\Rainmeter\Rainmeter.ini"
     $root = "$($Ini["Rainmeter"]["SkinPath"])#CoreInstallerCache"
