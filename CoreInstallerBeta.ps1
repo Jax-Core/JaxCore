@@ -349,12 +349,12 @@ public static extern bool IsWow64Process(
         Start-Sleep -Milliseconds 500
         If (-not $rminstalled) {
           Stop-Process -Name 'Rainmeter'
-          Start-Sleep -Milliseconds 500
           $Ini = Get-IniContent "$env:APPDATA\Rainmeter\Rainmeter.ini"
           $Ini["Rainmeter"]["SkinPath"] = "$designatedskinspath"
           Set-IniContent $Ini "$env:APPDATA\Rainmeter\Rainmeter.ini"
           Start-Process "$($programpath)Rainmeter.exe"
           Wait-ForProcess 'Rainmeter'
+          Start-Sleep -Milliseconds 500
         }
         & "$($programpath)Rainmeter.exe" [!ActivateConfig $skin_load_path]
     }
