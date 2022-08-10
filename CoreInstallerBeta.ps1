@@ -356,9 +356,8 @@ public static extern bool IsWow64Process(
     } else {
       $skinFolder = $skinName
     }
-    If (Test-Path -Path "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\$skinFolder") {
+    If (Test-Path -Path "$skinspath\$skinFolder") {
       Write-Emphasized "`n$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window. Press Enter to close this window"
-      Read-Host
       Exit
     }
 }
@@ -370,6 +369,8 @@ if ($installSkin) {
 } else {
   $skinName = "JaxCore"
 }
+
+$designatedskinspath = "$env:APPDATA\Rainmeter\Skins\"
 
 Write-Part "Checking if Rainmeter is installed"
 
@@ -407,7 +408,7 @@ if (Check_Program_Installed("Rainmeter")) {
     New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
 [Rainmeter]
 Logging=0
-SkinPath=$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\
+SkinPath=$skinspath
 HardwareAcceleration=1
 
 [illustro\Clock]
@@ -420,6 +421,6 @@ Active=0
 "@
     Write-Done
     # ---------------------------------- Install --------------------------------- #
-    $root = "$([Environment]::GetFolderPath("MyDocuments"))\Rainmeter\Skins\#CoreInstallerCache"
+    $root = "$skinspath#CoreInstallerCache"
     Install-Skin
 }
