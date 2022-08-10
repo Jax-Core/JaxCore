@@ -408,7 +408,7 @@ if (Check_Program_Installed("Rainmeter")) {
     New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
 [Rainmeter]
 Logging=0
-SkinPath=$skinspath
+SkinPath=$designatedskinspath
 HardwareAcceleration=1
 
 [illustro\Clock]
@@ -421,6 +421,6 @@ Active=0
 "@
     Write-Done
     # ---------------------------------- Install --------------------------------- #
-    $root = "$skinspath#CoreInstallerCache"
+    $root = "$designatedskinspath#CoreInstallerCache"
     Install-Skin
 }
