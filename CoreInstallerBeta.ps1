@@ -197,7 +197,7 @@ if ($installSkin) {
 $designatedskinspath = "$env:APPDATA\Rainmeter\Skins\"
 $expectedRMEXEloc = "$env:APPDATA\Rainmeter\Rainmeter.exe"
 
-Write-Part "COREINSTALLER REF: Beta v4"
+Write-Part "COREINSTALLER REF: Beta v5"
 Write-Done
 Write-Part "Checking if Rainmeter is installed at $expectedRMEXEloc"
 
