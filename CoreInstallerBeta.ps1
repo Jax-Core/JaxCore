@@ -195,16 +195,20 @@ if ($installSkin) {
 }
 
 $designatedskinspath = "$env:APPDATA\Rainmeter\Skins\"
-$expectedRMEXEloc = "$env:APPDATA\Rainmeter\Rainmeter.exe"
+$RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
+$RMEXE64bitloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
+$RMEXE32bitloc = "${Env:ProgramFiles(x86)}\Rainmeter\Rainmeter.exe"
 
-Write-Part "COREINSTALLER REF: Beta v6"
+Write-Part "COREINSTALLER REF: Beta v8"
 Write-Done
-Write-Part "Checking if Rainmeter is installed at $expectedRMEXEloc"
+Write-Part "Checking if Rainmeter is installed..."
 
 
-if (Test-Path "$expectedRMEXEloc") {
+if (Test-Path "$RMEXE32bitloc" -or Test-Path "$RMEXE64bitloc") {
     Write-Done
     $rminstalled = $true
+    If (Test-Path "$RMEXE32bitloc") {$RMEXEloc = "$RMEXE32bitloc"}
+    REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F
     $rmini = "$env:APPDATA\Rainmeter\Rainmeter.ini"
     If (Test-Path $rmini) {
         $Ini = Get-IniContent "$env:APPDATA\Rainmeter\Rainmeter.ini"
@@ -263,6 +267,8 @@ if (Test-Path "$expectedRMEXEloc") {
         Write-Part "Checking "; Write-Emphasized "$Env:Programfiles\Rainmeter\Rainmeter.exe"; Write-Part " for Rainmeter.exe"
         If (Test-Path -Path "$Env:Programfiles\Rainmeter\Rainmeter.exe") {
             Write-Done
+            If (Test-Path "$RMEXE32bitloc") {$RMEXEloc = "$RMEXE32bitloc"}
+            REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F
         } else {
             Write-Red "`nFailed to install Rainmeter! "; Write-Part "Make sure you have selected `"Yes`" when installation dialog pops up"
             Return
@@ -366,7 +372,6 @@ debug "SkinsPath: $skinspath"
 debug "-----------------"
 
 $skin_need_load = $false
-[System.Collections.ArrayList]$global:list_of_installations = @()
 Get-ChildItem "$root\" -Directory | ForEach-Object {
     $i_root = "$root\$($_.Name)"
 
@@ -381,7 +386,6 @@ Get-ChildItem "$root\" -Directory | ForEach-Object {
     $skin_load = $Ini["rmskin"]["Load"]
     $skin_load_path = Split-Path $skin_load
     If ($skin_name -contains '#JaxCore') {$skin_need_load = $true} 
-    $global:list_of_installations.Add("$skin_name") | Out-Null
 
     debug "$skin_name $skin_ver - by $skin_auth"
     debug "Variable files: $skin_varf"
@@ -469,5 +473,5 @@ If ($skinName -contains "JaxCore") {
 If (Test-Path -Path "$skinspath\$skinFolder") {
     Write-Emphasized "`n$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window. Press Enter to close this window"
     Get-ChildItem "$root\*" | Remove-Item -Recurse -Force
-    Exit
+    # Exit
 }
