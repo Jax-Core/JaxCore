@@ -352,6 +352,7 @@ $process = Get-Process 'Rainmeter'
 $ppid = $process.Id
 Get-CimInstance Win32_Process | Where-Object { $_.ParentProcessId -eq $ppid } | ForEach-Object { Stop-Process $_.ProcessId }
 Stop-Process -Name 'Rainmeter'
+Stop-Process -Name 'AHKv1'
 Write-Done
 # ---------------------------- Start installation ---------------------------- #
 $root = "$root\Unpacked"
