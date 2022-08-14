@@ -199,7 +199,7 @@ $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
 $RMEXE64bitloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
 $RMEXE32bitloc = "${Env:ProgramFiles(x86)}\Rainmeter\Rainmeter.exe"
 
-Write-Part "COREINSTALLER REF: Beta v11"
+Write-Part "COREINSTALLER REF: Beta v12"
 Write-Done
 Write-Part "Checking if Rainmeter is installed..."
 
@@ -322,7 +322,7 @@ Get-ChildItem $root -File | ForEach-Object {
 
 # ---------------------------- Start installation ---------------------------- #
 Write-Part "Starting Rainmeter.exe"
-& "$Env:Programfiles\Rainmeter\Rainmeter.exe"
+& "$RMEXEloc"
 Wait-ForProcess 'Rainmeter'
 $rmprocess_object = Get-Process Rainmeter
 $rmprocess_id = $rmprocess_object.id
@@ -337,6 +337,7 @@ Get-Process -Id $rmprocess_id | Foreach {
         $file = [System.IO.Path]::GetFileName($module.FileName).ToLower()
         if($file -eq "wow64.dll") {
             $bit = "32bit"
+            Break
         } else {
             $bit = "64bit"
         }
@@ -356,6 +357,7 @@ Write-Done
 $root = "$root\Unpacked"
 Write-Part "Getting archive info"
 $skinspath = $root | Split-Path | Split-Path
+Write-Done
 
 debug "RainmeterPluginsBit: $bit"
 debug "RainmeterPath: $settingspath"
@@ -464,5 +466,5 @@ If ($skinName -contains "JaxCore") {
 If (Test-Path -Path "$skinspath\$skinFolder") {
     Write-Emphasized "`n$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window. Press Enter to close this window"
     Get-ChildItem "$root\*" | Remove-Item -Recurse -Force
-    # Exit
+    Exit
 }
