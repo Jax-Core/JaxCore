@@ -199,7 +199,7 @@ $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
 $RMEXE64bitloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
 $RMEXE32bitloc = "${Env:ProgramFiles(x86)}\Rainmeter\Rainmeter.exe"
 
-Write-Part "COREINSTALLER REF: Beta v10"
+Write-Part "COREINSTALLER REF: Beta v11"
 Write-Done
 Write-Part "Checking if Rainmeter is installed..."
 
@@ -400,7 +400,6 @@ Get-ChildItem "$root\" -Directory | ForEach-Object {
                 If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" | Out-Null }
                 Copy-Item -Path "$skinspath\$($skin_varf[$i])" -Destination "$i_savelocation" -Force | Out-Null
             }
-            Get-ChildItem -Path "$skinspath\$skin_name" -Recurse | Remove-Item -Recurse
         } else {
             debug "> Not saving variable files"
         }
@@ -410,7 +409,7 @@ Get-ChildItem "$root\" -Directory | ForEach-Object {
     }
     # ---------------------------------- Process --------------------------------- #
     debug "> Moving skin files"
-    If ($new_install) {New-Item -Path "$skinspath\$skin_name\" -Type "Directory" -Force | Out-Null}
+    If ($new_install) {New-Item -Path "$skinspath\$skin_name\" -Type "Directory" -Force | Out-Null} else {Get-ChildItem -Path "$skinspath\$skin_name" -Recurse | Remove-Item -Recurse}
     Move-Item -Path "$i_root\Skins\$skin_name\*" -Destination "$skinspath\$skin_name\" -Force
     If (Test-Path "$i_root\Plugins\") {
         debug "> Moving / replacing plugins"
