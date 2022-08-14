@@ -199,7 +199,7 @@ $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
 $RMEXE64bitloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
 $RMEXE32bitloc = "${Env:ProgramFiles(x86)}\Rainmeter\Rainmeter.exe"
 
-Write-Part "COREINSTALLER REF: Beta v9"
+Write-Part "COREINSTALLER REF: Beta v10"
 Write-Done
 Write-Part "Checking if Rainmeter is installed..."
 
@@ -330,28 +330,20 @@ Write-Done
 # ------------------------------ Carry over data ----------------------------- #
 Write-Part "Getting required information"
 
-Add-Type -MemberDefinition @'
-[DllImport("kernel32.dll", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
-[return: MarshalAs(UnmanagedType.Bool)]
-public static extern bool IsWow64Process(
-[In] System.IntPtr hProcess,
-[Out, MarshalAs(UnmanagedType.Bool)] out bool wow64Process);
-'@ -Name NativeMethods -Namespace Kernel32
-
 $bit = '32bit'
 Get-Process -Id $rmprocess_id | Foreach {
-    $is32Bit=[int]0 
-    if ($_.Handle -ne $null) {
-        if ([Kernel32.NativeMethods]::IsWow64Process($_.Handle, [ref]$is32Bit)) { 
-            $bit = "$(if ($is32Bit) {'32bit'} else {'64bit'})"
-        } else {
+    $modules = $_.modules
+    foreach($module in $modules) {
+        $file = [System.IO.Path]::GetFileName($module.FileName).ToLower()
+        if($file -eq "wow64.dll") {
             $bit = "32bit"
-        }    
+        } else {
+            $bit = "64bit"
+        }
     }
 }
 
 $settingspath = "$env:APPDATA\Rainmeter"
-$programpath = "$Env:Programfiles\Rainmeter\"
 Write-Done
 # -------------------------- Stop running instances -------------------------- #
 Write-Part "Ending running processes"
@@ -367,7 +359,7 @@ $skinspath = $root | Split-Path | Split-Path
 
 debug "RainmeterPluginsBit: $bit"
 debug "RainmeterPath: $settingspath"
-debug "RainmeterExePath: $programpath"
+debug "RainmeterExePath: $RMEXEloc"
 debug "SkinsPath: $skinspath"
 debug "-----------------"
 
@@ -448,7 +440,7 @@ Get-ChildItem "$root\" -Directory | ForEach-Object {
     debug "-----------------"
 }
 
-Start-Process "$($programpath)Rainmeter.exe"
+Start-Process "$RMEXEloc"
 If ($skin_need_load) {
     Wait-ForProcess 'Rainmeter'
     Start-Sleep -Milliseconds 500
@@ -457,11 +449,11 @@ If ($skin_need_load) {
         $Ini = Get-IniContent "$env:APPDATA\Rainmeter\Rainmeter.ini"
         $Ini["Rainmeter"]["SkinPath"] = "$designatedskinspath"
         Set-IniContent $Ini "$env:APPDATA\Rainmeter\Rainmeter.ini"
-        Start-Process "$($programpath)Rainmeter.exe"
+        Start-Process "$RMEXEloc"
         Wait-ForProcess 'Rainmeter'
         Start-Sleep -Milliseconds 500
     }
-    & "$($programpath)Rainmeter.exe" [!ActivateConfig $skin_load_path]
+    & "$RMEXEloc" [!ActivateConfig $skin_load_path]
 }
 
 
