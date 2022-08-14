@@ -207,7 +207,6 @@ if (Test-Path "$expectedRMEXEloc") {
     Write-Done
     $Ini = Get-IniContent "$env:APPDATA\Rainmeter\Rainmeter.ini"
     $root = "$($Ini["Rainmeter"]["SkinPath"])#CoreInstallerCache"
-    return
 } else {
     if (Check_Program_Installed("Rainmeter")) {
         $rminstalled = $true
@@ -216,9 +215,11 @@ if (Test-Path "$expectedRMEXEloc") {
         Write-Part "$userRMEXEloc"
         Write-Done
         Write-Part "Checking if Rainmeter is installed at $userRMEXEloc"
+        If (!($userRMEXEloc -match '^.*Rainmeter\.exe$')) {$userRMEXEloc = "$userRMEXEloc\Rainmeter.exe"}
         If (Test-Path $userRMEXEloc) {
+            $Ini = Get-IniContent "$env:APPDATA\Rainmeter\Rainmeter.ini"
+            $root = "$($Ini["Rainmeter"]["SkinPath"])#CoreInstallerCache"
             Write-Done
-            return
         } else {
             Write-Done
             Write-Red "Could not find $userRMEXEloc. Please double check the path and re-enter."
@@ -268,7 +269,6 @@ Active=0
         Write-Done
         # ---------------------------------- Install --------------------------------- #
         $root = "$designatedskinspath#CoreInstallerCache"
-        return
     }
 }
 
