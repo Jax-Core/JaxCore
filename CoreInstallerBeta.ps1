@@ -197,36 +197,53 @@ if ($installSkin) {
 $designatedskinspath = "$env:APPDATA\Rainmeter\Skins\"
 $expectedRMEXEloc = "$env:APPDATA\Rainmeter\Rainmeter.exe"
 
-Write-Part "COREINSTALLER REF: Beta v3"
+Write-Part "COREINSTALLER REF: Beta v4"
 Write-Done
 Write-Part "Checking if Rainmeter is installed at $expectedRMEXEloc"
 
 
 if (Test-Path "$expectedRMEXEloc") {
-    $rminstalled = $true
     Write-Done
-    $Ini = Get-IniContent "$env:APPDATA\Rainmeter\Rainmeter.ini"
-    $root = "$($Ini["Rainmeter"]["SkinPath"])#CoreInstallerCache"
-} else {
-    if (Check_Program_Installed("Rainmeter")) {
-        $rminstalled = $true
-        Write-Done
-        $userRMEXEloc = Read-Host -Prompt "Rainmeter isn't installed at the expected location `"$expectedRMEXEloc`". Please enter the location of Rainmeter.exe below:"
-        Write-Part "$userRMEXEloc"
-        Write-Done
-        Write-Part "Checking if Rainmeter is installed at $userRMEXEloc"
-        If (!($userRMEXEloc -match '^.*Rainmeter\.exe$')) {$userRMEXEloc = "$userRMEXEloc\Rainmeter.exe"}
-        If (Test-Path $userRMEXEloc) {
-            $Ini = Get-IniContent "$env:APPDATA\Rainmeter\Rainmeter.ini"
-            $root = "$($Ini["Rainmeter"]["SkinPath"])#CoreInstallerCache"
-            Write-Done
-        } else {
-            Write-Done
-            Write-Red "Could not find $userRMEXEloc. Please double check the path and re-enter."
-            Read-Host
-            Exit
+    $rminstalled = $true
+    $rmini = "$env:APPDATA\Rainmeter\Rainmeter.ini"
+    If (Test-Path $rmini) {
+        $Ini = Get-IniContent "$env:APPDATA\Rainmeter\Rainmeter.ini"
+        $root = "$($Ini["Rainmeter"]["SkinPath"])#CoreInstallerCache"
+        
+        $hwa = $Ini["Rainmeter"]["HardwareAcceleration"]
+        if ($hwa -eq 0) {
+            Write-Info "JaxCore recommends that the HardwareAcceleration option for Rainmeter to be turned on. "
+            $confirmation = Read-Host "Do you want to save variables for $skin_name? (y/n)"
+            if ($confirmation -eq 'y') {
+                $Ini["Rainmeter"]["HardwareAcceleration"] = "1"
+                Set-IniContent $Ini "$env:APPDATA\Rainmeter\Rainmeter.ini"
+            }
         }
     } else {
+        Write-Red "Seems like you have Rainmeter installed but haven't ran it once on this account. Please do so and try again."
+        Read-Host
+        Exit
+    }
+} else {
+    # if (Check_Program_Installed("Rainmeter")) {
+    #     $rminstalled = $true
+    #     $userRMEXEloc = Read-Host -Prompt "Rainmeter isn't installed at the expected location `"$expectedRMEXEloc`". Please enter the location of Rainmeter.exe below:"
+    #     Write-Part "$userRMEXEloc"
+    #     Write-Done
+    #     Write-Part "Checking if Rainmeter is installed at $userRMEXEloc"
+    #     If ($userRMEXEloc -match '^.*Rainmeter\.exe$') {$userRMEXEloc = $userRMEXEloc | Split-Path}
+    #     If (Test-Path "$userRMEXEloc\Rainmeter.exe") {
+    #         $Ini = Get-IniContent "$userRMEXEloc\Rainmeter.ini"
+    #         $root = "$($Ini["Rainmeter"]["SkinPath"])#CoreInstallerCache"
+    #         Write-Done
+    #     } else {
+    #         Write-Done
+    #         Write-Red "Could not find $userRMEXEloc. Please double check the path and re-enter."
+    #         Read-Host
+    #         Exit
+    #     }
+    # } else {
+        $rminstalled = $false
         # ----------------------------------- Fetch ---------------------------------- #
         Write-Info "`nRainmeter is not installed, installing Rainmeter"
         $api_url = 'https://api.github.com/repos/rainmeter/rainmeter/releases'
@@ -269,7 +286,7 @@ Active=0
         Write-Done
         # ---------------------------------- Install --------------------------------- #
         $root = "$designatedskinspath#CoreInstallerCache"
-    }
+    # }
 }
 
 
@@ -374,18 +391,23 @@ Get-ChildItem "$root\" -Directory | ForEach-Object {
     If (Test-Path "$skinspath\$skin_name") {
         $new_install = $false
         debug "This is an update"
-        debug "> Saving variable files"
-        $skin_varf = $skin_varf -split '\s\|\s'
-        If (Test-Path "$root\Unpacked\$i_name\") { Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse | Out-Null }
-        New-Item -Path "$i_root\SavedVarFiles" -Type "Directory" | Out-Null
-        for ($i=0; $i -lt $skin_varf.Count; $i++) {
-            $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $skin_varf[$i])"
-            $i_savelocation = "$i_root\SavedVarFiles\$($skin_varf[$i])"
-            debug "Saving #$i $($skin_varf[$i]) -> $i_savelocation"
-            If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" | Out-Null }
-            Copy-Item -Path "$skinspath\$($skin_varf[$i])" -Destination "$i_savelocation" -Force | Out-Null
+        $confirmation = Read-Host "Do you want to save variables for $skin_name? (y/n)"
+        if ($confirmation -eq 'y') {
+            debug "> Saving variable files"
+            $skin_varf = $skin_varf -split '\s\|\s'
+            If (Test-Path "$root\Unpacked\$i_name\") { Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse | Out-Null }
+            New-Item -Path "$i_root\SavedVarFiles" -Type "Directory" | Out-Null
+            for ($i=0; $i -lt $skin_varf.Count; $i++) {
+                $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $skin_varf[$i])"
+                $i_savelocation = "$i_root\SavedVarFiles\$($skin_varf[$i])"
+                debug "Saving #$i $($skin_varf[$i]) -> $i_savelocation"
+                If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" | Out-Null }
+                Copy-Item -Path "$skinspath\$($skin_varf[$i])" -Destination "$i_savelocation" -Force | Out-Null
+            }
+            Get-ChildItem -Path "$skinspath\$skin_name" -Recurse | Remove-Item -Recurse
+        } else {
+            debug "> Not saving variable files"
         }
-        Get-ChildItem -Path "$skinspath\$skin_name" -Recurse | Remove-Item -Recurse
     } else {
         $new_install = $true
         debug "This is a new installation"
@@ -408,7 +430,7 @@ Get-ChildItem "$root\" -Directory | ForEach-Object {
     } else {
         debug "> Skipping plugin installation (none)"
     }
-    If (-not $new_install) {
+    If ((-not $new_install) -and ($confirmation -eq 'y')) {
         debug "> Moving saved variables files back to skin"
         for ($i=0; $i -lt $skin_varf.Count; $i++) {
             $i_savelocation = "$i_root\SavedVarFiles\$($skin_varf[$i])"
@@ -421,8 +443,6 @@ Get-ChildItem "$root\" -Directory | ForEach-Object {
     debug "> Finished installation of $skin_name"
     debug "-----------------"
 }
-
-Get-ChildItem "$root\*" | Remove-Item -Recurse -Force
 
 Start-Process "$($programpath)Rainmeter.exe"
 If ($skin_need_load) {
@@ -448,5 +468,6 @@ If ($skinName -contains "JaxCore") {
 }
 If (Test-Path -Path "$skinspath\$skinFolder") {
     Write-Emphasized "`n$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window. Press Enter to close this window"
+    Get-ChildItem "$root\*" | Remove-Item -Recurse -Force
     Exit
 }
