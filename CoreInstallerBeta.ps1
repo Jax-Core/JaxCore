@@ -199,12 +199,12 @@ $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
 $RMEXE64bitloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
 $RMEXE32bitloc = "${Env:ProgramFiles(x86)}\Rainmeter\Rainmeter.exe"
 
-Write-Part "COREINSTALLER REF: Beta v8"
+Write-Part "COREINSTALLER REF: Beta v9"
 Write-Done
 Write-Part "Checking if Rainmeter is installed..."
 
 
-if (Test-Path "$RMEXE32bitloc" -or Test-Path "$RMEXE64bitloc") {
+if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
     Write-Done
     $rminstalled = $true
     If (Test-Path "$RMEXE32bitloc") {$RMEXEloc = "$RMEXE32bitloc"}
