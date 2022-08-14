@@ -197,7 +197,7 @@ if ($installSkin) {
 $designatedskinspath = "$env:APPDATA\Rainmeter\Skins\"
 $expectedRMEXEloc = "$env:APPDATA\Rainmeter\Rainmeter.exe"
 
-Write-Part "COREINSTALLER REF: Beta v5"
+Write-Part "COREINSTALLER REF: Beta v6"
 Write-Done
 Write-Part "Checking if Rainmeter is installed at $expectedRMEXEloc"
 
@@ -213,8 +213,8 @@ if (Test-Path "$expectedRMEXEloc") {
         $hwa = $Ini["Rainmeter"]["HardwareAcceleration"]
         if ($hwa -eq 0) {
             Write-Info "JaxCore recommends that the HardwareAcceleration option for Rainmeter to be turned on. "
-            $confirmation = Read-Host "Do you want to save variables for $skin_name? (y/n)"
-            if ($confirmation -eq 'y') {
+            $confirmation = Read-Host "Turn on? (y/n)"
+            if ($confirmation -match '^y$') {
                 $Ini["Rainmeter"]["HardwareAcceleration"] = "1"
                 Set-IniContent $Ini "$env:APPDATA\Rainmeter\Rainmeter.ini"
             }
@@ -391,8 +391,8 @@ Get-ChildItem "$root\" -Directory | ForEach-Object {
     If (Test-Path "$skinspath\$skin_name") {
         $new_install = $false
         debug "This is an update"
-        $confirmation = Read-Host "Do you want to save variables for $skin_name? (y/n)"
-        if ($confirmation -eq 'y') {
+        $confirmation = Read-Host "Do you want to save variables for this installation? (y/n)"
+        if ($confirmation -match '^y$') {
             debug "> Saving variable files"
             $skin_varf = $skin_varf -split '\s\|\s'
             If (Test-Path "$root\Unpacked\$i_name\") { Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse | Out-Null }
@@ -430,7 +430,7 @@ Get-ChildItem "$root\" -Directory | ForEach-Object {
     } else {
         debug "> Skipping plugin installation (none)"
     }
-    If ((-not $new_install) -and ($confirmation -eq 'y')) {
+    If ((-not $new_install) -and ($confirmation -match '^y$')) {
         debug "> Moving saved variables files back to skin"
         for ($i=0; $i -lt $skin_varf.Count; $i++) {
             $i_savelocation = "$i_root\SavedVarFiles\$($skin_varf[$i])"
