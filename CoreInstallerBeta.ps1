@@ -177,9 +177,9 @@ $s_rootFolderName = "#CoreInstallerCache"
 $s_root = "$s_RMSkinFolder$s_rootFolderName"
 $s_unpacked = "$s_RMSkinFolder$s_rootFolderName\Unpacked"
 
-function Set-DPICompatability {REG ADD "HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers" /V "\$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F}
+function Set-DPICompatability {REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F}
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Merged Installer Beta v1"
+Write-Info "COREINSTALLER REF: Merged Installer Beta v2"
 # --------------------------- Check if RM installed -------------------------- #
 Write-Task "Checking if Rainmeter is installed..."
 
@@ -290,12 +290,11 @@ Get-ChildItem $s_root -File | ForEach-Object {
     Write-Done
 }
 # ---------------------------- Start installation ---------------------------- #
-Write-Task "Starting Rainmeter.exe"
 & "$RMEXEloc"
 Wait-ForProcess 'Rainmeter'
+Write-Done
 $rmprocess_object = Get-Process Rainmeter
 $rmprocess_id = $rmprocess_object.id
-Write-Done
 # ------------------------------------ Bit ----------------------------------- #
 Write-Task "Getting Rainmeter bitness..."
 $bit = '32bit'
