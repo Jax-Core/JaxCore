@@ -167,7 +167,7 @@ function DownloadFile($url, $targetFile)
 if (!($o_InstallModule)) {$o_InstallModule = "JaxCore"}
 if (!($o_FromCore)) {$o_FromCore = $false}
 if (!($o_Force)) {$o_Force = $false}
-if (!($o_PromptBestOption)) {$o_PromptBestOption = $true}
+if (!($o_PromptBestOption)) {$o_PromptBestOption = !$o_FromCore}
 # ---------------------------- Installer variables --------------------------- #
 $s_InstallIsBatch = [bool]($o_InstallModule.Count -gt '1')
 $s_RMSettingsFolder = "$env:APPDATA\Rainmeter\"
@@ -268,15 +268,11 @@ If ($o_Version) {
     downloadFile "$githubDownloadURL" "$githubDownloadOutpath"
     Write-Done
 } else {
-    If ($s_InstallIsBatch) {$downloadCount = $o_InstallModule.Count} else {$downloadCount = 1}
-    for ($i = 0,$i -lt $downloadCount, $i++) {
-        $githubRAWVersionResponse = Invoke-WebRequest "https://raw.githubusercontent.com/Jax-Core/$i_name/main/%40Resources/Version.inc" -UseBasicParsing
-        $githubRAWVersionResponseBytes = $githubRAWVersionResponse.RawContentStream.ToArray()
-        if ([System.Text.Encoding]::Unicode.GetString($githubRAWVersionResponseBytes) -match 'Version=(.+)') {
-            $i_version = $matches[1]
-        }
-        $githubDownloadURL = "https://github.com/Jax-Core/$o_InstallModule/releases/download/v$i_version/$($o_InstallModule)_v$i_version.rmskin"
-        $githubDownloadOutpath = "$s_root\$($o_InstallModule)_v$i_version.rmskin"
+    for (($i=0);($i -lt $o_InstallModule.Count);$i++) {
+        If ($o_InstallModule.Count -eq 1) {$i_name = $o_InstallModule} else {$i_name = $o_InstallModule[$i]}
+        $githubAPIObject= Invoke-WebRequest -Uri "https://api.github.com/repos/Jax-Core/$i_name/releases" -UseBasicParsing | ConvertFrom-Json
+        $githubDownloadURL = $githubAPIObject.assets.browser_download_url[0]
+        $githubDownloadOutpath = "$s_root\$($i_name)_$($githubAPIObject.tag_name[0]).rmskin"
         Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
         downloadFile "$githubDownloadURL" "$githubDownloadOutpath"
         Write-Done
@@ -437,7 +433,7 @@ Get-ChildItem "$s_unpacked\" -Directory | ForEach-Object {
                 Copy-Item -Path "$i_savelocation" -Destination "$i_targetlocation" -Force | Out-Null
             }
         }
-    } elseif ($skin_name -notcontains 'JaxCore') {
+    } elseif ($skin_name -notcontains '#JaxCore') {
         debug "> Automatically changing scale variables (new installation)"
         $vc = Get-WmiObject -class "Win32_VideoController"
         $saw = $vc.CurrentHorizontalResolution
@@ -496,30 +492,35 @@ If ($isInstallingCore) {
     }
     & "$RMEXEloc" [!ActivateConfig $skin_load_path]
 } else {
-    If ([String]::IsNullOrWhiteSpace((Get-content "$s_RMSkinFolder\..\CoreData\@DLCs\InstalledDLCs.inc"))) {
+    $dlcINCFile = "$s_RMSkinFolder\..\CoreData\@DLCs\InstalledDLCs.inc"
+    If (!(Test-Path $dlcINCFile)) {
         debug "No DLCs installed."
     } else {
-        # --------------------- Check if skin has a DLC installed -------------------- #
-        $Ini = Get-IniContent -filePath "$s_RMSkinFolder\..\CoreData\@DLCs\InstalledDLCs.inc"
+        If ([String]::IsNullOrWhiteSpace((Get-content $dlcINCFile))) {
+            debug "No DLCs installed."
+        } else {
+            # --------------------- Check if skin has a DLC installed -------------------- #
+            $Ini = Get-IniContent -filePath $dlcINCFile
 
-        for ($i = 0;$i -lt $list_of_installations.Count;$i++) {
-            $i_name = $list_of_installations[$i]
-            debug "> Matching $i_name with installed DLCs"
+            for ($i = 0;$i -lt $list_of_installations.Count;$i++) {
+                $i_name = $list_of_installations[$i]
+                debug "> Matching $i_name with installed DLCs"
 
-            for ($j = 0; $j -lt $Ini['Variables'].Keys.Count; $j++) { 
-                if ($Ini['Variables'].Keys[$j] -match $i_name) {
-                    debug "Found $i_name in installed DLCs"
-                    & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "2" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!WriteKeyValue Variables Page.SubPage "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Complete_Reinstallation "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Reinstallation_isSingle "$([Bool]($list_of_installations.Count -eq 1))" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
-                    Return
+                for ($j = 0; $j -lt $Ini['Variables'].Keys.Count; $j++) { 
+                    if ($Ini['Variables'].Keys[$j] -match $i_name) {
+                        debug "Found $i_name in installed DLCs"
+                        & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "2" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!WriteKeyValue Variables Page.SubPage "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Complete_Reinstallation "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Reinstallation_isSingle "$([Bool]($list_of_installations.Count -eq 1))" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
+                        Return
+                    }
                 }
             }
+            debug "No matching DLCs found"
         }
-        debug "No matching DLCs found"
-    }
-    If ($s_InstallIsBatch) {
-        & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
-    } else {
-        & "$RMEXEloc" [!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
+        If ($s_InstallIsBatch) {
+            & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
+        } else {
+            & "$RMEXEloc" [!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
+        }
     }
 }
 
