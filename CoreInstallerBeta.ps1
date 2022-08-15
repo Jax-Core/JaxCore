@@ -179,7 +179,7 @@ $s_unpacked = "$s_RMSkinFolder$s_rootFolderName\Unpacked"
 
 function Set-DPICompatability {REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F}
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Merged Installer Beta v3"
+Write-Info "COREINSTALLER REF: Merged Installer Beta v4"
 # --------------------------- Check if RM installed -------------------------- #
 Write-Task "Checking if Rainmeter is installed..."
 
@@ -268,7 +268,7 @@ If ($o_Version) {
     downloadFile "$githubDownloadURL" "$githubDownloadOutpath"
     Write-Done
 } else {
-    If {$s_InstallIsBatch} then {$downloadCount = $o_InstallModule.Count} else {$downloadCount = 1}
+    If ($s_InstallIsBatch) then {$downloadCount = $o_InstallModule.Count} else {$downloadCount = 1}
     for ($i = 0,$i -lt $downloadCount, $i++) {
         $githubRAWVersionResponse = Invoke-WebRequest "https://raw.githubusercontent.com/Jax-Core/$i_name/main/%40Resources/Version.inc" -UseBasicParsing
         $githubRAWVersionResponseBytes = $githubRAWVersionResponse.RawContentStream.ToArray()
