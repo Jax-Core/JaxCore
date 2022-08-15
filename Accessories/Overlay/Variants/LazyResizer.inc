@@ -4,8 +4,8 @@ OnRefreshAction=[]
 
 [Variables]
 @includeVars=#@#Vars.inc
-CacheW=692
-CacheH=936
+CacheW=1246
+CacheH=828
 
 [p.FrostedGlass]
 Measure=Plugin
