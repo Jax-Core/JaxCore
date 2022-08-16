@@ -197,6 +197,8 @@ if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
     If (Test-Path $s_RMINIFile) {
         $Ini = Get-IniContent $s_RMINIFile
         $s_RMSkinFolder = $Ini["Rainmeter"]["SkinPath"]
+        $s_root = "$s_RMSkinFolder$s_rootFolderName"
+        $s_unpacked = "$s_RMSkinFolder$s_rootFolderName\Unpacked"
         $hwa = $Ini["Rainmeter"]["HardwareAcceleration"]
         if (($hwa -eq 0) -and ($o_PromptBestOption -eq $true)) {
             Write-Info "JaxCore recommends that the HardwareAcceleration option for Rainmeter to be turned on. "
@@ -516,11 +518,11 @@ If ($isInstallingCore) {
             }
             debug "No matching DLCs found"
         }
-        If ($s_InstallIsBatch) {
-            & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
-        } else {
-            & "$RMEXEloc" [!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
-        }
+    }
+    If ($s_InstallIsBatch) {
+        & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
+    } else {
+        & "$RMEXEloc" [!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
     }
 }
 
