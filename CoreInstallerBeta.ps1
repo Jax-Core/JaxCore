@@ -1,11 +1,11 @@
-# ----------------------------- Terminal outputs ----------------------------- #
-# Helper functions edited from spicetify cli ps1 installer (https://github.com/spicetify/spicetify-cli/blob/master/install.ps1)
-function Write-Part ([string] $Text) {
-  Write-Host $Text -NoNewline
-}
+# ---------------------------------------------------------------------------- #
+#                                   Functions                                  #
+# ---------------------------------------------------------------------------- #
 
-function Write-Emphasized ([string] $Text) {
-  Write-Host $Text -NoNewLine -ForegroundColor "Cyan"
+# Write-Host
+
+function Write-Task ([string] $Text) {
+  Write-Host $Text -NoNewline
 }
 
 function Write-Done {
@@ -13,11 +13,15 @@ function Write-Done {
   Write-Host "OK" -ForegroundColor "Green"
 }
 
+function Write-Emphasized ([string] $Text) {
+  Write-Host $Text -NoNewLine -ForegroundColor "Cyan"
+}
+
 function Write-Info ([string] $Text) {
   Write-Host $Text -ForegroundColor "Yellow"
 }
 
-function Write-Red ([string] $Text) {
+function Write-Fail ([string] $Text) {
   Write-Host $Text -ForegroundColor "Red"
 }
 
@@ -83,7 +87,6 @@ function Get-IniContent ($filePath) {
 
 function Set-IniContent($ini, $filePath) {
     $str = @()
-
     foreach ($section in $ini.GetEnumerator()) {
         if ($section -ne ';ItIsNotAFuckingSection;') {
             $str += "[" + ($section.Key -replace '\|\|ps\d+$', '') + "]"
@@ -97,9 +100,7 @@ function Set-IniContent($ini, $filePath) {
             }
         }
     }
-
     $finalStr = $str -join [System.Environment]::NewLine
-
     $finalStr | Out-File -filePath $filePath -Force -Encoding unicode
 }
 
@@ -115,8 +116,6 @@ function Wait-ForProcess
     {        $NumberOfProcesses = (Get-Process -Name $Name -ErrorAction SilentlyContinue).Count    }
     else
     {        $NumberOfProcesses = 0    }
-
-
     Write-Host "Waiting for $Name" -NoNewline
     while ( (Get-Process -Name $Name -ErrorAction SilentlyContinue).Count -eq $NumberOfProcesses )
     {
@@ -126,41 +125,7 @@ function Wait-ForProcess
     Write-Host ''
 }
 
-# ----------------------------- Wait for process ----------------------------- #
-
-function Wait-ForProcess
-{
-    param
-    (
-        $Name = 'notepad',
-
-        [Switch]
-        $IgnoreAlreadyRunningProcesses
-    )
-
-    if ($IgnoreAlreadyRunningProcesses)
-    {
-        $NumberOfProcesses = (Get-Process -Name $Name -ErrorAction SilentlyContinue).Count
-    }
-    else
-    {
-        $NumberOfProcesses = 0
-    }
-
-
-    Write-Host "Waiting for $Name" -NoNewline
-    while ( (Get-Process -Name $Name -ErrorAction SilentlyContinue).Count -eq $NumberOfProcesses )
-    {
-        Write-Host '.' -NoNewline
-        Start-Sleep -Milliseconds 400
-    }
-
-    Write-Host ''
-}
-
-# --------------------------------- Download --------------------------------- #
 function DownloadFile($url, $targetFile)
-
 {
    $uri = New-Object "System.Uri" "$url"
    $request = [System.Net.HttpWebRequest]::Create($uri)
@@ -186,99 +151,96 @@ function DownloadFile($url, $targetFile)
    $responseStream.Dispose()
 }
 
-# --------------------------- Start of installation -------------------------- #
+# ---------------------------------------------------------------------------- #
+#                             Start of installation                            #
+# ---------------------------------------------------------------------------- #
 
-if ($installSkin) {
-  $skinName = $installSkin
-} else {
-  $skinName = "JaxCore"
-}
+# ----------------------------------- Info ----------------------------------- #
+# $o - Option for installer
+# $s - Installer options set by developer
+# $o_InstallModule - Module to install
+# $o_Version - Version to get
+# $o_FromCore - If installation is invoked via JaxCore
+# $o_Force - Overwrite existing files
+# $o_PromptBestOption - Prompt for changing to best options
+# ------------------------------ Default values ------------------------------ #
+if (!($o_InstallModule)) {$o_InstallModule = "JaxCore"}
+if (!($o_FromCore)) {$o_FromCore = $false}
+if (!($o_Force)) {$o_Force = $false}
+if (!($o_PromptBestOption)) {$o_PromptBestOption = !$o_FromCore}
+# ---------------------------- Installer variables --------------------------- #
+$s_InstallIsBatch = [bool]($o_InstallModule.Count -gt '1')
+$s_RMSettingsFolder = "$env:APPDATA\Rainmeter\"
+$s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
+$s_RMSkinFolder = "$env:APPDATA\JaxCore\InstalledComponents\"
+$s_rootFolderName = "#CoreInstallerCache"
+$s_root = "$s_RMSkinFolder$s_rootFolderName"
+$s_unpacked = "$s_RMSkinFolder$s_rootFolderName\Unpacked"
 
-$designatedskinspath = "$env:APPDATA\Rainmeter\Skins\"
+function Set-DPICompatability {REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F}
+# ----------------------------------- Start ---------------------------------- #
+Write-Info "COREINSTALLER REF: Merged Installer Beta v5"
+# --------------------------- Check if RM installed -------------------------- #
+Write-Task "Checking if Rainmeter is installed..."
+
 $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
 $RMEXE64bitloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
 $RMEXE32bitloc = "${Env:ProgramFiles(x86)}\Rainmeter\Rainmeter.exe"
 
-Write-Part "COREINSTALLER REF: Beta v12"
 Write-Done
-Write-Part "Checking if Rainmeter is installed..."
-
-
 if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
-    Write-Done
-    $rminstalled = $true
+    # ------------------------------- RM installed ------------------------------- #
+    debug "Rainmeter is already installed on your device."
+    $wasRMInstalled = $true
     If (Test-Path "$RMEXE32bitloc") {$RMEXEloc = "$RMEXE32bitloc"}
-    REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F
-    $rmini = "$env:APPDATA\Rainmeter\Rainmeter.ini"
-    If (Test-Path $rmini) {
-        $Ini = Get-IniContent "$env:APPDATA\Rainmeter\Rainmeter.ini"
-        $root = "$($Ini["Rainmeter"]["SkinPath"])#CoreInstallerCache"
-        
+    Set-DPICompatability
+    If (Test-Path $s_RMINIFile) {
+        $Ini = Get-IniContent $s_RMINIFile
+        $s_RMSkinFolder = $Ini["Rainmeter"]["SkinPath"]
         $hwa = $Ini["Rainmeter"]["HardwareAcceleration"]
-        if ($hwa -eq 0) {
+        if (($hwa -eq 0) -and ($o_PromptBestOption -eq $true)) {
             Write-Info "JaxCore recommends that the HardwareAcceleration option for Rainmeter to be turned on. "
             $confirmation = Read-Host "Turn on? (y/n)"
             if ($confirmation -match '^y$') {
                 $Ini["Rainmeter"]["HardwareAcceleration"] = "1"
-                Set-IniContent $Ini "$env:APPDATA\Rainmeter\Rainmeter.ini"
+                Set-IniContent $Ini $s_RMINIFile
             }
         }
     } else {
-        Write-Red "Seems like you have Rainmeter installed but haven't ran it once on this account. Please do so and try again."
+        Write-Fail "Seems like you have Rainmeter installed but haven't ran it once on this account. Please do so and try again."
         Read-Host
         Exit
     }
 } else {
-    # if (Check_Program_Installed("Rainmeter")) {
-    #     $rminstalled = $true
-    #     $userRMEXEloc = Read-Host -Prompt "Rainmeter isn't installed at the expected location `"$expectedRMEXEloc`". Please enter the location of Rainmeter.exe below:"
-    #     Write-Part "$userRMEXEloc"
-    #     Write-Done
-    #     Write-Part "Checking if Rainmeter is installed at $userRMEXEloc"
-    #     If ($userRMEXEloc -match '^.*Rainmeter\.exe$') {$userRMEXEloc = $userRMEXEloc | Split-Path}
-    #     If (Test-Path "$userRMEXEloc\Rainmeter.exe") {
-    #         $Ini = Get-IniContent "$userRMEXEloc\Rainmeter.ini"
-    #         $root = "$($Ini["Rainmeter"]["SkinPath"])#CoreInstallerCache"
-    #         Write-Done
-    #     } else {
-    #         Write-Done
-    #         Write-Red "Could not find $userRMEXEloc. Please double check the path and re-enter."
-    #         Read-Host
-    #         Exit
-    #     }
-    # } else {
-        $rminstalled = $false
-        # ----------------------------------- Fetch ---------------------------------- #
-        Write-Info "`nRainmeter is not installed, installing Rainmeter"
-        $api_url = 'https://api.github.com/repos/rainmeter/rainmeter/releases'
-        $api_object = Invoke-WebRequest -Uri $api_url -UseBasicParsing | ConvertFrom-Json
-        $dl_url = $api_object.assets.browser_download_url[0]
-        $outpath = "$env:temp\RainmeterInstaller.exe"
-        # --------------------------------- Download --------------------------------- #
-        Write-Part "Downloading    "; Write-Emphasized $dl_url; Write-Part " -> "; Write-Emphasized $outpath
-        # Invoke-WebRequest $dl_url -OutFile $outpath
-        downloadFile "$dl_url" "$outpath"
+    $wasRMInstalled = $false
+    # ----------------------------------- Fetch ---------------------------------- #
+    Write-Info "Rainmeter is not installed, installing Rainmeter"
+    $githubRMReleaseAPIObject = Invoke-WebRequest -Uri 'https://api.github.com/repos/rainmeter/rainmeter/releases' -UseBasicParsing | ConvertFrom-Json
+    $githubRMDownloadURL = $githubRMReleaseAPIObject.assets.browser_download_url[0]
+    $githubRMDownloadOutpath = "$env:temp\RainmeterInstaller.exe"
+    # --------------------------------- Download --------------------------------- #
+    Write-Task "Downloading    "; Write-Emphasized $githubRMDownloadURL; Write-Task " -> "; Write-Emphasized $githubRMDownloadOutpath
+    downloadFile "$githubRMDownloadURL" "$githubRMDownloadOutpath"
+    Write-Done
+    # ------------------------------------ Run ----------------------------------- #
+    Write-Task "Running installer..."
+    Start-Process -FilePath $githubRMDownloadOutpath -ArgumentList "/S /AUTOSTARTUP=1 /RESTART=0" -Wait
+    Write-Done
+    # ---------------------------- Check if installed ---------------------------- #
+    Write-Task "Checking "; Write-Emphasized "$RMEXEloc"; Write-Task " for Rainmeter.exe"
+    If (Test-Path -Path "$RMEXEloc") {
         Write-Done
-        # ------------------------------------ Run ----------------------------------- #
-        Write-Part "Running installer   "; Write-Emphasized $outpath
-        Start-Process -FilePath $outpath -ArgumentList "/S /AUTOSTARTUP=1 /RESTART=0" -Wait
-        Write-Done
-        # ---------------------------- Check if installed ---------------------------- #
-        Write-Part "Checking "; Write-Emphasized "$Env:Programfiles\Rainmeter\Rainmeter.exe"; Write-Part " for Rainmeter.exe"
-        If (Test-Path -Path "$Env:Programfiles\Rainmeter\Rainmeter.exe") {
-            Write-Done
-            If (Test-Path "$RMEXE32bitloc") {$RMEXEloc = "$RMEXE32bitloc"}
-            REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F
-        } else {
-            Write-Red "`nFailed to install Rainmeter! "; Write-Part "Make sure you have selected `"Yes`" when installation dialog pops up"
-            Return
-        }
-        # --------------------------------- Generate --------------------------------- #
-        Write-Part "Generating "; Write-Emphasized "Rainmeter.ini "; Write-Part "for the first time..."
-        New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
+        Set-DPICompatability
+    } else {
+        Write-Fail "`nFailed to install Rainmeter! "; Write-Task "Make sure you have selected `"Yes`" when installation dialog pops up"
+        Return
+    }
+    # --------------------------------- Generate --------------------------------- #
+    Write-Task "Generating "; Write-Emphasized "Rainmeter.ini "; Write-Task "for the first time..."
+    New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
 [Rainmeter]
 Logging=0
-SkinPath=$designatedskinspath
+SkinPath=$s_RMSkinFolder
 HardwareAcceleration=1
 
 [illustro\Clock]
@@ -289,47 +251,49 @@ Active=0
 Active=0
 
 "@
-        Write-Done
-        # ---------------------------------- Install --------------------------------- #
-        $root = "$designatedskinspath#CoreInstallerCache"
-    # }
-}
-
-
-New-Item -Path $root -Type "Directory" -Force | Out-Null
-
-[System.IO.Directory]::CreateDirectory("$root") | Out-Null
-Get-Item $root -Force | foreach { $_.Attributes = $_.Attributes -bor "Hidden" }
-Get-ChildItem "$root" | ForEach-Object {
-    Remove-Item $_.FullName -Force -Recurse
-}
-# ------------------------------ Download files ------------------------------ #
-$api_url = 'https://api.github.com/repos/Jax-Core/' + $skinName + '/releases'
-$api_object = Invoke-WebRequest -Uri $api_url -UseBasicParsing | ConvertFrom-Json
-$dl_url = $api_object.assets.browser_download_url[0]
-$outpath = "$root\$($skinName)_$($api_object.tag_name[0]).rmskin"
-Write-Part "Downloading    "; Write-Emphasized $dl_url; Write-Part " -> "; Write-Emphasized $outpath
-downloadFile "$dl_url" "$outpath"
-Write-Done
-# ------------------------------- Extract file ------------------------------- #
-Get-ChildItem $root -File | ForEach-Object {
-    $i_name = $($_.Name -replace '\.rmskin', '')
-    Rename-Item "$root\$($_.Name)" -NewName "$i_name.zip"
-    Write-Part "Exapnding downloaded archive    "; Write-Emphasized "$root\$i_name.zip"; Write-Part " -> "; Write-Emphasized "$root\Unpacked\$i_name\"
-    Expand-Archive -Path "$root\$i_name.zip" -DestinationPath "$root\Unpacked\$i_name\" -Force
     Write-Done
 }
 
+# -------------------------------- Create root ------------------------------- #
+New-Item -Path $s_root -Type "Directory" -Force | Out-Null
+Get-Item $s_root -Force | foreach { $_.Attributes = $_.Attributes -bor "Hidden" }
+Get-ChildItem "$s_root" | ForEach-Object {
+    Remove-Item $_.FullName -Force -Recurse
+}
+# ------------------------------ Download files ------------------------------ #
+If ($o_Version) {
+    $githubDownloadURL = "https://github.com/Jax-Core/$o_InstallModule/releases/download/v$o_Version/$($o_InstallModule)_v$o_Version.rmskin"
+    $githubDownloadOutpath = "$s_root\$($o_InstallModule)_v$o_Version.rmskin"
+    Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
+    downloadFile "$githubDownloadURL" "$githubDownloadOutpath"
+    Write-Done
+} else {
+    for (($i=0);($i -lt $o_InstallModule.Count);$i++) {
+        If ($o_InstallModule.Count -eq 1) {$i_name = $o_InstallModule} else {$i_name = $o_InstallModule[$i]}
+        $githubAPIObject= Invoke-WebRequest -Uri "https://api.github.com/repos/Jax-Core/$i_name/releases" -UseBasicParsing | ConvertFrom-Json
+        $githubDownloadURL = $githubAPIObject.assets.browser_download_url[0]
+        $githubDownloadOutpath = "$s_root\$($i_name)_$($githubAPIObject.tag_name[0]).rmskin"
+        Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
+        downloadFile "$githubDownloadURL" "$githubDownloadOutpath"
+        Write-Done
+    }
+}
+# ------------------------------- Extract file ------------------------------- #
+Get-ChildItem $s_root -File | ForEach-Object {
+    $i_name = $($_.Name -replace '\.rmskin', '')
+    Rename-Item "$s_root\$($_.Name)" -NewName "$i_name.zip"
+    Write-Task "Exapnding downloaded archive    "; Write-Emphasized "$s_root\$i_name.zip"; Write-Task " -> "; Write-Emphasized "$s_root\Unpacked\$i_name\"
+    Expand-Archive -Path "$s_root\$i_name.zip" -DestinationPath "$s_unpacked\$i_name\" -Force
+    Write-Done
+}
 # ---------------------------- Start installation ---------------------------- #
-Write-Part "Starting Rainmeter.exe"
 & "$RMEXEloc"
 Wait-ForProcess 'Rainmeter'
+Write-Done
 $rmprocess_object = Get-Process Rainmeter
 $rmprocess_id = $rmprocess_object.id
-Write-Done
-# ------------------------------ Carry over data ----------------------------- #
-Write-Part "Getting required information"
-
+# ------------------------------------ Bit ----------------------------------- #
+Write-Task "Getting Rainmeter bitness..."
 $bit = '32bit'
 Get-Process -Id $rmprocess_id | Foreach {
     $modules = $_.modules
@@ -343,65 +307,80 @@ Get-Process -Id $rmprocess_id | Foreach {
         }
     }
 }
-
-$settingspath = "$env:APPDATA\Rainmeter"
 Write-Done
 # -------------------------- Stop running instances -------------------------- #
-Write-Part "Ending running processes"
-$process = Get-Process 'Rainmeter'
-$ppid = $process.Id
-Get-CimInstance Win32_Process | Where-Object { $_.ParentProcessId -eq $ppid } | ForEach-Object { Stop-Process $_.ProcessId }
-Stop-Process -Name 'Rainmeter'
-Stop-Process -Name 'AHKv1'
-Write-Done
+If (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
+    Write-Task "Ending running child processes of Rainmeter"
+    $process = Get-Process 'Rainmeter'
+    $ppid = $process.Id
+    Get-CimInstance Win32_Process | Where-Object { $_.ParentProcessId -eq $ppid } | ForEach-Object { Stop-Process $_.ProcessId }
+    Write-Done
+    Write-Task "Ending Rainmeter & potential AHKv1 process"
+    Stop-Process -Name 'Rainmeter'
+    If (Get-Process 'AHKv1' -ErrorAction SilentlyContinue) {
+        Stop-Process -Name 'AHKv1'
+    }
+    Write-Done
+}
 # ---------------------------- Start installation ---------------------------- #
-$root = "$root\Unpacked"
-Write-Part "Getting archive info"
-$skinspath = $root | Split-Path | Split-Path
-Write-Done
-
+Write-Info "Starting installation..."
+debug "-----------------"
 debug "RainmeterPluginsBit: $bit"
-debug "RainmeterPath: $settingspath"
+debug "RainmeterPath: $s_RMSettingsFolder"
 debug "RainmeterExePath: $RMEXEloc"
-debug "SkinsPath: $skinspath"
+debug "SkinsPath: $s_RMSkinFolder"
+debug "InstallIsBatch: $s_InstallIsBatch"
 debug "-----------------"
 
-$skin_need_load = $false
-Get-ChildItem "$root\" -Directory | ForEach-Object {
-    $i_root = "$root\$($_.Name)"
+$isInstallingCore = $false
+[System.Collections.ArrayList]$list_of_installations = @()
+[System.IO.Directory]::SetCurrentDirectory($s_RMSkinFolder)
+
+Get-ChildItem "$s_unpacked\" -Directory | ForEach-Object {
+    $i_root = "$s_unpacked\$($_.Name)"
+    
+    If (!(Test-Path "$i_root\RMSKIN.ini")) {
+        Write-Fail "ERROR: Unable to find RMSKIN.ini in extracted package. Please report this issue to the developer."
+        debug "Press ENTER to close this prompt"
+        Read-Host
+        Exit
+    }
 
     # ------------------------------ Read RMSKIN.ini ----------------------------- #
     $Ini = Get-IniContent "$i_root\RMSKIN.ini"
-    $skin_name = Get-ChildItem -Path "$i_root\Skins\" | Select-Object -First 1
-    $skin_name = $skin_name.Name
+    $skin_name = (Get-ChildItem -Path "$i_root\Skins\" | Select-Object -First 1).Name
     $skin_auth = $Ini["rmskin"]["Author"]
     $skin_ver = $Ini["rmskin"]["Version"]
     $skin_varf = $Ini["rmskin"]["VariableFiles"]
 
     $skin_load = $Ini["rmskin"]["Load"]
     $skin_load_path = Split-Path $skin_load
-    If ($skin_name -contains '#JaxCore') {$skin_need_load = $true} 
+    If ($skin_name -contains '#JaxCore') {$isInstallingCore = $true} 
+    $list_of_installations.Add("$skin_name") | Out-Null
 
     debug "$skin_name $skin_ver - by $skin_auth"
     debug "Variable files: $skin_varf"
-    debug "Load: $skin_load_path ($skin_need_load)"
+    debug "Load: $skin_load_path ($isInstallingCore)"
     debug "-----------------"
     # ------------------------------ Variable files ------------------------------ #
-    If (Test-Path "$skinspath\$skin_name") {
+    If (Test-Path "$s_RMSkinFolder\$skin_name") {
         $new_install = $false
         debug "This is an update"
-        $confirmation = Read-Host "Do you want to save variables for this installation? (y/n)"
+        $confirmation = 'y'
+        If ($o_PromptBestOption) {
+            $confirmation = Read-Host "Do you want to save variables for this installation? (y/n)"
+        }
         if ($confirmation -match '^y$') {
             debug "> Saving variable files"
             $skin_varf = $skin_varf -split '\s\|\s'
-            If (Test-Path "$root\Unpacked\$i_name\") { Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse | Out-Null }
+            If (Test-Path "$i_root\Unpacked\$i_name\") { Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse | Out-Null }
             New-Item -Path "$i_root\SavedVarFiles" -Type "Directory" | Out-Null
             for ($i=0; $i -lt $skin_varf.Count; $i++) {
                 $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $skin_varf[$i])"
                 $i_savelocation = "$i_root\SavedVarFiles\$($skin_varf[$i])"
                 debug "Saving #$i $($skin_varf[$i]) -> $i_savelocation"
                 If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" | Out-Null }
-                Copy-Item -Path "$skinspath\$($skin_varf[$i])" -Destination "$i_savelocation" -Force | Out-Null
+                Copy-Item -Path "$s_RMSkinFolder\$($skin_varf[$i])" -Destination "$i_savelocation" -Force | Out-Null
             }
         } else {
             debug "> Not saving variable files"
@@ -412,11 +391,11 @@ Get-ChildItem "$root\" -Directory | ForEach-Object {
     }
     # ---------------------------------- Process --------------------------------- #
     debug "> Moving skin files"
-    If ($new_install) {New-Item -Path "$skinspath\$skin_name\" -Type "Directory" -Force | Out-Null} else {Get-ChildItem -Path "$skinspath\$skin_name" -Recurse | Remove-Item -Recurse}
-    Move-Item -Path "$i_root\Skins\$skin_name\*" -Destination "$skinspath\$skin_name\" -Force
+    If ($new_install) {New-Item -Path "$s_RMSkinFolder\$skin_name\" -Type "Directory" -Force | Out-Null} else {Get-ChildItem -Path "$s_RMSkinFolder\$skin_name" -Recurse | Remove-Item -Recurse}
+    Move-Item -Path "$i_root\Skins\$skin_name\*" -Destination "$s_RMSkinFolder\$skin_name\" -Force
     If (Test-Path "$i_root\Plugins\") {
         debug "> Moving / replacing plugins"
-        $i_targetlocation = "$($settingspath)\Plugins\"
+        $i_targetlocation = "$($s_RMSettingsFolder)\Plugins\"
         If (!(Test-Path "$i_targetlocation\")) { New-Item -Path "$i_targetlocation" -Type "Directory" -Force }
         Get-ChildItem "$i_root\Plugins\$bit" | ForEach-Object {
             $i_plugin = $_.Name
@@ -429,13 +408,69 @@ Get-ChildItem "$root\" -Directory | ForEach-Object {
         debug "> Skipping plugin installation (none)"
     }
     If ((-not $new_install) -and ($confirmation -match '^y$')) {
-        debug "> Moving saved variables files back to skin"
+        debug "> Writing saved variables files back to skin"
         for ($i=0; $i -lt $skin_varf.Count; $i++) {
             $i_savelocation = "$i_root\SavedVarFiles\$($skin_varf[$i])"
-            $i_targetlocation = "$skinspath\$($skin_varf[$i])"
-            debug "Moving #$i $i_savelocation -> $i_targetlocation"
-            If (!(Test-Path "$i_targetlocation")) { New-Item -Path "$(Split-Path $i_targetlocation)" -Type "Directory" | Out-Null }
-            Copy-Item -Path "$i_savelocation" -Destination "$i_targetlocation" -Force | Out-Null
+            $i_targetlocation = "$s_RMSkinFolder\$($skin_varf[$i])"
+            If (Test-Path "$i_targetlocation") {
+                $Ini = Get-IniContent $i_savelocation;$oldvars = $Ini
+                $Ini = Get-IniContent $i_targetlocation;$newvars = $Ini
+                $oldvars.Keys | Foreach-Object {
+                    $i_section = $_
+                    $oldvars[$i_section].Keys | ForEach-Object {
+                        $i_value = $_
+                        # debug "[$i_section] $i_value"
+                        If ([bool]$newvars[$i_section][$i_value]) {
+                            $newvars[$i_section][$i_value] = $oldvars[$i_section][$i_value]
+                            # debug "$($newvars[$i_section][$i_value]) replaced by $($oldvars[$i_section][$i_value])"
+                        }
+                    }
+                }
+                Set-IniContent $newvars $i_targetlocation
+            } else {
+                debug "Moving #$i $i_savelocation -> $i_targetlocation"
+                New-Item -Path "$(Split-Path $i_targetlocation)" -Type "Directory" | Out-Null
+                Copy-Item -Path "$i_savelocation" -Destination "$i_targetlocation" -Force | Out-Null
+            }
+        }
+    } elseif ($skin_name -notcontains '#JaxCore') {
+        debug "> Automatically changing scale variables (new installation)"
+        $vc = Get-WmiObject -class "Win32_VideoController"
+        $saw = $vc.CurrentHorizontalResolution
+        $sah = $vc.CurrentVerticalResolution
+#        ((#SCREENAREAWIDTH#/1920) < (#SCREENAREAHEIGHT#/1080) ? (#SCREENAREAWIDTH#/1920) : (#SCREENAREAHEIGHT#/1080))
+        $scale = 1
+        If (($saw/1920) -lt ($sah/1080)) {
+            $scale = $saw / 1920
+        } else {
+            $scale = $sah / 1080
+        }
+        debug "Scale is $scale"
+        if (!($scale -eq 1)) {
+            $varsfile = "$s_RMSkinFolder\$skin_name\@Resources\Vars.inc"
+            If (Test-Path $varsfile) {
+                debug "Vars.inc found."
+                $Ini = Get-IniContent $varsfile
+                If ([bool]$Ini["Variables"]["Scale"]) {
+                    $Ini["Variables"]["Scale"] = $scale
+                    Set-IniContent $Ini $varsfile
+                }
+            }
+            $othervarfiles = "$s_RMSkinFolder\$skin_name\Main\Vars\"
+            If (Test-Path "$othervarfiles") {
+                debug "Found other variable files"
+                Get-ChildItem "$othervarfiles" -File | ForEach-Object {
+                    $i_file = "$othervarfiles\$($_.Name)"
+                    $Ini = Get-IniContent $i_file
+                    If ([bool]$Ini["Variables"]["Scale"]) {
+                        debug "Found scale variable in $i_file"
+                        $Ini["Variables"]["Scale"] = $scale
+                        Set-IniContent $Ini $i_file
+                    }
+                }
+            }
+        } else {
+            debug "Scale unchanged."
         }
     }
     debug "> Finished installation of $skin_name"
@@ -443,29 +478,51 @@ Get-ChildItem "$root\" -Directory | ForEach-Object {
 }
 
 Start-Process "$RMEXEloc"
-If ($skin_need_load) {
-    Wait-ForProcess 'Rainmeter'
-    Start-Sleep -Milliseconds 500
-    If (-not $rminstalled) {
+Wait-ForProcess 'Rainmeter'
+Start-Sleep -Milliseconds 500
+If ($isInstallingCore) {
+    If (-not $wasRMInstalled) {
         Stop-Process -Name 'Rainmeter'
         $Ini = Get-IniContent "$env:APPDATA\Rainmeter\Rainmeter.ini"
-        $Ini["Rainmeter"]["SkinPath"] = "$designatedskinspath"
+        $Ini["Rainmeter"]["SkinPath"] = "$s_RMSkinFolder"
         Set-IniContent $Ini "$env:APPDATA\Rainmeter\Rainmeter.ini"
         Start-Process "$RMEXEloc"
         Wait-ForProcess 'Rainmeter'
         Start-Sleep -Milliseconds 500
     }
     & "$RMEXEloc" [!ActivateConfig $skin_load_path]
-}
-
-
-If ($skinName -contains "JaxCore") {
-    $skinFolder = "#JaxCore"
 } else {
-    $skinFolder = $skinName
+    $dlcINCFile = "$s_RMSkinFolder\..\CoreData\@DLCs\InstalledDLCs.inc"
+    If (!(Test-Path $dlcINCFile)) {
+        debug "No DLCs installed."
+    } else {
+        If ([String]::IsNullOrWhiteSpace((Get-content $dlcINCFile))) {
+            debug "No DLCs installed."
+        } else {
+            # --------------------- Check if skin has a DLC installed -------------------- #
+            $Ini = Get-IniContent -filePath $dlcINCFile
+
+            for ($i = 0;$i -lt $list_of_installations.Count;$i++) {
+                $i_name = $list_of_installations[$i]
+                debug "> Matching $i_name with installed DLCs"
+
+                for ($j = 0; $j -lt $Ini['Variables'].Keys.Count; $j++) { 
+                    if ($Ini['Variables'].Keys[$j] -match $i_name) {
+                        debug "Found $i_name in installed DLCs"
+                        & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "2" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!WriteKeyValue Variables Page.SubPage "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Complete_Reinstallation "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Reinstallation_isSingle "$([Bool]($list_of_installations.Count -eq 1))" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
+                        Return
+                    }
+                }
+            }
+            debug "No matching DLCs found"
+        }
+        If ($s_InstallIsBatch) {
+            & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
+        } else {
+            & "$RMEXEloc" [!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
+        }
+    }
 }
-If (Test-Path -Path "$skinspath\$skinFolder") {
-    Write-Emphasized "`n$skinName is installed successfully. "; Write-Part "Follow the instructions in the pop-up window. Press Enter to close this window"
-    Get-ChildItem "$root\*" | Remove-Item -Recurse -Force
-    Exit
-}
+
+Get-ChildItem "$s_root\*" | Remove-Item -Recurse -Force
+Exit
