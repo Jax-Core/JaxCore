@@ -1,40 +1,99 @@
+:root {
+  --padding: 30px;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently */
+}
+
+@keyframes fadeInAnimation {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 body {
-  border-color: white;
-  border-width: 4px;
+  margin: 0;
+  width: calc(100vw);
+  height: calc(100vh);
+  background-color: #121212;
+  /* opacity: 0;
+  animation: fadeInAnimation ease 1s;
+  animation-fill-mode: forwards; */
 }
 
-
-.row {
-  display: flex;
-  /* flex-wrap: wrap; */
+p {
+  font-family: "Poppins", sans-serif;
+  color: white;
 }
 
-.last-row {
-  /* margin-top: 5vh; */
+.card-1 { grid-area: card-1; }
+.card-2 { grid-area: card-2; }
+.card-3 { grid-area: card-3; }
+.card-4 { grid-area: card-4; }
+.card-5 { grid-area: card-5; }
+.grid {  
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: var(--padding) var(--padding);
+  grid-auto-flow: row;
+  justify-items: stretch;
+  grid-template-areas:
+    "card-1 card-1 card-1 card-1 card-1 card-2 card-2 card-2 card-2"
+    "card-1 card-1 card-1 card-1 card-1 card-2 card-2 card-2 card-2"
+    "card-1 card-1 card-1 card-1 card-1 card-2 card-2 card-2 card-2"
+    "card-1 card-1 card-1 card-1 card-1 card-2 card-2 card-2 card-2"
+    "card-1 card-1 card-1 card-1 card-1 card-2 card-2 card-2 card-2"
+    "card-1 card-1 card-1 card-1 card-1 card-2 card-2 card-2 card-2"
+    "card-3 card-3 card-3 card-4 card-4 card-4 card-5 card-5 card-5"
+    "card-3 card-3 card-3 card-4 card-4 card-4 card-5 card-5 card-5"
+    "card-3 card-3 card-3 card-4 card-4 card-4 card-5 card-5 card-5"
+    "card-3 card-3 card-3 card-4 card-4 card-4 card-5 card-5 card-5"
+    "card-3 card-3 card-3 card-4 card-4 card-4 card-5 card-5 card-5"
+    "card-3 card-3 card-3 card-4 card-4 card-4 card-5 card-5 card-5"
+    "card-3 card-3 card-3 card-4 card-4 card-4 card-5 card-5 card-5";
 }
 
-.card {
+.grid > * {
+  opacity: 0;
+  animation-name: fadeInAnimation;
+  animation-timing-function: ease;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+.card-1 { animation-delay: 0s; }
+.card-2 { animation-delay: .1s; }
+.card-3 { animation-delay: .2s; }
+.card-4 { animation-delay: .3s; }
+.card-5 { animation-delay: .4s; }
+
+/* ---------------------------------- Grid ---------------------------------- */
+
+.grid-item {
+  border-radius: 16px;
   position: relative;
-  
   display: flex;
   flex-direction: column-reverse;
+  overflow: hidden;
 }
 
-.size-1 {
-  width: 55vw;
-  height: 45vh;
+.grid-item:hover {
+  cursor:pointer;
 }
 
-.size-2 {
-  width: 40vw;
-  height: 45vh;
-  margin-left: 5vw;
+/* ------------------------------- Grid items ------------------------------- */
+
+
+.card-title {
+  margin-bottom: 0px;
+  transition: margin-bottom 0.1s ease-out;
 }
 
-.size-3 {
-  width: 30vw;
-  height: 50vh;
-  /* margin-left: 5vw; */
+.grid-item:hover > .card-title {
+  margin-bottom: 10px;
 }
 
 .card-title > * {
@@ -50,6 +109,11 @@ body {
   mask-image: linear-gradient(45deg, transparent 10% , black 70%);
   position: absolute;
   z-index: -1;
+  transition: transform .1s; /* Animation */
+}
+
+.grid-item:hover > .card-bg {
+  transform: scale(1.05)
 }
 
 .card-icon {
@@ -59,9 +123,12 @@ body {
 }
 
 .card-text {
-  color: white;
-  font-family: "Poppins", sans-serif;
-  font-weight: 650;
-  font-size: 4vw;
+  font-weight: 600;
+  font-size: clamp(16px, 4vw, 48px);
   margin-top: -42px;
+  margin-bottom: -32px;
+}
+
+.card-description {
+  font-size: 1.25vw;
 }
