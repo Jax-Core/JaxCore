@@ -172,7 +172,7 @@ if (!($o_PromptBestOption)) {$o_PromptBestOption = !$o_FromCore}
 $s_InstallIsBatch = [bool]($o_InstallModule.Count -gt '1')
 $s_RMSettingsFolder = "$env:APPDATA\Rainmeter\"
 $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
-$s_RMSkinFolder = "$env:APPDATA\JaxCore\InstalledComponents\"
+$s_RMSkinFolder = "$env:APPDATA\Rainmeter\JaxCore\InstalledComponents\"
 $s_rootFolderName = "#CoreInstallerCache"
 $s_root = "$s_RMSkinFolder$s_rootFolderName"
 $s_unpacked = "$s_RMSkinFolder$s_rootFolderName\Unpacked"
@@ -312,11 +312,11 @@ Get-Process -Id $rmprocess_id | Foreach {
 Write-Done
 # -------------------------- Stop running instances -------------------------- #
 If (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
-    Write-Task "Ending running child processes of Rainmeter"
-    $process = Get-Process 'Rainmeter'
-    $ppid = $process.Id
-    Get-CimInstance Win32_Process | Where-Object { $_.ParentProcessId -eq $ppid } | ForEach-Object { Stop-Process $_.ProcessId }
-    Write-Done
+    # Write-Task "Ending running child processes of Rainmeter"
+    # $process = Get-Process 'Rainmeter'
+    # $ppid = $process.Id
+    # Get-CimInstance Win32_Process | Where-Object { $_.ParentProcessId -eq $ppid } | ForEach-Object { Stop-Process $_.ProcessId }
+    # Write-Done
     Write-Task "Ending Rainmeter & potential AHKv1 process"
     Stop-Process -Name 'Rainmeter'
     If (Get-Process 'AHKv1' -ErrorAction SilentlyContinue) {
