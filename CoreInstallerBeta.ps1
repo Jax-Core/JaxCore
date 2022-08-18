@@ -179,13 +179,13 @@ $s_InstallIsBatch = [bool]($o_InstallModule.Count -gt '1')
 $s_RMSettingsFolder = "$env:APPDATA\Rainmeter\"
 $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
 $s_RMSkinFolder = "$env:APPDATA\JaxCore\InstalledComponents\"
-$s_rootFolderName = "#CoreInstallerCache"
+$s_rootFolderName = "JaxCoreCache"
 $s_root = "$env:temp$s_rootFolderName"
 $s_unpacked = "$env:temp$s_rootFolderName\Unpacked"
 
 function Set-DPICompatability {REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F}
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Merged Installer Beta v6"
+Write-Info "COREINSTALLER REF: Merged Installer Beta v7"
 # --------------------------- Check if RM installed -------------------------- #
 Write-Task "Checking if Rainmeter is installed..."
 
@@ -316,11 +316,11 @@ Get-Process -Id $rmprocess_id | Foreach {
 Write-Done
 # -------------------------- Stop running instances -------------------------- #
 If (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
-    Write-Task "Ending running child processes of Rainmeter"
-    $process = Get-Process 'Rainmeter'
-    $ppid = $process.Id
-    Get-CimInstance Win32_Process | Where-Object { $_.ParentProcessId -eq $ppid } | ForEach-Object { Stop-Process $_.ProcessId }
-    Write-Done
+    # Write-Task "Ending running child processes of Rainmeter"
+    # $process = Get-Process 'Rainmeter'
+    # $ppid = $process.Id
+    # Get-CimInstance Win32_Process | Where-Object { $_.ParentProcessId -eq $ppid } | ForEach-Object { Stop-Process $_.ProcessId }
+    # Write-Done
     Write-Task "Ending Rainmeter & potential AHKv1 process"
     Stop-Process -Name 'Rainmeter'
     If (Get-Process 'AHKv1' -ErrorAction SilentlyContinue) {
@@ -527,11 +527,11 @@ If ($isInstallingCore) {
             }
             debug "No matching DLCs found"
         }
-        If ($s_InstallIsBatch) {
-            & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
-        } else {
-            & "$RMEXEloc" [!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
-        }
+    }
+    If ($s_InstallIsBatch) {
+        & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
+    } else {
+        & "$RMEXEloc" [!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
     }
 }
 
