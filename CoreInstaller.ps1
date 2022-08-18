@@ -531,7 +531,7 @@ If ($isInstallingCore) {
     If ($s_InstallIsBatch) {
         & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
     } else {
-        & "$RMEXEloc" [!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
+        & "$RMEXEloc" [!WriteKeyvalue Variables Skin.Name "$skin_name" "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
     }
 }
 
