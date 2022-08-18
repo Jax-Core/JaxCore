@@ -167,19 +167,25 @@ function DownloadFile($url, $targetFile)
 if (!($o_InstallModule)) {$o_InstallModule = "JaxCore"}
 if (!($o_FromCore)) {$o_FromCore = $false}
 if (!($o_Force)) {$o_Force = $false}
-if (!($o_PromptBestOption)) {$o_PromptBestOption = !$o_FromCore}
+if (!($o_PromptBestOption)) {
+    if ($o_FromCore -or $o_Force) {
+        $o_PromptBestOption = $false
+    } else {
+        $o_PromptBestOption = $true
+    }
+}
 # ---------------------------- Installer variables --------------------------- #
 $s_InstallIsBatch = [bool]($o_InstallModule.Count -gt '1')
 $s_RMSettingsFolder = "$env:APPDATA\Rainmeter\"
 $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
-$s_RMSkinFolder = "$env:APPDATA\Rainmeter\JaxCore\InstalledComponents\"
-$s_rootFolderName = "#CoreInstallerCache"
-$s_root = "$s_RMSkinFolder$s_rootFolderName"
-$s_unpacked = "$s_RMSkinFolder$s_rootFolderName\Unpacked"
+$s_RMSkinFolder = "$env:APPDATA\JaxCore\InstalledComponents\"
+$s_rootFolderName = "JaxCoreCache"
+$s_root = "$env:temp$s_rootFolderName"
+$s_unpacked = "$env:temp$s_rootFolderName\Unpacked"
 
 function Set-DPICompatability {REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F}
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v4"
+Write-Info "COREINSTALLER REF: Stable v4.1"
 # --------------------------- Check if RM installed -------------------------- #
 Write-Task "Checking if Rainmeter is installed..."
 
@@ -197,8 +203,6 @@ if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
     If (Test-Path $s_RMINIFile) {
         $Ini = Get-IniContent $s_RMINIFile
         $s_RMSkinFolder = $Ini["Rainmeter"]["SkinPath"]
-        $s_root = "$s_RMSkinFolder$s_rootFolderName"
-        $s_unpacked = "$s_RMSkinFolder$s_rootFolderName\Unpacked"
         $hwa = $Ini["Rainmeter"]["HardwareAcceleration"]
         if (($hwa -eq 0) -and ($o_PromptBestOption -eq $true)) {
             Write-Info "JaxCore recommends that the HardwareAcceleration option for Rainmeter to be turned on. "
@@ -369,6 +373,7 @@ Get-ChildItem "$s_unpacked\" -Directory | ForEach-Object {
         $new_install = $false
         debug "This is an update"
         $confirmation = 'y'
+        If ($o_Force) {$confirmation = 'n'}
         If ($o_PromptBestOption) {
             $confirmation = Read-Host "Do you want to save variables for this installation? (y/n)"
         }
@@ -393,7 +398,11 @@ Get-ChildItem "$s_unpacked\" -Directory | ForEach-Object {
     }
     # ---------------------------------- Process --------------------------------- #
     debug "> Moving skin files"
-    If ($new_install) {New-Item -Path "$s_RMSkinFolder\$skin_name\" -Type "Directory" -Force | Out-Null} else {Get-ChildItem -Path "$s_RMSkinFolder\$skin_name" -Recurse | Remove-Item -Recurse}
+    If ($new_install) {
+        New-Item -Path "$s_RMSkinFolder\$skin_name\" -Type "Directory" -Force | Out-Null
+    } else {
+        Get-ChildItem -Path "$s_RMSkinFolder\$skin_name\" -Recurse | Remove-Item -Recurse
+    }
     Move-Item -Path "$i_root\Skins\$skin_name\*" -Destination "$s_RMSkinFolder\$skin_name\" -Force
     If (Test-Path "$i_root\Plugins\") {
         debug "> Moving / replacing plugins"
@@ -526,5 +535,5 @@ If ($isInstallingCore) {
     }
 }
 
-Get-ChildItem "$s_root\*" | Remove-Item -Recurse -Force
+Get-ChildItem -Path "$s_root\" -Recurse | Remove-Item -Recurse
 Exit
