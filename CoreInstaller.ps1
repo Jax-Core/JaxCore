@@ -180,8 +180,8 @@ $s_RMSettingsFolder = "$env:APPDATA\Rainmeter\"
 $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
 $s_RMSkinFolder = "$env:APPDATA\JaxCore\InstalledComponents\"
 $s_rootFolderName = "JaxCoreCache"
-$s_root = "$env:temp$s_rootFolderName"
-$s_unpacked = "$env:temp$s_rootFolderName\Unpacked"
+$s_root = "$env:temp\$s_rootFolderName"
+$s_unpacked = "$env:temp\$s_rootFolderName\Unpacked"
 
 function Set-DPICompatability {REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F}
 # ----------------------------------- Start ---------------------------------- #
