@@ -180,12 +180,12 @@ $s_RMSettingsFolder = "$env:APPDATA\Rainmeter\"
 $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
 $s_RMSkinFolder = "$env:APPDATA\JaxCore\InstalledComponents\"
 $s_rootFolderName = "JaxCoreCache"
-$s_root = "$env:temp$s_rootFolderName"
-$s_unpacked = "$env:temp$s_rootFolderName\Unpacked"
+$s_root = "$env:temp\$s_rootFolderName"
+$s_unpacked = "$env:temp\$s_rootFolderName\Unpacked"
 
 function Set-DPICompatability {REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F}
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Merged Installer Beta v7"
+Write-Info "COREINSTALLER REF: Beta v8"
 # --------------------------- Check if RM installed -------------------------- #
 Write-Task "Checking if Rainmeter is installed..."
 
@@ -276,9 +276,13 @@ If ($o_Version) {
 } else {
     for (($i=0);($i -lt $o_InstallModule.Count);$i++) {
         If ($o_InstallModule.Count -eq 1) {$i_name = $o_InstallModule} else {$i_name = $o_InstallModule[$i]}
-        $githubAPIObject= Invoke-WebRequest -Uri "https://api.github.com/repos/Jax-Core/$i_name/releases" -UseBasicParsing | ConvertFrom-Json
-        $githubDownloadURL = $githubAPIObject.assets.browser_download_url[0]
-        $githubDownloadOutpath = "$s_root\$($i_name)_$($githubAPIObject.tag_name[0]).rmskin"
+        $response = Invoke-WebRequest "https://raw.githubusercontent.com/Jax-Core/$i_name/main/%40Resources/Version.inc" -UseBasicParsing
+        $responseBytes = $response.RawContentStream.ToArray()
+        if ([System.Text.Encoding]::Unicode.GetString($responseBytes) -match 'Version=(.+)') {
+            $latest_v = $matches[1]
+        }
+        $githubDownloadURL = "https://github.com/Jax-Core/$i_name/releases/download/v$latest_v/$($i_name)_v$latest_v.rmskin"
+        $githubDownloadOutpath = "$s_root\$($i_name)_$latest_v.rmskin"
         Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
         downloadFile "$githubDownloadURL" "$githubDownloadOutpath"
         Write-Done
@@ -531,7 +535,7 @@ If ($isInstallingCore) {
     If ($s_InstallIsBatch) {
         & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
     } else {
-        & "$RMEXEloc" [!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
+        & "$RMEXEloc" [!WriteKeyvalue Variables Skin.Name "$skin_name" "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
     }
 }
 

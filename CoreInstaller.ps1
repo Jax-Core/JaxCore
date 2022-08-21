@@ -185,7 +185,7 @@ $s_unpacked = "$env:temp\$s_rootFolderName\Unpacked"
 
 function Set-DPICompatability {REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F}
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v4.1"
+Write-Info "COREINSTALLER REF: Stable v4.2"
 # --------------------------- Check if RM installed -------------------------- #
 Write-Task "Checking if Rainmeter is installed..."
 
@@ -276,9 +276,15 @@ If ($o_Version) {
 } else {
     for (($i=0);($i -lt $o_InstallModule.Count);$i++) {
         If ($o_InstallModule.Count -eq 1) {$i_name = $o_InstallModule} else {$i_name = $o_InstallModule[$i]}
-        $githubAPIObject= Invoke-WebRequest -Uri "https://api.github.com/repos/Jax-Core/$i_name/releases" -UseBasicParsing | ConvertFrom-Json
-        $githubDownloadURL = $githubAPIObject.assets.browser_download_url[0]
-        $githubDownloadOutpath = "$s_root\$($i_name)_$($githubAPIObject.tag_name[0]).rmskin"
+        $response = Invoke-WebRequest "https://raw.githubusercontent.com/Jax-Core/$i_name/main/%40Resources/Version.inc" -UseBasicParsing
+        $responseBytes = $response.RawContentStream.ToArray()
+        if ([System.Text.Encoding]::Unicode.GetString($responseBytes) -match 'Version=(.+)') {
+            $latest_v = $matches[1]
+        } elseif ([System.Text.Encoding]::Unicode.GetString($responseBytes) -match 'Core\.Ver=(.+)') {
+            $latest_v = $matches[1]
+        }
+        $githubDownloadURL = "https://github.com/Jax-Core/$i_name/releases/download/v$latest_v/$($i_name)_v$latest_v.rmskin"
+        $githubDownloadOutpath = "$s_root\$($i_name)_$latest_v.rmskin"
         Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
         downloadFile "$githubDownloadURL" "$githubDownloadOutpath"
         Write-Done
@@ -340,6 +346,7 @@ debug "-----------------"
 
 $isInstallingCore = $false
 [System.Collections.ArrayList]$list_of_installations = @()
+If (!(Test-Path $s_RMSkinFolder)) {New-Item -Path $s_RMSkinFolder -Type "Directory" | Out-Null}
 [System.IO.Directory]::SetCurrentDirectory($s_RMSkinFolder)
 
 Get-ChildItem "$s_unpacked\" -Directory | ForEach-Object {
