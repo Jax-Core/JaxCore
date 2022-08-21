@@ -185,7 +185,7 @@ $s_unpacked = "$env:temp\$s_rootFolderName\Unpacked"
 
 function Set-DPICompatability {REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F}
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v4.2"
+Write-Info "COREINSTALLER REF: Stable v4.3"
 # --------------------------- Check if RM installed -------------------------- #
 Write-Task "Checking if Rainmeter is installed..."
 
@@ -538,7 +538,7 @@ If ($isInstallingCore) {
     If ($s_InstallIsBatch) {
         & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
     } else {
-        & "$RMEXEloc" [!WriteKeyvalue Variables Skin.Name "$skin_name" "#@#SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
+        & "$RMEXEloc" [!WriteKeyvalue Variables Skin.Name "$skin_name" "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
     }
 }
 
