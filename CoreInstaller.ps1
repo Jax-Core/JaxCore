@@ -185,7 +185,7 @@ $s_unpacked = "$env:temp\$s_rootFolderName\Unpacked"
 
 function Set-DPICompatability {REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F}
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v4.3"
+Write-Info "COREINSTALLER REF: Stable v4.4"
 # --------------------------- Check if RM installed -------------------------- #
 Write-Task "Checking if Rainmeter is installed..."
 
@@ -226,7 +226,7 @@ if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
     $githubRMDownloadOutpath = "$env:temp\RainmeterInstaller.exe"
     # --------------------------------- Download --------------------------------- #
     Write-Task "Downloading    "; Write-Emphasized $githubRMDownloadURL; Write-Task " -> "; Write-Emphasized $githubRMDownloadOutpath
-    downloadFile "$githubRMDownloadURL" "$githubRMDownloadOutpath"
+    wget "$githubRMDownloadURL" -outfile "$githubRMDownloadOutpath"
     Write-Done
     # ------------------------------------ Run ----------------------------------- #
     Write-Task "Running installer..."
@@ -271,7 +271,7 @@ If ($o_Version) {
     $githubDownloadURL = "https://github.com/Jax-Core/$o_InstallModule/releases/download/v$o_Version/$($o_InstallModule)_v$o_Version.rmskin"
     $githubDownloadOutpath = "$s_root\$($o_InstallModule)_v$o_Version.rmskin"
     Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
-    downloadFile "$githubDownloadURL" "$githubDownloadOutpath"
+    wget "$githubDownloadURL" -outfile "$githubDownloadOutpath"
     Write-Done
 } else {
     for (($i=0);($i -lt $o_InstallModule.Count);$i++) {
@@ -286,7 +286,7 @@ If ($o_Version) {
         $githubDownloadURL = "https://github.com/Jax-Core/$i_name/releases/download/v$latest_v/$($i_name)_v$latest_v.rmskin"
         $githubDownloadOutpath = "$s_root\$($i_name)_$latest_v.rmskin"
         Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
-        downloadFile "$githubDownloadURL" "$githubDownloadOutpath"
+        wget "$githubDownloadURL" -outfile "$githubDownloadOutpath"
         Write-Done
     }
 }
