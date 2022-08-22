@@ -290,21 +290,16 @@ if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
     #                             Portable installation                            #
     # ---------------------------------------------------------------------------- #
-    If (Test-Path "$o_Location\Rainmeter\Rainmeter.exe") {
-        # ---------------------------- Installer variables --------------------------- #
-        $s_RMSettingsFolder = "$o_Location\Rainmeter\"
-        $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
-        $s_RMSkinFolder = "$s_RMSettingsFolder\JaxCore\InstalledComponents\"
-        $RMEXEloc = "$s_RMSettingsFolder\Rainmeter.exe"
-    } else {
+    # ---------------------------- Installer variables --------------------------- #
+    $s_RMSettingsFolder = "$o_Location\Rainmeter\"
+    $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
+    $s_RMSkinFolder = "$o_Location\JaxCore\InstalledComponents\"
+    $RMEXEloc = "$s_RMSettingsFolder\Rainmeter.exe"
+    # ------- Check if Rainmeter is already installed at provided location ------- #
+    If (!(Test-Path "$o_Location\Rainmeter\Rainmeter.exe")) {
         Write-Task "Are you sure you want to install JaxCore at "; Write-Emphasized $o_Location
         $confirmation = Read-Host "? (y/n)"
         if ($confirmation -match '^y$') {
-            # ---------------------------- Installer variables --------------------------- #
-            $s_RMSettingsFolder = "$o_Location\Rainmeter\"
-            $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
-            $s_RMSkinFolder = "$o_Location\JaxCore\InstalledComponents\"
-            $RMEXEloc = "$s_RMSettingsFolder\Rainmeter.exe"
             Download-Rainmeter "/S /RESTART=0 /PORTABLE=1 /D=$s_RMSettingsFolder"
         } else {
             Write-Fail "Action cancelled. Installation terminated."
