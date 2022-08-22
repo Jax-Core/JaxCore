@@ -187,7 +187,8 @@ function Download-Rainmeter($params) {
     $githubRMDownloadOutpath = "$env:temp\RainmeterInstaller.exe"
     # --------------------------------- Download --------------------------------- #
     Write-Task "Downloading    "; Write-Emphasized $githubRMDownloadURL; Write-Task " -> "; Write-Emphasized $githubRMDownloadOutpath
-    wget "$githubRMDownloadURL" -outfile "$githubRMDownloadOutpath"
+    $ProgressPreference = 'SilentlyContinue'
+    wget "$githubRMDownloadURL" -outfile "$githubRMDownloadOutpath" -UseBasicParsing
     Write-Done
     # ------------------------------------ Run ----------------------------------- #
     Write-Task "Running installer..."
@@ -257,7 +258,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Beta v10"
+Write-Info "COREINSTALLER REF: Beta v11"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -325,7 +326,8 @@ If ($o_Version) {
     $githubDownloadURL = "https://github.com/Jax-Core/$o_InstallModule/releases/download/v$o_Version/$($o_InstallModule)_v$o_Version.rmskin"
     $githubDownloadOutpath = "$s_root\$($o_InstallModule)_v$o_Version.rmskin"
     Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
-    wget "$githubDownloadURL" -outfile "$githubDownloadOutpath"
+    $ProgressPreference = 'SilentlyContinue'
+    wget "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
     Write-Done
 } else {
     for (($i=0);($i -lt $o_InstallModule.Count);$i++) {
@@ -340,7 +342,8 @@ If ($o_Version) {
         $githubDownloadURL = "https://github.com/Jax-Core/$i_name/releases/download/v$latest_v/$($i_name)_v$latest_v.rmskin"
         $githubDownloadOutpath = "$s_root\$($i_name)_$latest_v.rmskin"
         Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
-        wget "$githubDownloadURL" -outfile "$githubDownloadOutpath"
+        $ProgressPreference = 'SilentlyContinue'
+        wget "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
         Write-Done
     }
 }
