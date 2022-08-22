@@ -499,8 +499,8 @@ Get-ChildItem "$s_unpacked\" -Directory | ForEach-Object {
                 Set-IniContent $newvars $i_targetlocation
             } else {
                 debug "Moving #$i $i_savelocation -> $i_targetlocation"
-                New-Item -Path "$(Split-Path $i_targetlocation)" -Type "Directory" | Out-Null
-                Copy-Item -Path "$i_savelocation" -Destination "$i_targetlocation" -Force | Out-Null
+                New-Item -Path "$(Split-Path $i_targetlocation)" -Type "Directory" -ErrorAction SilentlyContinue
+                Copy-Item -Path "$i_savelocation" -Destination "$i_targetlocation" -Force -ErrorAction SilentlyContinue
             }
         }
     } elseif ($skin_name -notcontains '#JaxCore') {
