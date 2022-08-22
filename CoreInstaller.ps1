@@ -152,54 +152,14 @@ function DownloadFile($url, $targetFile)
 }
 
 # ---------------------------------------------------------------------------- #
-#                             Start of installation                            #
+#                             Installation modules                             #
 # ---------------------------------------------------------------------------- #
 
-# ----------------------------------- Info ----------------------------------- #
-# $o - Option for installer
-# $s - Installer options set by developer
-# $o_InstallModule - Module to install
-# $o_Version - Version to get
-# $o_FromCore - If installation is invoked via JaxCore
-# $o_Force - Overwrite existing files
-# $o_PromptBestOption - Prompt for changing to best options
-# ------------------------------ Default values ------------------------------ #
-if (!($o_InstallModule)) {$o_InstallModule = "JaxCore"}
-if (!($o_FromCore)) {$o_FromCore = $false}
-if (!($o_Force)) {$o_Force = $false}
-if (!($o_PromptBestOption)) {
-    if ($o_FromCore -or $o_Force) {
-        $o_PromptBestOption = $false
-    } else {
-        $o_PromptBestOption = $true
-    }
+function Set-DPICompatability {
+    REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F
 }
-# ---------------------------- Installer variables --------------------------- #
-$s_InstallIsBatch = [bool]($o_InstallModule.Count -gt '1')
-$s_RMSettingsFolder = "$env:APPDATA\Rainmeter\"
-$s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
-$s_RMSkinFolder = "$env:APPDATA\JaxCore\InstalledComponents\"
-$s_rootFolderName = "JaxCoreCache"
-$s_root = "$env:temp\$s_rootFolderName"
-$s_unpacked = "$env:temp\$s_rootFolderName\Unpacked"
 
-function Set-DPICompatability {REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F}
-# ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v4.4"
-# --------------------------- Check if RM installed -------------------------- #
-Write-Task "Checking if Rainmeter is installed..."
-
-$RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
-$RMEXE64bitloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
-$RMEXE32bitloc = "${Env:ProgramFiles(x86)}\Rainmeter\Rainmeter.exe"
-
-Write-Done
-if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
-    # ------------------------------- RM installed ------------------------------- #
-    debug "Rainmeter is already installed on your device."
-    $wasRMInstalled = $true
-    If (Test-Path "$RMEXE32bitloc") {$RMEXEloc = "$RMEXE32bitloc"}
-    Set-DPICompatability
+function Prompt-UseHWA {
     If (Test-Path $s_RMINIFile) {
         $Ini = Get-IniContent $s_RMINIFile
         $s_RMSkinFolder = $Ini["Rainmeter"]["SkinPath"]
@@ -217,8 +177,9 @@ if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
         Read-Host
         Exit
     }
-} else {
-    $wasRMInstalled = $false
+}
+
+function Download-Rainmeter($params) {
     # ----------------------------------- Fetch ---------------------------------- #
     Write-Info "Rainmeter is not installed, installing Rainmeter"
     $githubRMReleaseAPIObject = Invoke-WebRequest -Uri 'https://api.github.com/repos/rainmeter/rainmeter/releases' -UseBasicParsing | ConvertFrom-Json
@@ -226,11 +187,12 @@ if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
     $githubRMDownloadOutpath = "$env:temp\RainmeterInstaller.exe"
     # --------------------------------- Download --------------------------------- #
     Write-Task "Downloading    "; Write-Emphasized $githubRMDownloadURL; Write-Task " -> "; Write-Emphasized $githubRMDownloadOutpath
-    wget "$githubRMDownloadURL" -outfile "$githubRMDownloadOutpath"
+    $ProgressPreference = 'SilentlyContinue'
+    wget "$githubRMDownloadURL" -outfile "$githubRMDownloadOutpath" -UseBasicParsing
     Write-Done
     # ------------------------------------ Run ----------------------------------- #
     Write-Task "Running installer..."
-    Start-Process -FilePath $githubRMDownloadOutpath -ArgumentList "/S /AUTOSTARTUP=1 /RESTART=0" -Wait
+    Start-Process -FilePath $githubRMDownloadOutpath -ArgumentList "$params" -Wait
     Write-Done
     # ---------------------------- Check if installed ---------------------------- #
     Write-Task "Checking "; Write-Emphasized "$RMEXEloc"; Write-Task " for Rainmeter.exe"
@@ -243,7 +205,7 @@ if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
     }
     # --------------------------------- Generate --------------------------------- #
     Write-Task "Generating "; Write-Emphasized "Rainmeter.ini "; Write-Task "for the first time..."
-    New-Item -Path "$env:APPDATA\Rainmeter" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
+    New-Item -Path "$s_RMSettingsFolder" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
 [Rainmeter]
 Logging=0
 SkinPath=$s_RMSkinFolder
@@ -260,7 +222,95 @@ Active=0
     Write-Done
 }
 
-# -------------------------------- Create root ------------------------------- #
+# ---------------------------------------------------------------------------- #
+#                             Start of installation                            #
+# ---------------------------------------------------------------------------- #
+
+# ----------------------------------- Info ----------------------------------- #
+# $o - Option for installer
+# $s - Installer options set by developer
+# $o_InstallModule - Module to install
+## $o_Version - Version to get
+# $o_FromCore - If installation is invoked via JaxCore
+# $o_Force - Overwrite existing files
+# $o_PromptBestOption - Prompt for changing to best options
+## $o_Location - Where to install Core, or where the Rainmeter folder is 
+# ------------------------------ Default values ------------------------------ #
+if (!($o_InstallModule)) {$o_InstallModule = "JaxCore"}
+if (!($o_FromCore)) {$o_FromCore = $false}
+if (!($o_Force)) {$o_Force = $false}
+if (!($o_PromptBestOption)) {
+    if ($o_FromCore -or $o_Force) {
+        $o_PromptBestOption = $false
+    } else {
+        $o_PromptBestOption = $true
+    }
+}
+# ---------------------------- Installer variables --------------------------- #
+$s_InstallIsBatch = [bool]($o_InstallModule.Count -gt '1')
+$s_rootFolderName = "JaxCoreCache"
+$s_root = "$env:temp\$s_rootFolderName"
+$s_unpacked = "$env:temp\$s_rootFolderName\Unpacked"
+# Declare global scope installer variables
+
+$s_RMSettingsFolder = ""
+$s_RMINIFile = ""
+$s_RMSkinFolder = ""
+$RMEXEloc = ""
+# ----------------------------------- Start ---------------------------------- #
+Write-Info "COREINSTALLER REF: Stable v5"
+
+if (!($o_Location)) {
+    # ---------------------------------------------------------------------------- #
+    #                             Standard installation                            #
+    # ---------------------------------------------------------------------------- #
+    # ---------------------------- Installer variables --------------------------- #
+    $s_RMSettingsFolder = "$env:APPDATA\Rainmeter\"
+    $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
+    $s_RMSkinFolder = "$env:APPDATA\JaxCore\InstalledComponents\"
+    # --------------------------- Check if RM installed -------------------------- #
+    Write-Task "Checking if Rainmeter is installed..."
+
+    $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
+    $RMEXE64bitloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
+    $RMEXE32bitloc = "${Env:ProgramFiles(x86)}\Rainmeter\Rainmeter.exe"
+
+    Write-Done
+    if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
+        # ------------------------------- RM installed ------------------------------- #
+        debug "Rainmeter is already installed on your device."
+        $wasRMInstalled = $true
+        If (Test-Path "$RMEXE32bitloc") {$RMEXEloc = "$RMEXE32bitloc"}
+        Prompt-UseHWA
+    } else {
+        $wasRMInstalled = $false
+        Download-Rainmeter "/S /AUTOSTARTUP=1 /RESTART=0"
+    }
+} else {
+    # ---------------------------------------------------------------------------- #
+    #                             Portable installation                            #
+    # ---------------------------------------------------------------------------- #
+    # ---------------------------- Installer variables --------------------------- #
+    $s_RMSettingsFolder = "$o_Location\Rainmeter\"
+    $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
+    $s_RMSkinFolder = "$o_Location\JaxCore\InstalledComponents\"
+    $RMEXEloc = "$s_RMSettingsFolder\Rainmeter.exe"
+    # ------- Check if Rainmeter is already installed at provided location ------- #
+    If (!(Test-Path "$o_Location\Rainmeter\Rainmeter.exe")) {
+        Write-Task "Are you sure you want to install JaxCore at "; Write-Emphasized $o_Location
+        $confirmation = Read-Host "? (y/n)"
+        if ($confirmation -match '^y$') {
+            Download-Rainmeter "/S /RESTART=0 /PORTABLE=1 /D=$s_RMSettingsFolder"
+        } else {
+            Write-Fail "Action cancelled. Installation terminated."
+            Return
+        }
+    }
+}
+
+# ---------------------------------------------------------------------------- #
+#                               Core installation                              #
+# ---------------------------------------------------------------------------- #
 New-Item -Path $s_root -Type "Directory" -Force | Out-Null
 Get-Item $s_root -Force | foreach { $_.Attributes = $_.Attributes -bor "Hidden" }
 Get-ChildItem "$s_root" | ForEach-Object {
@@ -271,7 +321,8 @@ If ($o_Version) {
     $githubDownloadURL = "https://github.com/Jax-Core/$o_InstallModule/releases/download/v$o_Version/$($o_InstallModule)_v$o_Version.rmskin"
     $githubDownloadOutpath = "$s_root\$($o_InstallModule)_v$o_Version.rmskin"
     Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
-    wget "$githubDownloadURL" -outfile "$githubDownloadOutpath"
+    $ProgressPreference = 'SilentlyContinue'
+    wget "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
     Write-Done
 } else {
     for (($i=0);($i -lt $o_InstallModule.Count);$i++) {
@@ -286,7 +337,8 @@ If ($o_Version) {
         $githubDownloadURL = "https://github.com/Jax-Core/$i_name/releases/download/v$latest_v/$($i_name)_v$latest_v.rmskin"
         $githubDownloadOutpath = "$s_root\$($i_name)_$latest_v.rmskin"
         Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
-        wget "$githubDownloadURL" -outfile "$githubDownloadOutpath"
+        $ProgressPreference = 'SilentlyContinue'
+        wget "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
         Write-Done
     }
 }
@@ -501,9 +553,9 @@ Start-Sleep -Milliseconds 500
 If ($isInstallingCore) {
     If (-not $wasRMInstalled) {
         Stop-Process -Name 'Rainmeter'
-        $Ini = Get-IniContent "$env:APPDATA\Rainmeter\Rainmeter.ini"
+        $Ini = Get-IniContent "$($s_RMSettingsFolder)Rainmeter.ini"
         $Ini["Rainmeter"]["SkinPath"] = "$s_RMSkinFolder"
-        Set-IniContent $Ini "$env:APPDATA\Rainmeter\Rainmeter.ini"
+        Set-IniContent $Ini "$($s_RMSettingsFolder)Rainmeter.ini"
         Start-Process "$RMEXEloc"
         Wait-ForProcess 'Rainmeter'
         Start-Sleep -Milliseconds 500
