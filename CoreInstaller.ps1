@@ -159,26 +159,6 @@ function Set-DPICompatability {
     REG ADD "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /V "$RMEXEloc" /T REG_SZ /D ~HIGHDPIAWARE /F
 }
 
-function Prompt-UseHWA {
-    If (Test-Path $s_RMINIFile) {
-        $Ini = Get-IniContent $s_RMINIFile
-        $s_RMSkinFolder = $Ini["Rainmeter"]["SkinPath"]
-        $hwa = $Ini["Rainmeter"]["HardwareAcceleration"]
-        if (($hwa -eq 0) -and ($o_PromptBestOption -eq $true)) {
-            Write-Info "JaxCore recommends that the HardwareAcceleration option for Rainmeter to be turned on. "
-            $confirmation = Read-Host "Turn on? (y/n)"
-            if ($confirmation -match '^y$') {
-                $Ini["Rainmeter"]["HardwareAcceleration"] = "1"
-                Set-IniContent $Ini $s_RMINIFile
-            }
-        }
-    } else {
-        Write-Fail "Seems like you have Rainmeter installed but haven't ran it once on this account. Please do so and try again."
-        Read-Host
-        Exit
-    }
-}
-
 function Download-Rainmeter($params) {
     # ----------------------------------- Fetch ---------------------------------- #
     Write-Info "Rainmeter is not installed, installing Rainmeter"
@@ -281,7 +261,23 @@ if (!($o_Location)) {
         debug "Rainmeter is already installed on your device."
         $wasRMInstalled = $true
         If (Test-Path "$RMEXE32bitloc") {$RMEXEloc = "$RMEXE32bitloc"}
-        Prompt-UseHWA
+        If (Test-Path $s_RMINIFile) {
+            $Ini = Get-IniContent $s_RMINIFile
+            $s_RMSkinFolder = $Ini["Rainmeter"]["SkinPath"]
+            $hwa = $Ini["Rainmeter"]["HardwareAcceleration"]
+            if (($hwa -eq 0) -and ($o_PromptBestOption -eq $true)) {
+                Write-Info "JaxCore recommends that the HardwareAcceleration option for Rainmeter to be turned on. "
+                $confirmation = Read-Host "Turn on? (y/n)"
+                if ($confirmation -match '^y$') {
+                    $Ini["Rainmeter"]["HardwareAcceleration"] = "1"
+                    Set-IniContent $Ini $s_RMINIFile
+                }
+            }
+        } else {
+            Write-Fail "Seems like you have Rainmeter installed but haven't ran it once on this account. Please do so and try again."
+            Read-Host
+            Exit
+        }
     } else {
         $wasRMInstalled = $false
         Download-Rainmeter "/S /AUTOSTARTUP=1 /RESTART=0"
