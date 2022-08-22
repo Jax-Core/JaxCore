@@ -238,7 +238,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v5"
+Write-Info "COREINSTALLER REF: Stable v5.1"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -369,12 +369,10 @@ Get-Process -Id $rmprocess_id | Foreach {
 }
 Write-Done
 # -------------------------- Stop running instances -------------------------- #
+If (!(Test-Path $s_RMSkinFolder)) {New-Item -Path $s_RMSkinFolder -Type "Directory" | Out-Null}
+[System.IO.Directory]::SetCurrentDirectory($s_RMSkinFolder)
+
 If (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
-    # Write-Task "Ending running child processes of Rainmeter"
-    # $process = Get-Process 'Rainmeter'
-    # $ppid = $process.Id
-    # Get-CimInstance Win32_Process | Where-Object { $_.ParentProcessId -eq $ppid } | ForEach-Object { Stop-Process $_.ProcessId }
-    # Write-Done
     Write-Task "Ending Rainmeter & potential AHKv1 process"
     Stop-Process -Name 'Rainmeter'
     If (Get-Process 'AHKv1' -ErrorAction SilentlyContinue) {
@@ -394,8 +392,6 @@ debug "-----------------"
 
 $isInstallingCore = $false
 [System.Collections.ArrayList]$list_of_installations = @()
-If (!(Test-Path $s_RMSkinFolder)) {New-Item -Path $s_RMSkinFolder -Type "Directory" | Out-Null}
-[System.IO.Directory]::SetCurrentDirectory($s_RMSkinFolder)
 
 Get-ChildItem "$s_unpacked\" -Directory | ForEach-Object {
     $i_root = "$s_unpacked\$($_.Name)"
