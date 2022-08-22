@@ -291,49 +291,41 @@ MeterStyle=Set.String:S | Set.Value:S
 [Set.Pri_Color]
 Meter=Shape
 MeterStyle=Set.Color:S
-LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 Y=([Option13:Y]-#Set.P#+(-30/2+8)*[Set.S])
 
 [Set.Sec_Color]
 Meter=Shape
 MeterStyle=Set.Color:S
-LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 Y=([Option14:Y]-#Set.P#+(-30/2+8)*[Set.S])
 
 [Set.Ter_Color]
 Meter=Shape
 MeterStyle=Set.Color:S
-LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 Y=([Option15:Y]-#Set.P#+(-30/2+8)*[Set.S])
 
 [Set.Accent_Color]
 Meter=Shape
 MeterStyle=Set.Color:S
-LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 Y=([Option16:Y]-#Set.P#+(-30/2+8)*[Set.S])
 
 [Set.Accent_Color_2]
 Meter=Shape
 MeterStyle=Set.Color:S
-LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 Y=([Option17:Y]-#Set.P#+(-30/2+8)*[Set.S])
 
 [Set.Text_Color]
 Meter=Shape
 MeterStyle=Set.Color:S
-LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 Y=([Option18:Y]-#Set.P#+(-30/2+8)*[Set.S])
 
 [Set.SubText_Color]
 Meter=Shape
 MeterStyle=Set.Color:S
-LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 Y=([Option19:Y]-#Set.P#+(-30/2+8)*[Set.S])
 
 [Set.Positive_Color]
 Meter=Shape
 MeterStyle=Set.Color:S
-LeftMouseUpAction=["#@#Addons\RainRGB4.exe" "VarName=#CURRENTSECTION#" "FileName=#Sec.SaveLocation#" "RefreshConfig=#CURRENTCONFIG# | #Skin.Name#\Main"]
 Y=([Option20:Y]-#Set.P#+(-30/2+8)*[Set.S])
 
 
