@@ -292,10 +292,27 @@ if (!($o_Location)) {
     $s_RMSkinFolder = "$o_Location\JaxCore\InstalledComponents\"
     $RMEXEloc = "$s_RMSettingsFolder\Rainmeter.exe"
     # ------- Check if Rainmeter is already installed at provided location ------- #
-    If (!(Test-Path "$o_Location\Rainmeter\Rainmeter.exe")) {
+    If (Test-Path "$o_Location\Rainmeter\Rainmeter.exe") {
+        Write-Task "Rainmeter is already installed under "; Write-Emphasized "$o_Location\Rainmeter"
+        $wasRMInstalled = $true
+        If (Test-Path $s_RMINIFile) {
+            $Ini = Get-IniContent $s_RMINIFile
+            $s_RMSkinFolder = $Ini["Rainmeter"]["SkinPath"]
+            $hwa = $Ini["Rainmeter"]["HardwareAcceleration"]
+            if (($hwa -eq 0) -and ($o_PromptBestOption -eq $true)) {
+                Write-Info "JaxCore recommends that the HardwareAcceleration option for Rainmeter to be turned on. "
+                $confirmation = Read-Host "Turn on? (y/n)"
+                if ($confirmation -match '^y$') {
+                    $Ini["Rainmeter"]["HardwareAcceleration"] = "1"
+                    Set-IniContent $Ini $s_RMINIFile
+                }
+            }
+        }
+    } else {
         Write-Task "Are you sure you want to install JaxCore at "; Write-Emphasized $o_Location
         $confirmation = Read-Host "? (y/n)"
         if ($confirmation -match '^y$') {
+            $wasRMInstalled = $false
             Download-Rainmeter "/S /RESTART=0 /PORTABLE=1 /D=$s_RMSettingsFolder"
         } else {
             Write-Fail "Action cancelled. Installation terminated."
