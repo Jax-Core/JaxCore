@@ -43,10 +43,9 @@ Run the following command in Powershell to install the latest version of JaxCore
 (To launch Powershell as an Admin: `Win + R` -> `powershell` -> Press `CTRL + SHIFT + ENTER` on your keyboard. Powershell can also be launched via Windows Search.)
 
 ```
-Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/Jax-Core/JaxCore/master/CoreInstaller.ps1" | Invoke-Expression
+iwr -useb "https://raw.githubusercontent.com/Jax-Core/JaxCore/master/CoreInstaller.ps1" | iex
 ```
-
-> Alternatively, you can download it from the [JaxCore website](https://jax-core.github.io/).
+For other methods or changing install location, check out the [FAQs](https://jaxcore.gitbook.io/core/getting-started/faqs/jaxcore-faqs#installation)
 <br />
 <br />
 
