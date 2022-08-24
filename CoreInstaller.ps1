@@ -293,7 +293,7 @@ if (!($o_Location)) {
     $RMEXEloc = "$s_RMSettingsFolder\Rainmeter.exe"
     # ------- Check if Rainmeter is already installed at provided location ------- #
     If (Test-Path "$o_Location\Rainmeter\Rainmeter.exe") {
-        Write-Task "Rainmeter is already installed under "; Write-Emphasized "$o_Location\Rainmeter"
+        Write-Task "Rainmeter is already installed under "; Write-Emphasized "$o_Location\Rainmeter";
         $wasRMInstalled = $true
         If (Test-Path $s_RMINIFile) {
             $Ini = Get-IniContent $s_RMINIFile
@@ -525,7 +525,11 @@ Get-ChildItem "$s_unpacked\" -Directory | ForEach-Object {
             $scale = $sah / 1080
         }
         debug "Scale is $scale"
-        if (!($scale -eq 1)) {
+        if ($scale -eq 1) {
+            debug "Scale unchanged."
+        } elseif ($scale -eq 0) {
+            Write-Fail "Seems ike the installer is unable to identify the correct screen sizes. Skipping scaling writing."
+        } else {
             $varsfile = "$s_RMSkinFolder\$skin_name\@Resources\Vars.inc"
             If (Test-Path $varsfile) {
                 debug "Vars.inc found."
@@ -548,8 +552,6 @@ Get-ChildItem "$s_unpacked\" -Directory | ForEach-Object {
                     }
                 }
             }
-        } else {
-            debug "Scale unchanged."
         }
     }
     debug "> Finished installation of $skin_name"
