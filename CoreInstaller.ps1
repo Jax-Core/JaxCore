@@ -564,14 +564,30 @@ Start-Sleep -Milliseconds 500
 If ($isInstallingCore) {
     If (-not $wasRMInstalled) {
         Stop-Process -Name 'Rainmeter'
-        $Ini = Get-IniContent "$($s_RMSettingsFolder)Rainmeter.ini"
-        $Ini["Rainmeter"]["SkinPath"] = "$s_RMSkinFolder"
-        Set-IniContent $Ini "$($s_RMSettingsFolder)Rainmeter.ini"
+        Remove-Item -Path "$($s_RMSettingsFolder)Rainmeter.ini"
+        New-Item -Path "$s_RMSettingsFolder" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
+[Rainmeter]
+Logging=0
+SkinPath=$s_RMSkinFolder
+HardwareAcceleration=1
+
+[illustro\Clock]
+Active=0
+[illustro\Disk]
+Active=0
+[illustro\System]
+Active=0
+
+[$skin_load_path]
+Active=1
+
+"@
         Start-Process "$RMEXEloc"
         Wait-ForProcess 'Rainmeter'
         Start-Sleep -Milliseconds 500
+    } else {
+        & "$RMEXEloc" [!ActivateConfig $skin_load_path]
     }
-    & "$RMEXEloc" [!ActivateConfig $skin_load_path]
 } else {
     $dlcINCFile = "$s_RMSkinFolder\..\CoreData\@DLCs\InstalledDLCs.inc"
     If (!(Test-Path $dlcINCFile)) {
