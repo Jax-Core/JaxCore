@@ -240,7 +240,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Beta v12"
+Write-Info "COREINSTALLER REF: Beta v13"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -324,41 +324,6 @@ if (!($o_Location)) {
 }
 
 # ---------------------------------------------------------------------------- #
-#                                   Download                                   #
-# ---------------------------------------------------------------------------- #
-New-Item -Path $s_root -Type "Directory" -Force | Out-Null
-Get-Item $s_root -Force | foreach { $_.Attributes = $_.Attributes -bor "Hidden" }
-Get-ChildItem "$s_root" | ForEach-Object {
-    Remove-Item $_.FullName -Force -Recurse
-}
-# ------------------------------ Download files ------------------------------ #
-If ($o_Version) {
-    $githubDownloadURL = "https://github.com/Jax-Core/$o_InstallModule/releases/download/v$o_Version/$($o_InstallModule)_v$o_Version.rmskin"
-    $githubDownloadOutpath = "$s_root\$($o_InstallModule)_v$o_Version.rmskin"
-    Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
-    $ProgressPreference = 'SilentlyContinue'
-    wget "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
-    Write-Done
-} else {
-    for (($i=0);($i -lt $o_InstallModule.Count);$i++) {
-        If ($o_InstallModule.Count -eq 1) {$i_name = $o_InstallModule} else {$i_name = $o_InstallModule[$i]}
-        $response = Invoke-WebRequest "https://raw.githubusercontent.com/Jax-Core/$i_name/main/%40Resources/Version.inc" -UseBasicParsing
-        $responseBytes = $response.RawContentStream.ToArray()
-        if ([System.Text.Encoding]::Unicode.GetString($responseBytes) -match 'Version=(.+)') {
-            $latest_v = $matches[1]
-        } elseif ([System.Text.Encoding]::Unicode.GetString($responseBytes) -match 'Core\.Ver=(.+)') {
-            $latest_v = $matches[1]
-        }
-        $githubDownloadURL = "https://github.com/Jax-Core/$i_name/releases/download/v$latest_v/$($i_name)_v$latest_v.rmskin"
-        $githubDownloadOutpath = "$s_root\$($i_name)_$latest_v.rmskin"
-        Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
-        $ProgressPreference = 'SilentlyContinue'
-        wget "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
-        Write-Done
-    }
-}
-
-# ---------------------------------------------------------------------------- #
 #                      Getting info from Rainmeter process                     #
 # ---------------------------------------------------------------------------- #
 If (!(Get-Process 'Rainmeter' -ErrorAction SilentlyContinue)) {
@@ -397,6 +362,45 @@ If (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
     Write-Done
 }
 
+
+# ---------------------------------------------------------------------------- #
+#                                   Download                                   #
+# ---------------------------------------------------------------------------- #
+New-Item -Path $s_root -Type "Directory" -Force | Out-Null
+Get-Item $s_root -Force | foreach { $_.Attributes = $_.Attributes -bor "Hidden" }
+Get-ChildItem "$s_root" | ForEach-Object {
+    Remove-Item $_.FullName -Force -Recurse
+}
+# ------------------------------ Download files ------------------------------ #
+If ($o_Version) {
+    $githubDownloadURL = "https://github.com/Jax-Core/$o_InstallModule/releases/download/v$o_Version/$($o_InstallModule)_v$o_Version.rmskin"
+    $githubDownloadOutpath = "$s_root\$($o_InstallModule)_v$o_Version.rmskin"
+    Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
+    $ProgressPreference = 'SilentlyContinue'
+    wget "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
+    Write-Done
+} else {
+    for (($i=0);($i -lt $o_InstallModule.Count);$i++) {
+        If ($o_InstallModule.Count -eq 1) {$i_name = $o_InstallModule} else {$i_name = $o_InstallModule[$i]}
+        $response = Invoke-WebRequest "https://raw.githubusercontent.com/Jax-Core/$i_name/main/%40Resources/Version.inc" -UseBasicParsing
+        $responseBytes = $response.RawContentStream.ToArray()
+        if ([System.Text.Encoding]::Unicode.GetString($responseBytes) -match 'Version=(.+)') {
+            $latest_v = $matches[1]
+        } elseif ([System.Text.Encoding]::Unicode.GetString($responseBytes) -match 'Core\.Ver=(.+)') {
+            $latest_v = $matches[1]
+        }
+        $githubDownloadURL = "https://github.com/Jax-Core/$i_name/releases/download/v$latest_v/$($i_name)_v$latest_v.rmskin"
+        $githubDownloadOutpath = "$s_root\$($i_name)_$latest_v.rmskin"
+        Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
+        $ProgressPreference = 'SilentlyContinue'
+        wget "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
+        Write-Done
+    }
+}
+
+# ---------------------------------------------------------------------------- #
+#                                 Installation                                 #
+# ---------------------------------------------------------------------------- #
 If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     # ---------------------------------------------------------------------------- #
     #                          RMSKIN legacy installation                          #
