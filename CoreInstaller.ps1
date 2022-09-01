@@ -240,7 +240,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v5.2"
+Write-Info "COREINSTALLER REF: Stable v5.21"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -431,9 +431,9 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     # ------------------------------- Extract file ------------------------------- #
     Get-ChildItem $s_root -File | ForEach-Object {
         $i_name = $($_.Name -replace '\.rmskin', '')
-        Rename-Item "$s_root\$($_.Name)" -NewName "$i_name.zip"
+        Rename-Item -LiteralPath "$s_root\$($_.Name)" -NewName "$i_name.zip"
         Write-Task "Exapnding downloaded archive    "; Write-Emphasized "$s_root\$i_name.zip"; Write-Task " -> "; Write-Emphasized "$s_root\Unpacked\$i_name\"
-        Expand-Archive -Path "$s_root\$i_name.zip" -DestinationPath "$s_unpacked\$i_name\" -Force
+        Expand-Archive -LiteralPath "$s_root\$i_name.zip" -DestinationPath "$s_unpacked\$i_name\" -Force
         Write-Done
     }
     # ---------------------------- Start installation ---------------------------- #
