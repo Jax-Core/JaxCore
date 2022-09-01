@@ -23,6 +23,9 @@
   <img alt="Github" src="https://img.shields.io/github/license/Jax-Core/JaxCore?style=for-the-badge" />
 </p><!-- END ShieldsFull.mustache -->
 
+## Screenshots 🖼️
+You can check out what you're desktop can look like [here](https://github.com/Jax-Core/YourMixer/blob/main/Screenshots.md)!
+
 ## About 👀
 
 ![GithubBanner](https://user-images.githubusercontent.com/80020581/173227081-761ae822-6c83-4a10-9093-a3117c2cffd7.png)
