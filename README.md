@@ -31,9 +31,6 @@ JaxCore is a collection of utility modules designed to improve your desktop expe
 
 JaxCore (configuration hub) acts as a settings menu for all JaxCore modules, while providing continuous support for patch / feature updates. It also allows you to access other modules more quickly!
 
-## Screenshots 🖼️
-You can check out what you're desktop can look like [here](https://github.com/Jax-Core/JaxCore/blob/main/Screenshots.md)!
-
 ## Prerequisites 🖥️
 - **Windows 10** or above
 - > 6GB RAM, > 4 Core CPU
