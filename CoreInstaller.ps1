@@ -176,7 +176,7 @@ function Download-Rainmeter($params) {
     Write-Done
     # ---------------------------- Check if installed ---------------------------- #
     Write-Task "Checking "; Write-Emphasized "$RMEXEloc"; Write-Task " for Rainmeter.exe"
-    If (Test-Path -LiteralPath "$RMEXEloc") {
+    If (Test-Path -Path "$RMEXEloc") {
         Write-Done
         Set-DPICompatability
     } else {
@@ -185,7 +185,7 @@ function Download-Rainmeter($params) {
     }
     # --------------------------------- Generate --------------------------------- #
     Write-Task "Generating "; Write-Emphasized "Rainmeter.ini "; Write-Task "for the first time..."
-    New-Item -LiteralPath "$s_RMSettingsFolder" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
+    New-Item -Path "$s_RMSettingsFolder" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
 [Rainmeter]
 Logging=0
 SkinPath=$s_RMSkinFolder
@@ -240,7 +240,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v5.3"
+Write-Info "COREINSTALLER REF: Stable v5.2"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -350,7 +350,7 @@ Get-Process -Id $rmprocess_id | Foreach {
 }
 Write-Done
 # -------------------------- Stop running instances -------------------------- #
-If (!(Test-Path $s_RMSkinFolder)) {New-Item -LiteralPath $s_RMSkinFolder -Type "Directory" | Out-Null}
+If (!(Test-Path $s_RMSkinFolder)) {New-Item -Path $s_RMSkinFolder -Type "Directory" | Out-Null}
 [System.IO.Directory]::SetCurrentDirectory($s_RMSkinFolder)
 
 If (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
@@ -366,10 +366,10 @@ If (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
 # ---------------------------------------------------------------------------- #
 #                                   Download                                   #
 # ---------------------------------------------------------------------------- #
-New-Item -LiteralPath $s_root -Type "Directory" -Force | Out-Null
-Get-Item -LiteralPath $s_root -Force | foreach { $_.Attributes = $_.Attributes -bor "Hidden" }
-Get-ChildItem -LiteralPath "$s_root" | ForEach-Object {
-    Remove-Item -LiteralPath $_.FullName -Force -Recurse
+New-Item -Path $s_root -Type "Directory" -Force | Out-Null
+Get-Item $s_root -Force | foreach { $_.Attributes = $_.Attributes -bor "Hidden" }
+Get-ChildItem "$s_root" | ForEach-Object {
+    Remove-Item $_.FullName -Force -Recurse
 }
 # ------------------------------ Download files ------------------------------ #
 If ($o_Version) {
@@ -407,8 +407,8 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     # ---------------------------------------------------------------------------- #
     # ---------------------------------- RMSKIN ---------------------------------- #
     Write-Task "Running .rmskin to install (specified)"
-    Get-ChildItem -LiteralPath $s_root -File | ForEach-Object {
-        Invoke-Item -LiteralPath $_.FullName
+    Get-ChildItem $s_root -File | ForEach-Object {
+        Invoke-Item $_.FullName
     }
     Write-Done
     Write-Task "Interacting with installer UI"
@@ -429,11 +429,11 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     #                       Standard extraction installation                       #
     # ---------------------------------------------------------------------------- #
     # ------------------------------- Extract file ------------------------------- #
-    Get-ChildItem -LiteralPath $s_root -File | ForEach-Object {
+    Get-ChildItem $s_root -File | ForEach-Object {
         $i_name = $($_.Name -replace '\.rmskin', '')
-        Rename-Item -LiteralPath "$s_root\$($_.Name)" -NewName "$i_name.zip"
+        Rename-Item "$s_root\$($_.Name)" -NewName "$i_name.zip"
         Write-Task "Exapnding downloaded archive    "; Write-Emphasized "$s_root\$i_name.zip"; Write-Task " -> "; Write-Emphasized "$s_root\Unpacked\$i_name\"
-        Expand-Archive -LiteralPath "$s_root\$i_name.zip" -DestinationPath "$s_unpacked\$i_name\" -Force
+        Expand-Archive -Path "$s_root\$i_name.zip" -DestinationPath "$s_unpacked\$i_name\" -Force
         Write-Done
     }
     # ---------------------------- Start installation ---------------------------- #
@@ -449,7 +449,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     $isInstallingCore = $false
     [System.Collections.ArrayList]$list_of_installations = @()
 
-    Get-ChildItem -LiteralPath "$s_unpacked\" -Directory | ForEach-Object {
+    Get-ChildItem "$s_unpacked\" -Directory | ForEach-Object {
         $i_root = "$s_unpacked\$($_.Name)"
         
         If (!(Test-Path "$i_root\RMSKIN.ini")) {
@@ -461,7 +461,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
 
         # ------------------------------ Read RMSKIN.ini ----------------------------- #
         $Ini = Get-IniContent "$i_root\RMSKIN.ini"
-        $skin_name = (Get-ChildItem -LiteralPath "$i_root\Skins\" | Select-Object -First 1).Name
+        $skin_name = (Get-ChildItem -Path "$i_root\Skins\" | Select-Object -First 1).Name
         $skin_auth = $Ini["rmskin"]["Author"]
         $skin_ver = $Ini["rmskin"]["Version"]
         $skin_varf = $Ini["rmskin"]["VariableFiles"]
@@ -487,14 +487,14 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             if ($confirmation -match '^y$') {
                 debug "> Saving variable files"
                 $skin_varf = $skin_varf -split '\s\|\s'
-                If (Test-Path "$i_root\Unpacked\$i_name\") { Remove-Item -LiteralPath "$i_root\SavedVarFiles" -Force -Recurse | Out-Null }
-                New-Item -LiteralPath "$i_root\SavedVarFiles" -Type "Directory" | Out-Null
+                If (Test-Path "$i_root\Unpacked\$i_name\") { Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse | Out-Null }
+                New-Item -Path "$i_root\SavedVarFiles" -Type "Directory" | Out-Null
                 for ($i=0; $i -lt $skin_varf.Count; $i++) {
                     $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $skin_varf[$i])"
                     $i_savelocation = "$i_root\SavedVarFiles\$($skin_varf[$i])"
                     debug "Saving #$i $($skin_varf[$i]) -> $i_savelocation"
-                    If (!(Test-Path "$i_savedir")) { New-Item -LiteralPath "$i_savedir" -Type "Directory" | Out-Null }
-                    Copy-Item -LiteralPath "$s_RMSkinFolder\$($skin_varf[$i])" -Destination "$i_savelocation" -Force | Out-Null
+                    If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" | Out-Null }
+                    Copy-Item -Path "$s_RMSkinFolder\$($skin_varf[$i])" -Destination "$i_savelocation" -Force | Out-Null
                 }
             } else {
                 debug "> Not saving variable files"
@@ -506,21 +506,21 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
         # ---------------------------------- Process --------------------------------- #
         debug "> Moving skin files"
         If ($new_install) {
-            New-Item -LiteralPath "$s_RMSkinFolder\$skin_name\" -Type "Directory" -Force | Out-Null
+            New-Item -Path "$s_RMSkinFolder\$skin_name\" -Type "Directory" -Force | Out-Null
         } else {
-            Get-ChildItem -LiteralPath "$s_RMSkinFolder\$skin_name\" -Recurse | Remove-Item -Recurse
+            Get-ChildItem -Path "$s_RMSkinFolder\$skin_name\" -Recurse | Remove-Item -Recurse
         }
-        Move-Item -LiteralPath "$i_root\Skins\$skin_name\*" -Destination "$s_RMSkinFolder\$skin_name\" -Force
+        Move-Item -Path "$i_root\Skins\$skin_name\*" -Destination "$s_RMSkinFolder\$skin_name\" -Force
         If (Test-Path "$i_root\Plugins\") {
             debug "> Moving / replacing plugins"
             $i_targetlocation = "$($s_RMSettingsFolder)\Plugins\"
-            If (!(Test-Path "$i_targetlocation\")) { New-Item -LiteralPath "$i_targetlocation" -Type "Directory" -Force }
-            Get-ChildItem -LiteralPath "$i_root\Plugins\$bit" | ForEach-Object {
+            If (!(Test-Path "$i_targetlocation\")) { New-Item -Path "$i_targetlocation" -Type "Directory" -Force }
+            Get-ChildItem "$i_root\Plugins\$bit" | ForEach-Object {
                 $i_plugin = $_.Name
                 $i_pluginlocation = "$i_root\Plugins\$bit\$i_plugin"
                 debug "Moving `"$i_plugin`" -> `"$i_pluginlocation`""
                 If (Test-Path "$i_targetlocation\$i_plugin") { Remove-Item "$i_targetlocation\$i_plugin" -Force }
-                Copy-Item -LiteralPath "$i_pluginlocation" -Destination "$i_targetlocation" -Force
+                Copy-Item -Path "$i_pluginlocation" -Destination "$i_targetlocation" -Force
             }
         } else {
             debug "> Skipping plugin installation (none)"
@@ -547,8 +547,8 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                     Set-IniContent $newvars $i_targetlocation
                 } else {
                     debug "Moving #$i $i_savelocation -> $i_targetlocation"
-                    New-Item -LiteralPath "$(Split-Path $i_targetlocation)" -Type "Directory" -ErrorAction SilentlyContinue
-                    Copy-Item -LiteralPath "$i_savelocation" -Destination "$i_targetlocation" -Force -ErrorAction SilentlyContinue
+                    New-Item -Path "$(Split-Path $i_targetlocation)" -Type "Directory" -ErrorAction SilentlyContinue
+                    Copy-Item -Path "$i_savelocation" -Destination "$i_targetlocation" -Force -ErrorAction SilentlyContinue
                 }
             }
         } elseif ($skin_name -notcontains '#JaxCore') {
@@ -581,7 +581,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                 $othervarfiles = "$s_RMSkinFolder\$skin_name\Main\Vars\"
                 If (Test-Path "$othervarfiles") {
                     debug "Found other variable files"
-                    Get-ChildItem -LiteralPath "$othervarfiles" -File | ForEach-Object {
+                    Get-ChildItem "$othervarfiles" -File | ForEach-Object {
                         $i_file = "$othervarfiles\$($_.Name)"
                         $Ini = Get-IniContent $i_file
                         If ([bool]$Ini["Variables"]["Scale"]) {
@@ -604,8 +604,8 @@ Start-Sleep -Milliseconds 500
 If ($isInstallingCore) {
     If (-not $wasRMInstalled) {
         Stop-Process -Name 'Rainmeter'
-        Remove-Item -LiteralPath "$($s_RMSettingsFolder)Rainmeter.ini"
-        New-Item -LiteralPath "$s_RMSettingsFolder" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
+        Remove-Item -Path "$($s_RMSettingsFolder)Rainmeter.ini"
+        New-Item -Path "$s_RMSettingsFolder" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
 [Rainmeter]
 Logging=0
 SkinPath=$s_RMSkinFolder
@@ -664,5 +664,5 @@ Active=1
     }
 }
 
-Get-ChildItem -LiteralPath "$s_root\" -Recurse | Remove-Item -Recurse
+Get-ChildItem -Path "$s_root\" -Recurse | Remove-Item -Recurse
 Exit
