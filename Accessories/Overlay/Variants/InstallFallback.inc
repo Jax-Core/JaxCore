@@ -4,6 +4,7 @@ Update=-1
 
 [Variables]
 @includeVars=#@#Vars.inc
+@includeSkinVars=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 Sec.P=20
 Sec.ResultSize=30
 Process.Result_Count=0
@@ -11,10 +12,12 @@ Process.Result_Count=0
 [mActions]
 Measure=Plugin
 Plugin=ActionTimer
-ActionList1=Custom0
+ActionList1=Wait 200 | StartInput
 ActionList2=Deactivate
 ActionList3=Deactivate
-Custom0=
+StartInput=[!CommandMeasure p.InputText "ExecuteBatch 1"]
+Start0=[!CommandMeasure mTween "Start(0)"]
+Rewind0=[!CommandMeasure mTween "Rewind(0)"]
 Deactivate=[!DeactivateConfig]
 DynamicVariables=1
 
