@@ -240,7 +240,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Beta v14"
+Write-Info "COREINSTALLER REF: Beta v13"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -355,9 +355,7 @@ If (!(Test-Path $s_RMSkinFolder)) {New-Item -Path $s_RMSkinFolder -Type "Directo
 
 If (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
     Write-Task "Ending Rainmeter & potential AHKv1 process"
-    If (!($o_FromCore)) {
-        Stop-Process -Name 'Rainmeter'
-    }
+    Stop-Process -Name 'Rainmeter'
     If (Get-Process 'AHKv1' -ErrorAction SilentlyContinue) {
         Stop-Process -Name 'AHKv1'
     }
@@ -631,9 +629,6 @@ Active=1
         & "$RMEXEloc" [!ActivateConfig $skin_load_path]
     }
 } else {
-    If ($o_ExtInstall) {
-        & "$RMEXEloc" [!DeactivateConfig $skin_load_path]
-    }
     $dlcINCFile = "$s_RMSkinFolder\..\CoreData\@DLCs\InstalledDLCs.inc"
     If (!(Test-Path $dlcINCFile)) {
         debug "No DLCs installed."
