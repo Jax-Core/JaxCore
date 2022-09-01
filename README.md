@@ -23,9 +23,6 @@
   <img alt="Github" src="https://img.shields.io/github/license/Jax-Core/JaxCore?style=for-the-badge" />
 </p><!-- END ShieldsFull.mustache -->
 
-## Screenshots 🖼️
-You can check out what you're desktop can look like [here](https://github.com/Jax-Core/YourMixer/blob/main/Screenshots.md)!
-
 ## About 👀
 
 ![GithubBanner](https://user-images.githubusercontent.com/80020581/173227081-761ae822-6c83-4a10-9093-a3117c2cffd7.png)
@@ -33,6 +30,9 @@ You can check out what you're desktop can look like [here](https://github.com/Ja
 JaxCore is a collection of utility modules designed to improve your desktop experience and increase your productivity. Core is a configuration hub that allows for quick access to settings, updates, and new releases.
 
 JaxCore (configuration hub) acts as a settings menu for all JaxCore modules, while providing continuous support for patch / feature updates. It also allows you to access other modules more quickly!
+
+## Screenshots 🖼️
+You can check out what you're desktop can look like [here](https://github.com/Jax-Core/YourMixer/blob/main/Screenshots.md)!
 
 ## Prerequisites 🖥️
 - **Windows 10** or above
