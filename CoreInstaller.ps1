@@ -242,7 +242,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v5.4"
+Write-Info "COREINSTALLER REF: Stable v5.41"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -286,6 +286,7 @@ if (!($o_Location)) {
         }
     } else {
         $wasRMInstalled = $false
+        $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
         Download-Rainmeter "/S /AUTOSTARTUP=1 /RESTART=0"
     }
 } else {
