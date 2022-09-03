@@ -243,7 +243,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v5.3"
+Write-Info "COREINSTALLER REF: Stable v5.31"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -578,6 +578,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             } else {
                 $scale = $sah / 1080
             }
+            $scale = [math]::Round($scale,2)
             debug "Scale is $scale"
             if ($scale -eq 1) {
                 debug "Scale unchanged."
