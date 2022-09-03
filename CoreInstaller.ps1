@@ -200,6 +200,9 @@ Active=0
 
 "@
     Write-Done
+    If (Test-Path "$env:APPDATA\JaxCore\InstalledComponents\") {
+        Get-ChildItem -Path "$env:APPDATA\JaxCore\" -Recurse | Remove-Item -Recurse
+    }
 }
 
 # ---------------------------------------------------------------------------- #
@@ -240,7 +243,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v5.22"
+Write-Info "COREINSTALLER REF: Stable v5.3"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
