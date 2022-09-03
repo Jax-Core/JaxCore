@@ -407,7 +407,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     # ---------------------------------------------------------------------------- #
     # ---------------------------------- RMSKIN ---------------------------------- #
     Write-Task "Running .rmskin to install (specified)"
-    If (Test-Path -LiteralPath "$s_root\*") {
+    If (Test-Path -Path "$s_root\*") {
         Get-ChildItem $s_root -File | ForEach-Object {
             Invoke-Item $_.FullName
         }
@@ -435,7 +435,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     #                       Standard extraction installation                       #
     # ---------------------------------------------------------------------------- #
     # ------------------------------- Extract file ------------------------------- #
-    If (Test-Path -LiteralPath "$s_root\*") {
+    If (Test-Path -Path "$s_root\*") {
         Get-ChildItem $s_root -File | ForEach-Object {
             $i_name = $($_.Name -replace '\.rmskin', '')
             Rename-Item -LiteralPath "$s_root\$($_.Name)" -NewName "$i_name.zip"
