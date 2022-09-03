@@ -180,8 +180,7 @@ function Download-Rainmeter($params) {
         Write-Done
         Set-DPICompatability
     } else {
-        debug "Make sure you have selected `"Yes`" when installation dialog pops up"
-        throw "`nFailed to install Rainmeter! "   
+        throw "`nFailed to install Rainmeter! (Did not complete UAC)"
     }
     # --------------------------------- Generate --------------------------------- #
     Write-Task "Generating "; Write-Emphasized "Rainmeter.ini "; Write-Task "for the first time..."
@@ -243,7 +242,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v5.31"
+Write-Info "COREINSTALLER REF: Stable v5.4"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -256,16 +255,18 @@ if (!($o_Location)) {
     # --------------------------- Check if RM installed -------------------------- #
     Write-Task "Checking if Rainmeter is installed..."
 
-    $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
-    $RMEXE64bitloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
-    $RMEXE32bitloc = "${Env:ProgramFiles(x86)}\Rainmeter\Rainmeter.exe"
+    $RMEXEloc = "$($s_RMSettingsFolder)Rainmeter.exe"
+    # $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
+    # $RMEXE64bitloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"        
+    # $RMEXE32bitloc = "${Env:ProgramFiles(x86)}\Rainmeter\Rainmeter.exe"
 
     Write-Done
-    if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
+    # if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
+    if (Test-Path -LiteralPath "$RMEXEloc") {
         # ------------------------------- RM installed ------------------------------- #
         debug "Rainmeter is already installed on your device."
         $wasRMInstalled = $true
-        If (Test-Path "$RMEXE32bitloc") {$RMEXEloc = "$RMEXE32bitloc"}
+        # If (Test-Path "$RMEXE32bitloc") {$RMEXEloc = "$RMEXE32bitloc"}
         If (Test-Path $s_RMINIFile) {
             $Ini = Get-IniContent $s_RMINIFile
             $s_RMSkinFolder = $Ini["Rainmeter"]["SkinPath"]
