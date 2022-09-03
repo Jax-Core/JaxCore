@@ -240,7 +240,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v5.21"
+Write-Info "COREINSTALLER REF: Stable v5.22"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -407,8 +407,14 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     # ---------------------------------------------------------------------------- #
     # ---------------------------------- RMSKIN ---------------------------------- #
     Write-Task "Running .rmskin to install (specified)"
-    Get-ChildItem $s_root -File | ForEach-Object {
-        Invoke-Item $_.FullName
+    If (Test-Path -LiteralPath "$s_root\*") {
+        Get-ChildItem $s_root -File | ForEach-Object {
+            Invoke-Item $_.FullName
+        }
+    } else {
+        Write-Fail 'Unable to find downloaded file. Try running installer as adminstrator, or if you are installing a module within JaxCore, run Rainmeter as administrator and try again.'
+        Write-Info 'If the issue presists, make sure you have no programs running that would potentially delete the downloaded file'
+        Return
     }
     Write-Done
     Write-Task "Interacting with installer UI"
@@ -429,12 +435,18 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     #                       Standard extraction installation                       #
     # ---------------------------------------------------------------------------- #
     # ------------------------------- Extract file ------------------------------- #
-    Get-ChildItem $s_root -File | ForEach-Object {
-        $i_name = $($_.Name -replace '\.rmskin', '')
-        Rename-Item -LiteralPath "$s_root\$($_.Name)" -NewName "$i_name.zip"
-        Write-Task "Exapnding downloaded archive    "; Write-Emphasized "$s_root\$i_name.zip"; Write-Task " -> "; Write-Emphasized "$s_root\Unpacked\$i_name\"
-        Expand-Archive -LiteralPath "$s_root\$i_name.zip" -DestinationPath "$s_unpacked\$i_name\" -Force
-        Write-Done
+    If (Test-Path -LiteralPath "$s_root\*") {
+        Get-ChildItem $s_root -File | ForEach-Object {
+            $i_name = $($_.Name -replace '\.rmskin', '')
+            Rename-Item -LiteralPath "$s_root\$($_.Name)" -NewName "$i_name.zip"
+            Write-Task "Exapnding downloaded archive    "; Write-Emphasized "$s_root\$i_name.zip"; Write-Task " -> "; Write-Emphasized "$s_root\Unpacked\$i_name\"
+            Expand-Archive -LiteralPath "$s_root\$i_name.zip" -DestinationPath "$s_unpacked\$i_name\" -Force
+            Write-Done
+        }
+    } else {
+        Write-Fail 'Unable to find downloaded file. Try running installer as adminstrator, or if you are installing a module within JaxCore, run Rainmeter as administrator and try again.'
+        Write-Info 'If the issue presists, make sure you have no programs running that would potentially delete the downloaded file'
+        Return
     }
     # ---------------------------- Start installation ---------------------------- #
     Write-Info "Starting installation..."
