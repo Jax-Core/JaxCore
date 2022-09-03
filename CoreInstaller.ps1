@@ -180,8 +180,8 @@ function Download-Rainmeter($params) {
         Write-Done
         Set-DPICompatability
     } else {
-        Write-Fail "`nFailed to install Rainmeter! "; Write-Task "Make sure you have selected `"Yes`" when installation dialog pops up"
-        Return
+        debug "Make sure you have selected `"Yes`" when installation dialog pops up"
+        throw "`nFailed to install Rainmeter! "   
     }
     # --------------------------------- Generate --------------------------------- #
     Write-Task "Generating "; Write-Emphasized "Rainmeter.ini "; Write-Task "for the first time..."
@@ -270,7 +270,7 @@ if (!($o_Location)) {
             $Ini = Get-IniContent $s_RMINIFile
             $s_RMSkinFolder = $Ini["Rainmeter"]["SkinPath"]
             $hwa = $Ini["Rainmeter"]["HardwareAcceleration"]
-            if (($hwa -eq 0) -and ($o_PromptBestOption -eq $true)) {
+            if (($hwa -eq $null) -and ($o_PromptBestOption -eq $true)) {
                 Write-Info "JaxCore recommends that the HardwareAcceleration option for Rainmeter to be turned on. "
                 $confirmation = Read-Host "Turn on? (y/n)"
                 if ($confirmation -match '^y$') {
@@ -298,13 +298,18 @@ if (!($o_Location)) {
     $RMEXEloc = "$s_RMSettingsFolder\Rainmeter.exe"
     # ------- Check if Rainmeter is already installed at provided location ------- #
     If (Test-Path "$o_Location\Rainmeter\Rainmeter.exe") {
-        Write-Task "Rainmeter is already installed under "; Write-Emphasized "$o_Location\Rainmeter";
+        debug "Rainmeter is already installed under $o_Location\Rainmeter";
         $wasRMInstalled = $true
         If (Test-Path $s_RMINIFile) {
             $Ini = Get-IniContent $s_RMINIFile
             $s_RMSkinFolder = $Ini["Rainmeter"]["SkinPath"]
+            If ($s_RMSkinFolder -eq $null) {
+                $s_RMSkinFolder = "$($s_RMSettingsFolder)Skins\"
+                $Ini["Rainmeter"]["SkinPath"] = $s_RMSkinFolder
+                Set-IniContent $Ini $s_RMINIFile
+            }
             $hwa = $Ini["Rainmeter"]["HardwareAcceleration"]
-            if (($hwa -eq 0) -and ($o_PromptBestOption -eq $true)) {
+            if (($hwa -eq $null) -and ($o_PromptBestOption -eq $true)) {
                 Write-Info "JaxCore recommends that the HardwareAcceleration option for Rainmeter to be turned on. "
                 $confirmation = Read-Host "Turn on? (y/n)"
                 if ($confirmation -match '^y$') {
@@ -415,9 +420,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             Invoke-Item $_.FullName
         }
     } else {
-        Write-Fail 'Unable to find downloaded file. Try running installer as adminstrator, or if you are installing a module within JaxCore, run Rainmeter as administrator and try again.'
-        Write-Info 'If the issue presists, make sure you have no programs running that would potentially delete the downloaded file'
-        Return
+        throw 'Unable to find downloaded file. Try running installer as adminstrator, or if you are installing a module within JaxCore, run Rainmeter as administrator and try again. Make sure you have no programs running that would potentially delete the downloaded file'
     }
     Write-Done
     Write-Task "Interacting with installer UI"
@@ -447,9 +450,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             Write-Done
         }
     } else {
-        Write-Fail 'Unable to find downloaded file. Try running installer as adminstrator, or if you are installing a module within JaxCore, run Rainmeter as administrator and try again.'
-        Write-Info 'If the issue presists, make sure you have no programs running that would potentially delete the downloaded file'
-        Return
+        throw 'Unable to find downloaded file. Try running installer as adminstrator, or if you are installing a module within JaxCore, run Rainmeter as administrator and try again. Make sure you have no programs running that would potentially delete the downloaded file'
     }
     # ---------------------------- Start installation ---------------------------- #
     Write-Info "Starting installation..."
@@ -583,7 +584,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             if ($scale -eq 1) {
                 debug "Scale unchanged."
             } elseif ($scale -eq 0) {
-                Write-Fail "Seems ike the installer is unable to identify the correct screen sizes. Skipping scaling writing."
+                Write-Fail "Seems like the installer is unable to identify the correct screen sizes. Skipping scaling writing."
             } else {
                 $varsfile = "$s_RMSkinFolder\$skin_name\@Resources\Vars.inc"
                 If (Test-Path $varsfile) {
