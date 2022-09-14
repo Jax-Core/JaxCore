@@ -242,7 +242,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v5.42"
+Write-Info "COREINSTALLER REF: Stable v5.43"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -507,12 +507,12 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                 $skin_varf = $skin_varf -split '\s\|\s'
                 If (Test-Path "$i_root\Unpacked\$i_name\") { Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse > $null }
                 New-Item -Path "$i_root\SavedVarFiles" -Type "Directory" > $null
-                for ($i=0; $i -lt $skin_varf.Count; $i++) {
-                    $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $skin_varf[$i])"
-                    $i_savelocation = "$i_root\SavedVarFiles\$($skin_varf[$i])"
-                    debug "Saving #$i $($skin_varf[$i]) -> $i_savelocation"
+                foreach ($varf in $skin_varf) {
+                    $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $varf)"
+                    $i_savelocation = "$i_root\SavedVarFiles\$varf"
+                    debug "Saving #$i $($varf) -> $i_savelocation"
                     If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" > $null }
-                    Copy-Item -Path "$s_RMSkinFolder\$($skin_varf[$i])" -Destination "$i_savelocation" -Force > $null
+                    Copy-Item -Path "$s_RMSkinFolder\$varf" -Destination "$i_savelocation" -Force > $null
                 }
             } else {
                 debug "> Not saving variable files"
@@ -545,9 +545,9 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
         }
         If ((-not $new_install) -and ($confirmation -match '^y$')) {
             debug "> Writing saved variables files back to skin"
-            for ($i=0; $i -lt $skin_varf.Count; $i++) {
-                $i_savelocation = "$i_root\SavedVarFiles\$($skin_varf[$i])"
-                $i_targetlocation = "$s_RMSkinFolder\$($skin_varf[$i])"
+            foreach ($varf in $skin_varf) {
+                $i_savelocation = "$i_root\SavedVarFiles\$varf"
+                $i_targetlocation = "$s_RMSkinFolder\$varf"
                 If (Test-Path "$i_targetlocation") {
                     $Ini = Get-IniContent $i_savelocation;$oldvars = $Ini
                     $Ini = Get-IniContent $i_targetlocation;$newvars = $Ini
