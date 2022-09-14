@@ -35,7 +35,7 @@ JaxCore (configuration hub) acts as a settings menu for all JaxCore modules, whi
 You can check out what you're desktop can look like [here](https://github.com/Jax-Core/JaxCore/blob/main/Screenshots.md)!
 
 ## Prerequisites 🖥️
-- **Windows 10** or above
+- **Windows 10 (x64)** or above
 - > 6GB RAM, > 4 Core CPU
 - For older systems, **Powershell v5.1 or newer** is required. Upgrade powershell **[here](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-7.2#upgrading-existing-windows-powershell)**!
 
