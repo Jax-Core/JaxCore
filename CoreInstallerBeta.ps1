@@ -172,7 +172,7 @@ function Download-Rainmeter($params) {
     Write-Done
     # ------------------------------------ Run ----------------------------------- #
     Write-Task "Running installer..."
-    Start-Process -FilePath $githubRMDownloadOutpath -ArgumentList "$params" -Wait
+    Start-Process -FilePath (Get-Item -LiteralPath "$env:temp\RainmeterInstaller.exe").FullName -ArgumentList "$params" -Wait
     Write-Done
     # ---------------------------- Check if installed ---------------------------- #
     Write-Task "Checking "; Write-Emphasized "$RMEXEloc"; Write-Task " for Rainmeter.exe"
@@ -180,8 +180,7 @@ function Download-Rainmeter($params) {
         Write-Done
         Set-DPICompatability
     } else {
-        Write-Fail "`nFailed to install Rainmeter! "; Write-Task "Make sure you have selected `"Yes`" when installation dialog pops up"
-        Return
+        throw "`nFailed to install Rainmeter! (Did not complete UAC)"
     }
     # --------------------------------- Generate --------------------------------- #
     Write-Task "Generating "; Write-Emphasized "Rainmeter.ini "; Write-Task "for the first time..."
@@ -200,6 +199,9 @@ Active=0
 
 "@
     Write-Done
+    If (Test-Path "$env:APPDATA\JaxCore\InstalledComponents\") {
+        Get-ChildItem -Path "$env:APPDATA\JaxCore\" -Recurse | Remove-Item -Recurse
+    }
 }
 
 # ---------------------------------------------------------------------------- #
@@ -240,7 +242,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Beta v14"
+Write-Info "COREINSTALLER REF: Beta v5.43"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -253,21 +255,23 @@ if (!($o_Location)) {
     # --------------------------- Check if RM installed -------------------------- #
     Write-Task "Checking if Rainmeter is installed..."
 
-    $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
-    $RMEXE64bitloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
-    $RMEXE32bitloc = "${Env:ProgramFiles(x86)}\Rainmeter\Rainmeter.exe"
+    $RMEXEloc = "$($s_RMSettingsFolder)Rainmeter.exe"
+    # $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
+    # $RMEXE64bitloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"        
+    # $RMEXE32bitloc = "${Env:ProgramFiles(x86)}\Rainmeter\Rainmeter.exe"
 
     Write-Done
-    if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
+    # if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
+    if (Test-Path -LiteralPath "$RMEXEloc") {
         # ------------------------------- RM installed ------------------------------- #
         debug "Rainmeter is already installed on your device."
         $wasRMInstalled = $true
-        If (Test-Path "$RMEXE32bitloc") {$RMEXEloc = "$RMEXE32bitloc"}
+        # If (Test-Path "$RMEXE32bitloc") {$RMEXEloc = "$RMEXE32bitloc"}
         If (Test-Path $s_RMINIFile) {
             $Ini = Get-IniContent $s_RMINIFile
             $s_RMSkinFolder = $Ini["Rainmeter"]["SkinPath"]
             $hwa = $Ini["Rainmeter"]["HardwareAcceleration"]
-            if (($hwa -eq 0) -and ($o_PromptBestOption -eq $true)) {
+            if (($hwa -eq $null) -and ($o_PromptBestOption -eq $true)) {
                 Write-Info "JaxCore recommends that the HardwareAcceleration option for Rainmeter to be turned on. "
                 $confirmation = Read-Host "Turn on? (y/n)"
                 if ($confirmation -match '^y$') {
@@ -282,6 +286,7 @@ if (!($o_Location)) {
         }
     } else {
         $wasRMInstalled = $false
+        $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
         Download-Rainmeter "/S /AUTOSTARTUP=1 /RESTART=0"
     }
 } else {
@@ -295,13 +300,18 @@ if (!($o_Location)) {
     $RMEXEloc = "$s_RMSettingsFolder\Rainmeter.exe"
     # ------- Check if Rainmeter is already installed at provided location ------- #
     If (Test-Path "$o_Location\Rainmeter\Rainmeter.exe") {
-        Write-Task "Rainmeter is already installed under "; Write-Emphasized "$o_Location\Rainmeter";
+        debug "Rainmeter is already installed under $o_Location\Rainmeter";
         $wasRMInstalled = $true
         If (Test-Path $s_RMINIFile) {
             $Ini = Get-IniContent $s_RMINIFile
             $s_RMSkinFolder = $Ini["Rainmeter"]["SkinPath"]
+            If ($s_RMSkinFolder -eq $null) {
+                $s_RMSkinFolder = "$($s_RMSettingsFolder)Skins\"
+                $Ini["Rainmeter"]["SkinPath"] = $s_RMSkinFolder
+                Set-IniContent $Ini $s_RMINIFile
+            }
             $hwa = $Ini["Rainmeter"]["HardwareAcceleration"]
-            if (($hwa -eq 0) -and ($o_PromptBestOption -eq $true)) {
+            if (($hwa -eq $null) -and ($o_PromptBestOption -eq $true)) {
                 Write-Info "JaxCore recommends that the HardwareAcceleration option for Rainmeter to be turned on. "
                 $confirmation = Read-Host "Turn on? (y/n)"
                 if ($confirmation -match '^y$') {
@@ -350,7 +360,7 @@ Get-Process -Id $rmprocess_id | Foreach {
 }
 Write-Done
 # -------------------------- Stop running instances -------------------------- #
-If (!(Test-Path $s_RMSkinFolder)) {New-Item -Path $s_RMSkinFolder -Type "Directory" | Out-Null}
+If (!(Test-Path $s_RMSkinFolder)) {New-Item -Path $s_RMSkinFolder -Type "Directory" > $null}
 [System.IO.Directory]::SetCurrentDirectory($s_RMSkinFolder)
 
 If (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
@@ -366,7 +376,7 @@ If (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
 # ---------------------------------------------------------------------------- #
 #                                   Download                                   #
 # ---------------------------------------------------------------------------- #
-New-Item -Path $s_root -Type "Directory" -Force | Out-Null
+New-Item -Path $s_root -Type "Directory" -Force > $null
 Get-Item $s_root -Force | foreach { $_.Attributes = $_.Attributes -bor "Hidden" }
 Get-ChildItem "$s_root" | ForEach-Object {
     Remove-Item $_.FullName -Force -Recurse
@@ -407,8 +417,12 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     # ---------------------------------------------------------------------------- #
     # ---------------------------------- RMSKIN ---------------------------------- #
     Write-Task "Running .rmskin to install (specified)"
-    Get-ChildItem $s_root -File | ForEach-Object {
-        Invoke-Item $_.FullName
+    If (Test-Path -Path "$s_root\*") {
+        Get-ChildItem $s_root -File | ForEach-Object {
+            Invoke-Item $_.FullName
+        }
+    } else {
+        throw 'Unable to find downloaded file. Try running installer as adminstrator, or if you are installing a module within JaxCore, run Rainmeter as administrator and try again. Make sure you have no programs running that would potentially delete the downloaded file'
     }
     Write-Done
     Write-Task "Interacting with installer UI"
@@ -429,12 +443,16 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     #                       Standard extraction installation                       #
     # ---------------------------------------------------------------------------- #
     # ------------------------------- Extract file ------------------------------- #
-    Get-ChildItem $s_root -File | ForEach-Object {
-        $i_name = $($_.Name -replace '\.rmskin', '')
-        Rename-Item -LiteralPath "$s_root\$($_.Name)" -NewName "$i_name.zip"
-        Write-Task "Exapnding downloaded archive    "; Write-Emphasized "$s_root\$i_name.zip"; Write-Task " -> "; Write-Emphasized "$s_root\Unpacked\$i_name\"
-        Expand-Archive -LiteralPath "$s_root\$i_name.zip" -DestinationPath "$s_unpacked\$i_name\" -Force
-        Write-Done
+    If (Test-Path -Path "$s_root\*") {
+        Get-ChildItem $s_root -File | ForEach-Object {
+            $i_name = $($_.Name -replace '\.rmskin', '')
+            Rename-Item -LiteralPath (Get-Item -LiteralPath "$s_root\$($_.Name)").FullName -NewName "$i_name.zip"
+            Write-Task "Exapnding downloaded archive    "; Write-Emphasized "$s_root\$i_name.zip"; Write-Task " -> "; Write-Emphasized "$s_root\Unpacked\$i_name\"
+            Expand-Archive -LiteralPath (Get-Item -LiteralPath "$s_root\$i_name.zip").FullName -DestinationPath "$s_unpacked\$i_name\" -Force
+            Write-Done
+        }
+    } else {
+        throw 'Unable to find downloaded file. Try running installer as adminstrator, or if you are installing a module within JaxCore, run Rainmeter as administrator and try again. Make sure you have no programs running that would potentially delete the downloaded file'
     }
     # ---------------------------- Start installation ---------------------------- #
     Write-Info "Starting installation..."
@@ -469,7 +487,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
         $skin_load = $Ini["rmskin"]["Load"]
         $skin_load_path = Split-Path $skin_load
         If ($skin_name -contains '#JaxCore') {$isInstallingCore = $true} 
-        $list_of_installations.Add("$skin_name") | Out-Null
+        $list_of_installations.Add("$skin_name") > $null
 
         debug "$skin_name $skin_ver - by $skin_auth"
         debug "Variable files: $skin_varf"
@@ -487,14 +505,14 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             if ($confirmation -match '^y$') {
                 debug "> Saving variable files"
                 $skin_varf = $skin_varf -split '\s\|\s'
-                If (Test-Path "$i_root\Unpacked\$i_name\") { Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse | Out-Null }
-                New-Item -Path "$i_root\SavedVarFiles" -Type "Directory" | Out-Null
-                for ($i=0; $i -lt $skin_varf.Count; $i++) {
-                    $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $skin_varf[$i])"
-                    $i_savelocation = "$i_root\SavedVarFiles\$($skin_varf[$i])"
-                    debug "Saving #$i $($skin_varf[$i]) -> $i_savelocation"
-                    If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" | Out-Null }
-                    Copy-Item -Path "$s_RMSkinFolder\$($skin_varf[$i])" -Destination "$i_savelocation" -Force | Out-Null
+                If (Test-Path "$i_root\Unpacked\$i_name\") { Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse > $null }
+                New-Item -Path "$i_root\SavedVarFiles" -Type "Directory" > $null
+                foreach ($varf in $skin_varf) {
+                    $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $varf)"
+                    $i_savelocation = "$i_root\SavedVarFiles\$varf"
+                    debug "Saving #$i $($varf) -> $i_savelocation"
+                    If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" > $null }
+                    Copy-Item -Path "$s_RMSkinFolder\$varf" -Destination "$i_savelocation" -Force > $null
                 }
             } else {
                 debug "> Not saving variable files"
@@ -506,7 +524,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
         # ---------------------------------- Process --------------------------------- #
         debug "> Moving skin files"
         If ($new_install) {
-            New-Item -Path "$s_RMSkinFolder\$skin_name\" -Type "Directory" -Force | Out-Null
+            New-Item -Path "$s_RMSkinFolder\$skin_name\" -Type "Directory" -Force > $null
         } else {
             Get-ChildItem -Path "$s_RMSkinFolder\$skin_name\" -Recurse | Remove-Item -Recurse
         }
@@ -527,9 +545,9 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
         }
         If ((-not $new_install) -and ($confirmation -match '^y$')) {
             debug "> Writing saved variables files back to skin"
-            for ($i=0; $i -lt $skin_varf.Count; $i++) {
-                $i_savelocation = "$i_root\SavedVarFiles\$($skin_varf[$i])"
-                $i_targetlocation = "$s_RMSkinFolder\$($skin_varf[$i])"
+            foreach ($varf in $skin_varf) {
+                $i_savelocation = "$i_root\SavedVarFiles\$varf"
+                $i_targetlocation = "$s_RMSkinFolder\$varf"
                 If (Test-Path "$i_targetlocation") {
                     $Ini = Get-IniContent $i_savelocation;$oldvars = $Ini
                     $Ini = Get-IniContent $i_targetlocation;$newvars = $Ini
@@ -563,11 +581,12 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             } else {
                 $scale = $sah / 1080
             }
+            $scale = [math]::Round($scale,2)
             debug "Scale is $scale"
             if ($scale -eq 1) {
                 debug "Scale unchanged."
             } elseif ($scale -eq 0) {
-                Write-Fail "Seems ike the installer is unable to identify the correct screen sizes. Skipping scaling writing."
+                Write-Fail "Seems like the installer is unable to identify the correct screen sizes. Skipping scaling writing."
             } else {
                 $varsfile = "$s_RMSkinFolder\$skin_name\@Resources\Vars.inc"
                 If (Test-Path $varsfile) {
