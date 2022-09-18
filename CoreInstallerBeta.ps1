@@ -281,7 +281,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Beta v5.5"
+Write-Info "COREINSTALLER REF: Beta v5.51"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -421,7 +421,7 @@ Get-ChildItem "$s_root" | ForEach-Object {
     Remove-Item $_.FullName -Force -Recurse
 }
 # ------------------------------ Download files ------------------------------ #
-$moduleDetails = Get-RemoteIniContent 'https://raw.githubusercontent.com/Jax-Core/JaxCore/main/ModuleDetails.ini'
+$moduleDetails = Get-RemoteIniContent 'https://raw.githubusercontent.com/Jax-Core/JaxCore/main/S-Hub/ModuleDetails.ini'
 
 If ($o_Version) {
 
