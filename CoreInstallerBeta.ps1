@@ -89,10 +89,10 @@ function Get-RemoteIniContent ($link) {
     $ini = [ordered]@{}
 
     $result = iwr -useb $link
-    # $section = ';ItIsNotAFuckingSection;'
-    # $ini.Add($section, [ordered]@{})
+    $section = ';ItIsNotAFuckingSection;'
+    $ini.Add($section, [ordered]@{})
 
-    foreach ($line in $($result.Content -split "`r`n")) {
+    foreach ($line in $($result.Content -split "`n")) {
         if ($line -match "^\s*\[(.+?)\]\s*$") {
             $section = $matches[1]
             $secDup = 1
