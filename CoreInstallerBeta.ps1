@@ -85,6 +85,45 @@ function Get-IniContent ($filePath) {
     return $ini
 }
 
+function Get-RemoteIniContent ($link) {
+    $ini = [ordered]@{}
+
+    $result = iwr -useb $link
+    # $section = ';ItIsNotAFuckingSection;'
+    # $ini.Add($section, [ordered]@{})
+
+    foreach ($line in $($result.Content -split "`r`n")) {
+        if ($line -match "^\s*\[(.+?)\]\s*$") {
+            $section = $matches[1]
+            $secDup = 1
+            while ($ini.Keys -contains $section) {
+                $section = $section + '||ps' + $secDup
+            }
+            $ini.Add($section, [ordered]@{})
+        }
+        elseif ($line -match "^\s*;.*$") {
+            $notSectionCount = 0
+            while ($ini[$section].Keys -contains ';NotSection' + $notSectionCount) {
+                $notSectionCount++
+            }
+            $ini[$section][';NotSection' + $notSectionCount] = $matches[1]
+        }
+        elseif ($line -match "^\s*(.+?)\s*=\s*(.+?)$") {
+            $key, $value = $matches[1..2]
+            $ini[$section][$key] = $value
+        }
+        else {
+            $notSectionCount = 0
+            while ($ini[$section].Keys -contains ';NotSection' + $notSectionCount) {
+                $notSectionCount++
+            }
+            $ini[$section][';NotSection' + $notSectionCount] = $line
+        }
+    }
+
+    return $ini
+}
+
 function Set-IniContent($ini, $filePath) {
     $str = @()
     foreach ($section in $ini.GetEnumerator()) {
@@ -242,7 +281,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Beta v5.43"
+Write-Info "COREINSTALLER REF: Beta v5.5"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -382,8 +421,17 @@ Get-ChildItem "$s_root" | ForEach-Object {
     Remove-Item $_.FullName -Force -Recurse
 }
 # ------------------------------ Download files ------------------------------ #
+$moduleDetails = Get-RemoteIniContent 'https://raw.githubusercontent.com/Jax-Core/JaxCore/main/ModuleDetails.ini'
+
 If ($o_Version) {
-    $githubDownloadURL = "https://github.com/Jax-Core/$o_InstallModule/releases/download/v$o_Version/$($o_InstallModule)_v$o_Version.rmskin"
+
+    If ($moduleDetails.ExternalWidgets.Keys -contains $o_InstallModule) {
+        $githubOrg = $moduleDetails.ExternalWidgets[$o_InstallModule]
+    } else {
+        $githubOrg = 'Jax-Core'
+    }
+
+    $githubDownloadURL = "https://github.com/$githubOrg/$o_InstallModule/releases/download/v$o_Version/$($o_InstallModule)_v$o_Version.rmskin"
     $githubDownloadOutpath = "$s_root\$($o_InstallModule)_v$o_Version.rmskin"
     Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
     $ProgressPreference = 'SilentlyContinue'
@@ -392,14 +440,21 @@ If ($o_Version) {
 } else {
     for (($i=0);($i -lt $o_InstallModule.Count);$i++) {
         If ($o_InstallModule.Count -eq 1) {$i_name = $o_InstallModule} else {$i_name = $o_InstallModule[$i]}
-        $response = Invoke-WebRequest "https://raw.githubusercontent.com/Jax-Core/$i_name/main/%40Resources/Version.inc" -UseBasicParsing
+
+        If ($moduleDetails.ExternalWidgets.Keys -contains $o_InstallModule) {
+            $i_githubOrg = $moduleDetails.ExternalWidgets[$o_InstallModule]
+        } else {
+            $i_githubOrg = 'Jax-Core'
+        }
+
+        $response = Invoke-WebRequest "https://raw.githubusercontent.com/$i_githubOrg/$i_name/main/%40Resources/Version.inc" -UseBasicParsing
         $responseBytes = $response.RawContentStream.ToArray()
         if ([System.Text.Encoding]::Unicode.GetString($responseBytes) -match 'Version=(.+)') {
             $latest_v = $matches[1]
         } elseif ([System.Text.Encoding]::Unicode.GetString($responseBytes) -match 'Core\.Ver=(.+)') {
             $latest_v = $matches[1]
         }
-        $githubDownloadURL = "https://github.com/Jax-Core/$i_name/releases/download/v$latest_v/$($i_name)_v$latest_v.rmskin"
+        $githubDownloadURL = "https://github.com/$i_githubOrg/$i_name/releases/download/v$latest_v/$($i_name)_v$latest_v.rmskin"
         $githubDownloadOutpath = "$s_root\$($i_name)_$latest_v.rmskin"
         Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
         $ProgressPreference = 'SilentlyContinue'
