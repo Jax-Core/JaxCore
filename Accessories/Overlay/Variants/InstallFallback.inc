@@ -43,23 +43,6 @@ Border=All
 [Sec.String:S]
 Container=
 
-[Result.String:S]
-X=r
-Y=R
-W=(#Set.W#*0.4-20)
-H=#Sec.ResultSize#
-Padding=10,0,10,0
-ClipString=2
-StringAlign=LeftCenter
-SolidColor=0,0,0,1
-MouseOverAction=[!SetOption #CURRENTSECTION# SolidColor "#Set.Text_Color#,50"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-MouseLeaveAction=[!SetOption #CURRENTSECTION# SolidColor "0,0,0,1"][!UpdateMeter #CURRENTSECTION#][!Redraw]
-InlineSetting=GradientColor | 45 | #SEt.Accent_Color_2# ; 1 | #Set.Accent_color# ;0
-InlineSetting2=Color | #Set.Subtext_Color#
-InlineSetting3=Size | (8)
-Group=Results
-Hidden=1
-
 ; ---------------------------------------------------------------------------- ;
 ;                                    Content                                   ;
 ; ---------------------------------------------------------------------------- ;
