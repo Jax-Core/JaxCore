@@ -253,6 +253,7 @@ Active=0
 # $o_InstallModule - Module to install
 ## $o_Version - Version to get
 # $o_FromCore - If installation is invoked via JaxCore
+# $o_FromSHUB - If installation is invoked via S-Hub
 # $o_Force - Overwrite existing files
 # $o_ExtInstall - Run .rmskin
 # $o_PromptBestOption - Prompt for changing to best options
@@ -260,6 +261,7 @@ Active=0
 # ------------------------------ Default values ------------------------------ #
 if (!($o_InstallModule)) {$o_InstallModule = "JaxCore"}
 if (!($o_FromCore)) {$o_FromCore = $false}
+if (!($o_FromSHUB)) {$o_FromSHUB = $false}
 if (!($o_Force)) {$o_Force = $false}
 if (!($o_ExtInstall)) {$o_ExtInstall = $false}
 if (!($o_PromptBestOption)) {
@@ -707,36 +709,38 @@ Active=1
         & "$RMEXEloc" [!DeactivateConfig $skin_load_path]
     }
     $dlcINCFile = "$s_RMSkinFolder\..\CoreData\@DLCs\InstalledDLCs.inc"
-    If (!(Test-Path $dlcINCFile)) {
-        debug "No DLCs installed."
-    } else {
-        If ([String]::IsNullOrWhiteSpace((Get-content $dlcINCFile))) {
+    If (!($o_FromSHUB)) {
+        If (!(Test-Path $dlcINCFile)) {
             debug "No DLCs installed."
         } else {
-            # --------------------- Check if skin has a DLC installed -------------------- #
-            $Ini = Get-IniContent -filePath $dlcINCFile
+            If ([String]::IsNullOrWhiteSpace((Get-content $dlcINCFile))) {
+                debug "No DLCs installed."
+            } else {
+                # --------------------- Check if skin has a DLC installed -------------------- #
+                $Ini = Get-IniContent -filePath $dlcINCFile
 
-            for ($i = 0;$i -lt $list_of_installations.Count;$i++) {
-                $i_name = $list_of_installations[$i]
-                debug "> Matching $i_name with installed DLCs"
+                for ($i = 0;$i -lt $list_of_installations.Count;$i++) {
+                    $i_name = $list_of_installations[$i]
+                    debug "> Matching $i_name with installed DLCs"
 
-                for ($j = 0; $j -lt $Ini['Variables'].Keys.Count; $j++) { 
-                    if ($Ini['Variables'].Keys[$j] -match $i_name) {
-                        debug "Found $i_name in installed DLCs"
-                        & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "2" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!WriteKeyValue Variables Page.SubPage "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Complete_Reinstallation "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Reinstallation_isSingle "$([Bool]($list_of_installations.Count -eq 1))" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
-                        Return
+                    for ($j = 0; $j -lt $Ini['Variables'].Keys.Count; $j++) { 
+                        if ($Ini['Variables'].Keys[$j] -match $i_name) {
+                            debug "Found $i_name in installed DLCs"
+                            & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "2" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!WriteKeyValue Variables Page.SubPage "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Complete_Reinstallation "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Reinstallation_isSingle "$([Bool]($list_of_installations.Count -eq 1))" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
+                            Return
+                        }
                     }
                 }
+                debug "No matching DLCs found"
             }
-            debug "No matching DLCs found"
         }
-    }
-    If ($s_InstallIsBatch) {
-        & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
-    } else {
-        & "$RMEXEloc" [!WriteKeyvalue Variables Skin.Name "$skin_name" "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
+        If ($s_InstallIsBatch) {
+            & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
+        } else {
+            & "$RMEXEloc" [!WriteKeyvalue Variables Skin.Name "$skin_name" "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
+        }
     }
 }
 
 Get-ChildItem -Path "$s_root\" -Recurse | Remove-Item -Recurse
-Exit
+If (!($o_FromSHUB)) {Exit}
