@@ -283,7 +283,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v5.51"
+Write-Info "COREINSTALLER REF: Stable v5.52"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
