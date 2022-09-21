@@ -45,7 +45,7 @@ If ($set) {
     Set-ItemProperty -Path "$root\$name" -Name '(Default)' -Value "S-Hub Package"
     Set-ItemProperty -Path "$root\$name\DefaultIcon" -Name '(Default)' -Value "$o_RMSkinFolder\#JaxCore\@Resources\Images\SHP.ico"
     Set-ItemProperty -Path "$root\$name\Shell" -Name '(Default)' -Value 'open'
-    Set-ItemProperty -Path "$root\$name\Shell\Open\Command" -Name '(Default)' -Value "powershell.exe -ExecutionPolicy Bypass -File `"$($o_RMSkinFolder)\#JaxCore\S-Hub\shp-extractor.ps1`" `"%1`""
+    Set-ItemProperty -Path "$root\$name\Shell\Open\Command" -Name '(Default)' -Value "powershell.exe -ExecutionPolicy Bypass -File `"$($o_RMSkinFolder)\#JaxCore\S-Hub\getlatest-extractor.ps1`" `"%1`""
     'Restarting explorer...'
     taskkill /f /im explorer.exe
     start-process explorer.exe
