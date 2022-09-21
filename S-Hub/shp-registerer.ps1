@@ -43,4 +43,7 @@ Set-ItemProperty -Path "$root\$name\Shell\Open\Command" -Name '(Default)' -Value
 'Restarting explorer...'
 taskkill /f /im explorer.exe
 start-process explorer.exe
+'Generating SHP Path File'
+New-Item -Path 'C:\RMInstallation.txt' -Type "File" -Value $o_RMSettingsFolder -Force > $null
+Get-Item 'C:\RMInstallation.txt' -Force | foreach { $_.Attributes = $_.Attributes -bor "Hidden" }
 Exit
