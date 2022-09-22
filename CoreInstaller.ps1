@@ -377,42 +377,43 @@ if (!($o_Location)) {
 # ---------------------------------------------------------------------------- #
 #                      Getting info from Rainmeter process                     #
 # ---------------------------------------------------------------------------- #
-If (!(Get-Process 'Rainmeter' -ErrorAction SilentlyContinue)) {
-    & "$RMEXEloc"
-    Wait-ForProcess 'Rainmeter'
-    Write-Done
-}
-$rmprocess_object = Get-Process Rainmeter
-$rmprocess_id = $rmprocess_object.id
-# ------------------------------------ Bit ----------------------------------- #
-Write-Task "Getting Rainmeter bitness..."
-$bit = '32bit'
-Get-Process -Id $rmprocess_id | Foreach {
-    $modules = $_.modules
-    foreach($module in $modules) {
-        $file = [System.IO.Path]::GetFileName($module.FileName).ToLower()
-        if($file -eq "wow64.dll") {
-            $bit = "32bit"
-            Break
-        } else {
-            $bit = "64bit"
+If (!$bit) {
+    If (!(Get-Process 'Rainmeter' -ErrorAction SilentlyContinue)) {
+        & "$RMEXEloc"
+        Wait-ForProcess 'Rainmeter'
+        Write-Done
+    }
+    $rmprocess_object = Get-Process Rainmeter
+    $rmprocess_id = $rmprocess_object.id
+    # ------------------------------------ Bit ----------------------------------- #
+    Write-Task "Getting Rainmeter bitness..."
+    $bit = '32bit'
+    Get-Process -Id $rmprocess_id | Foreach {
+        $modules = $_.modules
+        foreach($module in $modules) {
+            $file = [System.IO.Path]::GetFileName($module.FileName).ToLower()
+            if($file -eq "wow64.dll") {
+                $bit = "32bit"
+                Break
+            } else {
+                $bit = "64bit"
+            }
         }
     }
-}
-Write-Done
-# -------------------------- Stop running instances -------------------------- #
-If (!(Test-Path $s_RMSkinFolder)) {New-Item -Path $s_RMSkinFolder -Type "Directory" > $null}
-[System.IO.Directory]::SetCurrentDirectory($s_RMSkinFolder)
-
-If (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
-    Write-Task "Ending Rainmeter & potential AHKv1 process"
-    Stop-Process -Name 'Rainmeter'
-    If (Get-Process 'AHKv1' -ErrorAction SilentlyContinue) {
-        Stop-Process -Name 'AHKv1'
-    }
     Write-Done
-}
+    # -------------------------- Stop running instances -------------------------- #
+    If (!(Test-Path $s_RMSkinFolder)) {New-Item -Path $s_RMSkinFolder -Type "Directory" > $null}
+    [System.IO.Directory]::SetCurrentDirectory($s_RMSkinFolder)
 
+    If (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
+        Write-Task "Ending Rainmeter & potential AHKv1 process"
+        Stop-Process -Name 'Rainmeter'
+        If (Get-Process 'AHKv1' -ErrorAction SilentlyContinue) {
+            Stop-Process -Name 'AHKv1'
+        }
+        Write-Done
+    }
+}
 
 # ---------------------------------------------------------------------------- #
 #                                   Download                                   #
@@ -682,8 +683,10 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
         debug "> Finished installation of $skin_name"
         debug "-----------------"
     }
-    Start-Process "$RMEXEloc"
-    Wait-ForProcess 'Rainmeter'
+    If (!($o_FromSHUB)) {
+        Start-Process "$RMEXEloc"
+        Wait-ForProcess 'Rainmeter'
+    }
 }
 
 Start-Sleep -Milliseconds 500
