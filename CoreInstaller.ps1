@@ -283,7 +283,7 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v5.52"
+Write-Info "COREINSTALLER REF: Stable v5.53"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -600,6 +600,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
         } else {
             debug "> Skipping plugin installation (none)"
         }
+        # ------------------------------ Variable files ------------------------------ #
         If ((-not $new_install) -and ($confirmation -match '^y$')) {
             debug "> Writing saved variables files back to skin"
             foreach ($varf in $skin_varf) {
@@ -667,6 +668,15 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                         }
                     }
                 }
+            }
+        }
+        # ------------------------------ Hotkey variable ----------------------------- #
+        If ($($ModuleDetails[$skin_name].VarFiles -split '\s\|\s') -contains "$skin_name\@Resources\Actions\Hotkeys.ini") {
+            If (!((join-path "$Env:APPDATA\Rainmeter\" "") -eq ($RMEXEloc))) {
+                $i_file = "$s_RMSkinFolder\$skin_name\@Resources\Actions\Hotkeys.ini"
+                $Ini = Get-IniContent $i_file
+                $Ini["Variables"]["RMPATH"] = $RMEXEloc
+                Set-IniContent $Ini $i_file
             }
         }
         debug "> Finished installation of $skin_name"
