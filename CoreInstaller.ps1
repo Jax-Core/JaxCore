@@ -504,7 +504,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
         Get-ChildItem $s_root -File | ForEach-Object {
             $i_name = $($_.Name -replace '\.rmskin', '')
             Rename-Item -LiteralPath (Get-Item -LiteralPath "$s_root\$($_.Name)").FullName -NewName "$i_name.zip"
-            Write-Task "Exapnding downloaded archive    "; Write-Emphasized "$s_root\$i_name.zip"; Write-Task " -> "; Write-Emphasized "$s_root\Unpacked\$i_name\"
+            Write-Task "Exapnding downloaded archive    "; Write-Emphasized "$i_name"; Write-Task " -> "; Write-Emphasized "$s_root\Unpacked\$i_name\"
             Expand-Archive -LiteralPath (Get-Item -LiteralPath "$s_root\$i_name.zip").FullName -DestinationPath "$s_unpacked\$i_name\" -Force
             Write-Done
         }
