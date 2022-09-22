@@ -626,7 +626,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                     Copy-Item -Path "$i_savelocation" -Destination "$i_targetlocation" -Force -ErrorAction SilentlyContinue
                 }
             }
-        } elseif ($skin_name -notcontains '#JaxCore') {
+        } elseif (($skin_name -notcontains '#JaxCore') -and !$o_FromSHUB) {
             debug "> Automatically changing scale variables (new installation)"
             $vc = Get-WmiObject -class "Win32_VideoController"
             $saw = $vc.CurrentHorizontalResolution
