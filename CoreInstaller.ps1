@@ -435,7 +435,7 @@ If ($o_Version) {
 
     $githubDownloadURL = "https://github.com/$githubOrg/$o_InstallModule/releases/download/v$o_Version/$($o_InstallModule)_v$o_Version.rmskin"
     $githubDownloadOutpath = "$s_root\$($o_InstallModule)_v$o_Version.rmskin"
-    Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
+    Write-Task "Downloading    "; Write-Emphasized $o_InstallModule; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
     $ProgressPreference = 'SilentlyContinue'
     wget "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
     Write-Done
@@ -458,7 +458,7 @@ If ($o_Version) {
         }
         $githubDownloadURL = "https://github.com/$i_githubOrg/$i_name/releases/download/v$latest_v/$($i_name)_v$latest_v.rmskin"
         $githubDownloadOutpath = "$s_root\$($i_name)_$latest_v.rmskin"
-        Write-Task "Downloading    "; Write-Emphasized $githubDownloadURL; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
+        Write-Task "Downloading    "; Write-Emphasized $i_name; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
         $ProgressPreference = 'SilentlyContinue'
         wget "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
         Write-Done
