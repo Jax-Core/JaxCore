@@ -88,7 +88,7 @@ function Get-IniContent ($filePath) {
 function Get-RemoteIniContent ($link) {
     $ini = [ordered]@{}
 
-    $result = iwr -useb $link
+    $result = Invoke-WebRequest -useb $link
     $section = ';ItIsNotAFuckingSection;'
     $ini.Add($section, [ordered]@{})
 
@@ -207,7 +207,7 @@ function Download-Rainmeter($params) {
     # --------------------------------- Download --------------------------------- #
     Write-Task "Downloading    "; Write-Emphasized $githubRMDownloadURL; Write-Task " -> "; Write-Emphasized $githubRMDownloadOutpath
     $ProgressPreference = 'SilentlyContinue'
-    wget "$githubRMDownloadURL" -outfile "$githubRMDownloadOutpath" -UseBasicParsing
+    Invoke-WebRequest "$githubRMDownloadURL" -outfile "$githubRMDownloadOutpath" -UseBasicParsing
     Write-Done
     # ------------------------------------ Run ----------------------------------- #
     Write-Task "Running installer..."
@@ -438,7 +438,7 @@ If ($o_Version) {
     $githubDownloadOutpath = "$s_root\$($o_InstallModule)_v$o_Version.rmskin"
     Write-Task "Downloading    "; Write-Emphasized $o_InstallModule; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
     $ProgressPreference = 'SilentlyContinue'
-    wget "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
+    Invoke-WebRequest "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
     Write-Done
 } else {
     for (($i=0);($i -lt $o_InstallModule.Count);$i++) {
@@ -461,7 +461,7 @@ If ($o_Version) {
         $githubDownloadOutpath = "$s_root\$($i_name)_$latest_v.rmskin"
         Write-Task "Downloading    "; Write-Emphasized $i_name; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
         $ProgressPreference = 'SilentlyContinue'
-        wget "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
+        Invoke-WebRequest "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
         Write-Done
     }
 }
