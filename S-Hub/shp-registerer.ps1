@@ -51,9 +51,15 @@ If ($set) {
     start-process explorer.exe
 }
 
+# --------------------------- Environment variables -------------------------- #
+$user = [EnvironmentVariableTarget]::User
+$path = [Environment]::GetEnvironmentVariable("PATH", $user)
+$paths = $path -split ";"
+$is_in_path = $paths -contains $o_RMSettingsFolder -or $paths -contains "${o_RMSettingsFolder}\"
+if (-not $is_in_path) {
+    "Adding '$o_RMSettingsFolder' to the PATH envar"
+    [Environment]::SetEnvironmentVariable("PATH", "${path};${o_RMSettingsFolder}", $user)
+    $env:PATH += ";${o_RMSettingsFolder}"
+}
 # ----------------------------------- Close ---------------------------------- #
-'Generating SHP Path File'
-If (Test-Path 'C:\RMInstallation.txt') {Remove-Item 'C:\RMInstallation.txt' -Force > $null}
-New-Item -Path 'C:\RMInstallation.txt' -Type "File" -Value "$o_RMSettingsFolder" -Force > $null
-Get-Item 'C:\RMInstallation.txt' -Force | foreach { $_.Attributes = $_.Attributes -bor "Hidden" }
 Exit
