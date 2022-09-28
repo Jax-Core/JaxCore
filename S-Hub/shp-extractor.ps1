@@ -695,7 +695,11 @@ if (($SHPData.Tags -contains 'Spicetify') -and ('S', 'A' | ? { $o_toImport -cont
         Write-Done
 
         Write-Task "Applying spicetify theme"
-        if (!$o_noMove) {ECHO Y | spicetify.exe apply > $null}
+        if (!$o_noMove) {
+            Write-Divider "Spicetify Apply"
+            ECHO Y | spicetify.exe apply
+            Write-Divider "Apply End"
+        }
         Write-Done
     }
 }

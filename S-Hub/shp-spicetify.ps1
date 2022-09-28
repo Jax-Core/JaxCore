@@ -1,14 +1,7 @@
 # Copyright 2022 Spicetify. GPL license.
 # Edited from project Denoland install script (https://github.com/denoland/deno_install)
-param (
-  [string] $version
-)
 
 $PSMinVersion = 3
-
-if ($v) {
-    $version = $v
-}
 
 # Helper functions for pretty terminal output.
 function Write-Part ([string] $Text) {
