@@ -669,7 +669,7 @@ if (($SHPData.Tags -contains 'Spicetify') -and ('S', 'A' | ? { $o_toImport -cont
     if ($spicetify_detected -ne $null -or $confirmation -match '^y$') {
         Write-Info 'Spicetify found in local (set)'
         $spicetify_configpath = spicetify.exe -c
-        $spicetify_path = "$spicetify_configpath\..\"
+        $spicetify_path = $spicetify_configpath | Split-Path
 
         debug "Applying settings"
         Write-Task "Changing spicetify key values"
@@ -682,7 +682,7 @@ if (($SHPData.Tags -contains 'Spicetify') -and ('S', 'A' | ? { $o_toImport -cont
             Write-Task "Changing & moving extensions to spicetify directory"
             if (!$o_noMove) {
                 spicetify.exe config extensions $SHPData.Spicetify.extensions > $null
-                Move-Item -Path "$s_cache_location\AppSkins\Spicetify\Extensions\*" -Destination "$($spicetify_path)Extensions\$($SHPData.Spicetify.extensions)"
+                Move-Item -Path "$s_cache_location\AppSkins\Spicetify\Extensions\*" -Destination "$spicetify_path\Extensions\$($SHPData.Spicetify.extensions)"
             }
             Write-Done
         }
@@ -690,7 +690,7 @@ if (($SHPData.Tags -contains 'Spicetify') -and ('S', 'A' | ? { $o_toImport -cont
         Write-Task "Copying theme assets to themes folder"
         if (!$o_noMove) {
             New-Item -Path "$spicetify_path\Themes\$($SHPData.Spicetify.current_theme)" -Type "Directory"
-            Move-Item -Path "$s_cache_location\AppSkins\Spicetify\Themes\*" -Destination "$($spicetify_path)Themes\$($SHPData.Spicetify.current_theme)" -Recurse
+            Move-Item -Path "$s_cache_location\AppSkins\Spicetify\Themes\*" -Destination "$spicetify_path\Themes\$($SHPData.Spicetify.current_theme)"
         }
         Write-Done
 
