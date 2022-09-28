@@ -1,3 +1,15 @@
+# Copyright 2022 Spicetify. GPL license.
+# Edited from project Denoland install script (https://github.com/denoland/deno_install)
+param (
+  [string] $version
+)
+
+$PSMinVersion = 3
+
+if ($v) {
+    $version = $v
+}
+
 # Helper functions for pretty terminal output.
 function Write-Part ([string] $Text) {
   Write-Host $Text -NoNewline
@@ -5,6 +17,11 @@ function Write-Part ([string] $Text) {
 
 function Write-Emphasized ([string] $Text) {
   Write-Host $Text -NoNewLine -ForegroundColor "Cyan"
+}
+
+function Write-Done {
+  Write-Host " > " -NoNewline
+  Write-Host "OK" -ForegroundColor "Green"
 }
 
 function RemoveOldPath {
