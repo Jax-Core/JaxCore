@@ -580,7 +580,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             } else {
                 Get-ChildItem -Path "$s_RMSkinFolder\$($_.Name)\" -Recurse | Remove-Item -Recurse
             }
-            Move-Item -Path "$i_root\Skins\$skin_name\*" -Destination "$s_RMSkinFolder\$skin_name\" -Force
+            Move-Item -Path "$i_root\Skins\$($_.Name)\*" -Destination "$s_RMSkinFolder\$($_.Name)\" -Force
         }
         If (Test-Path "$i_root\Plugins\") {
             debug "> Moving / replacing plugins"

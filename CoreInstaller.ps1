@@ -292,7 +292,7 @@ $RMEXEloc = ""
 # Enable TLS 1.2 since it is required for connections to GitHub.
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-Write-Info "COREINSTALLER REF: Stable v5.56"
+Write-Info "COREINSTALLER REF: Stable v5.57"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -574,12 +574,14 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
         }
         # ---------------------------------- Process --------------------------------- #
         debug "> Moving skin files"
-        If ($new_install) {
-            New-Item -Path "$s_RMSkinFolder\$skin_name\" -Type "Directory" -Force > $null
-        } else {
-            Get-ChildItem -Path "$s_RMSkinFolder\$skin_name\" -Recurse | Remove-Item -Recurse
+        Get-ChildItem -Path "$i_root\Skins\" | ForEach-Object {
+            If ($new_install) {
+                New-Item -Path "$s_RMSkinFolder\$($_.Name)\" -Type "Directory" -Force > $null
+            } else {
+                Get-ChildItem -Path "$s_RMSkinFolder\$($_.Name)\" -Recurse | Remove-Item -Recurse
+            }
+            Move-Item -Path "$i_root\Skins\$($_.Name)\*" -Destination "$s_RMSkinFolder\$($_.Name)\" -Force
         }
-        Move-Item -Path "$i_root\Skins\$skin_name\*" -Destination "$s_RMSkinFolder\$skin_name\" -Force
         If (Test-Path "$i_root\Plugins\") {
             debug "> Moving / replacing plugins"
             $i_targetlocation = "$($s_RMSettingsFolder)\Plugins\"
