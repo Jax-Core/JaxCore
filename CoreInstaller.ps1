@@ -165,6 +165,7 @@ function Wait-ForProcess
         Write-Host '.' -NoNewline
         Start-Sleep -Milliseconds 400
     }
+    Write-Done
 }
 
 function DownloadFile($url, $targetFile)
@@ -383,7 +384,6 @@ If (!$bit) {
     If (!(Get-Process 'Rainmeter' -ErrorAction SilentlyContinue)) {
         & "$RMEXEloc"
         Wait-ForProcess 'Rainmeter'
-        Write-Done
     }
     $rmprocess_object = Get-Process Rainmeter
     $rmprocess_id = $rmprocess_object.id
@@ -487,7 +487,6 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     Wait-Process "SkinInstaller"
     Write-Done
     Wait-ForProcess 'Rainmeter'
-    Write-Done
 } else {
     # ---------------------------------------------------------------------------- #
     #                       Standard extraction installation                       #
@@ -682,7 +681,6 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     If (!($o_FromSHUB) -or $o_NoPostActions) {
         Start-Process "$RMEXEloc"
         Wait-ForProcess 'Rainmeter'
-        Write-Done
     }
 }
 
@@ -706,7 +704,7 @@ Active=0
 [$skin_load_path]
 Active=1
 
-"@ > $null
+"@
     Start-Process "$RMEXEloc"
     Wait-ForProcess 'Rainmeter'
     Start-Sleep -Milliseconds 500
