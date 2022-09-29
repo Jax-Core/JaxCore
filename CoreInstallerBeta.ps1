@@ -165,6 +165,7 @@ function Wait-ForProcess
         Write-Host '.' -NoNewline
         Start-Sleep -Milliseconds 400
     }
+    Write-Done
 }
 
 function DownloadFile($url, $targetFile)
@@ -291,7 +292,7 @@ $RMEXEloc = ""
 # Enable TLS 1.2 since it is required for connections to GitHub.
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-Write-Info "COREINSTALLER REF: Beta v5.56"
+Write-Info "COREINSTALLER REF: Beta v5.57"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -383,7 +384,6 @@ If (!$bit) {
     If (!(Get-Process 'Rainmeter' -ErrorAction SilentlyContinue)) {
         & "$RMEXEloc"
         Wait-ForProcess 'Rainmeter'
-        Write-Done
     }
     $rmprocess_object = Get-Process Rainmeter
     $rmprocess_id = $rmprocess_object.id
@@ -487,7 +487,6 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     Wait-Process "SkinInstaller"
     Write-Done
     Wait-ForProcess 'Rainmeter'
-    Write-Done
 } else {
     # ---------------------------------------------------------------------------- #
     #                       Standard extraction installation                       #
@@ -575,10 +574,12 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
         }
         # ---------------------------------- Process --------------------------------- #
         debug "> Moving skin files"
-        If ($new_install) {
-            New-Item -Path "$s_RMSkinFolder\$skin_name\" -Type "Directory" -Force > $null
-        } else {
-            Get-ChildItem -Path "$s_RMSkinFolder\$skin_name\" -Recurse | Remove-Item -Recurse
+        Get-ChildItem -Path "$i_root\Skins\" | ForEach-Object {
+            If ($new_install) {
+                New-Item -Path "$s_RMSkinFolder\$($_.Name)\" -Type "Directory" -Force > $null
+            } else {
+                Get-ChildItem -Path "$s_RMSkinFolder\$($_.Name)\" -Recurse | Remove-Item -Recurse
+            }
         }
         Move-Item -Path "$i_root\Skins\$skin_name\*" -Destination "$s_RMSkinFolder\$skin_name\" -Force
         If (Test-Path "$i_root\Plugins\") {
@@ -682,7 +683,6 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     If (!($o_FromSHUB) -or $o_NoPostActions) {
         Start-Process "$RMEXEloc"
         Wait-ForProcess 'Rainmeter'
-        Write-Done
     }
 }
 
@@ -706,7 +706,7 @@ Active=0
 [$skin_load_path]
 Active=1
 
-"@ > $null
+"@
     Start-Process "$RMEXEloc"
     Wait-ForProcess 'Rainmeter'
     Start-Sleep -Milliseconds 500
