@@ -165,7 +165,6 @@ function Wait-ForProcess
         Write-Host '.' -NoNewline
         Start-Sleep -Milliseconds 400
     }
-    Write-Host ''
 }
 
 function DownloadFile($url, $targetFile)
@@ -209,7 +208,7 @@ function Download-Rainmeter($params) {
     $githubRMDownloadURL = $githubRMReleaseAPIObject.assets.browser_download_url[0]
     $githubRMDownloadOutpath = "$env:temp\RainmeterInstaller.exe"
     # --------------------------------- Download --------------------------------- #
-    Write-Task "Downloading    "; Write-Emphasized $githubRMDownloadURL; Write-Task " -> "; Write-Emphasized $githubRMDownloadOutpath
+    Write-Task "Downloading    "; Write-Emphasized $githubRMDownloadURL
     $ProgressPreference = 'SilentlyContinue'
     Invoke-WebRequest "$githubRMDownloadURL" -outfile "$githubRMDownloadOutpath" -UseBasicParsing
     Write-Done
@@ -445,7 +444,7 @@ foreach ($m in $o_InstallModule) {
     } else {
         $release_api_url = "https://api.github.com/repos/$org/$m/releases/tags/v$o_Version"
     }
-    Write-Task "Downloading    "; Write-Emphasized $release_api_url; Write-Task " to get required url to get"
+    Write-Task "Downloading    "; Write-Emphasized $release_api_url; Write-Task " to get download URL"
     $api_object = Invoke-WebRequest -Uri $release_api_url -UseBasicParsing | ConvertFrom-Json
     Write-Done
     $dl_url = $api_object.assets.browser_download_url
@@ -454,7 +453,7 @@ foreach ($m in $o_InstallModule) {
     
     $ProgressPreference = 'SilentlyContinue'
     $outpath = "$s_root\$($m)_$($api_object.tag_name).rmskin"
-    Write-Task "Downloading    "; Write-Emphasized $i_name; Write-Task " -> "; Write-Emphasized $outpath
+    Write-Task "Downloading    "; Write-Emphasized $dl_url
     Invoke-WebRequest "$dl_url" -outfile "$outpath" -UseBasicParsing
     Write-Done
 }
@@ -683,7 +682,6 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
         Write-Info "Finished installation of $skin_name! (^ ᴗ ^) "
     }
     If (!($o_FromSHUB) -or $o_NoPostActions) {
-        Write-Task "Starting Rainmeter"
         Start-Process "$RMEXEloc"
         Wait-ForProcess 'Rainmeter'
         Write-Done
