@@ -292,7 +292,7 @@ $RMEXEloc = ""
 # Enable TLS 1.2 since it is required for connections to GitHub.
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-Write-Info "COREINSTALLER REF: Beta v5.55"
+Write-Info "COREINSTALLER REF: Beta v5.56"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -303,7 +303,6 @@ if (!($o_Location)) {
     $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
     $s_RMSkinFolder = "$env:APPDATA\JaxCore\InstalledComponents\"
     # --------------------------- Check if RM installed -------------------------- #
-    Write-Task "Checking if Rainmeter is installed..."
 
     $RMEXEloc = "$($s_RMSettingsFolder)Rainmeter.exe"
 
@@ -366,7 +365,7 @@ if (!($o_Location)) {
             }
         }
     } else {
-        Write-Task "Are you sure you want to install JaxCore at "; Write-Emphasized $o_Location
+        Write-Host "Are you sure you want to install JaxCore at " -NoNewLine; Write-Emphasized $o_Location
         $confirmation = Read-Host "? (y/n)"
         if ($confirmation -match '^y$') {
             $wasRMInstalled = $false
@@ -560,11 +559,13 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                 If (Test-Path "$i_root\Unpacked\$i_name\") { Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse > $null }
                 New-Item -Path "$i_root\SavedVarFiles" -Type "Directory" > $null
                 foreach ($varf in $skin_varf) {
-                    $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $varf)"
-                    $i_savelocation = "$i_root\SavedVarFiles\$varf"
-                    debug "Saving #$i $($varf) -> $i_savelocation"
-                    If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" > $null }
-                    Copy-Item -Path "$s_RMSkinFolder\$varf" -Destination "$i_savelocation" -Force > $null
+                    if (Test-Path -Path "$s_RMSkinFolder\$varf") {
+                        $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $varf)"
+                        $i_savelocation = "$i_root\SavedVarFiles\$varf"
+                        debug "Saving #$i $($varf) -> $i_savelocation"
+                        If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" > $null }
+                        Copy-Item -Path "$s_RMSkinFolder\$varf" -Destination "$i_savelocation" -Force > $null
+                    }
                 }
             } else {
                 debug "> Not saving variable files"
@@ -590,7 +591,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                 $i_pluginlocation = "$i_root\Plugins\$bit\$i_plugin"
                 debug "Moving `"$i_plugin`" -> `"$i_pluginlocation`""
                 If (Test-Path "$i_targetlocation\$i_plugin") { Remove-Item "$i_targetlocation\$i_plugin" -Force }
-                Copy-Item -Path "$i_pluginlocation" -Destination "$i_targetlocation" -Force
+                Copy-Item -Path "$i_pluginlocation" -Destination "$i_targetlocation" -Force > $null
             }
         } else {
             debug "> Skipping plugin installation (none)"
@@ -601,7 +602,8 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             foreach ($varf in $skin_varf) {
                 $i_savelocation = "$i_root\SavedVarFiles\$varf"
                 $i_targetlocation = "$s_RMSkinFolder\$varf"
-                If (Test-Path "$i_targetlocation") {
+                If (Test-Path "$i_savelocation") {
+                    debug "Writing keys and values from saved variables to local"
                     $Ini = Get-IniContent $i_savelocation;$oldvars = $Ini
                     $Ini = Get-IniContent $i_targetlocation;$newvars = $Ini
                     $oldvars.Keys | Foreach-Object {
@@ -617,9 +619,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                     }
                     Set-IniContent $newvars $i_targetlocation
                 } else {
-                    debug "Moving #$i $i_savelocation -> $i_targetlocation"
-                    New-Item -Path "$(Split-Path $i_targetlocation)" -Type "Directory" -ErrorAction SilentlyContinue
-                    Copy-Item -Path "$i_savelocation" -Destination "$i_targetlocation" -Force -ErrorAction SilentlyContinue
+                    Write-Fail "Something went wrong with importing saved variables. Please report this issue to the developer."
                 }
             }
         } elseif (($skin_name -notcontains '#JaxCore') -and !$o_FromSHUB -and $o_NoPostActions) {
@@ -629,11 +629,13 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             $sah = $vc.CurrentVerticalResolution
     #        ((#SCREENAREAWIDTH#/1920) < (#SCREENAREAHEIGHT#/1080) ? (#SCREENAREAWIDTH#/1920) : (#SCREENAREAHEIGHT#/1080))
             $scale = 1
+            Write-Task "Getting scale"
             If (($saw/1920) -lt ($sah/1080)) {
                 $scale = $saw / 1920
             } else {
                 $scale = $sah / 1080
             }
+            Write-Done
             $scale = [math]::Round($scale,2)
             debug "Scale is $scale"
             if ($scale -eq 1) {
@@ -641,6 +643,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             } elseif ($scale -eq 0) {
                 Write-Fail "Seems like the installer is unable to identify the correct screen sizes. Skipping scaling writing."
             } else {
+                Write-Task "Applying scaling to config files"
                 $varsfile = "$s_RMSkinFolder\$skin_name\@Resources\Vars.inc"
                 If (Test-Path $varsfile) {
                     debug "Vars.inc found."
@@ -663,23 +666,27 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                         }
                     }
                 }
+                Write-Done
             }
         }
         # ------------------------------ Hotkey variable ----------------------------- #
         If ($($ModuleDetails[$skin_name].VarFiles -split '\s\|\s') -contains "$skin_name\@Resources\Actions\Hotkeys.ini") {
             If (!((join-path "$Env:APPDATA\Rainmeter\" "") -eq ($RMEXEloc))) {
+                Write-Task "Setting Rainmeter path for AutoHotkey to use in modules."
                 $i_file = "$s_RMSkinFolder\$skin_name\@Resources\Actions\Hotkeys.ini"
                 $Ini = Get-IniContent $i_file
                 $Ini["Variables"]["RMPATH"] = $RMEXEloc
                 Set-IniContent $Ini $i_file
+                Write-Done
             }
         }
-        debug "> Finished installation of $skin_name"
-        debug "-----------------"
+        Write-Info "Finished installation of $skin_name! (^ ᴗ ^) "
     }
     If (!($o_FromSHUB) -or $o_NoPostActions) {
+        Write-Task "Starting Rainmeter"
         Start-Process "$RMEXEloc"
         Wait-ForProcess 'Rainmeter'
+        Write-Done
     }
 }
 
@@ -703,7 +710,7 @@ Active=0
 [$skin_load_path]
 Active=1
 
-"@
+"@ > $null
     Start-Process "$RMEXEloc"
     Wait-ForProcess 'Rainmeter'
     Start-Sleep -Milliseconds 500
@@ -748,6 +755,7 @@ Active=1
         }
     }
 }
-
+Write-Task "Clearing cache"
 Get-ChildItem -Path "$s_root\" -Recurse | Remove-Item -Recurse
+Write-Done
 If (!($o_FromSHUB)) {Exit}
