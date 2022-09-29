@@ -292,7 +292,7 @@ $RMEXEloc = ""
 # Enable TLS 1.2 since it is required for connections to GitHub.
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-Write-Info "COREINSTALLER REF: Beta v5.57"
+Write-Info "COREINSTALLER REF: Beta v5.571"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -580,8 +580,8 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             } else {
                 Get-ChildItem -Path "$s_RMSkinFolder\$($_.Name)\" -Recurse | Remove-Item -Recurse
             }
+            Move-Item -Path "$i_root\Skins\$skin_name\*" -Destination "$s_RMSkinFolder\$skin_name\" -Force
         }
-        Move-Item -Path "$i_root\Skins\$skin_name\*" -Destination "$s_RMSkinFolder\$skin_name\" -Force
         If (Test-Path "$i_root\Plugins\") {
             debug "> Moving / replacing plugins"
             $i_targetlocation = "$($s_RMSettingsFolder)\Plugins\"
