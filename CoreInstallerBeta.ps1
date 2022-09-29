@@ -617,8 +617,6 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                         }
                     }
                     Set-IniContent $newvars $i_targetlocation
-                } else {
-                    Write-Fail "Something went wrong with importing saved variables. Please report this issue to the developer."
                 }
             }
         } elseif (($skin_name -notcontains '#JaxCore') -and !$o_FromSHUB -and $o_NoPostActions) {
@@ -679,7 +677,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                 Write-Done
             }
         }
-        Write-Info "Finished installation of $skin_name! (^ ᴗ ^) "
+        Write-Info "Finished installation of $skin_name! :D "
     }
     If (!($o_FromSHUB) -or $o_NoPostActions) {
         Start-Process "$RMEXEloc"
