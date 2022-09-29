@@ -25,8 +25,12 @@ function Write-Fail ([string] $Text) {
   Write-Host $Text -ForegroundColor "Red"
 }
 
+function Write-Divider ([string] $Text) {
+    Write-Host "[$Text]>+============================================+<[$Text]" -BackgroundColor "DarkGray"
+}
+
 function debug ([string] $Text) {
-  Write-Host $Text
+  Write-Verbose "$Text"
 }
 
 # -------------------------- Check program installed ------------------------- #
@@ -251,7 +255,7 @@ Active=0
 # $o - Option for installer
 # $s - Installer options set by developer
 # $o_InstallModule - Module to install
-## $o_Version - Version to get
+## $o_Version - Version to get (Number ONLY)
 # $o_FromCore - If installation is invoked via JaxCore
 # $o_FromSHUB - If installation is invoked via S-Hub
 # $o_Force - Overwrite existing files
@@ -284,7 +288,11 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Beta v5.54"
+
+# Enable TLS 1.2 since it is required for connections to GitHub.
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+Write-Info "COREINSTALLER REF: Beta v5.55"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -298,12 +306,7 @@ if (!($o_Location)) {
     Write-Task "Checking if Rainmeter is installed..."
 
     $RMEXEloc = "$($s_RMSettingsFolder)Rainmeter.exe"
-    # $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
-    # $RMEXE64bitloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"        
-    # $RMEXE32bitloc = "${Env:ProgramFiles(x86)}\Rainmeter\Rainmeter.exe"
 
-    Write-Done
-    # if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
     if (Test-Path -LiteralPath "$RMEXEloc") {
         # ------------------------------- RM installed ------------------------------- #
         debug "Rainmeter is already installed on your device."
@@ -425,46 +428,36 @@ Get-ChildItem "$s_root" | ForEach-Object {
     Remove-Item $_.FullName -Force -Recurse
 }
 # ------------------------------ Download files ------------------------------ #
+Write-Task "Getting ModuleDetails from JaxCore repository"
 $moduleDetails = Get-RemoteIniContent 'https://raw.githubusercontent.com/Jax-Core/JaxCore/main/S-Hub/ModuleDetails.ini'
+Write-Done
+foreach ($m in $o_InstallModule) {
+    debug "Processing module $m"
 
-If ($o_Version) {
-
-    If ($moduleDetails.ExternalWidgets.Keys -contains $o_InstallModule) {
-        $githubOrg = $moduleDetails.ExternalWidgets[$o_InstallModule]
+    If ($moduleDetails.ExternalWidgets.Keys -contains $m) {
+        $org = $moduleDetails.ExternalWidgets[$m]
     } else {
-        $githubOrg = 'Jax-Core'
+        $org = 'Jax-Core'
     }
+    debug "Organization: $org"
 
-    $githubDownloadURL = "https://github.com/$githubOrg/$o_InstallModule/releases/download/v$o_Version/$($o_InstallModule)_v$o_Version.rmskin"
-    $githubDownloadOutpath = "$s_root\$($o_InstallModule)_v$o_Version.rmskin"
-    Write-Task "Downloading    "; Write-Emphasized $o_InstallModule; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
-    $ProgressPreference = 'SilentlyContinue'
-    Invoke-WebRequest "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
+    if (-not $o_Version) {
+        $release_api_url = "https://api.github.com/repos/$org/$m/releases/latest"
+    } else {
+        $release_api_url = "https://api.github.com/repos/$org/$m/releases/tags/v$o_Version"
+    }
+    Write-Task "Downloading    "; Write-Emphasized $release_api_url; Write-Task " to get required url to get"
+    $api_object = Invoke-WebRequest -Uri $release_api_url -UseBasicParsing | ConvertFrom-Json
     Write-Done
-} else {
-    for (($i=0);($i -lt $o_InstallModule.Count);$i++) {
-        If ($o_InstallModule.Count -eq 1) {$i_name = $o_InstallModule} else {$i_name = $o_InstallModule[$i]}
+    $dl_url = $api_object.assets.browser_download_url
 
-        If ($moduleDetails.ExternalWidgets.Keys -contains $o_InstallModule) {
-            $i_githubOrg = $moduleDetails.ExternalWidgets[$o_InstallModule]
-        } else {
-            $i_githubOrg = 'Jax-Core'
-        }
-
-        $response = Invoke-WebRequest "https://raw.githubusercontent.com/$i_githubOrg/$i_name/main/%40Resources/Version.inc" -UseBasicParsing
-        $responseBytes = $response.RawContentStream.ToArray()
-        if ([System.Text.Encoding]::Unicode.GetString($responseBytes) -match 'Version=(.+)') {
-            $latest_v = $matches[1]
-        } elseif ([System.Text.Encoding]::Unicode.GetString($responseBytes) -match 'Core\.Ver=(.+)') {
-            $latest_v = $matches[1]
-        }
-        $githubDownloadURL = "https://github.com/$i_githubOrg/$i_name/releases/download/v$latest_v/$($i_name)_v$latest_v.rmskin"
-        $githubDownloadOutpath = "$s_root\$($i_name)_$latest_v.rmskin"
-        Write-Task "Downloading    "; Write-Emphasized $i_name; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
-        $ProgressPreference = 'SilentlyContinue'
-        Invoke-WebRequest "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
-        Write-Done
-    }
+    debug "Version to get: $v"
+    
+    $ProgressPreference = 'SilentlyContinue'
+    $outpath = "$s_root\$($m)_$($api_object.tag_name).rmskin"
+    Write-Task "Downloading    "; Write-Emphasized $i_name; Write-Task " -> "; Write-Emphasized $outpath
+    Invoke-WebRequest "$dl_url" -outfile "$outpath" -UseBasicParsing
+    Write-Done
 }
 
 # ---------------------------------------------------------------------------- #
