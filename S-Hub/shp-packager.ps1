@@ -223,8 +223,8 @@ function Get-IniContent ($filePath) {
     if (![System.IO.File]::Exists($filePath)) {
         throw "$filePath invalid"
     }
-    # $section = ';ItIsNotAFuckingSection;'
-    # $ini.Add($section, [ordered]@{})
+    $section = ';ItIsNotAFuckingSection;'
+    $ini.Add($section, [ordered]@{})
 
     foreach ($line in [System.IO.File]::ReadLines($filePath)) {
         if ($line -match "^\s*\[(.+?)\]\s*$") {
@@ -730,7 +730,7 @@ if (!$o_noWinVS) {
     Write-Done
     Write-Task "Reading $(Split-Path $currentTheme -Leaf -Resolve)"
     $WinVSdotTheme = Get-IniContent $currentTheme
-    $currentThemeVSPath = ($WinVSdotTheme.VisualStyles.Path).Replace('%ResourceDir%', 'C:\Windows\Resources\')
+    $currentThemeVSPath = ($WinVSdotTheme.VisualStyles.Path).Replace('%ResourceDir%\', 'C:\Windows\Resources\').Replace('%SystemRoot%\', 'C:\Windows\')
     $currentThemeVSPathFolder = $currentThemeVSPath | Split-Path
     $currentThemeVSPathFolderName = $currentThemeVSPathFolder | Split-Path -Leaf
     Write-Done
