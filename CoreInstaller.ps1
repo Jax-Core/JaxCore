@@ -25,8 +25,12 @@ function Write-Fail ([string] $Text) {
   Write-Host $Text -ForegroundColor "Red"
 }
 
+function Write-Divider ([string] $Text) {
+    Write-Host "[$Text]>+============================================+<[$Text]" -BackgroundColor "DarkGray"
+}
+
 function debug ([string] $Text) {
-  Write-Host $Text
+  Write-Verbose "$Text"
 }
 
 # -------------------------- Check program installed ------------------------- #
@@ -161,7 +165,6 @@ function Wait-ForProcess
         Write-Host '.' -NoNewline
         Start-Sleep -Milliseconds 400
     }
-    Write-Host ''
 }
 
 function DownloadFile($url, $targetFile)
@@ -205,7 +208,7 @@ function Download-Rainmeter($params) {
     $githubRMDownloadURL = $githubRMReleaseAPIObject.assets.browser_download_url[0]
     $githubRMDownloadOutpath = "$env:temp\RainmeterInstaller.exe"
     # --------------------------------- Download --------------------------------- #
-    Write-Task "Downloading    "; Write-Emphasized $githubRMDownloadURL; Write-Task " -> "; Write-Emphasized $githubRMDownloadOutpath
+    Write-Task "Downloading    "; Write-Emphasized $githubRMDownloadURL
     $ProgressPreference = 'SilentlyContinue'
     Invoke-WebRequest "$githubRMDownloadURL" -outfile "$githubRMDownloadOutpath" -UseBasicParsing
     Write-Done
@@ -251,13 +254,14 @@ Active=0
 # $o - Option for installer
 # $s - Installer options set by developer
 # $o_InstallModule - Module to install
-## $o_Version - Version to get
+## $o_Version - Version to get (Number ONLY)
 # $o_FromCore - If installation is invoked via JaxCore
 # $o_FromSHUB - If installation is invoked via S-Hub
 # $o_Force - Overwrite existing files
 # $o_ExtInstall - Run .rmskin
 # $o_PromptBestOption - Prompt for changing to best options
 ## $o_Location - Where to install Core, or where the Rainmeter folder is 
+## $o_NoPostActions - Whether to do additional things after installation
 # ------------------------------ Default values ------------------------------ #
 if (!($o_InstallModule)) {$o_InstallModule = "JaxCore"}
 if (!($o_FromCore)) {$o_FromCore = $false}
@@ -283,7 +287,11 @@ $s_RMINIFile = ""
 $s_RMSkinFolder = ""
 $RMEXEloc = ""
 # ----------------------------------- Start ---------------------------------- #
-Write-Info "COREINSTALLER REF: Stable v5.53"
+
+# Enable TLS 1.2 since it is required for connections to GitHub.
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+Write-Info "COREINSTALLER REF: Stable v5.56"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -294,15 +302,9 @@ if (!($o_Location)) {
     $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
     $s_RMSkinFolder = "$env:APPDATA\JaxCore\InstalledComponents\"
     # --------------------------- Check if RM installed -------------------------- #
-    Write-Task "Checking if Rainmeter is installed..."
 
     $RMEXEloc = "$($s_RMSettingsFolder)Rainmeter.exe"
-    # $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
-    # $RMEXE64bitloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"        
-    # $RMEXE32bitloc = "${Env:ProgramFiles(x86)}\Rainmeter\Rainmeter.exe"
 
-    Write-Done
-    # if ((Test-Path "$RMEXE32bitloc") -or (Test-Path "$RMEXE64bitloc")) {
     if (Test-Path -LiteralPath "$RMEXEloc") {
         # ------------------------------- RM installed ------------------------------- #
         debug "Rainmeter is already installed on your device."
@@ -362,7 +364,7 @@ if (!($o_Location)) {
             }
         }
     } else {
-        Write-Task "Are you sure you want to install JaxCore at "; Write-Emphasized $o_Location
+        Write-Host "Are you sure you want to install JaxCore at " -NoNewLine; Write-Emphasized $o_Location
         $confirmation = Read-Host "? (y/n)"
         if ($confirmation -match '^y$') {
             $wasRMInstalled = $false
@@ -424,46 +426,36 @@ Get-ChildItem "$s_root" | ForEach-Object {
     Remove-Item $_.FullName -Force -Recurse
 }
 # ------------------------------ Download files ------------------------------ #
+Write-Task "Getting ModuleDetails from JaxCore repository"
 $moduleDetails = Get-RemoteIniContent 'https://raw.githubusercontent.com/Jax-Core/JaxCore/main/S-Hub/ModuleDetails.ini'
+Write-Done
+foreach ($m in $o_InstallModule) {
+    debug "Processing module $m"
 
-If ($o_Version) {
-
-    If ($moduleDetails.ExternalWidgets.Keys -contains $o_InstallModule) {
-        $githubOrg = $moduleDetails.ExternalWidgets[$o_InstallModule]
+    If ($moduleDetails.ExternalWidgets.Keys -contains $m) {
+        $org = $moduleDetails.ExternalWidgets[$m]
     } else {
-        $githubOrg = 'Jax-Core'
+        $org = 'Jax-Core'
     }
+    debug "Organization: $org"
 
-    $githubDownloadURL = "https://github.com/$githubOrg/$o_InstallModule/releases/download/v$o_Version/$($o_InstallModule)_v$o_Version.rmskin"
-    $githubDownloadOutpath = "$s_root\$($o_InstallModule)_v$o_Version.rmskin"
-    Write-Task "Downloading    "; Write-Emphasized $o_InstallModule; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
-    $ProgressPreference = 'SilentlyContinue'
-    Invoke-WebRequest "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
+    if (-not $o_Version) {
+        $release_api_url = "https://api.github.com/repos/$org/$m/releases/latest"
+    } else {
+        $release_api_url = "https://api.github.com/repos/$org/$m/releases/tags/v$o_Version"
+    }
+    Write-Task "Downloading    "; Write-Emphasized $release_api_url; Write-Task " to get download URL"
+    $api_object = Invoke-WebRequest -Uri $release_api_url -UseBasicParsing | ConvertFrom-Json
     Write-Done
-} else {
-    for (($i=0);($i -lt $o_InstallModule.Count);$i++) {
-        If ($o_InstallModule.Count -eq 1) {$i_name = $o_InstallModule} else {$i_name = $o_InstallModule[$i]}
+    $dl_url = $api_object.assets.browser_download_url
 
-        If ($moduleDetails.ExternalWidgets.Keys -contains $o_InstallModule) {
-            $i_githubOrg = $moduleDetails.ExternalWidgets[$o_InstallModule]
-        } else {
-            $i_githubOrg = 'Jax-Core'
-        }
-
-        $response = Invoke-WebRequest "https://raw.githubusercontent.com/$i_githubOrg/$i_name/main/%40Resources/Version.inc" -UseBasicParsing
-        $responseBytes = $response.RawContentStream.ToArray()
-        if ([System.Text.Encoding]::Unicode.GetString($responseBytes) -match 'Version=(.+)') {
-            $latest_v = $matches[1]
-        } elseif ([System.Text.Encoding]::Unicode.GetString($responseBytes) -match 'Core\.Ver=(.+)') {
-            $latest_v = $matches[1]
-        }
-        $githubDownloadURL = "https://github.com/$i_githubOrg/$i_name/releases/download/v$latest_v/$($i_name)_v$latest_v.rmskin"
-        $githubDownloadOutpath = "$s_root\$($i_name)_$latest_v.rmskin"
-        Write-Task "Downloading    "; Write-Emphasized $i_name; Write-Task " -> "; Write-Emphasized $githubDownloadOutpath
-        $ProgressPreference = 'SilentlyContinue'
-        Invoke-WebRequest "$githubDownloadURL" -outfile "$githubDownloadOutpath" -UseBasicParsing
-        Write-Done
-    }
+    debug "Version to get: $v"
+    
+    $ProgressPreference = 'SilentlyContinue'
+    $outpath = "$s_root\$($m)_$($api_object.tag_name).rmskin"
+    Write-Task "Downloading    "; Write-Emphasized $dl_url
+    Invoke-WebRequest "$dl_url" -outfile "$outpath" -UseBasicParsing
+    Write-Done
 }
 
 # ---------------------------------------------------------------------------- #
@@ -566,11 +558,13 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                 If (Test-Path "$i_root\Unpacked\$i_name\") { Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse > $null }
                 New-Item -Path "$i_root\SavedVarFiles" -Type "Directory" > $null
                 foreach ($varf in $skin_varf) {
-                    $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $varf)"
-                    $i_savelocation = "$i_root\SavedVarFiles\$varf"
-                    debug "Saving #$i $($varf) -> $i_savelocation"
-                    If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" > $null }
-                    Copy-Item -Path "$s_RMSkinFolder\$varf" -Destination "$i_savelocation" -Force > $null
+                    if (Test-Path -Path "$s_RMSkinFolder\$varf") {
+                        $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $varf)"
+                        $i_savelocation = "$i_root\SavedVarFiles\$varf"
+                        debug "Saving #$i $($varf) -> $i_savelocation"
+                        If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" > $null }
+                        Copy-Item -Path "$s_RMSkinFolder\$varf" -Destination "$i_savelocation" -Force > $null
+                    }
                 }
             } else {
                 debug "> Not saving variable files"
@@ -596,7 +590,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                 $i_pluginlocation = "$i_root\Plugins\$bit\$i_plugin"
                 debug "Moving `"$i_plugin`" -> `"$i_pluginlocation`""
                 If (Test-Path "$i_targetlocation\$i_plugin") { Remove-Item "$i_targetlocation\$i_plugin" -Force }
-                Copy-Item -Path "$i_pluginlocation" -Destination "$i_targetlocation" -Force
+                Copy-Item -Path "$i_pluginlocation" -Destination "$i_targetlocation" -Force > $null
             }
         } else {
             debug "> Skipping plugin installation (none)"
@@ -607,7 +601,8 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             foreach ($varf in $skin_varf) {
                 $i_savelocation = "$i_root\SavedVarFiles\$varf"
                 $i_targetlocation = "$s_RMSkinFolder\$varf"
-                If (Test-Path "$i_targetlocation") {
+                If (Test-Path "$i_savelocation") {
+                    debug "Writing keys and values from saved variables to local"
                     $Ini = Get-IniContent $i_savelocation;$oldvars = $Ini
                     $Ini = Get-IniContent $i_targetlocation;$newvars = $Ini
                     $oldvars.Keys | Foreach-Object {
@@ -622,24 +617,22 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                         }
                     }
                     Set-IniContent $newvars $i_targetlocation
-                } else {
-                    debug "Moving #$i $i_savelocation -> $i_targetlocation"
-                    New-Item -Path "$(Split-Path $i_targetlocation)" -Type "Directory" -ErrorAction SilentlyContinue
-                    Copy-Item -Path "$i_savelocation" -Destination "$i_targetlocation" -Force -ErrorAction SilentlyContinue
                 }
             }
-        } elseif (($skin_name -notcontains '#JaxCore') -and !$o_FromSHUB) {
+        } elseif (($skin_name -notcontains '#JaxCore') -and !$o_FromSHUB -and $o_NoPostActions) {
             debug "> Automatically changing scale variables (new installation)"
             $vc = Get-WmiObject -class "Win32_VideoController"
             $saw = $vc.CurrentHorizontalResolution
             $sah = $vc.CurrentVerticalResolution
     #        ((#SCREENAREAWIDTH#/1920) < (#SCREENAREAHEIGHT#/1080) ? (#SCREENAREAWIDTH#/1920) : (#SCREENAREAHEIGHT#/1080))
             $scale = 1
+            Write-Task "Getting scale"
             If (($saw/1920) -lt ($sah/1080)) {
                 $scale = $saw / 1920
             } else {
                 $scale = $sah / 1080
             }
+            Write-Done
             $scale = [math]::Round($scale,2)
             debug "Scale is $scale"
             if ($scale -eq 1) {
@@ -647,6 +640,7 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             } elseif ($scale -eq 0) {
                 Write-Fail "Seems like the installer is unable to identify the correct screen sizes. Skipping scaling writing."
             } else {
+                Write-Task "Applying scaling to config files"
                 $varsfile = "$s_RMSkinFolder\$skin_name\@Resources\Vars.inc"
                 If (Test-Path $varsfile) {
                     debug "Vars.inc found."
@@ -669,32 +663,34 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                         }
                     }
                 }
+                Write-Done
             }
         }
         # ------------------------------ Hotkey variable ----------------------------- #
         If ($($ModuleDetails[$skin_name].VarFiles -split '\s\|\s') -contains "$skin_name\@Resources\Actions\Hotkeys.ini") {
             If (!((join-path "$Env:APPDATA\Rainmeter\" "") -eq ($RMEXEloc))) {
+                Write-Task "Setting Rainmeter path for AutoHotkey to use in modules."
                 $i_file = "$s_RMSkinFolder\$skin_name\@Resources\Actions\Hotkeys.ini"
                 $Ini = Get-IniContent $i_file
                 $Ini["Variables"]["RMPATH"] = $RMEXEloc
                 Set-IniContent $Ini $i_file
+                Write-Done
             }
         }
-        debug "> Finished installation of $skin_name"
-        debug "-----------------"
+        Write-Info "Finished installation of $skin_name! :D "
     }
-    If (!($o_FromSHUB)) {
+    If (!($o_FromSHUB) -or $o_NoPostActions) {
         Start-Process "$RMEXEloc"
         Wait-ForProcess 'Rainmeter'
+        Write-Done
     }
 }
 
 Start-Sleep -Milliseconds 500
-If ($isInstallingCore) {
-    If (-not $wasRMInstalled) {
-        Stop-Process -Name 'Rainmeter'
-        Remove-Item -Path "$($s_RMSettingsFolder)Rainmeter.ini"
-        New-Item -Path "$s_RMSettingsFolder" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
+If (!$wasRMInstalled) {
+    Stop-Process -Name 'Rainmeter'
+    Remove-Item -Path "$($s_RMSettingsFolder)Rainmeter.ini"
+    New-Item -Path "$s_RMSettingsFolder" -Name "Rainmeter.ini" -ItemType "file" -Force -Value @"
 [Rainmeter]
 Logging=0
 SkinPath=$s_RMSkinFolder
@@ -710,11 +706,12 @@ Active=0
 [$skin_load_path]
 Active=1
 
-"@
-        Start-Process "$RMEXEloc"
-        Wait-ForProcess 'Rainmeter'
-        Start-Sleep -Milliseconds 500
-    } elseif ($o_ExtInstall -eq $false) {
+"@ > $null
+    Start-Process "$RMEXEloc"
+    Wait-ForProcess 'Rainmeter'
+    Start-Sleep -Milliseconds 500
+} elseif ($isInstallingCore -or $o_NoPostActions) {
+    if ($o_ExtInstall -eq $false) {
         & "$RMEXEloc" [!ActivateConfig $skin_load_path]
     }
 } else {
@@ -754,6 +751,7 @@ Active=1
         }
     }
 }
-
+Write-Task "Clearing cache"
 Get-ChildItem -Path "$s_root\" -Recurse | Remove-Item -Recurse
+Write-Done
 If (!($o_FromSHUB)) {Exit}
