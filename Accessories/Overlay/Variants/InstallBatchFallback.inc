@@ -3,11 +3,13 @@ Update=-1
 
 [Variables]
 @includeVars=#@#Vars.inc
+@includeSkinVars=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 
 [mActions]
 Measure=Plugin
 Plugin=ActionTimer
-ActionList1=Wait 200
+ActionList1=Wait 200 | Position
+Position=[!SetWindowPosition 50% 50% 50% 50%]
 
 [p.FrostedGlass]
 Measure=Plugin
@@ -30,17 +32,17 @@ Container=
 
 [Overlay]
 Meter=String
-W=(#Set.W#+#Set.WinB#)
-H=(#Set.H#+#Set.WinB#)
+W=(600*#Sec.S#)
+H=(800*#Sec.S#)
 SolidColor=0,0,0,150
 Leftmouseupaction=[!DeactivateConfig]
 MouseActionCursor=0
 
 [Title]
 Meter=String
-X=(#Set.W#/2)
-Y=(#Set.H#/2)
-W=(#Set.W#)
+X=((600*#Sec.S#)/2)
+Y=((800*#Sec.S#)/2)
+W=(600*#Sec.S#)
 StringAlign=CenterCenter
 Text=Installer not working? Click me
 FontSize=20
