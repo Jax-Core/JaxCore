@@ -441,7 +441,7 @@ If ($o_FromCore -and !$o_FromSHUB) {
                 for ($j = 0; $j -lt $Ini['Variables'].Keys.Count; $j++) { 
                     if ($Ini['Variables'].Keys[$j] -match $i_name) {
                         debug "Found $i_name in installed DLCs"
-                        $s_PostAction += '[!WriteKeyValue Variables Sec.Page "2" "'+$s_RMSkinFolder+'\#JaxCore\Main\Home.ini"][!WriteKeyValue Variables Page.SubPage "1" "'+$s_RMSkinFolder+'\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Complete_Reinstallation "1" "'+$s_RMSkinFolder+'\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Reinstallation_isSingle "'+$([Bool]($list_of_installations.Count -eq 1))+'" "'+$s_RMSkinFolder+'\#JaxCore\CoreShell\Home\Page2.inc"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]'
+                        $s_PostAction += '[!WriteKeyValue Variables Sec.Page "2" "'+$s_RMSkinFolder+'\#JaxCore\Main\Home.ini"][!WriteKeyValue Variables Page.SubPage "1" "'+$s_RMSkinFolder+'\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Complete_Reinstallation "1" "'+$s_RMSkinFolder+'\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Reinstallation_isSingle "'+$([Bool]($o_InstallModule.Count -eq 1))+'" "'+$s_RMSkinFolder+'\#JaxCore\CoreShell\Home\Page2.inc"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]'
                         Return
                     }
                 }
@@ -452,7 +452,7 @@ If ($o_FromCore -and !$o_FromSHUB) {
     If ($s_InstallIsBatch) {
         $s_PostAction += '[!WriteKeyValue Variables Sec.Page "1" "'+$s_RMSkinFolder+'\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]'
     } else {
-        $s_PostAction += '[!WriteKeyvalue Variables Skin.Name "'+$skin_name+'" "'+$s_RMSkinFolder+'\#JaxCore\@Resources\SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "'+$s_RMSkinFolder+'\#JaxCore\@Resources\SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.Ini"]'
+        $s_PostAction += '[!WriteKeyvalue Variables Skin.Name "'+$o_InstallModule+'" "'+$s_RMSkinFolder+'\#JaxCore\@Resources\SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "'+$s_RMSkinFolder+'\#JaxCore\@Resources\SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.Ini"]'
     }
     
     Write-Task "Setting up post-actions"
