@@ -292,7 +292,7 @@ $RMEXEloc = ""
 # Enable TLS 1.2 since it is required for connections to GitHub.
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-Write-Info "COREINSTALLER REF: Beta v5.571"
+Write-Info "COREINSTALLER REF: Beta v5.6"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -408,14 +408,66 @@ If (!$bit) {
     [System.IO.Directory]::SetCurrentDirectory($s_RMSkinFolder)
 
     If (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
-        Write-Task "Ending Rainmeter & potential AHKv1 process"
-        Stop-Process -Name 'Rainmeter'
+        Write-Task "Potential AHKv1 process"
+        # Stop-Process -Name 'Rainmeter'
         If (Get-Process 'AHKv1' -ErrorAction SilentlyContinue) {
             Stop-Process -Name 'AHKv1'
         }
         Write-Done
     }
 }
+
+# ---------------------------------------------------------------------------- #
+#                                 Post-actions                                 #
+# ---------------------------------------------------------------------------- #
+$s_PostAction = $null
+If ($o_FromCore -and !$o_FromSHUB) {
+    If ($o_ExtInstall) {
+        $s_PostAction += '[!DeactivateConfig $skin_load_path]'
+    }
+    $dlcINCFile = "$s_RMSkinFolder\..\CoreData\@DLCs\InstalledDLCs.inc"
+    If (!(Test-Path $dlcINCFile)) {
+        debug "No DLCs installed."
+    } else {
+        If ([String]::IsNullOrWhiteSpace((Get-content $dlcINCFile))) {
+            debug "No DLCs installed."
+        } else {
+            # --------------------- Check if skin has a DLC installed -------------------- #
+            $Ini = Get-IniContent -filePath $dlcINCFile
+
+            foreach ($i_name in $o_InstallModule) {
+                debug "> Matching $i_name with installed DLCs"
+
+                for ($j = 0; $j -lt $Ini['Variables'].Keys.Count; $j++) { 
+                    if ($Ini['Variables'].Keys[$j] -match $i_name) {
+                        debug "Found $i_name in installed DLCs"
+                        $s_PostAction += '[!WriteKeyValue Variables Sec.Page "2" "'+$s_RMSkinFolder+'\#JaxCore\Main\Home.ini"][!WriteKeyValue Variables Page.SubPage "1" "'+$s_RMSkinFolder+'\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Complete_Reinstallation "1" "'+$s_RMSkinFolder+'\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Reinstallation_isSingle "'+$([Bool]($list_of_installations.Count -eq 1))+'" "'+$s_RMSkinFolder+'\#JaxCore\CoreShell\Home\Page2.inc"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]'
+                        Return
+                    }
+                }
+            }
+            debug "No matching DLCs found"
+        }
+    }
+    If ($s_InstallIsBatch) {
+        $s_PostAction += '[!WriteKeyValue Variables Sec.Page "1" "'+$s_RMSkinFolder+'\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]'
+    } else {
+        $s_PostAction += '[!WriteKeyvalue Variables Skin.Name "'+$skin_name+'" "'+$s_RMSkinFolder+'\#JaxCore\@Resources\SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "'+$s_RMSkinFolder+'\#JaxCore\@Resources\SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.Ini"]'
+    }
+    
+    Write-Task "Setting up post-actions"
+    Set-Content -Path "$s_RMSkinFolder\#JaxCore\Accessories\Action\Main.ini" -Force -Value @"
+[Rainmeter]
+Update=-1
+OnUpdateAction=$s_PostAction[!DeactivateConfig]
+
+[x]
+meter=string
+
+"@
+    Write-Done
+}
+
 
 # ---------------------------------------------------------------------------- #
 #                                   Download                                   #
@@ -514,7 +566,6 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     debug "-----------------"
 
     $isInstallingCore = $false
-    [System.Collections.ArrayList]$list_of_installations = @()
 
     Get-ChildItem "$s_unpacked\" -Directory | ForEach-Object {
         $i_root = "$s_unpacked\$($_.Name)"
@@ -536,7 +587,6 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
         $skin_load = $Ini["rmskin"]["Load"]
         $skin_load_path = Split-Path $skin_load
         If ($skin_name -contains '#JaxCore') {$isInstallingCore = $true} 
-        $list_of_installations.Add("$skin_name") > $null
 
         debug "$skin_name $skin_ver - by $skin_auth"
         debug "Variable files: $skin_varf"
@@ -714,42 +764,9 @@ Active=1
     if ($o_ExtInstall -eq $false) {
         & "$RMEXEloc" [!ActivateConfig $skin_load_path]
     }
-} else {
-    If ($o_ExtInstall) {
-        & "$RMEXEloc" [!DeactivateConfig $skin_load_path]
-    }
-    $dlcINCFile = "$s_RMSkinFolder\..\CoreData\@DLCs\InstalledDLCs.inc"
-    If (!($o_FromSHUB)) {
-        If (!(Test-Path $dlcINCFile)) {
-            debug "No DLCs installed."
-        } else {
-            If ([String]::IsNullOrWhiteSpace((Get-content $dlcINCFile))) {
-                debug "No DLCs installed."
-            } else {
-                # --------------------- Check if skin has a DLC installed -------------------- #
-                $Ini = Get-IniContent -filePath $dlcINCFile
-
-                for ($i = 0;$i -lt $list_of_installations.Count;$i++) {
-                    $i_name = $list_of_installations[$i]
-                    debug "> Matching $i_name with installed DLCs"
-
-                    for ($j = 0; $j -lt $Ini['Variables'].Keys.Count; $j++) { 
-                        if ($Ini['Variables'].Keys[$j] -match $i_name) {
-                            debug "Found $i_name in installed DLCs"
-                            & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "2" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!WriteKeyValue Variables Page.SubPage "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Complete_Reinstallation "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Reinstallation_isSingle "$([Bool]($list_of_installations.Count -eq 1))" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
-                            Return
-                        }
-                    }
-                }
-                debug "No matching DLCs found"
-            }
-        }
-        If ($s_InstallIsBatch) {
-            & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
-        } else {
-            & "$RMEXEloc" [!WriteKeyvalue Variables Skin.Name "$skin_name" "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
-        }
-    }
+} elseif ($o_FromCore) {
+    & "$s_RMSkinFolder\#JaxCore\@Resources\Addons\RestartRainmeter.exe"
+    Exit
 }
 Write-Task "Clearing cache"
 Get-ChildItem -Path "$s_root\" -Recurse | Remove-Item -Recurse
