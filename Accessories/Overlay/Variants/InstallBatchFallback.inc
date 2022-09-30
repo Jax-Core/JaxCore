@@ -2,6 +2,7 @@
 Update=-1
 
 [Variables]
+Sec.S=((#SCREENAREAWIDTH#/1920) < (#SCREENAREAHEIGHT#/1080) ? (#SCREENAREAWIDTH#/1920) : (#SCREENAREAHEIGHT#/1080))
 @includeVars=#@#Vars.inc
 @includeSkinVars=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 
