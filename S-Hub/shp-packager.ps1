@@ -386,7 +386,7 @@ Test flow
 .\S-Hub\shp-packager.ps1 -n "Test" -keep -nocompile
 #>
 
-Write-Info "SHPPACKAGER REF: Experimental v1.6"
+Write-Info "SHPPACKAGER REF: Experimental v1.7"
 # ---------------------------- Installer variables --------------------------- #
 
 $user = [EnvironmentVariableTarget]::User
@@ -434,10 +434,28 @@ Get-Process -Id $rmprocess_id | Foreach {
 Write-Done
 # ---------------------------------- Screen ---------------------------------- #
 Write-Task "Getting screen sizes"
-$vc = Get-WmiObject -class "Win32_VideoController"
-$saw = $vc.CurrentHorizontalResolution
-$sah = $vc.CurrentVerticalResolution
+Add-Type -AssemblyName System.Windows.Forms
+$saw = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Width
+$sah = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Height
 Write-Done
+if ($saw -eq $null) {
+    while ($true) {
+        $saw = Read-Host 'Unable to detect monitor width. Please enter the width of the primary monitor in pixels as a whole number'
+        if ($saw -gt 0) {
+            while ($true) {
+                $sah = Read-Host 'Unable to detect monitor height. Please enter height width of the primary monitor in pixels as a whole number'
+                if ($sah -gt 0) {
+                    Break
+                } else {
+                    Continue
+                }
+            }
+            Break
+        } else {
+            Continue
+        }
+    }
+}
 
 # ------------------------------- Start package ------------------------------ #
 debug "SetupName: $o_name"
@@ -497,7 +515,7 @@ $ModuleDetails = Get-RemoteIniContent 'https://raw.githubusercontent.com/Jax-Cor
 $tagged_modules = "ValliStart|YourFlyouts|YourMixer"
 $jaxcore_modules = $ModuleDetails.Keys | Where-Object {$_ -notmatch "Setup|Version|JaxCore"}
 $exclude_plugins = $ModuleDetails.Version.Keys
-$s_RMINIFile_filterpattern = "^Rainmeter$","^#JaxCore","^Keylaunch","^DropTop","@Start$","^;" -join '|'
+$s_RMINIFile_filterpattern = "^Rainmeter$","^#JaxCore","^Keylaunch","^IdleStyle","^DropTop","@Start$","^;","^TaskbarX","^Polybar" -join '|'
 Write-Done
 # ---------------------------- Read Rainmeter.ini ---------------------------- #
 Write-Task "Getting Rainmeter layout..."
@@ -631,12 +649,15 @@ if (!$o_noSpotify) {
             $SHPData.Spicetify.current_theme = $spicetify_current_theme
             $SHPData.Spicetify.color_scheme = $spicetify_color_scheme
             Write-Done
-            if ($spicetify_extensions -match $spicetify_current_theme) {
-                $spicetify_themeext = $spicetify_extensions -match $spicetify_current_theme
-                Write-Task "Found corresponding plugin matching theme name $spicetify_themeext, copying"
-                $SHPData.Spicetify.extensions = "$spicetify_themeext.js"
-                if (!$o_noCopy) { Copy-Item -Path "$spicetify_path\Extensions\$spicetify_themeext.js" -Destination "$o_saveLocation\AppSkins\Spicetify\Extensions" -Force }
-                Write-Done
+            foreach ($extension in $spicetify_extensions) {
+                if ($extension -match $spicetify_current_theme) {
+                    Write-Task "Found corresponding plugin matching theme name $spicetify_current_theme, copying"
+                    $spicetify_themeext = $extension.TrimEnd('.js')+'.js'
+                    $SHPData.Spicetify.extensions = $spicetify_themeext
+                    if (!$o_noCopy) { Copy-Item -Path "$spicetify_path\Extensions\$spicetify_themeext" -Destination "$o_saveLocation\AppSkins\Spicetify\Extensions" -Force }
+                    Write-Done
+                    Break
+                }
             }
             $SHPData.Tags += 'Spicetify'
         } else {

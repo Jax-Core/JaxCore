@@ -55,7 +55,7 @@ function Get-IniContent ($filePath) {
     if (![System.IO.File]::Exists($filePath)) {
         throw "$filePath invalid"
     }
-    $section = ';ItIsNotAFuckingSection;'
+    $section = ''
     $ini.Add($section, [ordered]@{})
 
     foreach ($line in [System.IO.File]::ReadLines($filePath)) {
@@ -379,7 +379,7 @@ Test flow
 .\S-Hub\shp-extractor.ps1 "C:\Users\Jax\AppData\Roaming\JaxCore\CoreData\S-Hub\Exports\Test{}.shp" -extracted -nomove
 #>
 
-Write-Info "SHPEXTRACTOR REF: Experimental v1.7"
+Write-Info "SHPEXTRACTOR REF: Experimental v1.8"
 # ---------------------------- Installer variables --------------------------- #
 $user = [EnvironmentVariableTarget]::User
 $path = [Environment]::GetEnvironmentVariable("PATH", $user)
@@ -428,10 +428,28 @@ Get-Process -Id $rmprocess_id | Foreach {
 Write-Done
 # ---------------------------------- Screen ---------------------------------- #
 Write-Task "Getting screen sizes"
-$vc = Get-WmiObject -class "Win32_VideoController"
-$w = $vc.CurrentHorizontalResolution
-$h = $vc.CurrentVerticalResolution
+Add-Type -AssemblyName System.Windows.Forms
+$w = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Width
+$h = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Height
 Write-Done
+if ($w -eq $null) {
+    while ($true) {
+        $w = Read-Host 'Unable to detect monitor width. Please enter the width of the primary monitor in pixels as a whole number'
+        if ($w -gt 0) {
+            while ($true) {
+                $h = Read-Host 'Unable to detect monitor height. Please enter height width of the primary monitor in pixels as a whole number'
+                if ($h -gt 0) {
+                    Break
+                } else {
+                    Continue
+                }
+            }
+            Break
+        } else {
+            Continue
+        }
+    }
+}
 # ---------------------------------- Restore --------------------------------- #
 
 if (!$o_noExtract) {
@@ -517,43 +535,53 @@ if ((($SHPData.Tags -contains 'Rainmeter') -or ($SHPData.Data.CoreModules.Count 
             }
             Write-Done
         }
-        # -------------------------------- Get layout -------------------------------- #
-        Write-Task "Getting current Rainmeter layout"
-        $Ini = Get-IniContent $s_RMINIFile
-        $isCoreCheckingUpdate = $Ini["#JaxCore\Accessories\UpdatePrompt"].Active
-        Write-Done
         # ------------------------------ Dynamic coords ------------------------------ #
-        Write-Task "Intepretating skin coordinates and applying dynamic scale"
         $Ini = Get-IniContent "$s_cache_location\Rainmeter.ini"
         $tagged_modules = "ValliStart|YourFlyouts|YourMixer"
+        $preserve_sections = @('Rainmeter', '#JaxCore\Accessories\UpdatePrompt', 'Keylaunch\Main', 'IdleStyle\Main', 'TaskbarX')
+        $import_filterpattern = "^Rainmeter$","^#JaxCore","^Keylaunch","^IdleStyle","^DropTop","@Start$","^;","^TaskbarX","^Polybar" -join '|' 
 
         # Properties for interpolation
         $w0 = $SHPData.Data.ScreenSizeW
         $h0 = $SHPData.Data.ScreenSizeH
         $m = 250
-        # Loop
-        [string[]]$Ini.Keys | Where-Object { $_ -notmatch $tagged_modules } | ForEach-Object { 
-            $x0 = [int]$Ini[$_].WindowX
-            $y0 = [int]$Ini[$_].WindowY
-            $sw = [int]$Ini[$_].WindowW
-            $sh = [int]$Ini[$_].WindowH
+        Write-Task "Removing illegal sections & interpolating skin coordinates"
+        [string[]]$Ini.Keys | ForEach-Object { 
+            if ($_ -match $import_filterpattern) {
+                $Ini.Remove($_)
+            } elseif ($_ -notmatch $tagged_modules) {
+                $x0 = [int]$Ini[$_].WindowX
+                $y0 = [int]$Ini[$_].WindowY
+                $sw = [int]$Ini[$_].WindowW
+                $sh = [int]$Ini[$_].WindowH
 
-            debug "$($_): $x0, $y0"
-            $x, $y = coords-interp
-
-            $Ini[$_].WindowX = $x
-            $Ini[$_].WindowY = $y
+                if ($x0 -eq $null -or $y0 -eq $null) {
+                    debug "Skipping coordinate interpolation for $($_) since coordinates are not provided as numbers"
+                } else {
+                    debug "$($_): $x0, $y0"
+                    $Ini[$_].WindowX, $Ini[$_].WindowY = coords-interp
+                }
+            }
         }
         Write-Done
+        # -------------------------------- Get layout -------------------------------- #
+        Write-Task "Getting current Rainmeter layout"
+        $RMINI = Get-IniContent $s_RMINIFile
+        Write-Done
         # ------------------------------ JaxCore updater ----------------------------- #
-        if ($isCoreCheckingUpdate -eq '1') {
-            Write-Task "Setting activeness of presistent skins"
-            $Ini["#JaxCore\Accessories\UpdatePrompt"] = @{'Active'='1'}
-            Write-Done
+        Write-Task "Setting activeness of presistent skins"
+        foreach ($section in $preserve_sections) {
+            if ($RMINI[$section].Active -eq '1') {
+                debug "$section is locally active, writing"
+                $Ini[$section] = @{'Active'='1'}
+            }
         }
-        Set-IniContent $Ini "$s_cache_location\Rainmeter.ini"
-        # ----------------------------------- Move ----------------------------------- #
-        Write-Task "Moving Rainmeter layout"
+        Write-Done
+        # ------------------- Saving Rainmeter settings in ini file ------------------ #
+        $Ini.Rainmeter = $RMINI.Rainmeter        
+        # ------------------------------ Move and write ------------------------------ #
+        Write-Task "Moving & applying Rainmeter layout"
+        Set-IniContent $Ini $s_RMINIFile
         New-Item -Path "$s_RMSettingsFolder\Layouts\$s_name" -ItemType "Directory" > $null
         Move-Item -Path "$s_cache_location\Rainmeter.ini" -Destination "$s_RMSettingsFolder\Layouts\$s_name" -Force
         Write-Done
@@ -833,9 +861,6 @@ Write-Task "Clearing cache and applying changes"
 if (!$o_noMove) {
     if ((($SHPData.Tags -contains 'Rainmeter') -or ($SHPData.Data.CoreModules.Count -gt 0)) -and ('R', 'C', 'A' | ? { $o_toImport -contains $_ })) {
         Start-Process "$RMEXEloc"
-        Wait-ForProcess 'Rainmeter'
-        Start-Sleep -Milliseconds 500
-        & "$RMEXEloc" [!LoadLayout "$s_name"]
     }
 
     if (($SHPData.Tags -contains 'BetterDiscord') -and ('B', 'A' | ? { $o_toImport -contains $_ })) {
