@@ -54,8 +54,8 @@ function Get-IniContent ($filePath) {
     if (![System.IO.File]::Exists($filePath)) {
         throw "$filePath invalid"
     }
-    # $section = ';ItIsNotAFuckingSection;'
-    # $ini.Add($section, [ordered]@{})
+    $section = ';ItIsNotAFuckingSection;'
+    $ini.Add($section, [ordered]@{})
 
     foreach ($line in [System.IO.File]::ReadLines($filePath)) {
         if ($line -match "^\s*\[(.+?)\]\s*$") {
@@ -292,7 +292,7 @@ $RMEXEloc = ""
 # Enable TLS 1.2 since it is required for connections to GitHub.
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-Write-Info "COREINSTALLER REF: Stable v5.57"
+Write-Info "COREINSTALLER REF: Stable v5.58"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
