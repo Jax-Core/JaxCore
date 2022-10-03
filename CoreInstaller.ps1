@@ -270,7 +270,7 @@ if (!($o_FromSHUB)) {$o_FromSHUB = $false}
 if (!($o_Force)) {$o_Force = $false}
 if (!($o_ExtInstall)) {$o_ExtInstall = $false}
 if (!($o_PromptBestOption)) {
-    if ($o_FromCore -or $o_Force) {
+    if ($o_FromCore -or $o_Force -or $o_NoPostActions) {
         $o_PromptBestOption = $false
     } else {
         $o_PromptBestOption = $true
