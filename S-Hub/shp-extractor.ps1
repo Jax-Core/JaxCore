@@ -525,7 +525,7 @@ if ((($SHPData.Tags -contains 'Rainmeter') -or ($SHPData.Data.CoreModules.Count 
         # ------------------------------ Dynamic coords ------------------------------ #
         Write-Task "Intepretating skin coordinates and applying dynamic scale"
         $Ini = Get-IniContent "$s_cache_location\Rainmeter.ini"
-        $tagged_modules = "ValliStart|YourFlyouts|YourMixer|IdleStyle"
+        $tagged_modules = "ValliStart|YourFlyouts|YourMixer"
 
         # Properties for interpolation
         $w0 = $SHPData.Data.ScreenSizeW

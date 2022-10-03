@@ -461,7 +461,6 @@ $s_NameToID = @{
     "YourFlyouts"="0";
     "YourMixer"="1";
     "ValliStart"="2";
-    "IdleStyle"="3";
     "Rainmeter"="R";
     "Firefox"="F";
     "Spicetify"="S";
@@ -495,7 +494,7 @@ Write-Done
 Write-Task "Reading remote ModuleDetails.ini..."
 $ModuleDetails = Get-RemoteIniContent 'https://raw.githubusercontent.com/Jax-Core/JaxCore/main/S-Hub/ModuleDetails.ini'
 # Pre-defined stuff
-$tagged_modules = "ValliStart|YourFlyouts|YourMixer|IdleStyle"
+$tagged_modules = "ValliStart|YourFlyouts|YourMixer"
 $jaxcore_modules = $ModuleDetails.Keys | Where-Object {$_ -notmatch "Setup|Version|JaxCore"}
 $exclude_plugins = $ModuleDetails.Version.Keys
 $s_RMINIFile_filterpattern = "^Rainmeter$","^#JaxCore","^Keylaunch","^DropTop","@Start$","^;" -join '|'
