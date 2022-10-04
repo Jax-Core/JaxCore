@@ -456,7 +456,10 @@ if ($saw -eq $null) {
         }
     }
 }
-
+$WinVer = [int]((Get-WmiObject -class Win32_OperatingSystem).Caption -replace "[^0-9]" , '')
+if ($WinVer -eq $null) {
+    $WinVer = [int]((Get-ComputerInfo).WindowsProductName -replace "[^0-9]" , '')
+}
 # ------------------------------- Start package ------------------------------ #
 debug "SetupName: $o_name"
 debug "RainmeterPluginsBit: $bit"
@@ -468,7 +471,7 @@ debug "SavingDirectory_SHP: $o_saveLocationSHP"
 debug "PrimaryScreenAreaSizes: $saw x $sah"
 
 # ------------------------- Create SHPData structure ------------------------- #
-$SHPInfo = @{'SetupName'=$o_name;'ScreenSizeW'=$saw;'ScreenSizeH'=$sah;'CoreModules'='';'DLCs'=@();'WinBuild'=$([System.Environment]::OSVersion.Version.Build);'WinVer'=[int]((Get-WmiObject -class Win32_OperatingSystem).Caption -replace "[^0-9]" , '');'WinVS'=''}
+$SHPInfo = @{'SetupName'=$o_name;'ScreenSizeW'=$saw;'ScreenSizeH'=$sah;'CoreModules'='';'DLCs'=@();'WinBuild'=$([System.Environment]::OSVersion.Version.Build);'WinVer'=$WinVer;'WinVS'=''}
 $SHPRainmeter = @{'Skins'=''}
 $SHPBetterDiscord = @{'themelist'=@()}
 $SHPSpicetify = @{'current_theme'='';'color_scheme'='';'extensions'=''}

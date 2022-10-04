@@ -466,7 +466,7 @@ A - Import all
 R - Rainmeter skins
 C - JaxCore modules
 W - Windows visual style
-B - BetterDiscord theme
+D - BetterDiscord theme
 S - Spicetify theme
 F - Firefox custom css
 
@@ -722,19 +722,17 @@ if (($SHPData.Tags -contains 'Spicetify') -and ('S', 'A' | ? { $o_toImport -cont
         }
         Write-Done
 
-        Write-Task "Applying spicetify theme"
         if (!$o_noMove) {
             Write-Divider "Spicetify Apply"
             ECHO Y | spicetify.exe apply
             Write-Divider "Apply End"
         }
-        Write-Done
     }
 }
 # ---------------------------------------------------------------------------- #
 #                                 BetterDiscord                                #
 # ---------------------------------------------------------------------------- #
-if (($SHPData.Tags -contains 'BetterDiscord') -and ('B', 'A' | ? { $o_toImport -contains $_ })) {
+if (($SHPData.Tags -contains 'BetterDiscord') -and ('D', 'A' | ? { $o_toImport -contains $_ })) {
     Write-Info "BetterDiscord found in package (pre)"
     $bd_path = "$env:APPDATA\BetterDiscord"
     if (Test-Path -Path $bd_path) {
@@ -863,7 +861,7 @@ if (!$o_noMove) {
         Start-Process "$RMEXEloc"
     }
 
-    if (($SHPData.Tags -contains 'BetterDiscord') -and ('B', 'A' | ? { $o_toImport -contains $_ })) {
+    if (($SHPData.Tags -contains 'BetterDiscord') -and ('D', 'A' | ? { $o_toImport -contains $_ })) {
         If ($bd_selected_folder -contains 'Stable') {
             & "$ENV:LOCALAPPDATA\Discord\Update.exe" --processStart Discord.exe
         } else {
