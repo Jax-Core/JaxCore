@@ -279,8 +279,8 @@ if (!($o_PromptBestOption)) {
 # ---------------------------- Installer variables --------------------------- #
 $s_InstallIsBatch = [bool]($o_InstallModule.Count -gt '1')
 $s_rootFolderName = "JaxCoreCache"
-$s_root = "$env:temp\$s_rootFolderName"
-$s_unpacked = "$env:temp\$s_rootFolderName\Unpacked"
+$s_root = "C:\$s_rootFolderName"
+$s_unpacked = "$s_root\Unpacked"
 # Declare global scope installer variables
 
 $s_RMSettingsFolder = ""
@@ -292,7 +292,7 @@ $RMEXEloc = ""
 # Enable TLS 1.2 since it is required for connections to GitHub.
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-Write-Info "COREINSTALLER REF: Stable v5.58"
+Write-Info "COREINSTALLER REF: Stable v5.59"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -753,5 +753,6 @@ Active=1
 }
 Write-Task "Clearing cache"
 Get-ChildItem -Path "$s_root\" -Recurse | Remove-Item -Recurse
+Remove-Item -Path "$s_root" -Force
 Write-Done
 If (!($o_FromSHUB)) {Exit}
