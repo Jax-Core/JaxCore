@@ -55,8 +55,8 @@ function Get-IniContent ($filePath) {
     if (![System.IO.File]::Exists($filePath)) {
         throw "$filePath invalid"
     }
-    $section = ''
-    $ini.Add($section, [ordered]@{})
+    # $section = ''
+    # $ini.Add($section, [ordered]@{})
 
     foreach ($line in [System.IO.File]::ReadLines($filePath)) {
         if ($line -match "^\s*\[(.+?)\]\s*$") {
