@@ -271,7 +271,6 @@ function Apply-Variables($m) {
     $dlcFound = $null
     foreach ($dlc in $SHPData.Data.DLCs) {
         debug "This setup has DLC $dlc"
-        $dlcFound = $false
         $currentDLCModule = $($dlc -split '_')[0]
         $currentDLCName = $($dlc -split '_')[1]
         if ($currentDLCModule -contains $m) {
@@ -282,10 +281,12 @@ function Apply-Variables($m) {
                 } else {
                     debug "$dlc is not installed on this device"
                     Write-Info "The module $m from $s_name requires the DLC $currentDLCName for it to be installed.`nReapply this .shp package once you've obtained it. Using current settings"
+                    $dlcFound = $false
                 }
             } else {
                 debug "No installed DLCs on this device"
                 Write-Info "The module $m from $s_name requires the DLC $currentDLCName for it to be installed.`nReapply this .shp package once you've obtained it. Using current settings"
+                $dlcFound = $false
             }
         }
     } 
@@ -297,8 +298,8 @@ function Apply-Variables($m) {
             $i_savelocation = $_.FullName
             $i_targetlocation = "$s_RMSkinFolder\$i_foundLocation"
             if (Test-Path "$i_targetlocation") {
-                # debug $i_savelocation
-                # debug $i_targetlocation
+                debug $i_savelocation
+                debug $i_targetlocation
                 $Ini = Get-IniContent $i_savelocation;$oldvars = $Ini
                 $Ini = Get-IniContent $i_targetlocation;$newvars = $Ini
                 $oldvars.Keys | Foreach-Object {

@@ -90,7 +90,7 @@ Add-Type -TypeDefinition '
 class OpenWindow {
     [string] $Title
     [IntPtr] $Handle
-    [UInt32]   $ProcessID
+    [UInt32] $ProcessID
 }
 
 # ---------------------------------------------------------------------------- #
@@ -223,8 +223,8 @@ function Get-IniContent ($filePath) {
     if (![System.IO.File]::Exists($filePath)) {
         throw "$filePath invalid"
     }
-    $section = ';ItIsNotAFuckingSection;'
-    $ini.Add($section, [ordered]@{})
+    # $section = ';ItIsNotAFuckingSection;'
+    # $ini.Add($section, [ordered]@{})
 
     foreach ($line in [System.IO.File]::ReadLines($filePath)) {
         if ($line -match "^\s*\[(.+?)\]\s*$") {
