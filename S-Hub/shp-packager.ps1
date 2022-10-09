@@ -759,7 +759,7 @@ if (!$o_noWinVS) {
     Write-Done
     If ($currentThemeVSPath -ne $null) {
         Write-Task "Copying $currentThemeVSPath"
-        Copy-Item -Path "$currentThemeVSPath" -Destination "$o_saveLocation\WinVS\$currentThemeVSPathFolder\"
+        Copy-Item -Path $currentThemeVSPath -Destination "$o_saveLocation\WinVS\$currentThemeVSPathFolderName\"
         Write-Done
         If ((Get-ChildItem -Path $currentThemeVSPathFolder -Directory) -ne $null) {
             Write-Task "Copying additional files in msstyles directory"
@@ -767,6 +767,7 @@ if (!$o_noWinVS) {
                 debug $_.FullName
                 Copy-Item -Path $_.FullName -Destination "$o_saveLocation\WinVS\$currentThemeVSPathFolderName\" -Recurse
             }
+            Write-Done
         }
     } else {
         Write-Fail "Unable to locate $(Split-Path $currentTheme -leaf)'s msstyle directory."
