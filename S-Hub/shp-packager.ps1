@@ -386,7 +386,7 @@ Test flow
 .\S-Hub\shp-packager.ps1 -n "Test" -keep -nocompile
 #>
 
-Write-Info "SHPPACKAGER REF: Experimental v1.7"
+Write-Info "SHPPACKAGER REF: Experimental v1.8"
 # ---------------------------- Installer variables --------------------------- #
 
 $user = [EnvironmentVariableTarget]::User
@@ -435,9 +435,14 @@ Write-Done
 # ---------------------------------- Screen ---------------------------------- #
 Write-Task "Getting screen sizes"
 Add-Type -AssemblyName System.Windows.Forms
+$sa_Top = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Top
+$sa_Left = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Left
+$sa_Bottom = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Bottom
+$sa_Right = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Right
 $saw = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Width
 $sah = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Height
 Write-Done
+debug "SCREEN TLBR: $sa_Top, $sa_Left, $sa_Bottom, $sa_Right"
 if ($saw -eq $null) {
     while ($true) {
         $saw = Read-Host 'Unable to detect monitor width. Please enter the width of the primary monitor in pixels as a whole number'
@@ -460,6 +465,33 @@ $WinVer = [int]((Get-WmiObject -class Win32_OperatingSystem).Caption -replace "[
 if ($WinVer -eq $null) {
     $WinVer = [int]((Get-ComputerInfo).WindowsProductName -replace "[^0-9]" , '')
 }
+# ----------------------------- Get display scale ---------------------------- #
+Add-Type @'
+  using System;
+  using System.Runtime.InteropServices;
+  using System.Drawing;
+
+  public class DPI {
+    [DllImport("gdi32.dll")]
+    static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
+
+    public enum DeviceCap {
+      VERTRES = 10,
+      DESKTOPVERTRES = 117
+    }
+
+    public static float scaling() {
+      Graphics g = Graphics.FromHwnd(IntPtr.Zero);
+      IntPtr desktop = g.GetHdc();
+      int LogicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.VERTRES);
+      int PhysicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
+
+      return (float)PhysicalScreenHeight / (float)LogicalScreenHeight;
+    }
+  }
+'@ -ReferencedAssemblies 'System.Drawing.dll'
+
+$WinScale = [Math]::round([DPI]::scaling(), 2)
 # ------------------------------- Start package ------------------------------ #
 debug "SetupName: $o_name"
 debug "RainmeterPluginsBit: $bit"
@@ -471,7 +503,7 @@ debug "SavingDirectory_SHP: $o_saveLocationSHP"
 debug "PrimaryScreenAreaSizes: $saw x $sah"
 
 # ------------------------- Create SHPData structure ------------------------- #
-$SHPInfo = @{'SetupName'=$o_name;'ScreenSizeW'=$saw;'ScreenSizeH'=$sah;'CoreModules'='';'DLCs'=@();'WinBuild'=$([System.Environment]::OSVersion.Version.Build);'WinVer'=$WinVer;'WinVS'=''}
+$SHPInfo = @{'SetupName'=$o_name;'ScreenSizeW'=$saw;'ScreenSizeH'=$sah;'CoreModules'='';'DLCs'=@();'WinBuild'=$([System.Environment]::OSVersion.Version.Build);'WinVer'=$WinVer;'WinScale'=$WinScale;'WinVS'=''}
 $SHPRainmeter = @{'Skins'=''}
 $SHPBetterDiscord = @{'themelist'=@()}
 $SHPSpicetify = @{'current_theme'='';'color_scheme'='';'extensions'=''}
@@ -512,13 +544,24 @@ Write-Done
 #                             Rainmeter and JaxCore                            #
 # ---------------------------------------------------------------------------- #
 # ------------------------ Get JaxCore module details ------------------------ #
-Write-Task "Reading remote ModuleDetails.ini..."
+Write-Task "Reading remote ModuleDetails.ini"
 $ModuleDetails = Get-RemoteIniContent 'https://raw.githubusercontent.com/Jax-Core/JaxCore/main/S-Hub/ModuleDetails.ini'
 # Pre-defined stuff
-$tagged_modules = "ValliStart|YourFlyouts|YourMixer"
+$tagged_modules = "ValliStart|YourFlyouts|YourMixer|Droptop"
+$custom_userimages = @{
+    'ModularVisualizer' = 
+    @{
+        '@Resources\Vars.inc'='ImageUnderlayName';
+        '@Resources\LayeringVars.inc'='ImagePath'
+    };
+    'ValliStart' = 
+    @{
+        '@Resources\Vars.inc'='ImageUnderlayPath'
+    }
+}
 $jaxcore_modules = $ModuleDetails.Keys | Where-Object {$_ -notmatch "Setup|Version|JaxCore"}
 $exclude_plugins = $ModuleDetails.Version.Keys
-$s_RMINIFile_filterpattern = "^Rainmeter$","^#JaxCore","^Keylaunch","^IdleStyle","^DropTop","@Start$","^;","^TaskbarX","^Polybar" -join '|'
+$s_RMINIFile_filterpattern = "^Rainmeter$","^#JaxCore","^Keylaunch","^QuickNotes","^MIUI-Shade","^Keystrokes","^IdleStyle","@Start$","^;","^TaskbarX","^Polybar" -join '|'
 Write-Done
 # ---------------------------- Read Rainmeter.ini ---------------------------- #
 Write-Task "Getting Rainmeter layout..."
@@ -532,10 +575,40 @@ Write-Task "Filtering through Rainmeter sections"
     $Ini.Remove($_)
 }
 # ----------------------------- Tag modules & WH ----------------------------- #
+function isOffscreen($st, $sl, $sb, $sr) {
+    debug "TLBR: $st, $sl, $sb, $sr"
+    # If rectangle has area 0, no overlap
+    if ($sl -eq $sr -or $st -eq $sb) {
+        return $true
+    }
+    # If one rectangle is on left side of other
+    if ($sl -gt $sa_Right -or $sa_Left -gt $sr) {
+        return $true
+    }
+    # If one rectangle is above other
+    if ($sb -lt $sa_Top -or $sa_Bottom -lt $st) {
+        return $true
+    }
+ 
+    return $false
+}
 [string[]]$Ini.Keys | ForEach-Object { 
-    # no need to check for duplicates since there must be only one active interface per module
     $currentSection = $_
-    if ($_ -match $tagged_modules ) {
+    
+    if ($_ -notmatch "$tagged_modules") {
+        Get-ChildItem -Path "$s_RMSkinFolder\$currentSection" -File | ForEach-Object {
+            debug "Getting window property of $s_RMSkinFolder\$currentSection\$($_.Name)"
+            $currentSWH = Get-OpenWindow "$s_RMSkinFolder\$currentSection\$($_.Name)" | Get-WindowPosition
+            if ($currentSWH -ne $null) {
+                if (isOffscreen $currentSWH.Top $currentSWH.Left $currentSWH.Bottom $currentSWH.Right) {
+                    debug "$currentSection is off screen"
+                    $Ini.Remove($currentSection)
+                } else {
+                    debug  "$currentSection is on screen"
+                }
+            }
+        }
+    } elseif ($currentSection -match "^($tagged_modules)\\Main$") {
         if (!$o_noCore) {
             $currentSection = $currentSection -replace '\\.*$', ''
             debug "Valid SHP Tag: $currentSection"
@@ -543,15 +616,11 @@ Write-Task "Filtering through Rainmeter sections"
         } else {
             $Ini.Remove($currentSection)
         }
+    } elseif ($currentSection -match "^($tagged_modules)?\\.*$") {
+        $Ini.Remove($currentSection)
     } else {
-        Get-ChildItem -Path "$s_RMSkinFolder\$currentSection" -File | ForEach-Object {
-            $currentSkinWinHdle = Get-OpenWindow "$s_RMSkinFolder\$currentSection\$($_.Name)" | Get-WindowPosition
-            debug "Getting window property of $s_RMSkinFolder\$currentSection\$($_.Name)"
-            if ($currentSkinWinHdle -ne $null) {
-                $Ini[$currentSection].WindowW = $currentSkinWinHdle.Right - $currentSkinWinHdle.Left
-                $Ini[$currentSection].WindowH = $currentSkinWinHdle.Bottom - $currentSkinWinHdle.Top
-            }
-        }
+        $Ini[$currentSection].WindowW = $currentSWH.Right - $currentSWH.Left
+        $Ini[$currentSection].WindowH = $currentSWH.Bottom - $currentSWH.Top
     }
 }
 Write-Done
@@ -569,7 +638,6 @@ $valid_skins | select-object -unique | ForEach-Object {
             $ii++
             $valid_jaxcore_modules += $_
             $skin_varf = $ModuleDetails["$_"].VarFiles -split '\s\|\s' | Where-Object {$_ -notmatch "WelcomeVars|Hotkeys"}
-
 
             if (!$o_noCopy) {
                 foreach ($varf in $skin_varf) {
@@ -590,6 +658,30 @@ $valid_skins | select-object -unique | ForEach-Object {
                                 }
                             }
                         }
+                    }
+                }
+            }
+
+            foreach ($module in $custom_userimages.Keys) {
+                if ($_ -eq $module) {
+                    foreach ($varf in $custom_userimages[$module].Keys) {
+                        $moduleIni = Get-IniContent "$s_RMSkinFolder\$module\$varf"
+                        $current_userimage = $moduleIni.Variables.$($custom_userimages[$module][$varf])
+                        if (($current_userimage -notmatch "#SKINSPATH#") -and (Test-Path -Path $current_userimage)) {
+                            debug "Copying $varf from $module to root of module (user content)"
+                            if (!$o_noCopy) {
+                                Copy-Item -Path $current_userimage -Destination "$o_saveLocation\Rainmeter\JaxCore\$module\"
+                            }
+                        }
+                    }
+                }
+            }
+
+            if ($_ -eq 'ModularVisualizer') {
+                New-Item -Path "$o_saveLocation\Rainmeter\CoreData\ModularVisualizer" -ItemType Directory > $null
+                if (!$o_noCopy) {
+                    Get-ChildItem "$s_RMSkinFolder\..\CoreData\ModularVisualizer\" -Directory | ForEach-Object {
+                        Copy-Item -Path $_.FullName -Destination "$o_saveLocation\Rainmeter\CoreData\ModularVisualizer\" -Recurse
                     }
                 }
             }
@@ -759,7 +851,8 @@ if (!$o_noWinVS) {
     Write-Done
     If ($currentThemeVSPath -ne $null) {
         Write-Task "Copying $currentThemeVSPath"
-        Copy-Item -Path $currentThemeVSPath -Destination "$o_saveLocation\WinVS\$currentThemeVSPathFolderName\"
+        New-Item -Path "$o_saveLocation\WinVS\$currentThemeVSPathFolderName\" -ItemType Directory > $Null
+        Copy-Item -Path "$currentThemeVSPath" -Destination "$o_saveLocation\WinVS\$currentThemeVSPathFolderName\"
         Write-Done
         If ((Get-ChildItem -Path $currentThemeVSPathFolder -Directory) -ne $null) {
             Write-Task "Copying additional files in msstyles directory"
