@@ -504,7 +504,7 @@ debug "PrimaryScreenAreaSizes: $saw x $sah"
 
 # ------------------------- Create SHPData structure ------------------------- #
 $SHPInfo = @{'SetupName'=$o_name;'ScreenSizeW'=$saw;'ScreenSizeH'=$sah;'CoreModules'='';'DLCs'=@();'WinBuild'=$([System.Environment]::OSVersion.Version.Build);'WinVer'=$WinVer;'WinScale'=$WinScale;'WinVS'=''}
-$SHPRainmeter = @{'Skins'=''}
+$SHPRainmeter = @{'Skins'='';'Droptop'=$false}
 $SHPBetterDiscord = @{'themelist'=@()}
 $SHPSpicetify = @{'current_theme'='';'color_scheme'='';'extensions'=''}
 $SHPFirefox = @{}
@@ -517,7 +517,8 @@ $s_NameToID = @{
     "Rainmeter"="R";
     "Firefox"="F";
     "Spicetify"="S";
-    "BetterDiscord"="B";
+    "BetterDiscord"="D";
+    "Droptop"="T";
     "WinVS"="W"
 }
 # ------------------------------ Wipe directory ------------------------------ #
@@ -546,22 +547,20 @@ Write-Done
 # ------------------------ Get JaxCore module details ------------------------ #
 Write-Task "Reading remote ModuleDetails.ini"
 $ModuleDetails = Get-RemoteIniContent 'https://raw.githubusercontent.com/Jax-Core/JaxCore/main/S-Hub/ModuleDetails.ini'
-# Pre-defined stuff
-$tagged_modules = "ValliStart|YourFlyouts|YourMixer|Droptop"
-$custom_userimages = @{
-    'ModularVisualizer' = 
-    @{
-        '@Resources\Vars.inc'='ImageUnderlayName';
-        '@Resources\LayeringVars.inc'='ImagePath'
-    };
-    'ValliStart' = 
-    @{
-        '@Resources\Vars.inc'='ImageUnderlayPath'
+
+$tagged_modules = $ModuleDetails.SHubPreferences.TaggedModules
+$custom_userimages = @{}
+foreach ($k in $ModuleDetails.CustomUserImages.Keys) {
+    $a = $($ModuleDetails.CustomUserImages[$k]).Split('|')
+    $ha = @{}
+    foreach($v in $a) {
+        $ha += ConvertFrom-StringData $v
     }
+    $custom_userimages[$k] = $ha
 }
-$jaxcore_modules = $ModuleDetails.Keys | Where-Object {$_ -notmatch "Setup|Version|JaxCore"}
+$jaxcore_modules = $ModuleDetails.Keys | Where-Object {$_ -notmatch "Setup|Version|JaxCore|ExternalWidgets|ExternalWidgetsPlugins|JaxCoreDLCs|CustomUserImages|SHubPreferences"}
 $exclude_plugins = $ModuleDetails.Version.Keys
-$s_RMINIFile_filterpattern = "^Rainmeter$","^#JaxCore","^Keylaunch","^QuickNotes","^MIUI-Shade","^Keystrokes","^IdleStyle","@Start$","^;","^TaskbarX","^Polybar" -join '|'
+$s_RMINIFile_filterpattern = $ModuleDetails.SHubPreferences.SectionFilterPattern
 Write-Done
 # ---------------------------- Read Rainmeter.ini ---------------------------- #
 Write-Task "Getting Rainmeter layout..."
@@ -666,11 +665,13 @@ $valid_skins | select-object -unique | ForEach-Object {
                 if ($_ -eq $module) {
                     foreach ($varf in $custom_userimages[$module].Keys) {
                         $moduleIni = Get-IniContent "$s_RMSkinFolder\$module\$varf"
-                        $current_userimage = $moduleIni.Variables.$($custom_userimages[$module][$varf])
+                        $current_userimage = $moduleIni.Variables[$custom_userimages[$module][$varf]]
                         if (($current_userimage -notmatch "#SKINSPATH#") -and (Test-Path -Path $current_userimage)) {
                             debug "Copying $varf from $module to root of module (user content)"
                             if (!$o_noCopy) {
                                 Copy-Item -Path $current_userimage -Destination "$o_saveLocation\Rainmeter\JaxCore\$module\"
+                                $moduleIni.Variables[$custom_userimages[$module][$varf]] = '#ROOTCONFIGPATH#' + $(Split-Path $current_userimage -Leaf)
+                                Set-IniContent $moduleIni "$o_saveLocation\Rainmeter\JaxCore\$module\$varf"
                             }
                         }
                     }

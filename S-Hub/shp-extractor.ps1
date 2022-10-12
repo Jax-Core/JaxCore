@@ -264,62 +264,6 @@ public class Params
  
 }
 
-# ------------------------------ Core variables ------------------------------ #
-
-function Apply-Variables($m) {
-    $listInstalledDLCs = "$s_RMSkinFolder\..\CoreData\@DLCs\InstalledDLCs.inc"
-    $dlcFound = $null
-    foreach ($dlc in $SHPData.Data.DLCs) {
-        debug "This setup has DLC $dlc"
-        $currentDLCModule = $($dlc -split '_')[0]
-        $currentDLCName = $($dlc -split '_')[1]
-        if ($currentDLCModule -contains $m) {
-            if (Test-Path -Path "$listInstalledDLCs") {
-                if ($(Get-IniContent $listInstalledDLCs).Variables[$dlc] -ne $null) {
-                    debug "$dlc is installed on this device"
-                    $dlcFound = $true
-                } else {
-                    debug "$dlc is not installed on this device"
-                    Write-Info "The module $m from $s_name requires the DLC $currentDLCName for it to be installed.`nReapply this .shp package once you've obtained it. Using current settings"
-                    $dlcFound = $false
-                }
-            } else {
-                debug "No installed DLCs on this device"
-                Write-Info "The module $m from $s_name requires the DLC $currentDLCName for it to be installed.`nReapply this .shp package once you've obtained it. Using current settings"
-                $dlcFound = $false
-            }
-        }
-    } 
-    
-    if ($dlcFound -eq $null -or $dlcFound -eq $true) {
-        debug "Importing variables files back to $m"
-        Get-ChildItem -Path "$s_cache_location\Rainmeter\JaxCore\$m" -Recurse -File | ForEach-Object {
-            $i_foundLocation = $_.FullName -replace "^$([regex]::Escape("$s_cache_location\Rainmeter\JaxCore\"))"
-            $i_savelocation = $_.FullName
-            $i_targetlocation = "$s_RMSkinFolder\$i_foundLocation"
-            if (Test-Path "$i_targetlocation") {
-                debug $i_savelocation
-                debug $i_targetlocation
-                $Ini = Get-IniContent $i_savelocation;$oldvars = $Ini
-                $Ini = Get-IniContent $i_targetlocation;$newvars = $Ini
-                $oldvars.Keys | Foreach-Object {
-                    $i_section = $_
-                    $oldvars[$i_section].Keys | ForEach-Object {
-                        $i_value = $_
-                        if ([bool]$newvars[$i_section][$i_value]) {
-                            $newvars[$i_section][$i_value] = $oldvars[$i_section][$i_value]
-                        }
-                    }
-                }
-                Set-IniContent $newvars $i_targetlocation
-            } else {
-                debug "Moving #$i $i_savelocation -> $i_targetlocation"
-                New-Item -Path "$(Split-Path $i_targetlocation)" -Type "Directory" -ErrorAction SilentlyContinue
-                Copy-Item -Path "$i_savelocation" -Destination "$i_targetlocation" -Force -ErrorAction SilentlyContinue
-            }
-        }
-    }
-}
 # ------------------------------- Coords interp ------------------------------ #
 function coords-interp {
     if (($w/1920) -lt ($h/1080)) { $scale = $w / 1920 } else { $scale = $h / 1080 }
@@ -470,8 +414,9 @@ W - Windows visual style
 D - BetterDiscord theme
 S - Spicetify theme
 F - Firefox custom css
+T - Droptop theme
 
-Input example: "RCW" (To import Rainmeter, JaxCore and Windows only)
+Input example: "RCW" (To import Rainmeter, JaxCore and Windows Visual Styles only)
 Input example: "A" (To import all available themes)
 
 Selection
@@ -526,6 +471,24 @@ debug "WinInfo: Windows $WinVer Build $WinBuild"
 if ((($SHPData.Tags -contains 'Rainmeter') -or ($SHPData.Data.CoreModules.Count -gt 0)) -and ('R', 'C', 'A' | ? { $o_toImport -contains $_ })) {
 
     Write-Info "Rainmeter / JaxCore layout found in package"
+    # ------------------------ Get JaxCore module details ------------------------ #
+    Write-Task "Reading remote ModuleDetails.ini"
+    $ModuleDetails = Get-RemoteIniContent 'https://raw.githubusercontent.com/Jax-Core/JaxCore/main/S-Hub/ModuleDetails.ini'
+
+    $tagged_modules = $ModuleDetails.SHubPreferences.TaggedModules
+    $custom_userimages = @{}
+    foreach ($k in $ModuleDetails.CustomUserImages.Keys) {
+        $a = $($ModuleDetails.CustomUserImages[$k]).Split('|')
+        $ha = @{}
+        foreach($v in $a) {
+            $ha += ConvertFrom-StringData $v
+        }
+        $custom_userimages[$k] = $ha
+    }
+    $jaxcore_modules = $ModuleDetails.Keys | Where-Object {$_ -notmatch "Setup|Version|JaxCore|ExternalWidgets|ExternalWidgetsPlugins|JaxCoreDLCs|CustomUserImages|SHubPreferences"}
+    $exclude_plugins = $ModuleDetails.Version.Keys
+    $s_RMINIFile_filterpattern = $ModuleDetails.SHubPreferences.SectionFilterPattern
+    Write-Done
     if (!$o_noMove) {
         # ------------------------------ Close Rainmeter ----------------------------- #
         if (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
@@ -538,9 +501,6 @@ if ((($SHPData.Tags -contains 'Rainmeter') -or ($SHPData.Data.CoreModules.Count 
         }
         # ------------------------------ Dynamic coords ------------------------------ #
         $Ini = Get-IniContent "$s_cache_location\Rainmeter.ini"
-        $tagged_modules = "ValliStart|YourFlyouts|YourMixer"
-        $preserve_sections = @('Rainmeter', '#JaxCore\Accessories\UpdatePrompt', 'Keylaunch\Main', 'IdleStyle\Main', 'TaskbarX')
-        $import_filterpattern = "^Rainmeter$","^#JaxCore","^Keylaunch","^IdleStyle","^DropTop","@Start$","^;","^TaskbarX","^Polybar" -join '|' 
 
         # Properties for interpolation
         $w0 = $SHPData.Data.ScreenSizeW
@@ -548,11 +508,11 @@ if ((($SHPData.Tags -contains 'Rainmeter') -or ($SHPData.Data.CoreModules.Count 
         $m = 250
         Write-Task "Removing illegal sections & interpolating skin coordinates"
         [string[]]$Ini.Keys | ForEach-Object { 
-            if ($_ -match $import_filterpattern) {
+            if ($_ -match $s_RMINIFile_filterpattern) {
                 $Ini.Remove($_)
             } elseif ($_ -notmatch $tagged_modules) {
-                $x0 = [int]$Ini[$_].WindowX
-                $y0 = [int]$Ini[$_].WindowY
+                $x0 = [int]$Ini[$_].WindowX -replace '@\d$'
+                $y0 = [int]$Ini[$_].WindowY -replace '@\d$'
                 $sw = [int]$Ini[$_].WindowW
                 $sh = [int]$Ini[$_].WindowH
 
@@ -646,20 +606,22 @@ if (($SHPData.Tags -contains 'Rainmeter') -and ('R', 'A' | ? { $o_toImport -cont
 # ---------------------------------------------------------------------------- #
 #                                    JaxCore                                   #
 # ---------------------------------------------------------------------------- #
+if (($SHPData.Data.CoreModules -contains 'Droptop') -and (!('T', 'A' | ? { $o_toImport -contains $_ }) -or (!(Test-Path "$s_RMSkinFolder\Droptop")))) {
+    $SHPData.Data.CoreModules.Remove('Droptop')
+}
 if (($SHPData.Data.CoreModules.Count -gt 0) -and ('C', 'A' | ? { $o_toImport -contains $_ })) {
     Write-Info "JaxCore modules found in package"
     if (!$o_noMove) {
+
         $o_InstallModule = @()
-        $SHPData.Data.CoreModules | ForEach-Object {
-            $currentModule = $_
-            if (Test-Path "$s_RMSkinFolder\$currentModule") {
-                Apply-Variables $currentModule
-            } else {
+        foreach($m in $SHPData.Data.CoreModules) {
+            if (!(Test-Path "$s_RMSkinFolder\$m")) {
                 $hasModuleToDownload = $true
-                $o_InstallModule += $currentModule
-                debug "Added $_ to the list of modules pending to install"
+                $o_InstallModule += $m
+                debug "Added $m to the list of modules pending to install"
             }
         }
+
         if ($hasModuleToDownload) {
             $o_FromSHUB = $true
             $o_Force = $true
@@ -667,11 +629,67 @@ if (($SHPData.Data.CoreModules.Count -gt 0) -and ('C', 'A' | ? { $o_toImport -co
             Write-Divider "JaxCore Installer"
             iwr -useb 'https://raw.githubusercontent.com/Jax-Core/JaxCore/master/CoreInstaller.ps1' | iex
             Write-Divider "Install End"
-            foreach($module in $o_InstallModule) {
-                Apply-Variables $module
+        }
+
+        foreach($m in $SHPData.Data.CoreModules) { 
+            $listInstalledDLCs = "$s_RMSkinFolder\..\CoreData\@DLCs\InstalledDLCs.inc"
+            $dlcFound = $null
+            foreach ($dlc in $SHPData.Data.DLCs) {
+                debug "This setup has DLC $dlc"
+                $currentDLCModule = $($dlc -split '_')[0]
+                $currentDLCName = $($dlc -split '_')[1]
+                if ($currentDLCModule -contains $m) {
+                    if (Test-Path -Path "$listInstalledDLCs") {
+                        if ($(Get-IniContent $listInstalledDLCs).Variables[$dlc] -ne $null) {
+                            debug "$dlc is installed on this device"
+                            $dlcFound = $true
+                        } else {
+                            debug "$dlc is not installed on this device"
+                            Write-Info "The module $m from $s_name requires the DLC $currentDLCName for it to be installed.`nReapply this .shp package once you've obtained it. Using current settings"
+                            $dlcFound = $false
+                        }
+                    } else {
+                        debug "No installed DLCs on this device"
+                        Write-Info "The module $m from $s_name requires the DLC $currentDLCName for it to be installed.`nReapply this .shp package once you've obtained it. Using current settings"
+                        $dlcFound = $false
+                    }
+                }
+            } 
+            
+            if ($dlcFound -eq $null -or $dlcFound -eq $true) {
+                debug "Importing variables files back to $m"
+                Get-ChildItem -Path "$s_cache_location\Rainmeter\JaxCore\$m" -Recurse -File | ForEach-Object {
+                    $i_foundLocation = $_.FullName -replace "^$([regex]::Escape("$s_cache_location\Rainmeter\JaxCore\"))"
+                    $i_savelocation = $_.FullName
+                    $i_targetlocation = "$s_RMSkinFolder\$i_foundLocation"
+                    if (Test-Path "$i_targetlocation") {
+                        debug $i_savelocation
+                        debug $i_targetlocation
+                        $Ini = Get-IniContent $i_savelocation;$oldvars = $Ini
+                        $Ini = Get-IniContent $i_targetlocation;$newvars = $Ini
+                        $oldvars.Keys | Foreach-Object {
+                            $i_section = $_
+                            $oldvars[$i_section].Keys | ForEach-Object {
+                                $i_value = $_
+                                if ([bool]$newvars[$i_section][$i_value]) {
+                                    $newvars[$i_section][$i_value] = $oldvars[$i_section][$i_value]
+                                }
+                            }
+                        }
+                        Set-IniContent $newvars $i_targetlocation
+                    } else {
+                        debug "Moving #$i $i_savelocation -> $i_targetlocation"
+                        New-Item -Path "$(Split-Path $i_targetlocation)" -Type "Directory" -ErrorAction SilentlyContinue
+                        Copy-Item -Path "$i_savelocation" -Destination "$i_targetlocation" -Force -ErrorAction SilentlyContinue
+                    }
+                }
+
+                if ($m -eq 'ModularVisualizer') {
+                    debug "Moving ModularVisualizer generated bars and measures"
+                    Move-Item -Path "$s_cache_location\Rainmeter\CoreData\ModularVisualizer\*" -Destination "$s_RMSkinFolder\ModularVisualizer\" -Force
+                }
             }
         }
-        Write-Done
     }
 }
 # ---------------------------------------------------------------------------- #
