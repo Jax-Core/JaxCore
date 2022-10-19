@@ -558,7 +558,7 @@ foreach ($k in $ModuleDetails.CustomUserImages.Keys) {
     }
     $custom_userimages[$k] = $ha
 }
-$jaxcore_modules = $ModuleDetails.Keys | Where-Object {$_ -notmatch "Setup|Version|JaxCore|ExternalWidgets|ExternalWidgetsPlugins|JaxCoreDLCs|CustomUserImages|SHubPreferences"}
+$jaxcore_modules = $ModuleDetails.Keys | Where-Object {$_ -notmatch "Setup|Version|JaxCore|JaxCoreDLCs|CustomUserImages|SHubPreferences"}
 $exclude_plugins = $ModuleDetails.Version.Keys
 $s_RMINIFile_filterpattern = $ModuleDetails.SHubPreferences.SectionFilterPattern
 Write-Done

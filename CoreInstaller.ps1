@@ -433,7 +433,11 @@ Write-Done
 foreach ($m in $o_InstallModule) {
     debug "Processing module $m"
 
-    If ($moduleDetails.ExternalWidgets.Keys -contains $m) {
+    if ($m -match '/') {
+        $org = $x.Split('/')[0]
+        $m = $x.Split('/')[1]
+    }
+    elseif ($moduleDetails.ExternalWidgets.Keys -contains $m) {
         $org = $moduleDetails.ExternalWidgets[$m]
     } else {
         $org = 'Jax-Core'
