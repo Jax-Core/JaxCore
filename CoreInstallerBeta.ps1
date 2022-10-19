@@ -678,7 +678,6 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                 }
             }
         } else {
-            $skin_name = 'Patch'
             debug "> Skipping skin installation (none)"
         }
         # ---------------------------------- Plugins --------------------------------- #
