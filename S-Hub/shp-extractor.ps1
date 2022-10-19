@@ -324,7 +324,7 @@ Test flow
 .\S-Hub\shp-extractor.ps1 "C:\Users\Jax\AppData\Roaming\JaxCore\CoreData\S-Hub\Exports\Test{}.shp" -extracted -nomove
 #>
 
-Write-Info "SHPEXTRACTOR REF: Experimental v1.8"
+Write-Info "SHPEXTRACTOR REF: Experimental v1.9"
 # ---------------------------- Installer variables --------------------------- #
 $user = [EnvironmentVariableTarget]::User
 $path = [Environment]::GetEnvironmentVariable("PATH", $user)

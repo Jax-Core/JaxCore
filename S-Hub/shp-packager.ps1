@@ -386,7 +386,7 @@ Test flow
 .\S-Hub\shp-packager.ps1 -n "Test" -keep -nocompile
 #>
 
-Write-Info "SHPPACKAGER REF: Experimental v1.8"
+Write-Info "SHPPACKAGER REF: Experimental v1.9"
 # ---------------------------- Installer variables --------------------------- #
 
 $user = [EnvironmentVariableTarget]::User
