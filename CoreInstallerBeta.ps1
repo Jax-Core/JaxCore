@@ -54,8 +54,8 @@ function Get-IniContent ($filePath) {
     if (![System.IO.File]::Exists($filePath)) {
         throw "$filePath invalid"
     }
-    # $section = ';ItIsNotAFuckingSection;'
-    # $ini.Add($section, [ordered]@{})
+    $section = ';ItIsNotAFuckingSection;'
+    $ini.Add($section, [ordered]@{})
 
     foreach ($line in [System.IO.File]::ReadLines($filePath)) {
         if ($line -match "^\s*\[(.+?)\]\s*$") {
@@ -210,7 +210,6 @@ function Download-Rainmeter($params) {
     $githubRMDownloadOutpath = "$env:temp\RainmeterInstaller.exe"
     # --------------------------------- Download --------------------------------- #
     Write-Task "Downloading    "; Write-Emphasized $githubRMDownloadURL
-    $ProgressPreference = 'SilentlyContinue'
     Invoke-WebRequest "$githubRMDownloadURL" -outfile "$githubRMDownloadOutpath" -UseBasicParsing
     Write-Done
     # ------------------------------------ Run ----------------------------------- #
@@ -270,7 +269,7 @@ if (!($o_FromSHUB)) {$o_FromSHUB = $false}
 if (!($o_Force)) {$o_Force = $false}
 if (!($o_ExtInstall)) {$o_ExtInstall = $false}
 if (!($o_PromptBestOption)) {
-    if ($o_FromCore -or $o_Force) {
+    if ($o_FromCore -or $o_Force -or $o_NoPostActions) {
         $o_PromptBestOption = $false
     } else {
         $o_PromptBestOption = $true
@@ -279,8 +278,8 @@ if (!($o_PromptBestOption)) {
 # ---------------------------- Installer variables --------------------------- #
 $s_InstallIsBatch = [bool]($o_InstallModule.Count -gt '1')
 $s_rootFolderName = "JaxCoreCache"
-$s_root = "$env:temp\$s_rootFolderName"
-$s_unpacked = "$env:temp\$s_rootFolderName\Unpacked"
+$s_root = "C:\$s_rootFolderName"
+$s_unpacked = "$s_root\Unpacked"
 # Declare global scope installer variables
 
 $s_RMSettingsFolder = ""
@@ -291,8 +290,10 @@ $RMEXEloc = ""
 
 # Enable TLS 1.2 since it is required for connections to GitHub.
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        
+$ProgressPreference = 'SilentlyContinue'
 
-Write-Info "COREINSTALLER REF: Beta v5.6"
+Write-Info "COREINSTALLER REF: Stable v5.60"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -408,66 +409,14 @@ If (!$bit) {
     [System.IO.Directory]::SetCurrentDirectory($s_RMSkinFolder)
 
     If (Get-Process 'Rainmeter' -ErrorAction SilentlyContinue) {
-        Write-Task "Potential AHKv1 process"
-        # Stop-Process -Name 'Rainmeter'
+        Write-Task "Ending Rainmeter & potential AHKv1 process"
+        Stop-Process -Name 'Rainmeter'
         If (Get-Process 'AHKv1' -ErrorAction SilentlyContinue) {
             Stop-Process -Name 'AHKv1'
         }
         Write-Done
     }
 }
-
-# ---------------------------------------------------------------------------- #
-#                                 Post-actions                                 #
-# ---------------------------------------------------------------------------- #
-$s_PostAction = $null
-If ($o_FromCore -and !$o_FromSHUB) {
-    If ($o_ExtInstall) {
-        $s_PostAction += '[!DeactivateConfig $skin_load_path]'
-    }
-    $dlcINCFile = "$s_RMSkinFolder\..\CoreData\@DLCs\InstalledDLCs.inc"
-    If (!(Test-Path $dlcINCFile)) {
-        debug "No DLCs installed."
-    } else {
-        If ([String]::IsNullOrWhiteSpace((Get-content $dlcINCFile))) {
-            debug "No DLCs installed."
-        } else {
-            # --------------------- Check if skin has a DLC installed -------------------- #
-            $Ini = Get-IniContent -filePath $dlcINCFile
-
-            foreach ($i_name in $o_InstallModule) {
-                debug "> Matching $i_name with installed DLCs"
-
-                for ($j = 0; $j -lt $Ini['Variables'].Keys.Count; $j++) { 
-                    if ($Ini['Variables'].Keys[$j] -match $i_name) {
-                        debug "Found $i_name in installed DLCs"
-                        $s_PostAction += '[!WriteKeyValue Variables Sec.Page "2" "'+$s_RMSkinFolder+'\#JaxCore\Main\Home.ini"][!WriteKeyValue Variables Page.SubPage "1" "'+$s_RMSkinFolder+'\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Complete_Reinstallation "1" "'+$s_RMSkinFolder+'\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Reinstallation_isSingle "'+$([Bool]($o_InstallModule.Count -eq 1))+'" "'+$s_RMSkinFolder+'\#JaxCore\CoreShell\Home\Page2.inc"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]'
-                        Return
-                    }
-                }
-            }
-            debug "No matching DLCs found"
-        }
-    }
-    If ($s_InstallIsBatch) {
-        $s_PostAction += '[!WriteKeyValue Variables Sec.Page "1" "'+$s_RMSkinFolder+'\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]'
-    } else {
-        $s_PostAction += '[!WriteKeyvalue Variables Skin.Name "'+$o_InstallModule+'" "'+$s_RMSkinFolder+'\#JaxCore\@Resources\SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "'+$s_RMSkinFolder+'\#JaxCore\@Resources\SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.Ini"]'
-    }
-    
-    Write-Task "Setting up post-actions"
-    Set-Content -Path "$s_RMSkinFolder\#JaxCore\Accessories\Action\Main.ini" -Force -Value @"
-[Rainmeter]
-Update=-1
-OnUpdateAction=$s_PostAction[!DeactivateConfig]
-
-[x]
-meter=string
-
-"@
-    Write-Done
-}
-
 
 # ---------------------------------------------------------------------------- #
 #                                   Download                                   #
@@ -496,14 +445,25 @@ foreach ($m in $o_InstallModule) {
     } else {
         $release_api_url = "https://api.github.com/repos/$org/$m/releases/tags/v$o_Version"
     }
+
+    # 22H2 media player patch
+
+    if (($moduleDetails[$m].Values -contains 'WindowsNowPlaying') -and ($22h2_downloaded -eq $false)) {
+        $22h2_downloaded = $true
+
+        $outpath = "$s_root\zzzzzz.rmskin"
+        Write-Task "Downloading 22H2 media player patch from    "; Write-Emphasized "https://github.com/Jax-Core/22H2-MediaPatch/releases/download/v1/zzzzzz.rmskin"
+        Invoke-WebRequest "https://github.com/Jax-Core/22H2-MediaPatch/releases/download/v1/zzzzzz.rmskin" -outfile "$outpath" -UseBasicParsing
+        Write-Done
+    }
+
+    # End End End End
+
     Write-Task "Downloading    "; Write-Emphasized $release_api_url; Write-Task " to get download URL"
     $api_object = Invoke-WebRequest -Uri $release_api_url -UseBasicParsing | ConvertFrom-Json
     Write-Done
     $dl_url = $api_object.assets.browser_download_url
-
-    debug "Version to get: $v"
     
-    $ProgressPreference = 'SilentlyContinue'
     $outpath = "$s_root\$($m)_$($api_object.tag_name).rmskin"
     Write-Task "Downloading    "; Write-Emphasized $dl_url
     Invoke-WebRequest "$dl_url" -outfile "$outpath" -UseBasicParsing
@@ -566,8 +526,9 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
     debug "-----------------"
 
     $isInstallingCore = $false
+    [System.Collections.ArrayList]$list_of_installations = @()
 
-    Get-ChildItem "$s_unpacked\" -Directory | ForEach-Object {
+    Get-ChildItem "$s_unpacked\" -Directory | Sort-Object | ForEach-Object {
         $i_root = "$s_unpacked\$($_.Name)"
         
         If (!(Test-Path "$i_root\RMSKIN.ini")) {
@@ -586,52 +547,140 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
 
         $skin_load = $Ini["rmskin"]["Load"]
         $skin_load_path = Split-Path $skin_load
-        If ($skin_name -contains '#JaxCore') {$isInstallingCore = $true} 
+        if ($skin_name) {
+            if ($skin_name -contains '#JaxCore') {$isInstallingCore = $true} 
+            $list_of_installations.Add("$skin_name") > $null
 
-        debug "$skin_name $skin_ver - by $skin_auth"
-        debug "Variable files: $skin_varf"
-        debug "Load: $skin_load_path ($isInstallingCore)"
-        debug "-----------------"
-        # ------------------------------ Variable files ------------------------------ #
-        If (Test-Path "$s_RMSkinFolder\$skin_name") {
-            $new_install = $false
-            debug "This is an update"
-            $confirmation = 'y'
-            If ($o_Force) {$confirmation = 'n'}
-            If ($o_PromptBestOption) {
-                $confirmation = Read-Host "Do you want to save variables for this installation? (y/n)"
-            }
-            if ($confirmation -match '^y$') {
-                debug "> Saving variable files"
-                $skin_varf = $skin_varf -split '\s\|\s'
-                If (Test-Path "$i_root\Unpacked\$i_name\") { Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse > $null }
-                New-Item -Path "$i_root\SavedVarFiles" -Type "Directory" > $null
-                foreach ($varf in $skin_varf) {
-                    if (Test-Path -Path "$s_RMSkinFolder\$varf") {
-                        $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $varf)"
-                        $i_savelocation = "$i_root\SavedVarFiles\$varf"
-                        debug "Saving #$i $($varf) -> $i_savelocation"
-                        If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" > $null }
-                        Copy-Item -Path "$s_RMSkinFolder\$varf" -Destination "$i_savelocation" -Force > $null
+            debug "$skin_name $skin_ver - by $skin_auth"
+            debug "Variable files: $skin_varf"
+            debug "Load: $skin_load_path ($isInstallingCore)"
+            debug "-----------------"
+            # ------------------------------ Variable files ------------------------------ #
+            If (Test-Path "$s_RMSkinFolder\$skin_name") {
+                $new_install = $false
+                debug "This is an update"
+                $confirmation = 'y'
+                If ($o_Force) {$confirmation = 'n'}
+                If ($o_PromptBestOption) {
+                    $confirmation = Read-Host "Do you want to save variables for this installation? (y/n)"
+                }
+                if ($confirmation -match '^y$') {
+                    debug "> Saving variable files"
+                    $skin_varf = $skin_varf -split '\s\|\s'
+                    If (Test-Path "$i_root\Unpacked\$i_name\") { Remove-Item -Path "$i_root\SavedVarFiles" -Force -Recurse > $null }
+                    New-Item -Path "$i_root\SavedVarFiles" -Type "Directory" > $null
+                    foreach ($varf in $skin_varf) {
+                        if (Test-Path -Path "$s_RMSkinFolder\$varf") {
+                            $i_savedir = "$i_root\SavedVarFiles\$(Split-Path $varf)"
+                            $i_savelocation = "$i_root\SavedVarFiles\$varf"
+                            debug "Saving #$i $($varf) -> $i_savelocation"
+                            If (!(Test-Path "$i_savedir")) { New-Item -Path "$i_savedir" -Type "Directory" > $null }
+                            Copy-Item -Path "$s_RMSkinFolder\$varf" -Destination "$i_savelocation" -Force > $null
+                        }
                     }
+                } else {
+                    debug "> Not saving variable files"
                 }
             } else {
-                debug "> Not saving variable files"
+                $new_install = $true
+                debug "This is a new installation"
+            }
+            # ---------------------------------- Process --------------------------------- #
+            debug "> Moving skin files"
+            Get-ChildItem -Path "$i_root\Skins\" | ForEach-Object {
+                If ($new_install) {
+                    New-Item -Path "$s_RMSkinFolder\$($_.Name)\" -Type "Directory" -Force > $null
+                } else {
+                    Get-ChildItem -Path "$s_RMSkinFolder\$($_.Name)\" -Recurse | Remove-Item -Recurse
+                }
+                Move-Item -Path "$i_root\Skins\$($_.Name)\*" -Destination "$s_RMSkinFolder\$($_.Name)\" -Force
+            }
+            # ------------------------------ Variable files ------------------------------ #
+            If ((-not $new_install) -and ($confirmation -match '^y$')) {
+                debug "> Writing saved variables files back to skin"
+                foreach ($varf in $skin_varf) {
+                    $i_savelocation = "$i_root\SavedVarFiles\$varf"
+                    $i_targetlocation = "$s_RMSkinFolder\$varf"
+                    If (Test-Path "$i_savelocation") {
+                        debug "Writing keys and values from saved variables to local"
+                        $Ini = Get-IniContent $i_savelocation;$oldvars = $Ini
+                        $Ini = Get-IniContent $i_targetlocation;$newvars = $Ini
+                        $oldvars.Keys | Foreach-Object {
+                            $i_section = $_
+                            $oldvars[$i_section].Keys | ForEach-Object {
+                                $i_value = $_
+                                # debug "[$i_section] $i_value"
+                                If ([bool]$newvars[$i_section][$i_value]) {
+                                    $newvars[$i_section][$i_value] = $oldvars[$i_section][$i_value]
+                                    # debug "$($newvars[$i_section][$i_value]) replaced by $($oldvars[$i_section][$i_value])"
+                                }
+                            }
+                        }
+                        Set-IniContent $newvars $i_targetlocation
+                    }
+                }
+            } elseif (($skin_name -notcontains '#JaxCore') -and !$o_FromSHUB -and $o_NoPostActions) {
+                debug "> Automatically changing scale variables (new installation)"
+                $vc = Get-WmiObject -class "Win32_VideoController"
+                $saw = $vc.CurrentHorizontalResolution
+                $sah = $vc.CurrentVerticalResolution
+        #        ((#SCREENAREAWIDTH#/1920) < (#SCREENAREAHEIGHT#/1080) ? (#SCREENAREAWIDTH#/1920) : (#SCREENAREAHEIGHT#/1080))
+                $scale = 1
+                Write-Task "Getting scale"
+                If (($saw/1920) -lt ($sah/1080)) {
+                    $scale = $saw / 1920
+                } else {
+                    $scale = $sah / 1080
+                }
+                Write-Done
+                $scale = [math]::Round($scale,2)
+                debug "Scale is $scale"
+                if ($scale -eq 1) {
+                    debug "Scale unchanged."
+                } elseif ($scale -eq 0) {
+                    Write-Fail "Seems like the installer is unable to identify the correct screen sizes. Skipping scaling writing."
+                } else {
+                    Write-Task "Applying scaling to config files"
+                    $varsfile = "$s_RMSkinFolder\$skin_name\@Resources\Vars.inc"
+                    If (Test-Path $varsfile) {
+                        debug "Vars.inc found."
+                        $Ini = Get-IniContent $varsfile
+                        If ([bool]$Ini["Variables"]["Scale"]) {
+                            $Ini["Variables"]["Scale"] = $scale
+                            Set-IniContent $Ini $varsfile
+                        }
+                    }
+                    $othervarfiles = "$s_RMSkinFolder\$skin_name\Main\Vars\"
+                    If (Test-Path "$othervarfiles") {
+                        debug "Found other variable files"
+                        Get-ChildItem "$othervarfiles" -File | ForEach-Object {
+                            $i_file = "$othervarfiles\$($_.Name)"
+                            $Ini = Get-IniContent $i_file
+                            If ([bool]$Ini["Variables"]["Scale"]) {
+                                debug "Found scale variable in $i_file"
+                                $Ini["Variables"]["Scale"] = $scale
+                                Set-IniContent $Ini $i_file
+                            }
+                        }
+                    }
+                    Write-Done
+                }
+            }
+            # ------------------------------ Hotkey variable ----------------------------- #
+            If ($($ModuleDetails[$skin_name].VarFiles -split '\s\|\s') -contains "$skin_name\@Resources\Actions\Hotkeys.ini") {
+                If (!((join-path "$Env:APPDATA\Rainmeter\" "") -eq ($RMEXEloc))) {
+                    Write-Task "Setting Rainmeter path for AutoHotkey to use in modules."
+                    $i_file = "$s_RMSkinFolder\$skin_name\@Resources\Actions\Hotkeys.ini"
+                    $Ini = Get-IniContent $i_file
+                    $Ini["Variables"]["RMPATH"] = $RMEXEloc
+                    Set-IniContent $Ini $i_file
+                    Write-Done
+                }
             }
         } else {
-            $new_install = $true
-            debug "This is a new installation"
+            debug "No skins found."
         }
-        # ---------------------------------- Process --------------------------------- #
-        debug "> Moving skin files"
-        Get-ChildItem -Path "$i_root\Skins\" | ForEach-Object {
-            If ($new_install) {
-                New-Item -Path "$s_RMSkinFolder\$($_.Name)\" -Type "Directory" -Force > $null
-            } else {
-                Get-ChildItem -Path "$s_RMSkinFolder\$($_.Name)\" -Recurse | Remove-Item -Recurse
-            }
-            Move-Item -Path "$i_root\Skins\$($_.Name)\*" -Destination "$s_RMSkinFolder\$($_.Name)\" -Force
-        }
+        # ---------------------------------- Plugins --------------------------------- #
         If (Test-Path "$i_root\Plugins\") {
             debug "> Moving / replacing plugins"
             $i_targetlocation = "$($s_RMSettingsFolder)\Plugins\"
@@ -645,88 +694,6 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
             }
         } else {
             debug "> Skipping plugin installation (none)"
-        }
-        # ------------------------------ Variable files ------------------------------ #
-        If ((-not $new_install) -and ($confirmation -match '^y$')) {
-            debug "> Writing saved variables files back to skin"
-            foreach ($varf in $skin_varf) {
-                $i_savelocation = "$i_root\SavedVarFiles\$varf"
-                $i_targetlocation = "$s_RMSkinFolder\$varf"
-                If (Test-Path "$i_savelocation") {
-                    debug "Writing keys and values from saved variables to local"
-                    $Ini = Get-IniContent $i_savelocation;$oldvars = $Ini
-                    $Ini = Get-IniContent $i_targetlocation;$newvars = $Ini
-                    $oldvars.Keys | Foreach-Object {
-                        $i_section = $_
-                        $oldvars[$i_section].Keys | ForEach-Object {
-                            $i_value = $_
-                            # debug "[$i_section] $i_value"
-                            If ([bool]$newvars[$i_section][$i_value]) {
-                                $newvars[$i_section][$i_value] = $oldvars[$i_section][$i_value]
-                                # debug "$($newvars[$i_section][$i_value]) replaced by $($oldvars[$i_section][$i_value])"
-                            }
-                        }
-                    }
-                    Set-IniContent $newvars $i_targetlocation
-                }
-            }
-        } elseif (($skin_name -notcontains '#JaxCore') -and !$o_FromSHUB -and $o_NoPostActions) {
-            debug "> Automatically changing scale variables (new installation)"
-            $vc = Get-WmiObject -class "Win32_VideoController"
-            $saw = $vc.CurrentHorizontalResolution
-            $sah = $vc.CurrentVerticalResolution
-    #        ((#SCREENAREAWIDTH#/1920) < (#SCREENAREAHEIGHT#/1080) ? (#SCREENAREAWIDTH#/1920) : (#SCREENAREAHEIGHT#/1080))
-            $scale = 1
-            Write-Task "Getting scale"
-            If (($saw/1920) -lt ($sah/1080)) {
-                $scale = $saw / 1920
-            } else {
-                $scale = $sah / 1080
-            }
-            Write-Done
-            $scale = [math]::Round($scale,2)
-            debug "Scale is $scale"
-            if ($scale -eq 1) {
-                debug "Scale unchanged."
-            } elseif ($scale -eq 0) {
-                Write-Fail "Seems like the installer is unable to identify the correct screen sizes. Skipping scaling writing."
-            } else {
-                Write-Task "Applying scaling to config files"
-                $varsfile = "$s_RMSkinFolder\$skin_name\@Resources\Vars.inc"
-                If (Test-Path $varsfile) {
-                    debug "Vars.inc found."
-                    $Ini = Get-IniContent $varsfile
-                    If ([bool]$Ini["Variables"]["Scale"]) {
-                        $Ini["Variables"]["Scale"] = $scale
-                        Set-IniContent $Ini $varsfile
-                    }
-                }
-                $othervarfiles = "$s_RMSkinFolder\$skin_name\Main\Vars\"
-                If (Test-Path "$othervarfiles") {
-                    debug "Found other variable files"
-                    Get-ChildItem "$othervarfiles" -File | ForEach-Object {
-                        $i_file = "$othervarfiles\$($_.Name)"
-                        $Ini = Get-IniContent $i_file
-                        If ([bool]$Ini["Variables"]["Scale"]) {
-                            debug "Found scale variable in $i_file"
-                            $Ini["Variables"]["Scale"] = $scale
-                            Set-IniContent $Ini $i_file
-                        }
-                    }
-                }
-                Write-Done
-            }
-        }
-        # ------------------------------ Hotkey variable ----------------------------- #
-        If ($($ModuleDetails[$skin_name].VarFiles -split '\s\|\s') -contains "$skin_name\@Resources\Actions\Hotkeys.ini") {
-            If (!((join-path "$Env:APPDATA\Rainmeter\" "") -eq ($RMEXEloc))) {
-                Write-Task "Setting Rainmeter path for AutoHotkey to use in modules."
-                $i_file = "$s_RMSkinFolder\$skin_name\@Resources\Actions\Hotkeys.ini"
-                $Ini = Get-IniContent $i_file
-                $Ini["Variables"]["RMPATH"] = $RMEXEloc
-                Set-IniContent $Ini $i_file
-                Write-Done
-            }
         }
         Write-Info "Finished installation of $skin_name! :D "
     }
@@ -764,11 +731,45 @@ Active=1
     if ($o_ExtInstall -eq $false) {
         & "$RMEXEloc" [!ActivateConfig $skin_load_path]
     }
-} elseif ($o_FromCore) {
-    & "$s_RMSkinFolder\#JaxCore\@Resources\Addons\RestartRainmeter.exe"
-    Exit
+} else {
+    If ($o_ExtInstall) {
+        & "$RMEXEloc" [!DeactivateConfig $skin_load_path]
+    }
+    $dlcINCFile = "$s_RMSkinFolder\..\CoreData\@DLCs\InstalledDLCs.inc"
+    If (!($o_FromSHUB)) {
+        If (!(Test-Path $dlcINCFile)) {
+            debug "No DLCs installed."
+        } else {
+            If ([String]::IsNullOrWhiteSpace((Get-content $dlcINCFile))) {
+                debug "No DLCs installed."
+            } else {
+                # --------------------- Check if skin has a DLC installed -------------------- #
+                $Ini = Get-IniContent -filePath $dlcINCFile
+
+                for ($i = 0;$i -lt $list_of_installations.Count;$i++) {
+                    $i_name = $list_of_installations[$i]
+                    debug "> Matching $i_name with installed DLCs"
+
+                    for ($j = 0; $j -lt $Ini['Variables'].Keys.Count; $j++) { 
+                        if ($Ini['Variables'].Keys[$j] -match $i_name) {
+                            debug "Found $i_name in installed DLCs"
+                            & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "2" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!WriteKeyValue Variables Page.SubPage "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Complete_Reinstallation "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Reinstallation_isSingle "$([Bool]($list_of_installations.Count -eq 1))" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
+                            Return
+                        }
+                    }
+                }
+                debug "No matching DLCs found"
+            }
+        }
+        If ($s_InstallIsBatch) {
+            & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
+        } else {
+            & "$RMEXEloc" [!WriteKeyvalue Variables Skin.Name "$skin_name" "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
+        }
+    }
 }
 Write-Task "Clearing cache"
 Get-ChildItem -Path "$s_root\" -Recurse | Remove-Item -Recurse
+Remove-Item -Path "$s_root" -Force
 Write-Done
 If (!($o_FromSHUB)) {Exit}
