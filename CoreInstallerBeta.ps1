@@ -448,7 +448,7 @@ foreach ($m in $o_InstallModule) {
 
     # 22H2 media player patch
 
-    if (($moduleDetails[$m].Values -contains 'WindowsNowPlaying') -and ($22h2_downloaded -eq $false)) {
+    if (($moduleDetails[$m].Values -contains 'WindowsNowPlaying') -and ($22h2_downloaded -ne $true) -and ($([System.Environment]::OSVersion.Version.Build) -gt 22533)) {
         $22h2_downloaded = $true
 
         $outpath = "$s_root\zzzzzz.rmskin"
