@@ -540,14 +540,14 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
 
         # ------------------------------ Read RMSKIN.ini ----------------------------- #
         $Ini = Get-IniContent "$i_root\RMSKIN.ini"
-        $skin_name = (Get-ChildItem -Path "$i_root\Skins\" | Select-Object -First 1).Name
-        $skin_auth = $Ini["rmskin"]["Author"]
-        $skin_ver = $Ini["rmskin"]["Version"]
-        $skin_varf = $Ini["rmskin"]["VariableFiles"]
+        if (Test-Path "$i_root\Skins\") {
+            $skin_name = (Get-ChildItem -Path "$i_root\Skins\" | Select-Object -First 1).Name
+            $skin_auth = $Ini["rmskin"]["Author"]
+            $skin_ver = $Ini["rmskin"]["Version"]
+            $skin_varf = $Ini["rmskin"]["VariableFiles"]
 
-        $skin_load = $Ini["rmskin"]["Load"]
-        $skin_load_path = Split-Path $skin_load
-        if ($skin_name) {
+            $skin_load = $Ini["rmskin"]["Load"]
+            $skin_load_path = Split-Path $skin_load
             if ($skin_name -contains '#JaxCore') {$isInstallingCore = $true} 
             $list_of_installations.Add("$skin_name") > $null
 
@@ -678,7 +678,8 @@ If (($o_ExtInstall -eq $true) -and ($s_InstallIsBatch -eq $false)) {
                 }
             }
         } else {
-            debug "No skins found."
+            $skin_name = 'Patch'
+            debug "> Skipping skin installation (none)"
         }
         # ---------------------------------- Plugins --------------------------------- #
         If (Test-Path "$i_root\Plugins\") {
