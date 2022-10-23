@@ -293,7 +293,7 @@ $RMEXEloc = ""
         
 $ProgressPreference = 'SilentlyContinue'
 
-Write-Info "COREINSTALLER REF: Stable v5.60"
+Write-Info "COREINSTALLER REF: Stable v5.61"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -434,11 +434,8 @@ foreach ($m in $o_InstallModule) {
     debug "Processing module $m"
 
     if ($m -match '/') {
-        $org = $x.Split('/')[0]
-        $m = $x.Split('/')[1]
-    }
-    elseif ($moduleDetails.ExternalWidgets.Keys -contains $m) {
-        $org = $moduleDetails.ExternalWidgets[$m]
+        $org = $m.Split('/')[0]
+        $m = $m.Split('/')[1]
     } else {
         $org = 'Jax-Core'
     }
