@@ -349,13 +349,17 @@ if (!($o_Location)) {
         Write-Host "JaxCore is not installed on your device:`n1 - Quick install (Recommended)`n2 - Install as Rainmeter application`n3 - Install at a custom location`n"
         $confirmation = Read-Host "Please select your desired installation by entering 1-3"
         if ($confirmation -match '1') {
-            # ------------------------------- Quick install ------------------------------ #
-            $s_RMSettingsFolder = "$env:APPDATA\Rainmeter\"
-            $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
-            $s_RMSkinFolder = "$env:APPDATA\JaxCore\InstalledComponents\"
-            $RMEXEloc = "$s_RMSettingsFolder\Rainmeter.exe"
+            # # ------------------------------- Quick install ------------------------------ #
+            # $s_RMSettingsFolder = "$env:APPDATA\Rainmeter\"
+            # $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
+            # $s_RMSkinFolder = "$env:APPDATA\JaxCore\InstalledComponents\"
+            # $RMEXEloc = "$s_RMSettingsFolder\Rainmeter.exe"
 
-            Download-Rainmeter "/S /RESTART=0 /PORTABLE=1 /D=$s_RMSettingsFolder"
+            # Download-Rainmeter "/S /RESTART=0 /PORTABLE=1 /D=$s_RMSettingsFolder"
+            $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
+
+            Download-Rainmeter "/S /AUTOSTARTUP=1 /RESTART=0"
+            # Quick install will do a portable install once I can get JaxCore.lnk to start Rainmeter if not already running
         } elseif ($confirmation -match '2') {
             # ----------------------- Install Rainmeter application ---------------------- #
             $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
