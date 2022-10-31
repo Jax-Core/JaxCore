@@ -194,6 +194,21 @@ function DownloadFile($url, $targetFile)
    $responseStream.Dispose()
 }
 
+function Get-Folder($initialDirectory="") {
+    [System.Reflection.Assembly]::LoadWithPartialName("System.windows.forms")|Out-Null
+
+    $foldername = New-Object System.Windows.Forms.FolderBrowserDialog
+    $foldername.Description = "Select a folder"
+    $foldername.rootfolder = "MyComputer"
+    $foldername.SelectedPath = $initialDirectory
+
+    if($foldername.ShowDialog() -eq "OK")
+    {
+        $folder += $foldername.SelectedPath
+    }
+    return $folder
+}
+
 # ---------------------------------------------------------------------------- #
 #                             Installation modules                             #
 # ---------------------------------------------------------------------------- #
@@ -293,7 +308,7 @@ $RMEXEloc = ""
         
 $ProgressPreference = 'SilentlyContinue'
 
-Write-Info "COREINSTALLER REF: Stable v5.61"
+Write-Info "COREINSTALLER REF: Stable v6"
 
 if (!($o_Location)) {
     # ---------------------------------------------------------------------------- #
@@ -331,8 +346,35 @@ if (!($o_Location)) {
         }
     } else {
         $wasRMInstalled = $false
-        $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
-        Download-Rainmeter "/S /AUTOSTARTUP=1 /RESTART=0"
+        Write-Host "JaxCore is not installed on your device:`n1 - Quick install (Recommended)`n2 - Install as Rainmeter application`n3 - Install at a custom location`n"
+        $confirmation = Read-Host "Please select your desired installation by entering 1-3"
+        if ($confirmation -match '1') {
+            # ------------------------------- Quick install ------------------------------ #
+            $s_RMSettingsFolder = "$env:APPDATA\Rainmeter\"
+            $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
+            $s_RMSkinFolder = "$env:APPDATA\JaxCore\InstalledComponents\"
+            $RMEXEloc = "$s_RMSettingsFolder\Rainmeter.exe"
+
+            Download-Rainmeter "/S /RESTART=0 /PORTABLE=1 /D=$s_RMSettingsFolder"
+        } elseif ($confirmation -match '2') {
+            # ----------------------- Install Rainmeter application ---------------------- #
+            $RMEXEloc = "$Env:Programfiles\Rainmeter\Rainmeter.exe"
+
+            Download-Rainmeter "/S /AUTOSTARTUP=1 /RESTART=0"
+        } elseif ($confirmation -match '3') {
+            # --------------------- Install custom location prompted --------------------- #
+            $o_Location = Get-Folder
+
+            $s_RMSettingsFolder = "$o_Location\Rainmeter\"
+            $s_RMINIFile = "$($s_RMSettingsFolder)Rainmeter.ini"
+            $s_RMSkinFolder = "$o_Location\JaxCore\InstalledComponents\"
+            $RMEXEloc = "$s_RMSettingsFolder\Rainmeter.exe"
+            
+            Download-Rainmeter "/S /RESTART=0 /PORTABLE=1 /D=$s_RMSettingsFolder"
+        } else {
+            Write-Fail "Action cancelled. Installation terminated."
+            Return
+        }
     }
 } else {
     # ---------------------------------------------------------------------------- #
