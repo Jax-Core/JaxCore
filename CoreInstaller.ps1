@@ -346,7 +346,13 @@ if (!($o_Location)) {
         }
     } else {
         $wasRMInstalled = $false
-        Write-Host "JaxCore is not installed on your device:`n1 - Quick install (Recommended)`n2 - Install as Rainmeter application`n3 - Install at a custom location`n"
+        
+        if ($o_InstallModule -match '/') {
+            $s_LargeModuleName = $o_InstallModule.Split('/')[1]
+        } else {
+            $s_LargeModuleName = 'JaxCore'
+        }
+        Write-Host "$s_LargeModuleName is not installed on your device:`n1 - Quick install (Recommended)`n2 - Install as Rainmeter application`n3 - Install at a custom location`n"
         $confirmation = Read-Host "Please select your desired installation by entering 1-3"
         if ($confirmation -match '1') {
             # # ------------------------------- Quick install ------------------------------ #
