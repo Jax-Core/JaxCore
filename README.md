@@ -31,8 +31,11 @@ JaxCore is a collection of utility modules designed to improve your desktop expe
 
 JaxCore (configuration hub) acts as a settings menu for all JaxCore modules, while providing continuous support for patch / feature updates. It also allows you to access other modules more quickly!
 
+## Screenshots 🖼️
+You can check out what you're desktop can look like [here](https://github.com/Jax-Core/JaxCore/blob/main/Screenshots.md)!
+
 ## Prerequisites 🖥️
-- **Windows 10** or above
+- **Windows 10 (x64)** or above
 - > 6GB RAM, > 4 Core CPU
 - For older systems, **Powershell v5.1 or newer** is required. Upgrade powershell **[here](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-7.2#upgrading-existing-windows-powershell)**!
 
@@ -43,10 +46,9 @@ Run the following command in Powershell to install the latest version of JaxCore
 (To launch Powershell as an Admin: `Win + R` -> `powershell` -> Press `CTRL + SHIFT + ENTER` on your keyboard. Powershell can also be launched via Windows Search.)
 
 ```
-Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/Jax-Core/JaxCore/master/CoreInstaller.ps1" | Invoke-Expression
+iwr -useb "https://raw.githubusercontent.com/Jax-Core/JaxCore/master/CoreInstaller.ps1" | iex
 ```
-
-> Alternatively, you can download it from the [JaxCore website](https://jax-core.github.io/).
+For other methods or changing install location, check out the [FAQs](https://jaxcore.gitbook.io/core/getting-started/faqs/jaxcore-faqs#installation)
 <br />
 <br />
 

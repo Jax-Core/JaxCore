@@ -6,7 +6,6 @@ Update=-1
 @includeVars=#@#Vars.inc
 @includeSkinVars=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 Set.TitleBarH=34
-Drop.Animation_Time=300
 Sec.P=20
 Sec.ResultSize=30
 Process.Result_Count=0

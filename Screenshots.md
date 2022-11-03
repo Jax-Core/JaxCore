@@ -1,0 +1,12 @@
+# Screenshots
+![ModularClocks](https://user-images.githubusercontent.com/80020581/187905607-779ed69c-26ce-4c87-83ef-ef9442445b07.png)
+![elaaa](https://user-images.githubusercontent.com/80020581/188602514-2d39bcdc-222e-449b-8ef8-c4a694f77759.png)
+![Plainext](https://user-images.githubusercontent.com/80020581/187905613-1c10c951-a38e-4d64-aa86-512a36131027.png)
+![ValliStart](https://user-images.githubusercontent.com/80020581/187905614-36896800-8692-4ac0-95b1-e96d20d5e3bc.png)
+![1](https://user-images.githubusercontent.com/80020581/187905628-4b3c24f8-787a-4d0f-a52c-05bce17e458c.png)
+![Layered](https://user-images.githubusercontent.com/80020581/187905688-393335ee-7d4f-4195-a264-9b6dc940fe8c.png)
+![ModularClocks Bank](https://user-images.githubusercontent.com/80020581/187905615-2a645716-d895-4039-9230-17c358b625c1.png)
+![Center](https://user-images.githubusercontent.com/80020581/187905743-3ffa37b6-2565-4969-bc28-5a894ad11953.png)
+![Screenshot 22-08-11 at 134349](https://user-images.githubusercontent.com/80020581/187905776-141ec6b3-5350-459a-96f6-475a0d6a48b9.png)
+![Screenshot 22-08-11 at 134918](https://user-images.githubusercontent.com/80020581/187905794-24c122f0-64d3-4664-8fe8-69360d70e75d.png)
+![Screenshot 22-08-11 at 134750](https://user-images.githubusercontent.com/80020581/187905805-748a193a-e270-4700-a93b-49538027c332.png)
