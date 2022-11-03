@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Core config</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="transitions.css">
+    <script type="text/javascript" src="pageList.js"></script> 
+    <script type="text/javascript" src="script.js"></script> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="shortcut icon" href="#">
+  </head>
+  <body>
+    <div class="transition transition-1 is-active"></div>
+    <nav class="sidebar">
+      <div class="sidebar-container pageList">
+        <img class="pageList-headerImage">
+        <div class="pageList-activatorContainer">
+          <div class="pageList-activatorShapeBackground">
+            <div class="pageList-activatorShapeNode"></div>
+          </div>
+        </div>
+        <a class="pageList-item" onclick="changeToPage('info')">
+          <span class="pageSelector-icon material-symbols-outlined" id="pageListItemIcon-info">info</span>
+          <span class="pageSelector-name" id="pageListItemName-info">Info</span>
+        </a>
+        <!-- ------------------ Sidebar items are inserted below ------------------- -->
+        <div class="pageList-div"></div>
+      </div>
+      <div class="sidebar-container help">
+        <div class="pageList-div"></div>
+        <a class="pageList-item" onclick="changeToPage('help')">
+          <span class="pageSelector-icon material-symbols-outlined" id="pageListItemIcon-help">help</span>
+          <span class="pageSelector-name" id="pageListItemName-help">Help</span>
+        </a>
+      </div>
+    </nav>
+    <div class="set-container" id="page-info">
+      <h1 class="set-pageName">Info</h1>
+    </div>
+    <!-- ---------------------- Pages are inserted below ----------------------- -->
+    <div class="set-container" id="page-help">
+    </div>
+  </body>
+</html>

@@ -4,5 +4,7 @@
 			"path": ".."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Testany"
+	}
 }
