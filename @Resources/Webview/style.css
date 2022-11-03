@@ -1,5 +1,7 @@
 :root {
   --padding: 30px;
+  --color-accent-1: 242, 52, 0;
+  --color-accent-2: 255, 183, 0;
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
@@ -26,6 +28,17 @@ body {
 p {
   font-family: "Poppins", sans-serif;
   color: white;
+}
+
+.coregrad-string {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--color-accent-1)) 0%,
+    rgb(var(--color-accent-2)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .card-1 { grid-area: card-1; }
@@ -127,6 +140,10 @@ p {
   font-size: clamp(16px, 4vw, 48px);
   margin-top: -42px;
   margin-bottom: -32px;
+}
+
+.card-text > span {
+  font-weight: 800;
 }
 
 .card-description {
