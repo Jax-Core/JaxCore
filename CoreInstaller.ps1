@@ -789,6 +789,8 @@ Active=1
         & "$RMEXEloc" [!DeactivateConfig $skin_load_path]
     }
     $dlcINCFile = "$s_RMSkinFolder\..\CoreData\@DLCs\InstalledDLCs.inc"
+    $isPostWebviewCore = Test-Path "$s_RMSkinFolder\#JaxCore\@Resources\CacheVars\Configurator.inc"
+
     If (!($o_FromSHUB)) {
         If (!(Test-Path $dlcINCFile)) {
             debug "No DLCs installed."
@@ -806,7 +808,12 @@ Active=1
                     for ($j = 0; $j -lt $Ini['Variables'].Keys.Count; $j++) { 
                         if ($Ini['Variables'].Keys[$j] -match $i_name) {
                             debug "Found $i_name in installed DLCs"
-                            & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "2" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!WriteKeyValue Variables Page.SubPage "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Complete_Reinstallation "1" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!WriteKeyValue Variables Page.Reinstallation_isSingle "$([Bool]($list_of_installations.Count -eq 1))" "$s_RMSkinFolder\#JaxCore\CoreShell\Home\Page2.inc"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
+                            # Preserve legacy DLC reinstall action
+                            if ($isPostWebviewCore) {
+                                & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\@Resources\CacheVars\Supporter.inc"][!WriteKeyValue Variables Page.Complete_Reinstallation "1" "$s_RMSkinFolder\#JaxCore\@Resources\CacheVars\Supporter.inc"][!WriteKeyValue Variables Page.Reinstallation_isSingle "$([Bool]($list_of_installations.Count -eq 1))" "$s_RMSkinFolder\#JaxCore\@Resources\CacheVars\Supporter.inc"][!ActivateConfig "#JaxCore\Main" "Supporter.Ini"]
+                            } else {
+                                & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\@Resources\CacheVars\Supporter.inc"][!WriteKeyValue Variables Page.Complete_Reinstallation "1" "$s_RMSkinFolder\#JaxCore\@Resources\CacheVars\Supporter.inc"][!WriteKeyValue Variables Page.Reinstallation_isSingle "$([Bool]($list_of_installations.Count -eq 1))" "$s_RMSkinFolder\#JaxCore\@Resources\CacheVars\Supporter.inc"][!ActivateConfig "#JaxCore\Main" "Supporter.Ini"]
+                            }
                             Return
                         }
                     }
@@ -815,9 +822,22 @@ Active=1
             }
         }
         If ($s_InstallIsBatch) {
-            & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
+            # Preserve legacy jaxcore post acton
+            If ($isPostWebviewCore) {
+                & "$RMEXEloc" [!ActivateConfig "#JaxCore\Main" "Home.Ini"]
+            } else {
+                & "$RMEXEloc" [!WriteKeyValue Variables Sec.Page "1" "$s_RMSkinFolder\#JaxCore\Main\Home.ini"][!ActivateConfig "#JaxCore\Main" "Home.Ini"]
+            }
         } else {
-            & "$RMEXEloc" [!WriteKeyvalue Variables Skin.Name "$skin_name" "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "$s_RMSkinFolder\#JaxCore\@Resources\SecVar.inc"][!ActivateConfig "#JaxCore\Main" "Settings.Ini"]
+            # Preserve legacy secvar path
+            If ($isPostWebviewCore) {
+                $cachevars_configurator = 'CacheVars\Configurator.inc'
+                $coreini_toload = 'Settings.ini'
+            } else {
+                $cachevars_configurator = 'SecVar.inc'
+                $coreini_toload = 'Settings.ini'
+            }
+            & "$RMEXEloc" [!WriteKeyvalue Variables Skin.Name "$skin_name" "$s_RMSkinFolder\#JaxCore\@Resources\$cachevars_configurator"][!WriteKeyvalue Variables Skin.Set_Page Info "$s_RMSkinFolder\#JaxCore\@Resources\$cachevars_configurator"][!ActivateConfig "#JaxCore\Main" "$coreini_toload"]
         }
     }
 }

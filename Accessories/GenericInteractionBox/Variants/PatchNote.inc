@@ -61,7 +61,7 @@ InlineSetting=Underline
 ; ---------------------------------------------------------------------------- ;
 
 [Contents]
-@includeSecvar=#@#SecVar.inc
+@includeCacheVarsConfigurator=#@#CacheVars\Configurator.inc
 @includeContent=#SKINSPATH##Skin.name#\Core\PatchNote\Main.inc
 
 [Anchor]

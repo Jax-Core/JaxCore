@@ -2,7 +2,6 @@
 Update=-1
 
 [Variables]
-@includeVars=#@#Vars.inc
 @includeSkinVars=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 Sec.P=20
 Sec.ResultSize=30

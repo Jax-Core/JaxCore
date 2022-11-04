@@ -1,0 +1,6 @@
+@Resources\CacheVars\Configurator.inc
+@Resources\CacheVars\Home.inc
+@Resources\CacheVars\Supporter.inc
+@Resources\CacheVars\Accessories.inc
+@Resources\CacheVars\Ctx.inc
+@Resources\Vars.inc

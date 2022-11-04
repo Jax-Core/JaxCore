@@ -1,7 +1,7 @@
 const _resourceDir = RainmeterAPI.GetVariable('@')
 
 function GoToCorePage (pageName) {
-    RainmeterAPI.Bang('[!WriteKeyvalue Variables Skin.Name '+pageName+' "'+_resourceDir+'SecVar.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "'+_resourceDir+'SecVar.inc"][!ActivateConfig "#JaxCore\\Main" "Settings.ini"]')
+    RainmeterAPI.Bang('[!WriteKeyvalue Variables Skin.Name '+pageName+' "'+_resourceDir+'CacheVars\\Configurator.inc"][!WriteKeyvalue Variables Skin.Set_Page Info "'+_resourceDir+'CacheVars\\Configurator.inc"][!ActivateConfig "#JaxCore\\Main" "Settings.ini"]')
 }
 
 function OpenCoreCtx() {

@@ -1,8 +1,12 @@
 [Rainmeter]
 Update=-1
+DefaultAlwaysOnTop=2
+DefaultDraggable=0
+DefaultFadeDuration=0
+DefaultKeepOnscreen=0
 
 [Variables]
-Sec.S=((#SCREENAREAWIDTH#/1920) < (#SCREENAREAHEIGHT#/1080) ? (#SCREENAREAWIDTH#/1920) : (#SCREENAREAHEIGHT#/1080))
+Transfer.S=((#SCREENAREAWIDTH#/1920) < (#SCREENAREAHEIGHT#/1080) ? (#SCREENAREAWIDTH#/1920) : (#SCREENAREAHEIGHT#/1080))
 @includeVars=#@#Vars.inc
 @includeSkinVars=#SKINSPATH##Skin.Name#\@Resources\Vars.inc
 
@@ -33,17 +37,17 @@ Container=
 
 [Overlay]
 Meter=String
-W=(600*#Sec.S#)
-H=(800*#Sec.S#)
+W=(600*#Transfer.S#)
+H=(800*#Transfer.S#)
 SolidColor=0,0,0,150
 Leftmouseupaction=[!DeactivateConfig]
 MouseActionCursor=0
 
 [Title]
 Meter=String
-X=((600*#Sec.S#)/2)
-Y=((800*#Sec.S#)/2)
-W=(600*#Sec.S#)
+X=((600*#Transfer.S#)/2)
+Y=((800*#Transfer.S#)/2)
+W=(600*#Transfer.S#)
 StringAlign=CenterCenter
 Text=Installer not working? Click me
 FontSize=20

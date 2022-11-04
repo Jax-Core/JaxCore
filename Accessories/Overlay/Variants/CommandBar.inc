@@ -65,6 +65,7 @@ ExecutionPolicy=Unrestricted
 ; ---------------------------------------------------------------------------- ;
 
 [Sec.String:S]
+FontSize=10
 Container=
 
 [Result.String:S]
@@ -113,7 +114,7 @@ y=(#Set.WinB#/2+#Set.TitleBarH#/2-(#Set.TitleBarH#-10)/2+5)
 W=((#Set.W#*0.4)-20)
 H=((#Set.TitleBarH#-10)-10)
 Clipstring=1
-FontSize=(8*#Sec.S#)
+FontSize=(8)
 FontColor=#Set.SubText_Color#
 Text=Search for a setting...
 Leftmouseupaction=[!SetOption UnloadHandler Formula 0][!CommandMeasure p.InputText "ExecuteBatch 1"][!HideMeterGroup Results][!Redraw]
