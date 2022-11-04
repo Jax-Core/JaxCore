@@ -5,3 +5,5 @@
 @Resources/CacheVars/Ctx.inc
 @Resources/Vars.inc
 @Resources/Includes/Window.inc
+
+git update-index --skip-worktree ...
