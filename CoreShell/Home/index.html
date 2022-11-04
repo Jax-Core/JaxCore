@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JaxCore Home</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+  </head>
+  <body>
+    
+    <nav id="nav-positioner" class="no-select">
+      <div id="nav"> 
+        <div class="pageSelector" id="pageSelectorItem-discover" onclick="changeToPage('discover')">
+          <span class="material-symbols-rounded">temp_preferences_custom</span>
+          <p>Discover</p>
+        </div>
+        <div class="pageSelector" id="pageSelectorItem-library" onclick="changeToPage('library')">
+          <span class="material-symbols-rounded">home_storage</span>
+          <p>Library</p>
+        </div>
+        <div class="pageSelector" id="pageSelectorItem-community" onclick="changeToPage('community')">
+          <span class="material-symbols-rounded">public</span>
+          <p>Community</p>
+        </div>
+        <div class="pageSelector" id="pageSelectorItem-support" onclick="changeToPage('support')">
+          <span class="material-symbols-rounded">volunteer_activism</span>
+          <p>Support</p>
+        </div>
+        <div class="pageSelector" id="pageSelectorItem-settings" onclick="changeToPage('settings')">
+          <span class="material-symbols-rounded">settings</span>
+          <p>Settings</p>
+        </div>
+      </div>
+    </nav>
+    <div class="page-container" id="page-discover">
+      <h1>Discover modules</h1>
+    </div>
+    <div class="page-container" id="page-library">
+      <p>library</p>
+    </div>
+    <div class="page-container" id="page-community">
+      <p>community</p>
+    </div>
+    <div class="page-container" id="page-support">
+      <p>support</p>
+    </div>
+    <div class="page-container" id="page-settings">
+      <p>settings</p>
+    </div>
+  </body>
+</html>
