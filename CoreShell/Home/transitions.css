@@ -1,0 +1,17 @@
+.transition-1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 101;
+    background-color: var(--color-graphene0);
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.5s ease-out;
+}
+
+.transition-1.is-active {
+    opacity: 1;
+    pointer-events: all;
+}
