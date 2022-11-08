@@ -229,6 +229,22 @@ MeterStyle=Sec.String:S
 
 ; --------------------------------- Game mode -------------------------------- ;
 
+[ParseGameMode]
+Measure=WebParser
+URL=file://#SETTINGSPATH#Rainmeter.data
+RegExp==([01])
+StringIndex=1
+OnUpdateAction=[!UpdateMeasure OutputGameMode]
+
+[OutputGameMode]
+Measure=Calc
+Formula=[ParseGameMode]
+IfEqualValue=0
+IfEqualAction=[!SetVariable GameModeVal 0][!UpdateMeter Section6][!Redraw]
+IfAboveValue=0
+IfAboveAction=[!SetVariable GameModeVal 1][!UpdateMeter Section6][!Redraw]
+DynamicVariables=1
+
 [Section6]
 Meter=Shape
 X=#Sec.WindowPaddingX#
@@ -239,14 +255,14 @@ MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Sec_Color#"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 DynamicVariables=1
 Container=a.Container
-LeftMouseUpAction=[!Manage GameMode]["#@#Actions\AHKv1.exe" "#@#Addons\CoreAHKFunctions.ahk" Setup_GameMode_FullScreenToggleOn][!SetOption GameMode MeterStyle "Sec.String:S | Sec.Icon:S | Section6.Icon:1"][!UpdateMeter GameMode][!Redraw]
+LeftMouseUpAction=[!EnableMeasure SetGameMode][!UpdateMeasure SetGameMode]
 
 [GameMode]
 Meter=String
 Text=[\xea28]
 X=(#Sec.P#)r
 Y=(100/2*#Sec.S#)r
-MeterStyle=Sec.String:S | Sec.Icon:S | Section6.Icon:0
+MeterStyle=Sec.String:S | Sec.Icon:S | Section6.Icon:#GameModeVal#
 [Section6.Icon:0]
 FontColor=#Set.Accent_Color#
 InlineSetting=Shadow | 0 | 0 | 2 | #Set.Accent_Color#
