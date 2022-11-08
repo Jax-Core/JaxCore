@@ -294,7 +294,17 @@ MouseOverAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Ter_Color#"][
 MouseLeaveAction=[!SetOption #CURRENTSECTION# Fill "Fill Color #Set.Sec_Color#"][!UpdateMeter #CURRENTSECTION#][!Redraw]
 DynamicVariables=1
 Container=a.Container
-LeftMouseUpAction=[!FadeDuration 0 "#JaxCore\Main"][!WriteKeyValue Variables Set.Blur None "#@#Vars.inc"][!WriteKeyValue Variables Set.PerformanceMode 1 "#@#Vars.inc"][!SetOption PerformanceMode MeterStyle "Sec.String:S | Sec.Icon:S | Section7.Icon:1"][!UpdateMeter PerformanceMode][!Redraw]
+LeftMouseUpAction=[!EnableMeasure SetPerformanceMode][!UpdateMeasure SetPerformanceMode]
+
+[SetPerformanceMode]
+Measure=Calc
+Formula=#Set.PerformanceMode#
+DynamicVariables=1
+IfEqualValue=0
+IfEqualAction=[!FadeDuration 0 "#JaxCore\Main"][!WriteKeyValue Variables Set.Blur None "#@#Vars.inc"][!WriteKeyValue Variables Set.PerformanceMode 1 "#@#Vars.inc"][!SetVariable Set.PerformanceMode 1][!DisableMeasure SetPerformanceMode][!UpdateMeter PerformanceMode][!Redraw]
+IfAboveValue=0
+IfAboveAction=[!FadeDuration 100 "#JaxCore\Main"][!WriteKeyValue Variables Set.Blur Blur "#@#Vars.inc"][!WriteKeyValue Variables Set.PerformanceMode 0 "#@#Vars.inc"][!SetVariable Set.PerformanceMode 0][!DisableMeasure SetPerformanceMode][!UpdateMeter PerformanceMode][!Redraw]
+Disabled=1
 
 [PerformanceMode]
 Meter=String
