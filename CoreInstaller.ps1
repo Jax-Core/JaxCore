@@ -292,8 +292,9 @@ if (!($o_PromptBestOption)) {
 }
 # ---------------------------- Installer variables --------------------------- #
 $s_InstallIsBatch = [bool]($o_InstallModule.Count -gt '1')
+$s_rootDrive = $(Get-PSDrive -PSProvider FileSystem | Select-Object -First 1).Name
 $s_rootFolderName = "JaxCoreCache"
-$s_root = "C:\$s_rootFolderName"
+$s_root = "$s_rootDrive:\$s_rootFolderName"
 $s_unpacked = "$s_root\Unpacked"
 # Declare global scope installer variables
 
