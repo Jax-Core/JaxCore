@@ -257,6 +257,16 @@ DynamicVariables=1
 Container=a.Container
 LeftMouseUpAction=[!EnableMeasure SetGameMode][!UpdateMeasure SetGameMode]
 
+[SetGameMode]
+Measure=Calc
+Formula=#GameModeVal#
+DynamicVariables=1
+IfEqualValue=0
+IfEqualAction=[!SetVariable GameModeVal 1][!Manage GameMode]["#@#Actions\AHKv1.exe" "#@#Addons\CoreAHKFunctions.ahk" Setup_GameMode_FullScreenToggleOn][!DisableMeasure SetGameMode][!UpdateMeter GameMode][!Redraw]
+IfAboveValue=0
+IfAboveAction=[!SetVariable GameModeVal 0][!Manage GameMode]["#@#Actions\AHKv1.exe" "#@#Addons\CoreAHKFunctions.ahk" Setup_GameMode_FullScreenToggleOff][!DisableMeasure SetGameMode][!UpdateMeter GameMode][!Redraw]
+Disabled=1
+
 [GameMode]
 Meter=String
 Text=[\xea28]
